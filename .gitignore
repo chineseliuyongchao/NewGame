@@ -8,3 +8,11 @@ Assembly-CSharp.csproj/
 NewGame.sln/
 Assembly-CSharp.csproj
 NewGame.sln
+Assembly-CSharp-Editor.csproj
+AudioKit.csproj
+QFramework.CoreKit.csproj
+QFramework.csproj
+ResKit.csproj
+ResKit.Editor.csproj
+UIKit.csproj
+UIKit.Editor.csproj
