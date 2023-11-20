@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using QFramework;
 using Utils;
 
@@ -56,7 +55,7 @@ namespace SystemTool.Pathfinding
                 DictionaryAdd(closeDictionary, GenerateKey(minNode.PathfindingMapNode.Pos, map.MapSize()), minNode);
                 int keyToRemove = openDictionary.First(kvp => kvp.Value == minNode).Key;
                 openDictionary.Remove(keyToRemove);
-                if (minNode.PathfindingMapNode.Pos.Equals(endPos))
+                if (minNode.PathfindingMapNode.Pos == endPos)
                 {
                     break;
                 }

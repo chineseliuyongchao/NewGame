@@ -20,8 +20,8 @@ namespace UI
         private RectTransform _parentNode;
         private float _imageSize = 50f;
 
-        private IntVector2 _startPos;
-        private IntVector2 _endPos;
+        private IntVector2 _startPos = new(-1, -1);
+        private IntVector2 _endPos = new(-1, -1);
 
         private Array2Utils<MapLattice> _mapLattice;
 
@@ -53,7 +53,7 @@ namespace UI
 
                 mapLattice.Operate = pos =>
                 {
-                    if (_startPos == null)
+                    if (_startPos == new IntVector2(-1, -1))
                     {
                         _startPos = pos;
                     }

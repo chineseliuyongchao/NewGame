@@ -1,7 +1,6 @@
 using System;
 using QFramework;
 using Utils;
-using Random = System.Random;
 
 namespace UI
 {
