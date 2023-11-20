@@ -39,10 +39,14 @@ namespace SystemTool.Pathfinding
                 for (int i = 0; i < pathfindingMapNodes.Count; i++)
                 {
                     PathfindingMapNode mapNode = pathfindingMapNodes[i];
-                    DictionaryAdd(openDictionary, GenerateKey(mapNode.Pos, map.MapSize()),
-                        CreatePathfindingFindNode(mapNode,
-                            AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
-                            findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode));
+                    int key = GenerateKey(mapNode.Pos, map.MapSize());
+                    if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
+                    {
+                        DictionaryAdd(openDictionary, key,
+                            CreatePathfindingFindNode(mapNode,
+                                AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
+                                findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode));
+                    }
                 }
 
                 if (openDictionary.Count == 0)
