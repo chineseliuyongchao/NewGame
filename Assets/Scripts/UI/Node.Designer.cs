@@ -1,15 +1,23 @@
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using QFramework;
+
 namespace UI
 {
-	// Generate Id:659b8013-628e-4923-892b-c95f7ac90306
+	// Generate Id:45fe8931-5d72-4536-9e1d-7709c69f85c1
 	public partial class Node
 	{
 		public const string Name = "Node";
 		
+		[SerializeField]
+		public UnityEngine.UI.Button Button;
 		
 		private NodeData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
+			Button = null;
 			
 			mData = null;
 		}

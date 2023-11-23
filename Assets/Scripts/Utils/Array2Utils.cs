@@ -68,5 +68,20 @@ namespace Utils
         {
             return pos.X >= 0 && pos.X < _mHeight && pos.Y >= 0 && pos.Y < _mWidth;
         }
+
+        /// <summary>
+        /// 遍历所有元素
+        /// </summary>
+        /// <param name="operate">元素要执行的方法</param>
+        public void ForEach(Action<int, int, T> operate)
+        {
+            for (var x = 0; x < _mWidth; x++)
+            {
+                for (var y = 0; y < _mHeight; y++)
+                {
+                    operate(x, y, _mGrid[x, y]);
+                }
+            }
+        }
     }
 }

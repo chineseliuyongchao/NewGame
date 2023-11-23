@@ -1,3 +1,4 @@
+using System;
 using QFramework;
 using SystemTool.Pathfinding;
 using UnityEngine;
@@ -16,9 +17,9 @@ namespace UI
     public partial class Node : UIPanel
     {
         public GameObject mapLatticePrefab;
-        private int _number = 10;
+        private int _number = 100;
         private RectTransform _parentNode;
-        private float _imageSize = 50f;
+        private float _imageSize = 25f;
 
         private IntVector2 _startPos = new(-1, -1);
         private IntVector2 _endPos = new(-1, -1);
@@ -41,11 +42,9 @@ namespace UI
             for (int i = 0; i < _number * _number; i++)
             {
                 GameObject imageGo = Instantiate(mapLatticePrefab, _parentNode);
-                RectTransform rectTransform = imageGo.GetComponent<RectTransform>();
-                rectTransform.sizeDelta = new Vector2(_imageSize, _imageSize);
                 MapLattice mapLattice = imageGo.GetComponent<MapLattice>();
                 mapLattice.Pos = new IntVector2(i % _number, i / _number);
-                bool canPass = random.Next(10) > 0;
+                bool canPass = random.Next(10) > 2;
                 if (!canPass)
                 {
                     mapLattice.SetCannotPass();
@@ -60,19 +59,31 @@ namespace UI
                     else
                     {
                         _endPos = pos;
+                        long time1 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                        Debug.LogError("asd001  " + time1);
                         PathfindingSingleMessage message =
                             PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
+                        for (int j = 0; j < 99; j++)
+                        {
+                            message = PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
+                        }
+
+                        long time2 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                        Debug.LogError("asd002  " + time2 + "  " + (time2 - time1));
                         for (int j = 0; j < message.PathfindingResult.Count; j++)
                         {
                             _mapLattice[message.PathfindingResult[j].Pos.X, message.PathfindingResult[j].Pos.Y]
-                                .ShowRoute();
+                                .ShowRoute(true);
                         }
                     }
                 };
                 float row = i / _number;
                 float col = i % _number;
+                RectTransform rectTransform = imageGo.GetComponent<RectTransform>();
                 rectTransform.anchoredPosition =
                     new Vector2((col - _number / 2) * _imageSize, (row - _number / 2) * _imageSize);
+                Vector2 size = rectTransform.sizeDelta;
+                rectTransform.localScale = new Vector3(_imageSize / size.x, _imageSize / size.x, _imageSize / size.x);
                 _mapLattice[i % _number, i / _number] = mapLattice;
 
                 PathfindingMapNode pathfindingMapNode = new PathfindingMapNode();
@@ -80,6 +91,13 @@ namespace UI
                 pathfindingMapNode.TerrainType = canPass ? TerrainType.CAN_PASS : TerrainType.CANNOT_PASS;
                 map.MapData[i % _number, i / _number] = pathfindingMapNode;
             }
+
+            Button.onClick.AddListener(() =>
+            {
+                _startPos = new(-1, -1);
+                _endPos = new(-1, -1);
+                _mapLattice.ForEach((_, _, value) => { value.ShowRoute(false); });
+            });
         }
 
         protected override void OnOpen(IUIData uiData = null)

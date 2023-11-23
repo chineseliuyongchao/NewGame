@@ -49,9 +49,9 @@ namespace UI
             button.interactable = false;
         }
 
-        public void ShowRoute()
+        public void ShowRoute(bool show)
         {
-            route.gameObject.SetActive(true);
+            route.gameObject.SetActive(show);
         }
     }
 }

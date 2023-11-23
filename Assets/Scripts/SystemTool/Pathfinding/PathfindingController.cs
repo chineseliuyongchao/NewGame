@@ -26,6 +26,8 @@ namespace SystemTool.Pathfinding
             }
 
             Dictionary<int, PathfindingFindNode> openDictionary = new Dictionary<int, PathfindingFindNode>();
+            List<int> openDictionaryKey = new List<int>();
+            openDictionaryKey.Add(0); //从第二个位置存储
             Dictionary<int, PathfindingFindNode> closeDictionary = new Dictionary<int, PathfindingFindNode>();
             closeDictionary.Add(GenerateKey(startPos, map.MapSize()), CreatePathfindingFindNode(
                 map.GetPathfindingMapNode(startPos), 0,
@@ -42,10 +44,14 @@ namespace SystemTool.Pathfinding
                     int key = GenerateKey(mapNode.Pos, map.MapSize());
                     if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
                     {
-                        DictionaryAdd(openDictionary, key,
-                            CreatePathfindingFindNode(mapNode,
-                                AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
-                                findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode));
+                        if (DictionaryAdd(openDictionary, key,
+                                CreatePathfindingFindNode(mapNode,
+                                    AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
+                                    findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode)))
+                        {
+                            //只有加入了之前没有的节点才需要在list中添加新的key
+                            OpenListAdd(openDictionary, openDictionaryKey, key);
+                        }
                     }
                 }
 
@@ -54,11 +60,9 @@ namespace SystemTool.Pathfinding
                     break;
                 }
 
-                PathfindingFindNode minNode =
-                    openDictionary.OrderBy(kvp => kvp.Value.TotalLength).FirstOrDefault().Value;
+                PathfindingFindNode minNode = openDictionary[openDictionaryKey[1]];
                 DictionaryAdd(closeDictionary, GenerateKey(minNode.PathfindingMapNode.Pos, map.MapSize()), minNode);
-                int keyToRemove = openDictionary.First(kvp => kvp.Value == minNode).Key;
-                openDictionary.Remove(keyToRemove);
+                OpenListAddRemove(openDictionary, openDictionaryKey);
                 if (minNode.PathfindingMapNode.Pos == endPos)
                 {
                     break;
@@ -145,7 +149,7 @@ namespace SystemTool.Pathfinding
             return pos.X * length.Y + pos.Y;
         }
 
-        private void DictionaryAdd(Dictionary<int, PathfindingFindNode> dictionary, int key, PathfindingFindNode node)
+        private bool DictionaryAdd(Dictionary<int, PathfindingFindNode> dictionary, int key, PathfindingFindNode node)
         {
             if (dictionary.ContainsKey(key))
             {
@@ -158,7 +162,87 @@ namespace SystemTool.Pathfinding
             else
             {
                 dictionary.Add(key, node);
+                return true;
             }
+
+            return false;
+        }
+
+        /// <summary>
+        /// 二叉堆插入key值
+        /// </summary>
+        /// <param name="dictionary"></param>
+        /// <param name="list"></param>
+        /// <param name="key"></param>
+        private void OpenListAdd(Dictionary<int, PathfindingFindNode> dictionary, List<int> list, int key)
+        {
+            int count = list.Count;
+            list.Add(key);
+            while (true)
+            {
+                if (count <= 1)
+                {
+                    break;
+                }
+
+                int fatherNode = count / 2;
+                PathfindingFindNode fatherFindNode = dictionary[list[fatherNode]];
+                PathfindingFindNode node = dictionary[list[count]];
+                if (fatherFindNode.TotalLength < node.TotalLength)
+                {
+                    break;
+                }
+
+                count = fatherNode;
+            }
+
+            (list[count], list[^1]) = (list[^1], list[count]);
+        }
+
+        /// <summary>
+        /// 二叉堆移除key值（直接移除第二个，第一个占位）
+        /// </summary>
+        private void OpenListAddRemove(Dictionary<int, PathfindingFindNode> dictionary, List<int> list)
+        {
+            int count = list.Count - 1;
+            dictionary.Remove(list[1]); //最小的值被去除，在字典中移除对应值
+            list[1] = list[count];
+            list.RemoveAt(count); //list中最后一个key被移动到第一个
+            count = 1;
+            if (list.Count <= count)
+            {
+                return;
+            }
+
+            while (true)
+            {
+                PathfindingFindNode node = dictionary[list[count]];
+                if (count * 2 < list.Count)
+                {
+                    int childNode1 = count * 2;
+                    PathfindingFindNode childFindNode1 = dictionary[list[childNode1]];
+                    if (node.TotalLength > childFindNode1.TotalLength)
+                    {
+                        count = childNode1;
+                        continue;
+                    }
+                }
+
+                if (count * 2 + 1 < list.Count)
+                {
+                    int childNode2 = count * 2 + 1;
+                    PathfindingFindNode childFindNode2 = dictionary[list[childNode2]];
+                    if (node.TotalLength > childFindNode2.TotalLength)
+                    {
+                        count = childNode2;
+                        continue;
+                    }
+                }
+
+                break;
+            }
+
+            (list[count], list[1]) = (list[1], list[count]);
         }
     }
 }
