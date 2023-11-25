@@ -17,9 +17,9 @@ namespace UI
     public partial class Node : UIPanel
     {
         public GameObject mapLatticePrefab;
-        private int _number = 100;
+        private int _number = 10;
         private RectTransform _parentNode;
-        private float _imageSize = 25f;
+        private float _imageSize = 250f;
 
         private IntVector2 _startPos = new(-1, -1);
         private IntVector2 _endPos = new(-1, -1);
@@ -68,6 +68,12 @@ namespace UI
                             message = PathfindingControllerOld.Singleton.Pathfinding(_startPos, _endPos, map);
                         }
 
+                        for (int j = 0; j < message.PathfindingResult.Count; j++)
+                        {
+                            _mapLattice[message.PathfindingResult[j].Pos.X, message.PathfindingResult[j].Pos.Y]
+                                .ShowRoute(true);
+                        }
+
                         long time2 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                         Debug.LogError("asd002  " + time2 + "  " + (time2 - time1));
                         PathfindingSingleMessage message1 =
@@ -77,18 +83,14 @@ namespace UI
                             message1 = PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
                         }
 
-                        long time3 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-                        Debug.LogError("asd003  " + time3 + "  " + (time3 - time2));
-                        for (int j = 0; j < message.PathfindingResult.Count; j++)
-                        {
-                            _mapLattice[message.PathfindingResult[j].Pos.X, message.PathfindingResult[j].Pos.Y]
-                                .ShowRoute(true);
-                        }
                         for (int j = 0; j < message1.PathfindingResult.Count; j++)
                         {
                             _mapLattice[message1.PathfindingResult[j].Pos.X, message1.PathfindingResult[j].Pos.Y]
                                 .ShowRoute1(true);
                         }
+
+                        long time3 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                        Debug.LogError("asd003  " + time3 + "  " + (time3 - time2));
                     }
                 };
                 float row = i / _number;

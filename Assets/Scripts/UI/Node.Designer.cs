@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:bb0fe346-6c63-45dc-8ab7-ddb0d22146d4
+	// Generate Id:bffa73d4-93d9-4589-8221-95efa63dd15e
 	public partial class Node
 	{
 		public const string Name = "Node";
