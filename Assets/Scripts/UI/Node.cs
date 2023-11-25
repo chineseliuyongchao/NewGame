@@ -62,18 +62,32 @@ namespace UI
                         long time1 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                         Debug.LogError("asd001  " + time1);
                         PathfindingSingleMessage message =
-                            PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
+                            PathfindingControllerOld.Singleton.Pathfinding(_startPos, _endPos, map);
                         for (int j = 0; j < 99; j++)
                         {
-                            message = PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
+                            message = PathfindingControllerOld.Singleton.Pathfinding(_startPos, _endPos, map);
                         }
 
                         long time2 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
                         Debug.LogError("asd002  " + time2 + "  " + (time2 - time1));
+                        PathfindingSingleMessage message1 =
+                            PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
+                        for (int j = 0; j < 99; j++)
+                        {
+                            message1 = PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
+                        }
+
+                        long time3 = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+                        Debug.LogError("asd003  " + time3 + "  " + (time3 - time2));
                         for (int j = 0; j < message.PathfindingResult.Count; j++)
                         {
                             _mapLattice[message.PathfindingResult[j].Pos.X, message.PathfindingResult[j].Pos.Y]
                                 .ShowRoute(true);
+                        }
+                        for (int j = 0; j < message1.PathfindingResult.Count; j++)
+                        {
+                            _mapLattice[message1.PathfindingResult[j].Pos.X, message1.PathfindingResult[j].Pos.Y]
+                                .ShowRoute1(true);
                         }
                     }
                 };
@@ -96,7 +110,11 @@ namespace UI
             {
                 _startPos = new(-1, -1);
                 _endPos = new(-1, -1);
-                _mapLattice.ForEach((_, _, value) => { value.ShowRoute(false); });
+                _mapLattice.ForEach((_, _, value) =>
+                {
+                    value.ShowRoute(false);
+                    value.ShowRoute1(false);
+                });
             });
         }
 

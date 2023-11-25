@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using QFramework;
 
 namespace UI
 {
-	// Generate Id:2fa69ed7-3e6e-4d72-a3b7-cb6ef0a72917
+	// Generate Id:11321cc4-b706-48e3-a188-d735a611aa14
 	public partial class MapLattice
 	{
 		public const string Name = "MapLattice";
@@ -11,6 +14,8 @@ namespace UI
 		public UnityEngine.UI.Button button;
 		[SerializeField]
 		public UnityEngine.UI.Image route;
+		[SerializeField]
+		public UnityEngine.UI.Image route1;
 		
 		private MapLatticeData mPrivateData = null;
 		
@@ -18,7 +23,7 @@ namespace UI
 		{
 			button = null;
 			route = null;
-			
+			route1 = null;
 			mData = null;
 		}
 		

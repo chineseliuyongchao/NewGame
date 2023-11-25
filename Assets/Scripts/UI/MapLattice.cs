@@ -53,5 +53,10 @@ namespace UI
         {
             route.gameObject.SetActive(show);
         }
+
+        public void ShowRoute1(bool show)
+        {
+            route1.gameObject.SetActive(show);
+        }
     }
 }

@@ -7,11 +7,11 @@ using Utils;
 namespace SystemTool.Pathfinding
 {
     /// <summary>
-    /// 寻路系统
+    /// 寻路系统（使用没有二叉堆的方法进行查找）
     /// </summary>
-    public class PathfindingController : ViewController, ISingleton
+    public class PathfindingControllerOld : ViewController, ISingleton
     {
-        public static PathfindingController Singleton => MonoSingletonProperty<PathfindingController>.Instance;
+        public static PathfindingControllerOld Singleton => MonoSingletonProperty<PathfindingControllerOld>.Instance;
 
         public void OnSingletonInit()
         {
@@ -26,8 +26,6 @@ namespace SystemTool.Pathfinding
             }
 
             Dictionary<int, PathfindingFindNode> openDictionary = new Dictionary<int, PathfindingFindNode>();
-            List<int> openDictionaryKey = new List<int>();
-            openDictionaryKey.Add(0); //从第二个位置存储
             Dictionary<int, PathfindingFindNode> closeDictionary = new Dictionary<int, PathfindingFindNode>();
             closeDictionary.Add(GenerateKey(startPos, map.MapSize()), CreatePathfindingFindNode(
                 map.GetPathfindingMapNode(startPos), 0,
@@ -44,14 +42,10 @@ namespace SystemTool.Pathfinding
                     int key = GenerateKey(mapNode.Pos, map.MapSize());
                     if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
                     {
-                        if (DictionaryAdd(openDictionary, key,
-                                CreatePathfindingFindNode(mapNode,
-                                    AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
-                                    findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode)))
-                        {
-                            //只有加入了之前没有的节点才需要在list中添加新的key
-                            OpenListAdd(openDictionary, openDictionaryKey, key);
-                        }
+                        DictionaryAdd(openDictionary, key,
+                            CreatePathfindingFindNode(mapNode,
+                                AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
+                                findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode));
                     }
                 }
 
@@ -60,9 +54,11 @@ namespace SystemTool.Pathfinding
                     break;
                 }
 
-                PathfindingFindNode minNode = openDictionary[openDictionaryKey[1]];
+                PathfindingFindNode minNode =
+                    openDictionary.OrderBy(kvp => kvp.Value.TotalLength).FirstOrDefault().Value;
                 DictionaryAdd(closeDictionary, GenerateKey(minNode.PathfindingMapNode.Pos, map.MapSize()), minNode);
-                OpenListAddRemove(openDictionary, openDictionaryKey);
+                int keyToRemove = openDictionary.First(kvp => kvp.Value == minNode).Key;
+                openDictionary.Remove(keyToRemove);
                 if (minNode.PathfindingMapNode.Pos == endPos)
                 {
                     break;
@@ -149,7 +145,7 @@ namespace SystemTool.Pathfinding
             return pos.X * length.Y + pos.Y;
         }
 
-        private bool DictionaryAdd(Dictionary<int, PathfindingFindNode> dictionary, int key, PathfindingFindNode node)
+        private void DictionaryAdd(Dictionary<int, PathfindingFindNode> dictionary, int key, PathfindingFindNode node)
         {
             if (dictionary.ContainsKey(key))
             {
@@ -162,85 +158,6 @@ namespace SystemTool.Pathfinding
             else
             {
                 dictionary.Add(key, node);
-                return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// 二叉堆插入key值
-        /// </summary>
-        /// <param name="dictionary"></param>
-        /// <param name="list"></param>
-        /// <param name="key"></param>
-        private void OpenListAdd(Dictionary<int, PathfindingFindNode> dictionary, List<int> list, int key)
-        {
-            int count = list.Count;
-            list.Add(key);
-            while (true)
-            {
-                if (count <= 1)
-                {
-                    break;
-                }
-
-                int fatherNode = count / 2;
-                PathfindingFindNode fatherFindNode = dictionary[list[fatherNode]];
-                PathfindingFindNode node = dictionary[list[count]];
-                if (fatherFindNode.TotalLength <= node.TotalLength)
-                {
-                    break;
-                }
-
-                (list[count], list[fatherNode]) = (list[fatherNode], list[count]);
-                count = fatherNode;
-            }
-        }
-
-        /// <summary>
-        /// 二叉堆移除key值（直接移除第二个，第一个占位）
-        /// </summary>
-        private void OpenListAddRemove(Dictionary<int, PathfindingFindNode> dictionary, List<int> list)
-        {
-            int count = list.Count - 1;
-            dictionary.Remove(list[1]); //最小的值被去除，在字典中移除对应值
-            list[1] = list[count];
-            list.RemoveAt(count); //list中最后一个key被移动到第一个
-            count = 1;
-            if (list.Count <= count)
-            {
-                return;
-            }
-
-            while (true)
-            {
-                PathfindingFindNode node = dictionary[list[count]];
-                if (count * 2 < list.Count)
-                {
-                    int childNode1 = count * 2;
-                    PathfindingFindNode childFindNode1 = dictionary[list[childNode1]];
-                    if (node.TotalLength > childFindNode1.TotalLength)
-                    {
-                        (list[count], list[childNode1]) = (list[childNode1], list[count]);
-                        count = childNode1;
-                        continue;
-                    }
-                }
-
-                if (count * 2 + 1 < list.Count)
-                {
-                    int childNode2 = count * 2 + 1;
-                    PathfindingFindNode childFindNode2 = dictionary[list[childNode2]];
-                    if (node.TotalLength > childFindNode2.TotalLength)
-                    {
-                        (list[count], list[childNode2]) = (list[childNode2], list[count]);
-                        count = childNode2;
-                        continue;
-                    }
-                }
-
-                break;
             }
         }
     }
