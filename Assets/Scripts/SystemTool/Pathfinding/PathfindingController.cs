@@ -36,8 +36,7 @@ namespace SystemTool.Pathfinding
             while (true)
             {
                 PathfindingFindNode findNode = closeDictionary.Values.Last();
-                List<PathfindingMapNode> pathfindingMapNodes =
-                    map.FindAroundNode(findNode.PathfindingMapNode.Pos);
+                List<PathfindingMapNode> pathfindingMapNodes = findNode.PathfindingMapNode.AroundNode;
                 for (int i = 0; i < pathfindingMapNodes.Count; i++)
                 {
                     PathfindingMapNode mapNode = pathfindingMapNodes[i];
@@ -206,7 +205,7 @@ namespace SystemTool.Pathfinding
                     break;
                 }
 
-                int fatherNode = count / 2;
+                int fatherNode = count >> 1;
                 PathfindingFindNode fatherFindNode = dictionary[list[fatherNode]];
                 PathfindingFindNode node = dictionary[list[count]];
                 if (fatherFindNode.TotalLength <= node.TotalLength)
@@ -237,12 +236,11 @@ namespace SystemTool.Pathfinding
             while (true)
             {
                 PathfindingFindNode node = dictionary[list[count]];
-
-                if (count * 2 + 1 < list.Count)
+                int childNode1 = count << 1;
+                int childNode2 = childNode1 + 1;
+                if (childNode2 < list.Count)
                 {
-                    int childNode1 = count * 2;
                     PathfindingFindNode childFindNode1 = dictionary[list[childNode1]];
-                    int childNode2 = count * 2 + 1;
                     PathfindingFindNode childFindNode2 = dictionary[list[childNode2]];
                     if (childFindNode1.TotalLength > childFindNode2.TotalLength)
                     {
@@ -277,9 +275,8 @@ namespace SystemTool.Pathfinding
                         }
                     }
                 }
-                else if (count * 2 < list.Count)
+                else if (childNode1 < list.Count)
                 {
-                    int childNode1 = count * 2;
                     PathfindingFindNode childFindNode1 = dictionary[list[childNode1]];
                     if (node.TotalLength > childFindNode1.TotalLength)
                     {

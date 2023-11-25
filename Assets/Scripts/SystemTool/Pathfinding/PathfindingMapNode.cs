@@ -1,4 +1,5 @@
-﻿using Utils;
+﻿using System.Collections.Generic;
+using Utils;
 
 namespace SystemTool.Pathfinding
 {
@@ -7,27 +8,20 @@ namespace SystemTool.Pathfinding
     /// </summary>
     public class PathfindingMapNode
     {
-        private IntVector2 _pos;
-
         /// <summary>
         /// 在地图中的位置
         /// </summary>
-        public IntVector2 Pos
-        {
-            get => _pos;
-            set => _pos = value;
-        }
-
-        private TerrainType _terrainType;
+        public IntVector2 Pos;
 
         /// <summary>
         /// 地形
         /// </summary>
-        public TerrainType TerrainType
-        {
-            get => _terrainType;
-            set => _terrainType = value;
-        }
+        public TerrainType TerrainType;
+
+        /// <summary>
+        /// 记录周围所有可以同行的点
+        /// </summary>
+        public List<PathfindingMapNode> AroundNode;
     }
 
     /// <summary>

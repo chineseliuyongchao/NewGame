@@ -17,9 +17,9 @@ namespace UI
     public partial class Node : UIPanel
     {
         public GameObject mapLatticePrefab;
-        private int _number = 10;
+        private int _number = 100;
         private RectTransform _parentNode;
-        private float _imageSize = 250f;
+        private float _imageSize = 25f;
 
         private IntVector2 _startPos = new(-1, -1);
         private IntVector2 _endPos = new(-1, -1);
@@ -107,6 +107,8 @@ namespace UI
                 pathfindingMapNode.TerrainType = canPass ? TerrainType.CAN_PASS : TerrainType.CANNOT_PASS;
                 map.MapData[i % _number, i / _number] = pathfindingMapNode;
             }
+
+            map.MapData.ForEach((i, j, node) => { node.AroundNode = map.FindAroundNode(new IntVector2(i, j)); });
 
             Button.onClick.AddListener(() =>
             {
