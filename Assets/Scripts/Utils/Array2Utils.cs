@@ -50,7 +50,7 @@ namespace Utils
         /// <returns></returns>
         public bool HandleElement(IntVector2 pos, Action<T> operate)
         {
-            if (pos.X < 0 || pos.X >= _mHeight || pos.Y < 0 || pos.Y >= _mWidth)
+            if (pos.X < 0 || pos.X >= _mWidth || pos.Y < 0 || pos.Y >= _mHeight)
             {
                 return false;
             }
@@ -66,7 +66,7 @@ namespace Utils
         /// <returns></returns>
         public bool IsWithinBounds(IntVector2 pos)
         {
-            return pos.X >= 0 && pos.X < _mHeight && pos.Y >= 0 && pos.Y < _mWidth;
+            return pos.X >= 0 && pos.X < _mWidth && pos.Y >= 0 && pos.Y < _mHeight;
         }
 
         /// <summary>

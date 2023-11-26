@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameQFramework;
 using QFramework;
 using Utils;
 
@@ -9,7 +10,7 @@ namespace SystemTool.Pathfinding
     /// <summary>
     /// 寻路系统（使用没有二叉堆的方法进行查找）
     /// </summary>
-    public class PathfindingControllerOld : ViewController, ISingleton
+    public class PathfindingControllerOld : BaseGameController, ISingleton
     {
         public static PathfindingControllerOld Singleton => MonoSingletonProperty<PathfindingControllerOld>.Instance;
 

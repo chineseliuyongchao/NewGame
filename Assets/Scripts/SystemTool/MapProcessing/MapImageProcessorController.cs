@@ -1,56 +1,47 @@
-﻿using UnityEngine;
+﻿using GameQFramework;
+using QFramework;
+using UnityEngine;
 
 namespace SystemTool.MapProcessing
 {
-    public class MapImageProcessor : MonoBehaviour
+    /// <summary>
+    /// 地图图片->网格图
+    /// </summary>
+    public class MapImageProcessorController : BaseGameController, ISingleton
     {
-        // 地图图片路径，相对于Assets文件夹
-        public string mapImagePath = "Assets/Image/image1.jpg";
+        public static MapImageProcessorController Singleton =>
+            MonoSingletonProperty<MapImageProcessorController>.Instance;
 
-        // 网格大小
-        public int gridSizeX = 50;
-        public int gridSizeY = 50;
-
-        // 在脚本启动时调用的方法
-        private void Start()
+        public void OnSingletonInit()
         {
-            // 处理地图图片
-            ProcessMapImage();
         }
 
-        // 处理地图图片的主要方法
-        void ProcessMapImage()
+        /// <summary>
+        /// 处理地图图片的主要方法
+        /// </summary>
+        /// <param name="path">地图路径</param>
+        /// <param name="fileName">文件名字</param>
+        /// <param name="gridSizeX">x轴网格大小</param>
+        /// <param name="gridSizeY">y轴网格大小</param>
+        public void ProcessMapImage(string path, string fileName, int gridSizeX, int gridSizeY)
         {
             // 加载原始地图图片
-            Texture2D originalTexture = LoadTexture(mapImagePath);
+            Texture2D originalTexture = this.GetSystem<IResSystem>().LoadTexture(path + fileName + ".png");
 
             // 转换为灰度图
             Texture2D grayTexture = ConvertToGrayscale(originalTexture);
             // 保存灰度图
-            SaveTexture(grayTexture, "Assets/Image/gray_image.jpg");
+            SaveTexture(grayTexture, path + "gray_" + fileName + ".jpg");
 
             // 转换为二值化图
             Texture2D binaryTexture = ConvertToBinary(grayTexture);
             // 保存二值化图
-            SaveTexture(binaryTexture, "Assets/Image/binary_image.jpg");
+            SaveTexture(binaryTexture, path + "binary_" + fileName + ".jpg");
 
             // 划分网格
             Texture2D gridTexture = DivideIntoGrid(binaryTexture, gridSizeX, gridSizeY);
             // 保存划分后的网格图
-            SaveTexture(gridTexture, "Assets/Image/grid_image.jpg");
-        }
-
-        /// <summary>
-        /// 加载图片方法
-        /// </summary>
-        /// <param name="imagePath"></param>
-        /// <returns></returns>
-        private Texture2D LoadTexture(string imagePath)
-        {
-            Texture2D texture = new Texture2D(2, 2);
-            byte[] fileData = System.IO.File.ReadAllBytes(imagePath);
-            texture.LoadImage(fileData);
-            return texture;
+            SaveTexture(gridTexture, path + "grid_" + fileName + ".jpg");
         }
 
         /// <summary>
