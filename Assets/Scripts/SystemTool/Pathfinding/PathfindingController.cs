@@ -74,7 +74,7 @@ namespace SystemTool.Pathfinding
             PathfindingFindNode node = closeDictionary.Values.Last();
             while (true)
             {
-                res.Add(node.PathfindingMapNode);
+                res.Insert(0, node.PathfindingMapNode);
                 if (node.FatherNode != null)
                 {
                     node = node.FatherNode;
