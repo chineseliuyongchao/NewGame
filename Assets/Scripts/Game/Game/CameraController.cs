@@ -1,5 +1,5 @@
-using Game.Map;
 using GameQFramework;
+using QFramework;
 using UnityEngine;
 
 namespace Game.Game
@@ -18,9 +18,9 @@ namespace Game.Game
         private void Start()
         {
             float proportion = 5 / 5.4f; //摄像机拍摄范围缩小比例（原理不清楚）
-            _minX = -MapConstant.MAP_WIDTH * (1 - proportion) / 2;
+            _minX = -this.GetModel<IMapModel>().MapSize.x * (1 - proportion) / 2;
             _maxX = -_minX;
-            _minY = -MapConstant.MAP_HEIGHT * (1 - proportion) / 2;
+            _minY = -this.GetModel<IMapModel>().MapSize.y * (1 - proportion) / 2;
             _maxY = -_minY;
         }
 

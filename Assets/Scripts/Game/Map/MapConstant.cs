@@ -6,13 +6,12 @@
     public class MapConstant
     {
         /// <summary>
-        /// 地图宽度
+        /// 图片的多少像素算一个网格
         /// </summary>
-        public const float MAP_WIDTH = 1920 / 100f;
+        public const int GRID_SIZE = 10;
 
-        /// <summary>
-        /// 地图长度
-        /// </summary>
-        public const float MAP_HEIGHT = 1080 / 100f;
+        public const string MAP_PATH = "Assets/Res/Image/map/";
+        public const string MAP_FILE_NAME = "map1.png";
+        public const string GRID_MAP_FILE_NAME = "grid_image.jpg";
     }
 }

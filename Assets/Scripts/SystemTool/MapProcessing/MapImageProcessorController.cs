@@ -26,22 +26,22 @@ namespace SystemTool.MapProcessing
         public void ProcessMapImage(string path, string fileName, int gridSizeX, int gridSizeY)
         {
             // 加载原始地图图片
-            Texture2D originalTexture = this.GetSystem<IResSystem>().LoadTexture(path + fileName + ".png");
+            Texture2D originalTexture = this.GetSystem<IResSystem>().LoadTexture(path + fileName);
 
             // 转换为灰度图
             Texture2D grayTexture = ConvertToGrayscale(originalTexture);
             // 保存灰度图
-            SaveTexture(grayTexture, path + "gray_" + fileName + ".jpg");
+            SaveTexture(grayTexture, path + "gray_" + fileName);
 
             // 转换为二值化图
             Texture2D binaryTexture = ConvertToBinary(grayTexture);
             // 保存二值化图
-            SaveTexture(binaryTexture, path + "binary_" + fileName + ".jpg");
+            SaveTexture(binaryTexture, path + "binary_" + fileName);
 
             // 划分网格
             Texture2D gridTexture = DivideIntoGrid(binaryTexture, gridSizeX, gridSizeY);
             // 保存划分后的网格图
-            SaveTexture(gridTexture, path + "grid_" + fileName + ".jpg");
+            SaveTexture(gridTexture, path + "grid_" + fileName);
         }
 
         /// <summary>
