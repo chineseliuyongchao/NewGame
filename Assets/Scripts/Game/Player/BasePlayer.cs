@@ -14,7 +14,6 @@ namespace Game.Player
     {
         private Sequence _sequence;
 
-
         /// <summary>
         /// 从一个位置移动到下一个位置
         /// </summary>
@@ -22,7 +21,7 @@ namespace Game.Player
         /// <param name="endPos"></param>
         protected void Move(IntVector2 startPos, IntVector2 endPos)
         {
-            if (_sequence == null)
+            if (_sequence == null || !_sequence.active)
             {
                 _sequence = DOTween.Sequence();
 
@@ -48,11 +47,14 @@ namespace Game.Player
         {
             PathfindingSingleMessage message =
                 PathfindingController.Singleton.Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
-            for (int i = 0; i < message.PathfindingResult.Count; i++)
+            if (message != null)
             {
-                Vector3 pos = this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent,
-                    this.GetSystem<IMapSystem>().GetGridToMapPos(message.PathfindingResult[i].Pos));
-                _sequence.Append(transform.DOMove(pos, 0.1f).SetEase(Ease.Linear));
+                for (int i = 0; i < message.PathfindingResult.Count; i++)
+                {
+                    Vector3 pos = this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent,
+                        this.GetSystem<IMapSystem>().GetGridToMapPos(message.PathfindingResult[i].Pos));
+                    _sequence.Append(transform.DOMove(pos, 0.1f * message.Length[i]).SetEase(Ease.Linear));
+                }
             }
         }
 

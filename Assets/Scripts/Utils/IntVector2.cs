@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Utils
 {
@@ -7,6 +8,21 @@ namespace Utils
     /// </summary>
     public struct IntVector2
     {
+        public bool Equals(IntVector2 other)
+        {
+            return X == other.X && Y == other.Y;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is IntVector2 other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
+        }
+
         public int X;
         public int Y;
 

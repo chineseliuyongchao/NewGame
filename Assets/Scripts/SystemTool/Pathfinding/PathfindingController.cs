@@ -26,6 +26,11 @@ namespace SystemTool.Pathfinding
                 return null;
             }
 
+            if (startPos.Equals(endPos))
+            {
+                return null;
+            }
+
             Dictionary<int, PathfindingFindNode> openDictionary = new Dictionary<int, PathfindingFindNode>();
             List<int> openDictionaryKey = new List<int>();
             openDictionaryKey.Add(0); //从第二个位置存储
@@ -71,21 +76,24 @@ namespace SystemTool.Pathfinding
             }
 
             List<PathfindingMapNode> res = new List<PathfindingMapNode>();
+            List<float> length = new List<float>();
             PathfindingFindNode node = closeDictionary.Values.Last();
             while (true)
             {
                 res.Insert(0, node.PathfindingMapNode);
                 if (node.FatherNode != null)
                 {
+                    length.Insert(0, node.LengthToStart - node.FatherNode.LengthToStart);
                     node = node.FatherNode;
                 }
                 else
                 {
+                    length.Insert(0, 0);
                     break;
                 }
             }
 
-            PathfindingSingleMessage pathfindingSingleMessage = new PathfindingSingleMessage(res);
+            PathfindingSingleMessage pathfindingSingleMessage = new PathfindingSingleMessage(res, length);
             return pathfindingSingleMessage;
         }
 
