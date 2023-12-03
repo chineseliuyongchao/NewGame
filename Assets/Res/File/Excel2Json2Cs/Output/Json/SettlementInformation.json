@@ -1,0 +1,28 @@
+﻿{
+    "Sheet1": [
+        {
+            "settlementId": 1,
+            "settlementName": "city1",
+            "settlementPos": [
+                0,
+                0
+            ]
+        },
+        {
+            "settlementId": 2,
+            "settlementName": "city2",
+            "settlementPos": [
+                0,
+                1
+            ]
+        },
+        {
+            "settlementId": 3,
+            "settlementName": "city3",
+            "settlementPos": [
+                0,
+                2
+            ]
+        }
+    ]
+}
