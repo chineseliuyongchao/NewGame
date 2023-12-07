@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Game.Map
 {
+    /// <summary>
+    /// 地图节点
+    /// </summary>
     public class MapNode : BaseGameController
     {
         public SpriteRenderer map;

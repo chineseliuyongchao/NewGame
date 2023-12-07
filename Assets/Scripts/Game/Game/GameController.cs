@@ -1,8 +1,8 @@
 using GameQFramework;
 
-namespace Game.GameController
+namespace Game.Game
 {
-	public partial class GameController : BaseGameController
+	public class GameController : BaseGameController
 	{
 		private void Awake()
 		{

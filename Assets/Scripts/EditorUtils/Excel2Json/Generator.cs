@@ -49,13 +49,13 @@ namespace EditorUtils
         /// <param name="jsonPath">Json文件路径</param>
         /// <param name="encoding"></param>
         // public void ConvertToJson(DataSet mResultSet, string _jsonPath, Encoding encoding, string CSharpPath)
-        private static bool ConvertToJson(string childPath, DataSet mResultSet, string jsonPath, Encoding encoding)
+        private static void ConvertToJson(string childPath, DataSet mResultSet, string jsonPath, Encoding encoding)
         {
             List<string> dataName = new List<string>();
             List<string> dataType = new List<string>();
+            if (dataType == null) throw new ArgumentNullException(nameof(dataType));
             //判断Excel文件中是否存在数据表
-            if (mResultSet.Tables.Count < 1)
-                return false;
+            if (mResultSet.Tables.Count < 1) return;
 
             Dictionary<string, object> allTable = new Dictionary<string, object>();
             for (int x = 0; x < mResultSet.Tables.Count; x++)
@@ -77,11 +77,9 @@ namespace EditorUtils
                 int colCount = mSheet.Columns.Count;
                 //准备一个列表存储整个表的数据
                 List<Dictionary<string, object>> table = new List<Dictionary<string, object>>();
-                List<object> tempvaluestrList = null;
-                string stringReplace;
-                string[] tempvaluestrArray;
-                string tempfield = null;
-                string temptypestring = null;
+                List<object> tempValueStrList = null;
+                string tempField = null;
+                string tempTypeString = null;
                 //读取数据
                 for (int i = 3; i < rowCount; i++)
                 {
@@ -94,47 +92,49 @@ namespace EditorUtils
                         field = field.Trim();
                         if (field != "")
                         {
-                            tempfield = field;
+                            tempField = field;
                             if (!dataName.Contains(field))
                             {
                                 dataName.Add(field);
                             }
                         }
-                        else if (tempfield != "" && field == "")
+                        else if (tempField != "" && field == "")
                         {
-                            field = tempfield;
+                            field = tempField;
                         }
 
-                        string typestring = mSheet.Rows[2][j].ToString();
-                        typestring = typestring.ToLower().Trim();
-                        if (typestring != "")
+                        string typeString = mSheet.Rows[2][j].ToString();
+                        typeString = typeString.ToLower().Trim();
+                        if (typeString != "")
                         {
-                            temptypestring = typestring;
-                            if (tempvaluestrList == null)
+                            tempTypeString = typeString;
+                            if (tempValueStrList == null)
                             {
-                                tempvaluestrList = new List<object>();
+                                tempValueStrList = new List<object>();
                             }
                             else
                             {
-                                tempvaluestrList.Clear();
+                                tempValueStrList.Clear();
                             }
 
-                            dataType.Add(typestring);
+                            dataType.Add(typeString);
                         }
-                        else if (typestring == "" && temptypestring != "")
+                        else if (typeString == "" && tempTypeString != "")
                         {
-                            typestring = temptypestring;
+                            typeString = tempTypeString;
                         }
 
-                        string valuestr = mSheet.Rows[i][j].ToString();
-                        valuestr = valuestr.Trim();
+                        string valueStr = mSheet.Rows[i][j].ToString();
+                        valueStr = valueStr.Trim();
                         //Key-Value对应 按类型存放
-                        switch (typestring)
+                        string stringReplace;
+                        string[] tempValueStrArray;
+                        switch (typeString)
                         {
                             case "int":
-                                if (valuestr != "")
+                                if (valueStr != "")
                                 {
-                                    row[field] = Convert.ToInt32(valuestr);
+                                    row[field] = Convert.ToInt32(valueStr);
                                 }
                                 else
                                 {
@@ -143,9 +143,9 @@ namespace EditorUtils
 
                                 break;
                             case "float":
-                                if (valuestr != "")
+                                if (valueStr != "")
                                 {
-                                    row[field] = float.Parse(valuestr);
+                                    row[field] = float.Parse(valueStr);
                                 }
                                 else
                                 {
@@ -154,9 +154,9 @@ namespace EditorUtils
 
                                 break;
                             case "double":
-                                if (valuestr != "")
+                                if (valueStr != "")
                                 {
-                                    row[field] = Convert.ToDouble(valuestr);
+                                    row[field] = Convert.ToDouble(valueStr);
                                 }
                                 else
                                 {
@@ -165,9 +165,9 @@ namespace EditorUtils
 
                                 break;
                             case "long":
-                                if (valuestr != "")
+                                if (valueStr != "")
                                 {
-                                    row[field] = Convert.ToInt64(valuestr);
+                                    row[field] = Convert.ToInt64(valueStr);
                                 }
                                 else
                                 {
@@ -176,7 +176,7 @@ namespace EditorUtils
 
                                 break;
                             case "bool":
-                                if (valuestr == "0" || valuestr == "fasle" || valuestr == "")
+                                if (valueStr == "0" || valueStr == "false" || valueStr == "")
                                 {
                                     row[field] = false;
                                 }
@@ -187,73 +187,73 @@ namespace EditorUtils
 
                                 break;
                             case "array<int>":
-                                stringReplace = valuestr.Replace("[", "");
+                                stringReplace = valueStr.Replace("[", "");
                                 stringReplace = stringReplace.Replace("]", "");
                                 //将字符串，转换成字符数组
-                                tempvaluestrArray = stringReplace.Split(',');
+                                tempValueStrArray = stringReplace.Split(',');
 
-                                int[] tempintArray = new int[tempvaluestrArray.Length];
-                                for (int index = 0; index < tempvaluestrArray.Length; index++)
+                                int[] tempIntArray = new int[tempValueStrArray.Length];
+                                for (int index = 0; index < tempValueStrArray.Length; index++)
                                 {
-                                    if (tempvaluestrArray.Length > 0)
+                                    if (tempValueStrArray.Length > 0)
                                     {
-                                        if (tempvaluestrArray[index].ToString() == "")
+                                        if (tempValueStrArray[index] == "")
                                         {
                                             continue;
                                         }
 
-                                        tempintArray[index] = (Convert.ToInt32(tempvaluestrArray[index]));
+                                        tempIntArray[index] = (Convert.ToInt32(tempValueStrArray[index]));
                                     }
                                 }
 
-                                row[field] = tempintArray;
+                                row[field] = tempIntArray;
                                 break;
                             case "array<string>":
-                                stringReplace = valuestr.Replace("[", "");
+                                stringReplace = valueStr.Replace("[", "");
                                 stringReplace = stringReplace.Replace("]", "");
                                 //将字符串，转换成字符数组
-                                tempvaluestrArray = stringReplace.Split(',');
+                                tempValueStrArray = stringReplace.Split(',');
 
-                                row[field] = tempvaluestrArray;
+                                row[field] = tempValueStrArray;
                                 break;
                             case "list<int>":
-                                tempvaluestrList.Add(valuestr);
-                                List<int> tempintList = new List<int>();
-                                for (int index = 0; index < tempvaluestrList.Count; index++)
+                                tempValueStrList.Add(valueStr);
+                                List<int> tempIntList = new List<int>();
+                                for (int index = 0; index < tempValueStrList.Count; index++)
                                 {
-                                    if (tempvaluestrList.Count > 0)
+                                    if (tempValueStrList.Count > 0)
                                     {
-                                        if (tempvaluestrList[index].ToString() == "")
+                                        if (tempValueStrList[index].ToString() == "")
                                         {
                                             continue;
                                         }
 
-                                        tempintList.Add(Convert.ToInt32(tempvaluestrList[index]));
+                                        tempIntList.Add(Convert.ToInt32(tempValueStrList[index]));
                                     }
                                 }
 
-                                row[field] = tempintList;
+                                row[field] = tempIntList;
                                 break;
                             case "list<string>":
-                                tempvaluestrList.Add(valuestr);
-                                List<object> tempstringList = new List<object>();
-                                for (int index = 0; index < tempvaluestrList.Count; index++)
+                                tempValueStrList.Add(valueStr);
+                                List<object> tempStringList = new List<object>();
+                                for (int index = 0; index < tempValueStrList.Count; index++)
                                 {
-                                    if (tempvaluestrList.Count > 0)
+                                    if (tempValueStrList.Count > 0)
                                     {
-                                        if (tempvaluestrList[index].ToString() == "")
+                                        if (tempValueStrList[index].ToString() == "")
                                         {
                                             continue;
                                         }
 
-                                        tempstringList.Add(tempvaluestrList[index]);
+                                        tempStringList.Add(tempValueStrList[index]);
                                     }
                                 }
 
-                                row[field] = tempstringList;
+                                row[field] = tempStringList;
                                 break;
                             default:
-                                row[field] = valuestr;
+                                row[field] = valueStr;
                                 break;
                         }
                     }
@@ -265,13 +265,13 @@ namespace EditorUtils
                 allTable.Add(jsonName, table);
             }
 
-            string json = JsonConvert.SerializeObject(allTable, Newtonsoft.Json.Formatting.None);
+            string json = JsonConvert.SerializeObject(allTable, Formatting.None);
             json = ConvertJsonString(json);
             // _jsonPath + "/" + jsonName + ".json"
             // string JsonFilePath = _jsonPath + "/" + jsonName + ".json";
-            string JsonFilePath = jsonPath + Path.GetFileNameWithoutExtension(childPath) + ".json";
+            string jsonFilePath = jsonPath + Path.GetFileNameWithoutExtension(childPath) + ".json";
             //写入文件
-            using (FileStream fileStream = new FileStream(JsonFilePath, FileMode.Create, FileAccess.Write))
+            using (FileStream fileStream = new FileStream(jsonFilePath, FileMode.Create, FileAccess.Write))
             {
                 using (TextWriter textWriter = new StreamWriter(fileStream, encoding))
                 {
@@ -281,10 +281,9 @@ namespace EditorUtils
 
             dataName.Clear();
             dataType.Clear();
-            return true;
         }
 
-        public static bool ConvertToJsonEx(string childPath, DataSet mResultSet, string _jsonPath, Encoding encoding)
+        public static bool ConvertToJsonEx(string childPath, DataSet mResultSet, string jsonPath, Encoding encoding)
         {
             // 重新构建一个DataSet
             DataSet mNewDataSet = new DataSet();
@@ -314,12 +313,11 @@ namespace EditorUtils
             {
                 //mSheet.Columns[k].ColumnName = mSheet.Rows[1][k].ToString();
                 string temp = mSheet.Rows[1][k].ToString(); //属性名字_类型
-                string[] tempArry = temp.Split('_');
+                string[] tempArray = temp.Split('_');
 
-                string pName = tempArry[0]; //属性名字
-                string typeName = tempArry[1]; //类型
+                string pName = tempArray[0]; //属性名字
+                string typeName = tempArray[1]; //类型
 
-                //Debug.LogError(tempArry[0]+"|"+tempArry[1]);
                 mSheet.Columns[k].ColumnName = pName;
 
                 //需要什么类型自己扩展
@@ -334,7 +332,6 @@ namespace EditorUtils
                     case "f":
                         mNewTable.Columns.Add(new DataColumn(pName, typeof(float)));
                         break;
-                    default: break;
                 }
             }
 
@@ -342,29 +339,25 @@ namespace EditorUtils
             //读取数据
             for (int i = 2; i < rowCount; i++)
             {
-                DataRow m_newRow = mNewTable.NewRow();
+                DataRow mNewRow = mNewTable.NewRow();
                 for (int j = 0; j < colCount; j++)
                 {
-                    m_newRow[mSheet.Columns[j].ColumnName] = mSheet.Rows[i][j];
+                    mNewRow[mSheet.Columns[j].ColumnName] = mSheet.Rows[i][j];
                 }
 
-                mNewTable.Rows.Add(m_newRow);
+                mNewTable.Rows.Add(mNewRow);
             }
 
             mNewDataSet.AcceptChanges();
 
             // 生成Json字符串
-            string json = JsonConvert.SerializeObject(mNewDataSet, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(mNewDataSet, Formatting.Indented);
 
             //写入文件
-            using (FileStream fileStream =
-                   new FileStream(_jsonPath + "/" + jsonName + ".json", FileMode.Create, FileAccess.Write))
-            {
-                using (TextWriter textWriter = new StreamWriter(fileStream, encoding))
-                {
-                    textWriter.Write(json);
-                }
-            }
+            using FileStream fileStream =
+                new FileStream(jsonPath + "/" + jsonName + ".json", FileMode.Create, FileAccess.Write);
+            using TextWriter textWriter = new StreamWriter(fileStream, encoding);
+            textWriter.Write(json);
 
             return true;
         }
@@ -388,7 +381,7 @@ namespace EditorUtils
                 StringWriter textWriter = new StringWriter();
                 JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
                 {
-                    Formatting = Newtonsoft.Json.Formatting.Indented,
+                    Formatting = Formatting.Indented,
                     Indentation = 4,
                     IndentChar = ' '
                 };

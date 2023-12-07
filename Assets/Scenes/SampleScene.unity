@@ -236,6 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapNode: {fileID: 7722786788074946758, guid: 753107ffdbda74f4688667876050c364, type: 3}
+  townNode: {fileID: -2046828217495126488, guid: a4ba88e123f9ed24fb946eff07fdd0ed, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

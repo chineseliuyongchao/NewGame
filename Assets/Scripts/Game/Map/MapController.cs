@@ -1,19 +1,25 @@
-﻿using GameQFramework;
+﻿using Game.Town;
+using GameQFramework;
 using QFramework;
 using SystemTool.MapProcessing;
 using UnityEngine;
 
 namespace Game.Map
 {
+    /// <summary>
+    /// 地图控制器，用于管理所有与地图有关的内容
+    /// </summary>
     public class MapController : BaseGameController
     {
         public MapNode mapNode;
+        public TownNode townNode;
 
         protected override void OnInit()
         {
             Instantiate(mapNode, transform);
             this.GetModel<IMapModel>().Map =
                 ImageToMapController.Singleton.GetMap(MapConstant.MAP_PATH + MapConstant.GRID_MAP_FILE_NAME);
+            Instantiate(townNode, transform);
         }
 
         private void Update()

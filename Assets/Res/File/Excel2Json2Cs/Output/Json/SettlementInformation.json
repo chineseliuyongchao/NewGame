@@ -1,25 +1,25 @@
 ﻿{
     "Sheet1": [
         {
-            "settlementId": 1,
-            "settlementName": "city1",
-            "settlementPos": [
+            "ID": 1,
+            "Name": "city1",
+            "TownPos": [
                 0,
                 0
             ]
         },
         {
-            "settlementId": 2,
-            "settlementName": "city2",
-            "settlementPos": [
+            "ID": 2,
+            "Name": "city2",
+            "TownPos": [
                 0,
                 1
             ]
         },
         {
-            "settlementId": 3,
-            "settlementName": "city3",
-            "settlementPos": [
+            "ID": 3,
+            "Name": "city3",
+            "TownPos": [
                 0,
                 2
             ]

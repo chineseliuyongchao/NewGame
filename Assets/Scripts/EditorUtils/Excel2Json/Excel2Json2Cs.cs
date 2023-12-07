@@ -29,19 +29,10 @@ namespace EditorUtils
             }
 
             GUI.Label(new Rect(120, 90, 600, 30), jsonPath);
-            if (GUI.Button(new Rect(150, 250, 100, 50), "Excel2Json"))
-            {
-                if (Generator.Excel2Json(excelPath, jsonPath))
-                {
-                    EditorUtility.DisplayDialog("", "完成", "确定");
-                }
-                else
-                {
-                    EditorUtility.DisplayDialog("", "出错了", "确定");
-                }
+            if (!GUI.Button(new Rect(150, 250, 100, 50), "Excel2Json")) return;
+            EditorUtility.DisplayDialog("", Generator.Excel2Json(excelPath, jsonPath) ? "完成" : "出错了", "确定");
 
-                AssetDatabase.Refresh();
-            }
+            AssetDatabase.Refresh();
         }
     }
 }

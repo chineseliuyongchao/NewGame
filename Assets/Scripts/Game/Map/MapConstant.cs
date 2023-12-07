@@ -3,7 +3,7 @@
     /// <summary>
     /// 地图相关常量
     /// </summary>
-    public class MapConstant
+    public abstract class MapConstant
     {
         /// <summary>
         /// 图片的多少像素算一个网格
