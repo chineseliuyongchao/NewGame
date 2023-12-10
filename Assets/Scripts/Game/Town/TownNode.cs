@@ -30,10 +30,9 @@ namespace Game.Town
             Dictionary<string, Town> townData = this.GetModel<ITownModel>().TownData;
             foreach (var kvp in townData)
             {
-                string key = kvp.Key; // 获取键
-                Town value = kvp.Value; // 获取值
+                string key = kvp.Key;
                 BaseTown town = Instantiate(baseTown, transform);
-                town.gameObject.transform.position = new Vector3(value.TownPos[0], value.TownPos[1], 0);
+                town.InitTown(key);
                 _towns.Add(key, town);
             }
         }

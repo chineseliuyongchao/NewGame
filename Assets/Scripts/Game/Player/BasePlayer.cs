@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Game.Town;
 using GameQFramework;
 using QFramework;
 using SystemTool.Pathfinding;
@@ -15,35 +16,42 @@ namespace Game.Player
         private Sequence _sequence;
 
         /// <summary>
-        /// 从一个位置移动到下一个位置
+        /// 设置游戏角色的移动路径
         /// </summary>
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
-        protected void Move(IntVector2 startPos, IntVector2 endPos)
+        /// <param name="callBack"></param>
+        protected void Move(IntVector2 startPos, IntVector2 endPos, MoveCloseBack callBack)
         {
             if (_sequence == null || !_sequence.active)
             {
                 _sequence = DOTween.Sequence();
 
-                PlayerMove(startPos, endPos);
+                PlayerMove(startPos, endPos, callBack);
             }
             else if (!_sequence.IsPlaying())
             {
                 _sequence = DOTween.Sequence();
-                PlayerMove(startPos, endPos);
+                PlayerMove(startPos, endPos, callBack);
             }
             else
             {
                 _sequence.OnKill(() =>
                 {
                     _sequence = DOTween.Sequence();
-                    PlayerMove(startPos, endPos);
+                    PlayerMove(startPos, endPos, callBack);
                 });
                 _sequence.Kill();
             }
         }
 
-        private void PlayerMove(IntVector2 startPos, IntVector2 endPos)
+        /// <summary>
+        /// 使用doTween设置游戏角色的移动路径
+        /// </summary>
+        /// <param name="startPos"></param>
+        /// <param name="endPos"></param>
+        /// <param name="callBack"></param>
+        private void PlayerMove(IntVector2 startPos, IntVector2 endPos, MoveCloseBack callBack)
         {
             PathfindingSingleMessage message =
                 PathfindingController.Singleton.Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
@@ -55,7 +63,21 @@ namespace Game.Player
                         this.GetSystem<IMapSystem>().GetGridToMapPos(message.PathfindingResult[i].Pos));
                     _sequence.Append(transform.DOMove(pos, 0.1f * message.Length[i]).SetEase(Ease.Linear));
                 }
+
+                if (callBack != null)
+                {
+                    _sequence.AppendCallback(() => { callBack(); });
+                }
             }
+        }
+
+        /// <summary>
+        /// 游戏角色移动到某个聚落
+        /// </summary>
+        /// <param name="baseTown"></param>
+        protected void MoveToTown(BaseTown baseTown)
+        {
+            Debug.Log("moveToTown:  " + baseTown.name);
         }
 
         /// <summary>

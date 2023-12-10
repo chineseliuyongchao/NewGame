@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using Game.Town;
+using QFramework;
 using UnityEngine;
 
 namespace GameQFramework
@@ -8,16 +9,18 @@ namespace GameQFramework
     /// </summary>
     public class SelectMapLocationCommand : AbstractCommand
     {
-        private Vector2 _selectPos;
+        private readonly Vector2 _selectPos;
+        private readonly BaseTown _baseTown;
 
-        public SelectMapLocationCommand(Vector2 selectPos)
+        public SelectMapLocationCommand(Vector2 selectPos, BaseTown baseTown)
         {
             this._selectPos = selectPos;
+            this._baseTown = baseTown;
         }
 
         protected override void OnExecute()
         {
-            this.SendEvent(new SelectMapLocationEvent(_selectPos));
+            this.SendEvent(new SelectMapLocationEvent(_selectPos, _baseTown));
         }
     }
 }

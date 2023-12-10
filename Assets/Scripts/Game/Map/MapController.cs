@@ -31,7 +31,19 @@ namespace Game.Map
                 Vector3 mousePosition = Input.mousePosition;
                 // 使用Camera.main.ScreenToWorldPoint将屏幕坐标转换为世界坐标
                 Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-                this.SendCommand(new SelectMapLocationCommand(worldPosition));
+                RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+                BaseTown baseTown = null;
+                // 判断是否点击到了游戏物体
+                if (hit.collider != null)
+                {
+                    GameObject clickedObject = hit.collider.gameObject;
+                    if (clickedObject.CompareTag("Town"))
+                    {
+                        baseTown = clickedObject.GetComponent<BaseTown>();
+                    }
+                }
+
+                this.SendCommand(new SelectMapLocationCommand(worldPosition, baseTown));
             }
         }
     }

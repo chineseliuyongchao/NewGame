@@ -70,4 +70,50 @@ namespace Utils
         [MethodImpl((MethodImplOptions)256)]
         public static bool operator !=(IntVector2 lhs, IntVector2 rhs) => !(lhs == rhs);
     }
+
+    /// <summary>
+    /// 9种方位
+    /// </summary>
+    public enum Position
+    {
+        CENTER,
+        CENTER_TOP,
+        RIGHT_CENTER,
+        CENTER_BOTTOM,
+        LEFT_CENTER,
+        RIGHT_TOP,
+        RIGHT_BOTTOM,
+        LEFT_BOTTOM,
+        LEFT_TOP
+    }
+
+    public static class PositionExtensions
+    {
+        public static IntVector2 GetCoordinates(this Position position)
+        {
+            switch (position)
+            {
+                case Position.CENTER:
+                    return new IntVector2(0, 0);
+                case Position.CENTER_TOP:
+                    return new IntVector2(0, 1);
+                case Position.RIGHT_CENTER:
+                    return new IntVector2(1, 0);
+                case Position.CENTER_BOTTOM:
+                    return new IntVector2(0, -1);
+                case Position.LEFT_CENTER:
+                    return new IntVector2(-1, 0);
+                case Position.RIGHT_TOP:
+                    return new IntVector2(1, 1);
+                case Position.RIGHT_BOTTOM:
+                    return new IntVector2(1, -1);
+                case Position.LEFT_BOTTOM:
+                    return new IntVector2(-1, -1);
+                case Position.LEFT_TOP:
+                    return new IntVector2(-1, 1);
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(position), position, null);
+            }
+        }
+    }
 }

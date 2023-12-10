@@ -39,12 +39,14 @@ namespace GameQFramework
             return res;
         }
 
-        public Vector2 GetGridToMapPos(IntVector2 pos)
+        public Vector2 GetGridToMapPos(IntVector2 pos, Position position = Position.CENTER_BOTTOM)
         {
             Vector2 vector2 = new Vector2(pos.X, pos.Y) * MapConstant.GRID_SIZE / 100;
             vector2 -= this.GetModel<IMapModel>().MapSize / 2;
+            IntVector2 gridPosition = position.GetCoordinates() + new IntVector2(1, 1); //因为直接算出来的位置在左下角，想到中心点就得先加（1,1）
             float halfGridRealSize = MapConstant.GRID_SIZE / 2f / MapConstant.MAP_PIXELS_PER_UNIT;
-            vector2 += new Vector2(halfGridRealSize, halfGridRealSize); //返回的位置应该是寻路方格的中心
+            vector2 += new Vector2(halfGridRealSize * gridPosition.X,
+                halfGridRealSize * gridPosition.Y);
             return vector2;
         }
     }

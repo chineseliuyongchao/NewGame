@@ -15,7 +15,13 @@ namespace Game.Player
             this.RegisterEvent<SelectMapLocationEvent>(e =>
             {
                 IntVector2 endPos = this.GetSystem<IMapSystem>().GetGridMapPos(e.SelectPos);
-                Move(GetStartPos(), endPos);
+                Move(GetStartPos(), endPos, () =>
+                {
+                    if (e.BaseTown != null)
+                    {
+                        MoveToTown(e.BaseTown);
+                    }
+                });
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
     }
