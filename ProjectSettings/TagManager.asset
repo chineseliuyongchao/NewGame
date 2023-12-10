@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: MapLayer
+    uniqueID: 2784504341
+    locked: 0
+  - name: TownLayer
+    uniqueID: 2641405333
+    locked: 0
+  - name: PlayerLayer
+    uniqueID: 1008394223
+    locked: 0

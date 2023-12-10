@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textAsset: {fileID: 4900000, guid: ec20ae6c54d1bf8479b6c2e36fda0438, type: 3}
+  baseTown: {fileID: 6178292900445369802, guid: 913db5d742468f94f8797fb1c9a9dbd0, type: 3}
