@@ -109,7 +109,7 @@ namespace QFramework
 			mUIData = null;
 		}
 
-		protected void CloseSelf()
+		protected virtual void CloseSelf()
 		{
 			UIKit.ClosePanel(this);
 		}
