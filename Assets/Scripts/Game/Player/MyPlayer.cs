@@ -20,6 +20,7 @@ namespace Game.Player
                     if (e.BaseTown != null)
                     {
                         MoveToTown(e.BaseTown);
+                        this.GetModel<IMyPlayerModel>().AccessTown++;
                     }
                 });
             }).UnRegisterWhenGameObjectDestroyed(gameObject);

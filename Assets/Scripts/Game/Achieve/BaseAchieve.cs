@@ -1,7 +1,6 @@
 ﻿using GameQFramework;
 using QFramework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Achieve
 {
@@ -27,7 +26,6 @@ namespace Game.Achieve
         public void OnFinish()
         {
             Debug.Log("成就完成：  " + Name);
-            SceneManager.LoadScene("PassScene");
         }
 
         public IArchitecture GetArchitecture()

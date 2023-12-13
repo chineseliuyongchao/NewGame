@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameQFramework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Achieve
 {
@@ -22,6 +23,7 @@ namespace Game.Achieve
         {
             _achieves = new List<BaseAchieve>();
             _achieves.Add(new StayTwoTimeAchieve());
+            _achieves.Add(new AccessThreeTownAchieve());
         }
 
         private void Update()
@@ -37,6 +39,11 @@ namespace Game.Achieve
                         _achieves.Remove(_achieves[i]);
                     }
                 }
+            }
+
+            if (_achieves.Count <= 0)
+            {
+                SceneManager.LoadScene("PassScene");
             }
         }
     }

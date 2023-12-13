@@ -14,6 +14,7 @@ namespace GameQFramework
             RegisterModel<IGameModel>(new GameModel());
             RegisterModel<IMapModel>(new MapModel());
             RegisterModel<ITownModel>(new TownModel());
+            RegisterModel<IMyPlayerModel>(new MyPlayerModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
         }
