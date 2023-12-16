@@ -3,28 +3,26 @@ using QFramework;
 
 namespace UI
 {
-    public class TimeNodeData : UIPanelData
+    public class UIGameLobbyData : UIPanelData
     {
     }
 
-    public partial class TimeNode : UIBase
+    /// <summary>
+    /// 游戏大厅界面
+    /// </summary>
+    public partial class UIGameLobby : UIBase
     {
-        private void Awake()
-        {
-            OnInit();
-        }
-
         protected override void OnInit(IUIData uiData = null)
         {
-            mData = uiData as TimeNodeData ?? new TimeNodeData();
+            mData = uiData as UIGameLobbyData ?? new UIGameLobbyData();
             // please add init code here
             base.OnInit(uiData);
         }
 
         protected override void OnOpen(IUIData uiData = null)
         {
-            mData = uiData as TimeNodeData ?? new TimeNodeData();
-            // please add init code here
+            mData = uiData as UIGameLobbyData ?? new UIGameLobbyData();
+            // please add open code here
             base.OnOpen(uiData);
         }
 

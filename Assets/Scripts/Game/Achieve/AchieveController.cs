@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using GameQFramework;
+using QFramework;
+using UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Game.Achieve
 {
@@ -43,7 +44,8 @@ namespace Game.Achieve
 
             if (_achieves.Count <= 0)
             {
-                SceneManager.LoadScene("PassScene");
+                UIKit.ClosePanel<UIGameLobby>();
+                this.GetSystem<IGameSystem>().ChangeMenuScene();
             }
         }
     }

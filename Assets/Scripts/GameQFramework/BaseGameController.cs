@@ -26,6 +26,15 @@ namespace GameQFramework
             OnListenEvent();
         }
 
+        private void Start()
+        {
+            OnControllerStart();
+        }
+
+        protected virtual void OnControllerStart()
+        {
+        }
+
         protected virtual void OnListenButton()
         {
         }

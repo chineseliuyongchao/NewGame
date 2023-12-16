@@ -1,4 +1,5 @@
 ﻿using QFramework;
+using UnityEngine.SceneManagement;
 
 namespace GameQFramework
 {
@@ -7,6 +8,16 @@ namespace GameQFramework
         protected override void OnInit()
         {
             
+        }
+
+        public void ChangeMenuScene()
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
+
+        public void ChangeMainGameScene()
+        {
+            SceneManager.LoadScene("MainGameScene");
         }
     }
 }

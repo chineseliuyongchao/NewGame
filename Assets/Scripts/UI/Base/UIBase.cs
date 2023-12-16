@@ -36,7 +36,6 @@ namespace UI
             return GameApp.Interface;
         }
 
-
         protected void ShowUIMask(Transform parent)
         {
             if (!bShowMask)

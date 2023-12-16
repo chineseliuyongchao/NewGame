@@ -5,15 +5,15 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:3bc712f7-9ecf-4435-9ce0-24f2c613dbf9
-	public partial class TimeNode
+	// Generate Id:a8d70499-65c7-464f-8ac4-55c99feded75
+	public partial class UIGameLobby
 	{
-		public const string Name = "TimeNode";
+		public const string Name = "UIGameLobby";
 		
 		[SerializeField]
 		public UnityEngine.UI.Text timeView;
 		
-		private TimeNodeData mPrivateData = null;
+		private UIGameLobbyData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
@@ -22,7 +22,7 @@ namespace UI
 			mData = null;
 		}
 		
-		public TimeNodeData Data
+		public UIGameLobbyData Data
 		{
 			get
 			{
@@ -30,11 +30,11 @@ namespace UI
 			}
 		}
 		
-		TimeNodeData mData
+		UIGameLobbyData mData
 		{
 			get
 			{
-				return mPrivateData ?? (mPrivateData = new TimeNodeData());
+				return mPrivateData ?? (mPrivateData = new UIGameLobbyData());
 			}
 			set
 			{
