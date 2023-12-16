@@ -17,14 +17,5 @@ namespace Game.Game
         {
             UIKit.OpenPanel<UIGameMenu>();
         }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                UIKit.ClosePanel<UIGameMenu>();
-                this.GetSystem<IGameSystem>().ChangeMainGameScene();
-            }
-        }
     }
 }
