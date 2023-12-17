@@ -3,6 +3,17 @@
 namespace GameQFramework
 {
     /// <summary>
+    /// 切换到菜单场景
+    /// </summary>
+    public class ChangeToMenuSceneCommand : AbstractCommand
+    {
+        protected override void OnExecute()
+        {
+            this.SendEvent(new ChangeToMenuSceneEvent());
+        }
+    }
+
+    /// <summary>
     /// 切换到主游戏场景
     /// </summary>
     public class ChangeToMainGameSceneCommand : AbstractCommand

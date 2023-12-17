@@ -29,15 +29,10 @@ namespace Game.Game
             if (_isPass)
             {
                 _deltaTime += Time.deltaTime;
+
                 if (_deltaTime >= GameConstant.CONVERT_QUARTER)
                 {
                     _deltaTime = 0;
-                    this.GetModel<IGameModel>().Quarter++;
-                }
-
-                if (this.GetModel<IGameModel>().Quarter >= GameConstant.CONVERT_TIME)
-                {
-                    this.GetModel<IGameModel>().Quarter = 0;
                     this.GetModel<IGameModel>().Time++;
                 }
 

@@ -3,12 +3,12 @@
     /// <summary>
     /// 游戏相关常量
     /// </summary>
-    public class GameConstant
+    public abstract class GameConstant
     {
         /// <summary>
         /// 现实秒换算游戏刻
         /// </summary>
-        public const int CONVERT_QUARTER = 1;
+        public const float CONVERT_QUARTER = 1.5f;
 
         /// <summary>
         /// 刻换算时辰
