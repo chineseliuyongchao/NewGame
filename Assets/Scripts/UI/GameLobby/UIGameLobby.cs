@@ -48,7 +48,7 @@ namespace UI
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<TimeChangeEvent>(e =>
+            this.RegisterEvent<ChangeTimeEvent>(e =>
             {
                 timeView.text = this.GetModel<IGameModel>().Year + "年" + this.GetModel<IGameModel>().Month + "月" +
                                 this.GetModel<IGameModel>().Day + "日" + this.GetModel<IGameModel>().Time + "时";

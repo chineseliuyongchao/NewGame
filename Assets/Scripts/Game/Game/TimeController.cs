@@ -29,11 +29,13 @@ namespace Game.Game
             if (_isPass)
             {
                 _deltaTime += Time.deltaTime;
+                bool hasChange = false;
 
                 if (_deltaTime >= GameConstant.CONVERT_QUARTER)
                 {
                     _deltaTime = 0;
                     this.GetModel<IGameModel>().Time++;
+                    hasChange = true;
                 }
 
                 if (this.GetModel<IGameModel>().Time >= GameConstant.CONVERT_DAY)
@@ -52,6 +54,11 @@ namespace Game.Game
                 {
                     this.GetModel<IGameModel>().Month = 0;
                     this.GetModel<IGameModel>().Year++;
+                }
+
+                if (hasChange)
+                {
+                    this.SendCommand(new ChangeTimeCommand());
                 }
             }
         }

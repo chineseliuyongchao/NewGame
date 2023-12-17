@@ -21,6 +21,13 @@
     }
 
     /// <summary>
+    /// 用于通知时间更新
+    /// </summary>
+    public class ChangeTimeEvent
+    {
+    }
+
+    /// <summary>
     /// 切换到菜单场景
     /// </summary>
     public class ChangeToMenuSceneEvent
