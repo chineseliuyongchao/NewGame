@@ -29,5 +29,10 @@
         /// 月换算年
         /// </summary>
         public const int CONVERT_YEAR = 12;
+
+        /// <summary>
+        /// 存档文件夹
+        /// </summary>
+        public const string SAVE_FOLDER_NAME = "/GameSave";
     }
 }

@@ -49,6 +49,10 @@ namespace UI
                 this.SendCommand(new ChangeToMenuSceneCommand());
                 this.GetSystem<IGameSystem>().ChangeMenuScene();
             });
+            saveButton.onClick.AddListener(() =>
+            {
+                this.GetSystem<IGameSaveSystem>().SaveGame(001.ToString()); //测试使用
+            });
             closeButton.onClick.AddListener(CloseSelf);
         }
 
