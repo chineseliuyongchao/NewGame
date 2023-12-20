@@ -34,5 +34,15 @@
         /// 存档文件夹
         /// </summary>
         public const string SAVE_FOLDER_NAME = "/GameSave";
+
+        /// <summary>
+        /// 保存游戏数据的文件夹
+        /// </summary>
+        public const string SAVE_GAME_DATA_FOLDER_NAME = "/GameDataSave";
+
+        /// <summary>
+        /// 保存游戏存档数据的文件
+        /// </summary>
+        public const string GAME_FILE_DATA = "/gameFileData.txt";
     }
 }

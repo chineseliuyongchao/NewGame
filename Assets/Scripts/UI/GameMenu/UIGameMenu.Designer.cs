@@ -5,13 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:0e6a6813-bb4e-4f53-87ef-93733e8a1cc7
+	// Generate Id:8c014a6c-24ac-4dfa-b966-3af2dccfb27b
 	public partial class UIGameMenu
 	{
 		public const string Name = "UIGameMenu";
 		
 		[SerializeField]
-		public UnityEngine.UI.Button startGameButton;
+		private UnityEngine.UI.Button startGameButton;
 		
 		private UIGameMenuData mPrivateData = null;
 		

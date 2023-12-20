@@ -12,6 +12,6 @@ namespace GameQFramework
         /// <summary>
         /// 切换到游戏场景
         /// </summary>
-        public void ChangeMainGameScene();
+        public void ChangeMainGameScene(string fileName = null);
     }
 }

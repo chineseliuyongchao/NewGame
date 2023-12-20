@@ -5,15 +5,15 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:f0f826f3-5d7d-4473-a1e8-82ab7dde412d
+	// Generate Id:c2397838-9c60-43f2-b122-437f9dc11b61
 	public partial class UIGameLobby
 	{
 		public const string Name = "UIGameLobby";
 		
 		[SerializeField]
-		public TMPro.TextMeshProUGUI timeView;
+		private TMPro.TextMeshProUGUI timeView;
 		[SerializeField]
-		public UnityEngine.UI.Button menuButton;
+		private UnityEngine.UI.Button menuButton;
 		
 		private UIGameLobbyData mPrivateData = null;
 		

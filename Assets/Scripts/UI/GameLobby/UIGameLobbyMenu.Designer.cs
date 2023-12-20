@@ -5,17 +5,17 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:1e6c5c7b-4f3c-40fa-b80a-03ae6bc3c1d7
+	// Generate Id:e321c830-726b-43c4-ab3f-94c8c026fa9e
 	public partial class UIGameLobbyMenu
 	{
 		public const string Name = "UIGameLobbyMenu";
 		
 		[SerializeField]
-		public UnityEngine.UI.Button backToMenuButton;
+		private UnityEngine.UI.Button backToMenuButton;
 		[SerializeField]
-		public UnityEngine.UI.Button saveButton;
+		private UnityEngine.UI.Button saveButton;
 		[SerializeField]
-		public UnityEngine.UI.Button closeButton;
+		private UnityEngine.UI.Button closeButton;
 		
 		private UIGameLobbyMenuData mPrivateData = null;
 		

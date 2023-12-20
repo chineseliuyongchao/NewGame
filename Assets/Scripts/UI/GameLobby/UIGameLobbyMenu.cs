@@ -1,6 +1,5 @@
 using GameQFramework;
 using QFramework;
-using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -51,7 +50,7 @@ namespace UI
             });
             saveButton.onClick.AddListener(() =>
             {
-                this.GetSystem<IGameSaveSystem>().SaveGame(001.ToString()); //测试使用
+                this.GetSystem<IGameSaveSystem>().SaveGame(this.GetUtility<IGameUtility>().TimeYToS());
             });
             closeButton.onClick.AddListener(CloseSelf);
         }

@@ -63,7 +63,7 @@ namespace QFramework
                             }
 
                             classScope.Custom("[SerializeField]");
-                            classScope.Custom("public " + bindInfo.BindScript.TypeName + " " + bindInfo.TypeName +
+                            classScope.Custom("private " + bindInfo.BindScript.TypeName + " " + bindInfo.TypeName +
                                               ";");
                         }
 
