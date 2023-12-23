@@ -1,5 +1,6 @@
 using GameQFramework;
 using QFramework;
+using UnityEngine;
 
 namespace UI
 {
@@ -63,6 +64,11 @@ namespace UI
         {
             this.RegisterEvent<ChangeToMenuSceneEvent>(_ => { CloseSelf(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+
+        protected override Transform AnimTransform()
+        {
+            return root;
         }
     }
 }

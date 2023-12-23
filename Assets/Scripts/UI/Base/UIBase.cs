@@ -36,7 +36,7 @@ namespace UI
             return GameApp.Interface;
         }
 
-        protected void ShowUIMask(Transform parent)
+        private void ShowUIMask(Transform parent)
         {
             if (!bShowMask)
             {
@@ -56,10 +56,10 @@ namespace UI
             if (needCloseAnim)
             {
                 _showSequence = DOTween.Sequence();
-                transform.localScale = Vector3.one;
+                AnimTransform().localScale = Vector3.one;
                 _canvasGroup.alpha = 1;
-                _showSequence.Append(transform.DOScale(animScale, performTime / 2));
-                _showSequence.Append(transform.DOScale(Vector3.zero, performTime));
+                _showSequence.Append(AnimTransform().DOScale(animScale, performTime / 2));
+                _showSequence.Append(AnimTransform().DOScale(Vector3.zero, performTime));
                 _showSequence.Join(_canvasGroup.DOFade(0, performTime));
                 _showSequence.AppendCallback(() =>
                 {
@@ -76,11 +76,11 @@ namespace UI
         private void ShowCanvas()
         {
             _showSequence = DOTween.Sequence();
-            transform.localScale = Vector3.zero;
+            AnimTransform().localScale = Vector3.zero;
             _canvasGroup.alpha = 0;
-            _showSequence.Append(transform.DOScale(animScale, performTime / 2));
+            _showSequence.Append(AnimTransform().DOScale(animScale, performTime / 2));
             _showSequence.Join(_canvasGroup.DOFade(1, performTime));
-            _showSequence.Append(transform.DOScale(Vector3.one, performTime));
+            _showSequence.Append(AnimTransform().DOScale(Vector3.one, performTime));
         }
 
         protected override void OnInit(IUIData uiData = null)
@@ -116,7 +116,7 @@ namespace UI
         {
             _mResLoader.Recycle2Cache();
             _mResLoader = null;
-            DOTween.Kill(this.gameObject);
+            DOTween.Kill(gameObject);
         }
 
         protected virtual void OnListenButton()
@@ -125,6 +125,15 @@ namespace UI
 
         protected virtual void OnListenEvent()
         {
+        }
+
+        /// <summary>
+        /// 用于做效果动作的Transform
+        /// </summary>
+        /// <returns></returns>
+        protected virtual Transform AnimTransform()
+        {
+            return transform;
         }
     }
 }

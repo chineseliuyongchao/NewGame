@@ -68,8 +68,8 @@ namespace UI
             {
                 this.GetSystem<IGameSaveSystem>().SaveGame(this.GetUtility<IGameUtility>().TimeYToS());
             });
-            backToMenu.onClick.AddListener(CloseSelf);
-            backToGame.onClick.AddListener(CloseSelf);
+            backToMenuButton.onClick.AddListener(CloseSelf);
+            backToGameButton.onClick.AddListener(CloseSelf);
         }
 
         protected override void OnListenEvent()
@@ -100,11 +100,11 @@ namespace UI
 
             if (mData.IsInMenu)
             {
-                backToGame.gameObject.SetActive(false);
+                backToGameButton.gameObject.SetActive(false);
             }
             else
             {
-                backToMenu.gameObject.SetActive(false);
+                backToMenuButton.gameObject.SetActive(false);
             }
 
             UpdateUI();
@@ -116,6 +116,11 @@ namespace UI
             Vector2 size = fileDataContent.GetComponent<RectTransform>().sizeDelta;
             size.y = list.Count * UIFileData.UI_FILE_DATA_HEIGHT;
             fileDataContent.GetComponent<RectTransform>().sizeDelta = size;
+        }
+
+        protected override Transform AnimTransform()
+        {
+            return root;
         }
     }
 }

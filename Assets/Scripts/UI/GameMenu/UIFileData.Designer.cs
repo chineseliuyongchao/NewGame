@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:37f3ca2e-b819-486a-8655-4151ad428247
+	// Generate Id:8852031e-273a-4231-95bf-ebedc82b9bb6
 	public partial class UIFileData
 	{
 		public const string Name = "UIFileData";
@@ -13,20 +13,20 @@ namespace UI
 		[SerializeField]
 		private TMPro.TextMeshProUGUI fileName;
 		[SerializeField]
-		private UnityEngine.UI.Button open;
+		private UnityEngine.UI.Button openButton;
 		[SerializeField]
-		private UnityEngine.UI.Button cover;
+		private UnityEngine.UI.Button coverButton;
 		[SerializeField]
-		private UnityEngine.UI.Button delete;
+		private UnityEngine.UI.Button deleteButton;
 		
 		private UIFileDataData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
 			fileName = null;
-			open = null;
-			cover = null;
-			delete = null;
+			openButton = null;
+			coverButton = null;
+			deleteButton = null;
 			
 			mData = null;
 		}

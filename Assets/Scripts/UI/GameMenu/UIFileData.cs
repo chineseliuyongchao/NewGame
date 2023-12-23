@@ -58,14 +58,14 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            open.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMainGameScene(_fileNameValue); });
-            delete.onClick.AddListener(() =>
+            openButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMainGameScene(_fileNameValue); });
+            deleteButton.onClick.AddListener(() =>
             {
                 this.GetSystem<IGameSaveSystem>().DeleteGame(_fileNameValue);
                 this.SendCommand(new DeleteFileCommand());
                 Destroy(gameObject);
             });
-            cover.onClick.AddListener(() => { this.GetSystem<IGameSaveSystem>().SaveGame(_fileNameValue); });
+            coverButton.onClick.AddListener(() => { this.GetSystem<IGameSaveSystem>().SaveGame(_fileNameValue); });
         }
 
         protected override void OnListenEvent()
@@ -83,11 +83,11 @@ namespace UI
             fileName.text = fileDataName;
             if (isLoad)
             {
-                cover.gameObject.SetActive(false);
+                coverButton.gameObject.SetActive(false);
             }
             else
             {
-                open.gameObject.SetActive(false);
+                openButton.gameObject.SetActive(false);
             }
         }
     }

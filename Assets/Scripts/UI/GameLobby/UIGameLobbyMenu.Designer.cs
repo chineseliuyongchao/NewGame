@@ -5,11 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:0c395f16-7ef9-4b30-b584-a420334ea969
+	// Generate Id:7bd1507d-28a8-418e-a100-81d181a2d78f
 	public partial class UIGameLobbyMenu
 	{
 		public const string Name = "UIGameLobbyMenu";
 		
+		[SerializeField]
+		private RectTransform root;
 		[SerializeField]
 		private UnityEngine.UI.Button backToMenuButton;
 		[SerializeField]
@@ -23,6 +25,7 @@ namespace UI
 		
 		protected override void ClearUIComponents()
 		{
+			root = null;
 			backToMenuButton = null;
 			saveButton = null;
 			loadButton = null;
