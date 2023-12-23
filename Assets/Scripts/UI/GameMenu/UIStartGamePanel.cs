@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using GameQFramework;
 using QFramework;
 using UnityEngine;
+using Utils.Constant;
 
 namespace UI
 {
@@ -64,10 +66,7 @@ namespace UI
         protected override void OnListenButton()
         {
             newGameButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMainGameScene(); });
-            newFileButton.onClick.AddListener(() =>
-            {
-                UIKit.OpenPanel<UINewFile>(new UINewFileData());
-            });
+            newFileButton.onClick.AddListener(() => { UIKit.OpenPanel<UINewFile>(new UINewFileData()); });
             backToMenuButton.onClick.AddListener(CloseSelf);
             backToGameButton.onClick.AddListener(CloseSelf);
         }
@@ -77,6 +76,8 @@ namespace UI
             this.RegisterEvent<ChangeToMainGameSceneEvent>(_ => { CloseSelf(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<DeleteFileEvent>(_ => { UpdateUI(); })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<SaveFileDataEvent>(_ => { CloseSelf(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
@@ -121,6 +122,26 @@ namespace UI
         protected override Transform AnimTransform()
         {
             return root;
+        }
+
+        protected override void OpenAnim()
+        {
+            ShowSequence = DOTween.Sequence();
+            RectTransform rectTransform = AnimTransform().GetComponent<RectTransform>();
+            rectTransform.anchoredPosition = new Vector2(-600, 0);
+            CanvasGroup.alpha = 0;
+            ShowSequence.Join(CanvasGroup.DOFade(1, performTime));
+            ShowSequence.Append(rectTransform.DOAnchorPos(Vector2.one, performTime).SetEase(Ease.OutQuart));
+        }
+
+        protected override void CloseAnim(UICloseBack callBack)
+        {
+            ShowSequence = DOTween.Sequence();
+            RectTransform rectTransform = AnimTransform().GetComponent<RectTransform>();
+            CanvasGroup.alpha = 1;
+            ShowSequence.Append(rectTransform.DOAnchorPos(new Vector2(-600, 0), performTime));
+            ShowSequence.Join(CanvasGroup.DOFade(0, performTime));
+            ShowSequence.AppendCallback(() => { callBack?.Invoke(); });
         }
     }
 }

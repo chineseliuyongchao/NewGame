@@ -5,6 +5,7 @@ using QFramework;
 using SystemTool.Pathfinding;
 using UnityEngine;
 using Utils;
+using Utils.Constant;
 
 namespace Game.Player
 {

@@ -34,4 +34,15 @@ namespace GameQFramework
             this.SendEvent(new ChangeToMainGameSceneEvent());
         }
     }
+
+    /// <summary>
+    /// 保存了存档
+    /// </summary>
+    public class SaveFileDataCommand : AbstractCommand
+    {
+        protected override void OnExecute()
+        {
+            this.SendEvent(new SaveFileDataEvent());
+        }
+    }
 }

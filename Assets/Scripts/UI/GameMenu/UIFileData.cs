@@ -58,14 +58,21 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            openButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMainGameScene(_fileNameValue); });
+            openButton.onClick.AddListener(() =>
+            {
+                this.GetSystem<IGameSystem>().ChangeMainGameScene(_fileNameValue);
+            });
             deleteButton.onClick.AddListener(() =>
             {
                 this.GetSystem<IGameSaveSystem>().DeleteGame(_fileNameValue);
                 this.SendCommand(new DeleteFileCommand());
                 Destroy(gameObject);
             });
-            coverButton.onClick.AddListener(() => { this.GetSystem<IGameSaveSystem>().SaveGame(_fileNameValue); });
+            coverButton.onClick.AddListener(() =>
+            {
+                this.GetSystem<IGameSaveSystem>().SaveGame(_fileNameValue);
+                this.SendCommand(new SaveFileDataCommand());
+            });
         }
 
         protected override void OnListenEvent()

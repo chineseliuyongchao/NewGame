@@ -40,4 +40,11 @@
     public class ChangeToMainGameSceneEvent
     {
     }
+
+    /// <summary>
+    /// 保存了存档
+    /// </summary>
+    public class SaveFileDataEvent
+    {
+    }
 }

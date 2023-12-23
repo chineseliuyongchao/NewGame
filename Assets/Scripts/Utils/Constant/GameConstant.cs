@@ -76,4 +76,14 @@
         /// </summary>
         public const int CONVERT_YEAR = 12;
     }
+
+    /// <summary>
+    /// 移动结束的回调
+    /// </summary>
+    public delegate void MoveCloseBack();
+
+    /// <summary>
+    /// UI关闭结束的回调
+    /// </summary>
+    public delegate void UICloseBack();
 }

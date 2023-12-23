@@ -54,15 +54,9 @@ namespace UI
             determineButton.onClick.AddListener(() =>
             {
                 string dataName = inputFileData.text;
-                if (dataName.Equals(""))
-                {
-                    this.GetSystem<IGameSaveSystem>().SaveGame(this.GetUtility<IGameUtility>().TimeYToS());
-                }
-                else
-                {
-                    this.GetSystem<IGameSaveSystem>().SaveGame(dataName);
-                }
-
+                this.GetSystem<IGameSaveSystem>()
+                    .SaveGame(dataName.Equals("") ? this.GetUtility<IGameUtility>().TimeYToS() : dataName);
+                this.SendCommand(new SaveFileDataCommand());
                 CloseSelf();
             });
             cancellationButton.onClick.AddListener(CloseSelf);
