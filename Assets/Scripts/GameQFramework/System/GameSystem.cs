@@ -11,7 +11,7 @@ namespace GameQFramework
         /// <summary>
         /// 记录是否初始化通用数据（即所有存档共用的数据，比如地图，聚落位置等，只需要在第一次加载存档时加载）
         /// </summary>
-        private bool _hasLoadCurrentData = false;
+        private bool _hasLoadCurrentData;
 
         protected override void OnInit()
         {

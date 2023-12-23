@@ -17,6 +17,7 @@ namespace UI
             mData = uiData as UIGameLobbyData ?? new UIGameLobbyData();
             // please add init code here
             base.OnInit(uiData);
+            InitUI();
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -48,13 +49,20 @@ namespace UI
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<ChangeTimeEvent>(e =>
-            {
-                timeView.text = this.GetModel<IGameModel>().Year + "年" + this.GetModel<IGameModel>().Month + "月" +
-                                this.GetModel<IGameModel>().Day + "日" + this.GetModel<IGameModel>().Time + "时";
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<ChangeTimeEvent>(e => { UpdateTime(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<ChangeToMenuSceneEvent>(_ => { CloseSelf(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+
+        private void InitUI()
+        {
+            UpdateTime();
+        }
+
+        private void UpdateTime()
+        {
+            timeView.text = this.GetModel<IGameModel>().Year + "年" + this.GetModel<IGameModel>().Month + "月" +
+                            this.GetModel<IGameModel>().Day + "日" + this.GetModel<IGameModel>().Time + "时";
         }
     }
 }

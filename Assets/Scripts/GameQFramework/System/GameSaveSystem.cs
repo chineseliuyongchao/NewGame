@@ -46,7 +46,6 @@ namespace GameQFramework
             {
                 for (int i = 0; i < _saveModels.Count; i++)
                 {
-                    string key = _saveModels[i].ModelName();
                     _saveModels[i].InitializeModel();
                 }
             }
@@ -95,7 +94,7 @@ namespace GameQFramework
             }
 
             List<string> list = LoadGameFileList();
-            list.Add(fileName);
+            list.Insert(0, fileName);
             SaveGameFileList(list);
         }
 
