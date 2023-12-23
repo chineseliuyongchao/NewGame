@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Game.Game;
 using QFramework;
 using UnityEngine;
+using Utils.Constant;
 
 namespace GameQFramework
 {

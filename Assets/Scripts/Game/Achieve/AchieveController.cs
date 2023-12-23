@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using GameQFramework;
-using QFramework;
-using UI;
 using UnityEngine;
 
 namespace Game.Achieve
@@ -40,12 +38,6 @@ namespace Game.Achieve
                         _achieves.Remove(_achieves[i]);
                     }
                 }
-            }
-
-            if (_achieves.Count <= 0)
-            {
-                UIKit.ClosePanel<UIGameLobby>();
-                this.GetSystem<IGameSystem>().ChangeMenuScene();
             }
         }
     }

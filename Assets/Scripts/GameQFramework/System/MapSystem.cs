@@ -1,7 +1,7 @@
-﻿using Game.Map;
-using QFramework;
+﻿using QFramework;
 using UnityEngine;
 using Utils;
+using Utils.Constant;
 
 namespace GameQFramework
 {

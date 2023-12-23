@@ -1,4 +1,4 @@
-﻿namespace Game.Map
+﻿namespace Utils.Constant
 {
     /// <summary>
     /// 地图相关常量

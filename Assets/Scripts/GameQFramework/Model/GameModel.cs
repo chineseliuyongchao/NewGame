@@ -1,16 +1,17 @@
 ﻿using QFramework;
 using UnityEngine;
+using Utils.Constant;
 using Object = System.Object;
 
 namespace GameQFramework
 {
     public class GameModel : AbstractModel, IGameModel, ISaveModel
     {
-        private int _year = 1;
-        private int _month = 1;
-        private int _day = 1;
-        private int _time = 1;
-        private int _quarter = 1;
+        private int _year;
+        private int _month;
+        private int _day;
+        private int _time;
+        private int _quarter;
 
         protected override void OnInit()
         {
@@ -91,6 +92,11 @@ namespace GameQFramework
 
         public void InitializeModel()
         {
+            _year = GameTimeConstant.INIT_YEAR;
+            _month = GameTimeConstant.INIT_MONTH;
+            _day = GameTimeConstant.INIT_DAY;
+            _time = GameTimeConstant.INIT_TIME;
+            _quarter = GameTimeConstant.INIT_QUARTER;
         }
 
         public string ModelName()

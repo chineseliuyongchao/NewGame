@@ -1,10 +1,18 @@
 ﻿using QFramework;
+using SystemTool.MapProcessing;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utils.Constant;
 
 namespace GameQFramework
 {
     public class GameSystem : AbstractSystem, IGameSystem
     {
+        /// <summary>
+        /// 记录是否初始化通用数据（即所有存档共用的数据，比如地图，聚落位置等，只需要在第一次加载存档时加载）
+        /// </summary>
+        private bool _hasLoadCurrentData = false;
+
         protected override void OnInit()
         {
         }
@@ -17,8 +25,27 @@ namespace GameQFramework
         public void ChangeMainGameScene(string fileName = null)
         {
             this.SendEvent(new ChangeToMainGameSceneEvent());
+            LoadCurrentData();
             this.GetSystem<IGameSaveSystem>().LoadGame(fileName);
             SceneManager.LoadScene("MainGameScene");
+        }
+
+        /// <summary>
+        /// 初始化通用数据
+        /// </summary>
+        private void LoadCurrentData()
+        {
+            if (_hasLoadCurrentData)
+            {
+                return;
+            }
+
+            ResLoader resLoader = ResLoader.Allocate();
+            var townTextAsset = resLoader.LoadSync<TextAsset>("SettlementInformation");
+            this.GetSystem<ITownSystem>().InitTownData(townTextAsset);
+            this.GetModel<IMapModel>().Map =
+                ImageToMapController.Singleton.GetMap(MapConstant.MAP_PATH + MapConstant.GRID_MAP_FILE_NAME);
+            _hasLoadCurrentData = true;
         }
     }
 }

@@ -2,7 +2,6 @@
 using Game.Town;
 using GameQFramework;
 using QFramework;
-using SystemTool.MapProcessing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -19,8 +18,6 @@ namespace Game.Map
         protected override void OnInit()
         {
             Instantiate(mapNode, transform);
-            this.GetModel<IMapModel>().Map =
-                ImageToMapController.Singleton.GetMap(MapConstant.MAP_PATH + MapConstant.GRID_MAP_FILE_NAME);
             Instantiate(townNode, transform);
         }
 

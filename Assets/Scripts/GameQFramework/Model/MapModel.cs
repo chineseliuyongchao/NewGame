@@ -14,7 +14,12 @@ namespace GameQFramework
             
         }
 
-        public PathfindingMap Map { get; set; }
+        public PathfindingMap Map
+        {
+            get => _map;
+            set => _map = value;
+        }
+
         public Vector2 MapSize { get; set; }
     }
 }

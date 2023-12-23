@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameQFramework;
 using QFramework;
-using UnityEngine;
 
 namespace Game.Town
 {
@@ -10,14 +9,12 @@ namespace Game.Town
     /// </summary>
     public class TownNode : BaseGameController
     {
-        public TextAsset textAsset;
         public BaseTown baseTown;
         private Dictionary<string, BaseTown> _towns;
 
         protected override void OnInit()
         {
             base.OnInit();
-            this.GetSystem<ITownSystem>().InitTownData(textAsset);
             _towns = new Dictionary<string, BaseTown>();
             InitTown();
         }
