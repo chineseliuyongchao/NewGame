@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:e321c830-726b-43c4-ab3f-94c8c026fa9e
+	// Generate Id:0c395f16-7ef9-4b30-b584-a420334ea969
 	public partial class UIGameLobbyMenu
 	{
 		public const string Name = "UIGameLobbyMenu";
@@ -15,6 +15,8 @@ namespace UI
 		[SerializeField]
 		private UnityEngine.UI.Button saveButton;
 		[SerializeField]
+		private UnityEngine.UI.Button loadButton;
+		[SerializeField]
 		private UnityEngine.UI.Button closeButton;
 		
 		private UIGameLobbyMenuData mPrivateData = null;
@@ -23,6 +25,7 @@ namespace UI
 		{
 			backToMenuButton = null;
 			saveButton = null;
+			loadButton = null;
 			closeButton = null;
 			
 			mData = null;

@@ -44,7 +44,8 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            startGameButton.onClick.AddListener(() => { UIKit.OpenPanel<UIStartGamePanel>(); });
+            startGameButton.onClick.AddListener(
+                () => { UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData()); });
         }
 
         protected override void OnListenEvent()

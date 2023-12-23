@@ -50,7 +50,11 @@ namespace UI
             });
             saveButton.onClick.AddListener(() =>
             {
-                this.GetSystem<IGameSaveSystem>().SaveGame(this.GetUtility<IGameUtility>().TimeYToS());
+                UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData(false, false));
+            });
+            loadButton.onClick.AddListener(() =>
+            {
+                UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData(true, false));
             });
             closeButton.onClick.AddListener(CloseSelf);
         }

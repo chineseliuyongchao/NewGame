@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:cc1ddf06-9c72-4403-9718-cbda45a2eb03
+	// Generate Id:37f3ca2e-b819-486a-8655-4151ad428247
 	public partial class UIFileData
 	{
 		public const string Name = "UIFileData";
@@ -15,6 +15,8 @@ namespace UI
 		[SerializeField]
 		private UnityEngine.UI.Button open;
 		[SerializeField]
+		private UnityEngine.UI.Button cover;
+		[SerializeField]
 		private UnityEngine.UI.Button delete;
 		
 		private UIFileDataData mPrivateData = null;
@@ -23,6 +25,7 @@ namespace UI
 		{
 			fileName = null;
 			open = null;
+			cover = null;
 			delete = null;
 			
 			mData = null;

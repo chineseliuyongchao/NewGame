@@ -65,16 +65,30 @@ namespace UI
                 this.SendCommand(new DeleteFileCommand());
                 Destroy(gameObject);
             });
+            cover.onClick.AddListener(() => { this.GetSystem<IGameSaveSystem>().SaveGame(_fileNameValue); });
         }
 
         protected override void OnListenEvent()
         {
         }
 
-        public void InitUI(string fileDataName)
+        /// <summary>
+        /// 初始化UI
+        /// </summary>
+        /// <param name="fileDataName"></param>
+        /// <param name="isLoad">本次打开存档界面是读取存档还是覆盖存档</param>
+        public void InitUI(string fileDataName, bool isLoad)
         {
             _fileNameValue = fileDataName;
             fileName.text = fileDataName;
+            if (isLoad)
+            {
+                cover.gameObject.SetActive(false);
+            }
+            else
+            {
+                open.gameObject.SetActive(false);
+            }
         }
     }
 }

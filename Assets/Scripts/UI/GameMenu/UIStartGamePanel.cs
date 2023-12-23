@@ -7,6 +7,21 @@ namespace UI
 {
     public class UIStartGamePanelData : UIPanelData
     {
+        /// <summary>
+        /// 本次打开存档界面是读取存档还是覆盖存档
+        /// </summary>
+        public readonly bool IsLoad;
+
+        /// <summary>
+        /// 本次打开存档界面是在主菜单还是游戏界面
+        /// </summary>
+        public readonly bool IsInMenu;
+
+        public UIStartGamePanelData(bool isLoad = true, bool isInMenu = true)
+        {
+            IsLoad = isLoad;
+            IsInMenu = isInMenu;
+        }
     }
 
     /// <summary>
@@ -49,7 +64,12 @@ namespace UI
         protected override void OnListenButton()
         {
             newGameButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMainGameScene(); });
+            newFileButton.onClick.AddListener(() =>
+            {
+                this.GetSystem<IGameSaveSystem>().SaveGame(this.GetUtility<IGameUtility>().TimeYToS());
+            });
             backToMenu.onClick.AddListener(CloseSelf);
+            backToGame.onClick.AddListener(CloseSelf);
         }
 
         protected override void OnListenEvent()
@@ -66,7 +86,25 @@ namespace UI
             for (int i = 0; i < list.Count; i++)
             {
                 UIFileData fileData = Instantiate(uiFileData, fileDataContent);
-                fileData.InitUI(list[i]);
+                fileData.InitUI(list[i], mData.IsLoad);
+            }
+
+            if (mData.IsLoad)
+            {
+                newFileButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                newGameButton.gameObject.SetActive(false);
+            }
+
+            if (mData.IsInMenu)
+            {
+                backToGame.gameObject.SetActive(false);
+            }
+            else
+            {
+                backToMenu.gameObject.SetActive(false);
             }
 
             UpdateUI();

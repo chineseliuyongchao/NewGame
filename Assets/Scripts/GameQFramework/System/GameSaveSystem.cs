@@ -94,8 +94,11 @@ namespace GameQFramework
             }
 
             List<string> list = LoadGameFileList();
-            list.Insert(0, fileName);
-            SaveGameFileList(list);
+            if (!list.Contains(fileName)) //防止把相同的存档添加两遍
+            {
+                list.Insert(0, fileName);
+                SaveGameFileList(list);
+            }
         }
 
         public List<string> LoadGameFileList()
