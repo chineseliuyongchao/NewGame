@@ -66,7 +66,7 @@ namespace UI
             newGameButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMainGameScene(); });
             newFileButton.onClick.AddListener(() =>
             {
-                this.GetSystem<IGameSaveSystem>().SaveGame(this.GetUtility<IGameUtility>().TimeYToS());
+                UIKit.OpenPanel<UINewFile>(new UINewFileData());
             });
             backToMenuButton.onClick.AddListener(CloseSelf);
             backToGameButton.onClick.AddListener(CloseSelf);
