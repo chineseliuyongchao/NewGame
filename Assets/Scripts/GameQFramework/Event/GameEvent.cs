@@ -47,4 +47,17 @@
     public class SaveFileDataEvent
     {
     }
+
+    /// <summary>
+    /// 设置时间是否可以流逝
+    /// </summary>
+    public class TimePassEvent
+    {
+        public bool IsPass;
+
+        public TimePassEvent(bool isPass)
+        {
+            IsPass = isPass;
+        }
+    }
 }

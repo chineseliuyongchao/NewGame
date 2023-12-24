@@ -45,4 +45,22 @@ namespace GameQFramework
             this.SendEvent(new SaveFileDataEvent());
         }
     }
+
+    /// <summary>
+    /// 设置时间是否可以流逝
+    /// </summary>
+    public class TimePassCommand : AbstractCommand
+    {
+        private readonly bool _isPass;
+
+        public TimePassCommand(bool isPass)
+        {
+            _isPass = isPass;
+        }
+
+        protected override void OnExecute()
+        {
+            this.SendEvent(new TimePassEvent(_isPass));
+        }
+    }
 }
