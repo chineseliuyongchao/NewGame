@@ -202,11 +202,33 @@ namespace EditorUtils
                                             continue;
                                         }
 
-                                        tempIntArray[index] = (Convert.ToInt32(tempValueStrArray[index]));
+                                        tempIntArray[index] = Convert.ToInt32(tempValueStrArray[index]);
                                     }
                                 }
 
                                 row[field] = tempIntArray;
+                                break;
+                            case "array<float>":
+                                stringReplace = valueStr.Replace("[", "");
+                                stringReplace = stringReplace.Replace("]", "");
+                                //将字符串，转换成字符数组
+                                tempValueStrArray = stringReplace.Split(',');
+
+                                float[] tempFloatArray = new float[tempValueStrArray.Length];
+                                for (int index = 0; index < tempValueStrArray.Length; index++)
+                                {
+                                    if (tempValueStrArray.Length > 0)
+                                    {
+                                        if (tempValueStrArray[index] == "")
+                                        {
+                                            continue;
+                                        }
+
+                                        tempFloatArray[index] = (float)Convert.ToDouble(tempValueStrArray[index]);
+                                    }
+                                }
+
+                                row[field] = tempFloatArray;
                                 break;
                             case "array<string>":
                                 stringReplace = valueStr.Replace("[", "");

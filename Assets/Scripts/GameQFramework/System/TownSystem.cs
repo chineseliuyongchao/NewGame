@@ -14,9 +14,9 @@ namespace GameQFramework
 
         public void InitTownData(TextAsset textAsset)
         {
-            Town[] towns = JsonParser.ParseJson<Town>(textAsset.text);
-            Dictionary<string, Town> townDictionary = this.GetModel<ITownModel>().TownData;
-            foreach (Town town in towns)
+            TownCommonData[] towns = JsonParser.ParseJson<TownCommonData>(textAsset.text);
+            Dictionary<string, TownCommonData> townDictionary = this.GetModel<ITownModel>().TownCommonData;
+            foreach (TownCommonData town in towns)
             {
                 townDictionary.TryAdd(town.Name, town);
             }

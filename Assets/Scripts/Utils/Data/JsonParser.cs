@@ -22,6 +22,7 @@ namespace Utils
     [System.Serializable]
     class JsonWrapper<T>
     {
+        // ReSharper disable once InconsistentNaming
         public T[] Sheet1;
     }
 
@@ -30,7 +31,14 @@ namespace Utils
     /// </summary>
     public class BaseJsonData
     {
+        /// <summary>
+        /// 编号
+        /// </summary>
         public int ID;
+
+        /// <summary>
+        /// 名字
+        /// </summary>
         public string Name;
     }
 }

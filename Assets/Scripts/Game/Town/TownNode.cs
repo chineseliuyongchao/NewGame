@@ -24,7 +24,7 @@ namespace Game.Town
         /// </summary>
         private void InitTown()
         {
-            Dictionary<string, Town> townData = this.GetModel<ITownModel>().TownData;
+            Dictionary<string, TownCommonData> townData = this.GetModel<ITownModel>().TownCommonData;
             foreach (var kvp in townData)
             {
                 string key = kvp.Key;

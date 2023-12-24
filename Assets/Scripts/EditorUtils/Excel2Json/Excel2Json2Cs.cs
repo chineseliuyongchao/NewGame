@@ -5,7 +5,7 @@ namespace EditorUtils
 {
     public class GenExcel2Json2Cs : EditorWindow
     {
-        [MenuItem("Tools/Excel导出")]
+        [MenuItem("Tools/ExcelExport")]
         public static void Init()
         {
             GetWindow(typeof(GenExcel2Json2Cs));

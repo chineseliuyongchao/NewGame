@@ -4,25 +4,56 @@
             "ID": 1,
             "Name": "city1",
             "TownPos": [
-                0,
-                0
-            ]
+                0.0,
+                0.0
+            ],
+            "InitWealth": 100000,
+            "InitPopulation": 10000,
+            "InitLevel": 2
         },
         {
             "ID": 2,
             "Name": "city2",
             "TownPos": [
-                0,
-                1
-            ]
+                0.0,
+                1.0
+            ],
+            "InitWealth": 1234556,
+            "InitPopulation": 6000,
+            "InitLevel": 2
         },
         {
             "ID": 3,
             "Name": "city3",
             "TownPos": [
-                0,
-                2
-            ]
+                0.0,
+                2.0
+            ],
+            "InitWealth": 80000,
+            "InitPopulation": 30000,
+            "InitLevel": 3
+        },
+        {
+            "ID": 4,
+            "Name": "city4",
+            "TownPos": [
+                1.0,
+                1.5
+            ],
+            "InitWealth": 100003,
+            "InitPopulation": 4000,
+            "InitLevel": 1
+        },
+        {
+            "ID": 5,
+            "Name": "city5",
+            "TownPos": [
+                1.3,
+                -2.3
+            ],
+            "InitWealth": 60004,
+            "InitPopulation": 10010,
+            "InitLevel": 2
         }
     ]
 }

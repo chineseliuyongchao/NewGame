@@ -13,9 +13,9 @@ namespace Game.Town
         public void InitTown(string townName)
         {
             name = townName;
-            Town town = this.GetModel<ITownModel>().TownData[gameObject.name];
+            TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[gameObject.name];
             IntVector2 gridPos = this.GetSystem<IMapSystem>()
-                .GetGridMapPos(new Vector3(town.TownPos[0], town.TownPos[1]));
+                .GetGridMapPos(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
             Vector2 pos = this.GetSystem<IMapSystem>().GetGridToMapPos(gridPos);
             transform.position = pos;
         }
