@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Game.Town;
 using QFramework;
 
 namespace GameQFramework
@@ -10,5 +9,10 @@ namespace GameQFramework
         /// 所有聚落的通用数据（部分信息所有存档共用，不会改变。剩余数据作为新存档的默认值）
         /// </summary>
         public Dictionary<string, TownCommonData> TownCommonData { get; set; }
+
+        /// <summary>
+        /// 记录所有聚落的当前数据，跟随存档变化
+        /// </summary>
+        public Dictionary<string, TownData> TownData { get; set; }
     }
 }

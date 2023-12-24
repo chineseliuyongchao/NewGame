@@ -72,22 +72,22 @@ namespace GameQFramework
         {
             return new GameModelData
             {
-                Year = _year,
-                Month = _month,
-                Day = _day,
-                Time = _time,
-                Quarter = _quarter
+                year = _year,
+                month = _month,
+                day = _day,
+                time = _time,
+                quarter = _quarter
             };
         }
 
         public void LoadModel(string data)
         {
             GameModelData gameModelData = JsonUtility.FromJson<GameModelData>(data);
-            _year = gameModelData.Year;
-            _month = gameModelData.Month;
-            _day = gameModelData.Day;
-            _time = gameModelData.Time;
-            _quarter = gameModelData.Quarter;
+            _year = gameModelData.year;
+            _month = gameModelData.month;
+            _day = gameModelData.day;
+            _time = gameModelData.time;
+            _quarter = gameModelData.quarter;
         }
 
         public void InitializeModel()
@@ -101,16 +101,16 @@ namespace GameQFramework
 
         public string ModelName()
         {
-            return GetType().ToString();
+            return "GameData";
         }
     }
 
     public class GameModelData
     {
-        public int Year;
-        public int Month;
-        public int Day;
-        public int Time;
-        public int Quarter;
+        public int year;
+        public int month;
+        public int day;
+        public int time;
+        public int quarter;
     }
 }

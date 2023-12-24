@@ -76,7 +76,7 @@ namespace Game.Player
         /// 游戏角色移动到某个聚落
         /// </summary>
         /// <param name="baseTown"></param>
-        protected void MoveToTown(BaseTown baseTown)
+        protected virtual void MoveToTown(BaseTown baseTown)
         {
             Debug.Log("moveToTown:  " + baseTown.name);
         }

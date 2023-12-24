@@ -153,9 +153,11 @@ namespace GameQFramework
     /// </summary>
     public class GameData
     {
+        // ReSharper disable once InconsistentNaming
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         public List<string> DataKey = new();
 
+        // ReSharper disable once InconsistentNaming
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         public List<string> DataValue = new();
     }

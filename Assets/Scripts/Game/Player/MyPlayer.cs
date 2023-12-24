@@ -1,5 +1,7 @@
-﻿using GameQFramework;
+﻿using Game.Town;
+using GameQFramework;
 using QFramework;
+using UI;
 using Utils;
 
 namespace Game.Player
@@ -24,6 +26,11 @@ namespace Game.Player
                     }
                 });
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+
+        protected override void MoveToTown(BaseTown baseTown)
+        {
+            UIKit.OpenPanel<UITown>(new UITownData(baseTown.name));
         }
     }
 }

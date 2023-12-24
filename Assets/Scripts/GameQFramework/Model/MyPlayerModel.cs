@@ -22,14 +22,14 @@ namespace GameQFramework
         {
             return new MyPlayerModelData
             {
-                AccessTown = _accessTown
+                accessTown = _accessTown
             };
         }
 
         public void LoadModel(string data)
         {
             MyPlayerModelData myPlayerModelData = JsonUtility.FromJson<MyPlayerModelData>(data);
-            _accessTown = myPlayerModelData.AccessTown;
+            _accessTown = myPlayerModelData.accessTown;
         }
 
         public void InitializeModel()
@@ -39,12 +39,12 @@ namespace GameQFramework
 
         public string ModelName()
         {
-            return GetType().ToString();
+            return "MyPlayerData";
         }
     }
 
     public class MyPlayerModelData
     {
-        public int AccessTown;
+        public int accessTown;
     }
 }
