@@ -12,17 +12,17 @@ namespace UI
         /// <summary>
         /// 本次打开存档界面是读取存档还是覆盖存档
         /// </summary>
-        public readonly bool IsLoad;
+        public readonly bool isLoad;
 
         /// <summary>
         /// 本次打开存档界面是在主菜单还是游戏界面
         /// </summary>
-        public readonly bool IsInMenu;
+        public readonly bool isInMenu;
 
         public UIStartGamePanelData(bool isLoad = true, bool isInMenu = true)
         {
-            IsLoad = isLoad;
-            IsInMenu = isInMenu;
+            this.isLoad = isLoad;
+            this.isInMenu = isInMenu;
         }
     }
 
@@ -87,10 +87,10 @@ namespace UI
             for (int i = 0; i < list.Count; i++)
             {
                 UIFileData fileData = Instantiate(uiFileData, fileDataContent);
-                fileData.InitUI(list[i], mData.IsLoad);
+                fileData.InitUI(list[i], mData.isLoad);
             }
 
-            if (mData.IsLoad)
+            if (mData.isLoad)
             {
                 newFileButton.gameObject.SetActive(false);
             }
@@ -99,7 +99,7 @@ namespace UI
                 newGameButton.gameObject.SetActive(false);
             }
 
-            if (mData.IsInMenu)
+            if (mData.isInMenu)
             {
                 backToGameButton.gameObject.SetActive(false);
             }

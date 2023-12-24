@@ -32,7 +32,7 @@ namespace Game.Game
 
             // 计算移动方向和距离
             Vector3 moveDirection = new Vector3(horizontalInput, verticalInput, 0);
-            Vector3 moveAmount = moveDirection.normalized * moveSpeed * Time.deltaTime;
+            Vector3 moveAmount = moveDirection.normalized * (moveSpeed * Time.deltaTime);
 
             // 移动相机
             Transform transform1;

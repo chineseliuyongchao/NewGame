@@ -49,7 +49,7 @@ namespace UI
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<ChangeTimeEvent>(e => { UpdateTime(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<ChangeTimeEvent>(_ => { UpdateTime(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<ChangeToMenuSceneEvent>(_ => { CloseSelf(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }

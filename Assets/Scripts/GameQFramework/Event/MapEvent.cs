@@ -8,13 +8,13 @@ namespace GameQFramework
     /// </summary>
     public class SelectMapLocationEvent
     {
-        public Vector2 SelectPos;
-        public BaseTown BaseTown;
+        public Vector2 selectPos;
+        public readonly BaseTown baseTown;
 
         public SelectMapLocationEvent(Vector2 selectPos, BaseTown baseTown)
         {
-            SelectPos = selectPos;
-            BaseTown = baseTown;
+            this.selectPos = selectPos;
+            this.baseTown = baseTown;
         }
     }
 }

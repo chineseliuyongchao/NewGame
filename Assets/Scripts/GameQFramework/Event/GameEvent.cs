@@ -53,11 +53,11 @@
     /// </summary>
     public class TimePassEvent
     {
-        public bool IsPass;
+        public readonly bool isPass;
 
         public TimePassEvent(bool isPass)
         {
-            IsPass = isPass;
+            this.isPass = isPass;
         }
     }
 }

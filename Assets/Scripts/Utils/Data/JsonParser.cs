@@ -34,11 +34,14 @@ namespace Utils
         /// <summary>
         /// 编号
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public int ID;
 
         /// <summary>
         /// 名字
         /// </summary>
+        // ReSharper disable once UnassignedField.Global
+        // ReSharper disable once InconsistentNaming
         public string Name;
     }
 }

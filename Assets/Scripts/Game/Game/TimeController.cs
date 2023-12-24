@@ -23,7 +23,7 @@ namespace Game.Game
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<TimePassEvent>(e => { _isPass = e.IsPass; })
+            this.RegisterEvent<TimePassEvent>(e => { _isPass = e.isPass; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 

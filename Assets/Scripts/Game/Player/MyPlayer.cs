@@ -16,12 +16,12 @@ namespace Game.Player
             base.OnListenEvent();
             this.RegisterEvent<SelectMapLocationEvent>(e =>
             {
-                IntVector2 endPos = this.GetSystem<IMapSystem>().GetGridMapPos(e.SelectPos);
+                IntVector2 endPos = this.GetSystem<IMapSystem>().GetGridMapPos(e.selectPos);
                 Move(GetStartPos(), endPos, () =>
                 {
-                    if (e.BaseTown != null)
+                    if (e.baseTown != null)
                     {
-                        MoveToTown(e.BaseTown);
+                        MoveToTown(e.baseTown);
                         this.GetModel<IMyPlayerModel>().AccessTown++;
                     }
                 });
