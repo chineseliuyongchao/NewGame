@@ -1,4 +1,7 @@
-﻿using QFramework;
+﻿using System.Collections.Generic;
+using QFramework;
+using UnityEngine;
+using Utils;
 
 namespace GameQFramework
 {
@@ -17,5 +20,14 @@ namespace GameQFramework
         /// <param name="overPower">要保留几位数字（不包括逗号），剩余的的使用KMBT代表</param>
         /// <returns></returns>
         string NumToKmbt(long num, int overPower);
+
+        /// <summary>
+        /// 把json中的数据解析到字典中
+        /// </summary>
+        /// <param name="textAsset"></param>
+        /// <param name="dictionary"></param>
+        /// <typeparam name="T"></typeparam>
+        void AnalysisJsonConfigurationTable<T>(TextAsset textAsset, Dictionary<int, T> dictionary)
+            where T : BaseJsonData;
     }
 }

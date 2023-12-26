@@ -78,6 +78,27 @@
     }
 
     /// <summary>
+    /// 配置表相关常量
+    /// </summary>
+    public abstract class ConfigurationTableConstant
+    {
+        /// <summary>
+        /// 聚落配置表
+        /// </summary>
+        public const string SETTLEMENT_INFORMATION = "SettlementInformation";
+
+        /// <summary>
+        /// 家族配置表
+        /// </summary>
+        public const string FAMILY_INFORMATION = "FamilyInformation";
+
+        /// <summary>
+        /// 角色配置表
+        /// </summary>
+        public const string ROLE_INFORMATION = "RoleInformation";
+    }
+
+    /// <summary>
     /// 移动结束的回调
     /// </summary>
     public delegate void MoveCloseBack();

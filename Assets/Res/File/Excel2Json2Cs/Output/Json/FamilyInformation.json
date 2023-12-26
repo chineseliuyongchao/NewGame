@@ -1,0 +1,34 @@
+﻿{
+    "Sheet1": [
+        {
+            "ID": 1,
+            "Name": "家族1",
+            "FamilyWealth": 3000,
+            "FamilyLevel": 1
+        },
+        {
+            "ID": 2,
+            "Name": "家族2",
+            "FamilyWealth": 5000,
+            "FamilyLevel": 1
+        },
+        {
+            "ID": 3,
+            "Name": "家族3",
+            "FamilyWealth": 12000,
+            "FamilyLevel": 2
+        },
+        {
+            "ID": 4,
+            "Name": "家族4",
+            "FamilyWealth": 50000,
+            "FamilyLevel": 3
+        },
+        {
+            "ID": 5,
+            "Name": "家族5",
+            "FamilyWealth": 8000,
+            "FamilyLevel": 1
+        }
+    ]
+}

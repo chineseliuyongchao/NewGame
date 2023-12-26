@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace GameQFramework
 {
@@ -41,6 +43,16 @@ namespace GameQFramework
             }
 
             return toKmbt;
+        }
+
+        public void AnalysisJsonConfigurationTable<T>(TextAsset textAsset, Dictionary<int, T> dictionary)
+            where T : BaseJsonData
+        {
+            T[] tData = JsonParser.ParseJson<T>(textAsset.text);
+            foreach (T t in tData)
+            {
+                dictionary.TryAdd(t.ID, t);
+            }
         }
     }
 }

@@ -8,6 +8,6 @@ namespace GameQFramework
         /// <summary>
         /// 初始化聚落数据
         /// </summary>
-        void InitTownData(TextAsset textAsset);
+        void InitTownCommonData(TextAsset textAsset);
     }
 }

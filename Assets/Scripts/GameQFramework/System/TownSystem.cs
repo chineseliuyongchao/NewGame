@@ -11,7 +11,7 @@ namespace GameQFramework
         {
         }
 
-        public void InitTownData(TextAsset textAsset)
+        public void InitTownCommonData(TextAsset textAsset)
         {
             TownCommonData[] towns = JsonParser.ParseJson<TownCommonData>(textAsset.text);
             Dictionary<string, TownCommonData> townDictionary = this.GetModel<ITownModel>().TownCommonData;
