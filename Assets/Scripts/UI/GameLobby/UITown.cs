@@ -5,11 +5,11 @@ namespace UI
 {
     public class UITownData : UIPanelData
     {
-        public readonly string townName;
+        public readonly int townId;
 
-        public UITownData(string townName = "")
+        public UITownData(int townId = 0)
         {
-            this.townName = townName;
+            this.townId = townId;
         }
     }
 
@@ -59,8 +59,8 @@ namespace UI
 
         private void InitUI()
         {
-            townName.text = mData.townName;
-            TownData townData = this.GetModel<ITownModel>().TownData[mData.townName];
+            TownData townData = this.GetModel<ITownModel>().TownData[mData.townId];
+            townName.text = townData.name;
             wealthValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.wealth, 5);
             populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.population, 5);
             levelValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.level, 5);

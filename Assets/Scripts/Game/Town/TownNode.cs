@@ -10,12 +10,12 @@ namespace Game.Town
     public class TownNode : BaseGameController
     {
         public BaseTown baseTown;
-        private Dictionary<string, BaseTown> _towns;
+        private Dictionary<int, BaseTown> _towns;
 
         protected override void OnInit()
         {
             base.OnInit();
-            _towns = new Dictionary<string, BaseTown>();
+            _towns = new Dictionary<int, BaseTown>();
             InitTown();
         }
 
@@ -24,10 +24,10 @@ namespace Game.Town
         /// </summary>
         private void InitTown()
         {
-            Dictionary<string, TownCommonData> townData = this.GetModel<ITownModel>().TownCommonData;
+            Dictionary<int, TownCommonData> townData = this.GetModel<ITownModel>().TownCommonData;
             foreach (var kvp in townData)
             {
-                string key = kvp.Key;
+                int key = kvp.Key;
                 BaseTown town = Instantiate(baseTown, transform);
                 town.InitTown(key);
                 _towns.Add(key, town);

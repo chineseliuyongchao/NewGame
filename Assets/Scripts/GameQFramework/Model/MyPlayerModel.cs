@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using System;
+using QFramework;
 using UnityEngine;
 
 namespace GameQFramework
@@ -43,6 +44,7 @@ namespace GameQFramework
         }
     }
 
+    [Serializable]
     public class MyPlayerModelData
     {
         public int accessTown;

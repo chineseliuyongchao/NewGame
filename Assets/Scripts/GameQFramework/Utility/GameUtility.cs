@@ -48,11 +48,18 @@ namespace GameQFramework
         public void AnalysisJsonConfigurationTable<T>(TextAsset textAsset, Dictionary<int, T> dictionary)
             where T : BaseJsonData
         {
-            T[] tData = JsonParser.ParseJson<T>(textAsset.text);
+            T[] tData = ParseJson<T>(textAsset.text);
             foreach (T t in tData)
             {
                 dictionary.TryAdd(t.ID, t);
             }
+        }
+
+        public T[] ParseJson<T>(string jsonString) where T : BaseJsonData
+        {
+            // 将JSON数据转换成指定类型的对象数组
+            JsonWrapper<T> jsonWrapper = JsonUtility.FromJson<JsonWrapper<T>>(jsonString);
+            return jsonWrapper?.Sheet1;
         }
     }
 }

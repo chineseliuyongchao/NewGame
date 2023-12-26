@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using QFramework;
+﻿using QFramework;
 using UnityEngine;
-using Utils;
 
 namespace GameQFramework
 {
@@ -13,12 +11,8 @@ namespace GameQFramework
 
         public void InitTownCommonData(TextAsset textAsset)
         {
-            TownCommonData[] towns = JsonParser.ParseJson<TownCommonData>(textAsset.text);
-            Dictionary<string, TownCommonData> townDictionary = this.GetModel<ITownModel>().TownCommonData;
-            foreach (TownCommonData town in towns)
-            {
-                townDictionary.TryAdd(town.Name, town);
-            }
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(textAsset, this.GetModel<ITownModel>().TownCommonData);
         }
     }
 }

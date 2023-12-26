@@ -29,5 +29,13 @@ namespace GameQFramework
         /// <typeparam name="T"></typeparam>
         void AnalysisJsonConfigurationTable<T>(TextAsset textAsset, Dictionary<int, T> dictionary)
             where T : BaseJsonData;
+
+        /// <summary>
+        /// 将JSON数据转换成指定类型的对象数组
+        /// </summary>
+        /// <param name="jsonString"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T[] ParseJson<T>(string jsonString) where T : BaseJsonData;
     }
 }

@@ -7,23 +7,23 @@ namespace GameQFramework
 {
     public class TownModel : AbstractModel, ITownModel, ISaveModel
     {
-        private Dictionary<string, TownCommonData> _townCommonData;
-        private Dictionary<string, TownData> _townData;
+        private Dictionary<int, TownCommonData> _townCommonData;
+        private Dictionary<int, TownData> _townData;
 
         protected override void OnInit()
         {
-            _townCommonData = new Dictionary<string, TownCommonData>();
-            _townData = new Dictionary<string, TownData>();
+            _townCommonData = new Dictionary<int, TownCommonData>();
+            _townData = new Dictionary<int, TownData>();
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
         }
 
-        public Dictionary<string, TownCommonData> TownCommonData
+        public Dictionary<int, TownCommonData> TownCommonData
         {
             get => _townCommonData;
             set => _townCommonData = value;
         }
 
-        public Dictionary<string, TownData> TownData
+        public Dictionary<int, TownData> TownData
         {
             get => _townData;
             set => _townData = value;
@@ -33,7 +33,7 @@ namespace GameQFramework
         {
             TownModelData townModelData = new TownModelData
             {
-                townDataKey = new List<string>(_townData.Keys)
+                townDataKey = new List<int>(_townData.Keys)
             };
             for (int i = 0; i < _townData.Count; i++)
             {
@@ -56,7 +56,7 @@ namespace GameQFramework
         public void InitializeModel()
         {
             _townData.Clear();
-            List<string> key = new List<string>(_townCommonData.Keys);
+            List<int> key = new List<int>(_townCommonData.Keys);
             for (int i = 0; i < key.Count; i++)
             {
                 _townData.Add(key[i], new TownData(_townCommonData[key[i]]));
@@ -72,7 +72,7 @@ namespace GameQFramework
     [Serializable]
     public class TownModelData
     {
-        public List<string> townDataKey = new();
+        public List<int> townDataKey = new();
         public List<TownData> townDataValue = new();
     }
 }

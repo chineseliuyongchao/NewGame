@@ -30,7 +30,7 @@ namespace Game.Player
 
         protected override void MoveToTown(BaseTown baseTown)
         {
-            UIKit.OpenPanel<UITown>(new UITownData(baseTown.name));
+            UIKit.OpenPanel<UITown>(new UITownData(baseTown.TownId));
         }
     }
 }

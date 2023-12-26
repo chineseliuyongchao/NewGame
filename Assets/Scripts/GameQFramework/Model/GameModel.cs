@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using System;
+using QFramework;
 using UnityEngine;
 using Utils.Constant;
 using Object = System.Object;
@@ -105,6 +106,7 @@ namespace GameQFramework
         }
     }
 
+    [Serializable]
     public class GameModelData
     {
         public int year;
