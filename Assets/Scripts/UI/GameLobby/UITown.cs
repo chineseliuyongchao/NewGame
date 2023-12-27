@@ -50,6 +50,10 @@ namespace UI
 
         protected override void OnListenButton()
         {
+            showRoleButton.onClick.AddListener(() =>
+            {
+                UIKit.OpenPanel<UITownRole>(new UITownRoleData(mData.townId));
+            });
             leaveButton.onClick.AddListener(CloseSelf);
         }
 

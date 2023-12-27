@@ -5,11 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:cd6eb2ad-fe74-4140-8ca3-0d23804d1a1e
+	// Generate Id:ffe1dd89-bb3f-4311-a4d4-39cd5ddda5a9
 	public partial class UITown
 	{
 		public const string Name = "UITown";
 		
+		[SerializeField]
+		private UnityEngine.UI.Button showRoleButton;
 		[SerializeField]
 		private UnityEngine.UI.Button leaveButton;
 		[SerializeField]
@@ -25,6 +27,7 @@ namespace UI
 		
 		protected override void ClearUIComponents()
 		{
+			showRoleButton = null;
 			leaveButton = null;
 			townName = null;
 			wealthValue = null;

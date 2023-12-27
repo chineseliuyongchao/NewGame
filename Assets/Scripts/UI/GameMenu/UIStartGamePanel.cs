@@ -114,9 +114,9 @@ namespace UI
         private void UpdateUI()
         {
             List<string> list = this.GetSystem<IGameSaveSystem>().LoadGameFileList();
-            Vector2 size = fileDataContent.GetComponent<RectTransform>().sizeDelta;
+            Vector2 size = fileDataContent.sizeDelta;
             size.y = list.Count * UIFileData.UI_FILE_DATA_HEIGHT;
-            fileDataContent.GetComponent<RectTransform>().sizeDelta = size;
+            fileDataContent.sizeDelta = size;
         }
 
         protected override Transform AnimTransform()
