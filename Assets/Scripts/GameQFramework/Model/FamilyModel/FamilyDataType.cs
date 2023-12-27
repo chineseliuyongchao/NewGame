@@ -27,14 +27,14 @@ namespace GameQFramework.FamilyModel
         /// <summary>
         /// 家族所有角色
         /// </summary>
-        public List<RoleData> familyRoleData;
+        public List<int> familyRoleS;
 
         public FamilyData(FamilyCommonData familyCommonData)
         {
             familyName = familyCommonData.Name;
             familyWealth = familyCommonData.FamilyWealth;
             familyLevel = familyCommonData.FamilyLevel;
-            familyRoleData = new List<RoleData>();
+            familyRoleS = new List<int>();
         }
     }
 
@@ -54,10 +54,22 @@ namespace GameQFramework.FamilyModel
         /// </summary>
         public int roleAge;
 
+        /// <summary>
+        /// 所在家族编号
+        /// </summary>
+        public int familyId;
+
+        /// <summary>
+        /// 所在聚落编号
+        /// </summary>
+        public int townId;
+
         public RoleData(RoleCommonData roleCommonData)
         {
             roleName = roleCommonData.Name;
             roleAge = roleCommonData.Age;
+            familyId = roleCommonData.FamilyId;
+            townId = roleCommonData.TownId;
         }
     }
 }

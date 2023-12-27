@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameQFramework.FamilyModel;
 using QFramework;
 using UnityEngine;
 
@@ -60,6 +61,14 @@ namespace GameQFramework
             for (int i = 0; i < key.Count; i++)
             {
                 _townData.Add(key[i], new TownData(_townCommonData[key[i]]));
+            }
+
+            Dictionary<int, RoleCommonData> roleCommonDataS = this.GetModel<IFamilyModel>().RoleCommonData;
+            List<int> roleKey = new List<int>(roleCommonDataS.Keys);
+            for (int i = 0; i < roleKey.Count; i++)
+            {
+                RoleCommonData roleCommonData = roleCommonDataS[roleKey[i]];
+                _townData[roleCommonData.TownId].townRoleS.Add(roleCommonData.ID);
             }
         }
 

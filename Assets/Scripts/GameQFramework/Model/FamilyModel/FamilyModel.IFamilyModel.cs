@@ -19,5 +19,10 @@ namespace GameQFramework.FamilyModel
         /// 游戏当前所有家族信息
         /// </summary>
         public Dictionary<int, FamilyData> FamilyData { get; set; }
+
+        /// <summary>
+        /// 游戏当前所有角色信息
+        /// </summary>
+        public Dictionary<int, RoleData> RoleData { get; set; }
     }
 }

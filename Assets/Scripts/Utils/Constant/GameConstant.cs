@@ -85,7 +85,7 @@
         /// <summary>
         /// 聚落配置表
         /// </summary>
-        public const string SETTLEMENT_INFORMATION = "SettlementInformation";
+        public const string SETTLEMENT_INFORMATION = "TownInformation";
 
         /// <summary>
         /// 家族配置表

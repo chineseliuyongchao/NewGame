@@ -35,9 +35,15 @@ namespace GameQFramework.FamilyModel
         public int Age;
 
         /// <summary>
-        /// 家族编号
+        /// 所在家族编号
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public int FamilyId;
+
+        /// <summary>
+        /// 所在聚落编号（游戏开始时所有角色默认在聚落中）
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int TownId;
     }
 }

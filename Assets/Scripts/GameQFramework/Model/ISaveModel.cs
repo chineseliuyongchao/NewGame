@@ -6,7 +6,7 @@ namespace GameQFramework
     /// <summary>
     /// 用于存取数据
     /// </summary>
-    public interface ISaveModel : ICanGetSystem
+    public interface ISaveModel : ICanGetSystem, ICanGetModel
     {
         /// <summary>
         /// 保存数据

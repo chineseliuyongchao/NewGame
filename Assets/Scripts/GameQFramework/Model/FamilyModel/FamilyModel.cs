@@ -11,6 +11,7 @@ namespace GameQFramework.FamilyModel
         private Dictionary<int, RoleCommonData> _roleCommonData;
 
         private Dictionary<int, FamilyData> _familyData;
+        private Dictionary<int, RoleData> _roleData;
 
         protected override void OnInit()
         {
@@ -18,6 +19,7 @@ namespace GameQFramework.FamilyModel
             _roleCommonData = new Dictionary<int, RoleCommonData>();
 
             _familyData = new Dictionary<int, FamilyData>();
+            _roleData = new Dictionary<int, RoleData>();
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
         }
 
@@ -39,15 +41,27 @@ namespace GameQFramework.FamilyModel
             set => _familyData = value;
         }
 
+        public Dictionary<int, RoleData> RoleData
+        {
+            get => _roleData;
+            set => _roleData = value;
+        }
+
         public object SaveModel()
         {
             FamilyModelData familyModelData = new FamilyModelData()
             {
-                familyDataKey = new List<int>(_familyData.Keys)
+                familyDataKey = new List<int>(_familyData.Keys),
+                roleDataKey = new List<int>(_roleData.Keys)
             };
             for (int i = 0; i < _familyData.Count; i++)
             {
                 familyModelData.familyDataValue.Add(_familyData[familyModelData.familyDataKey[i]]);
+            }
+
+            for (int i = 0; i < _roleData.Count; i++)
+            {
+                familyModelData.roleDataValue.Add(_roleData[familyModelData.roleDataKey[i]]);
             }
 
             return familyModelData;
@@ -61,6 +75,12 @@ namespace GameQFramework.FamilyModel
             {
                 _familyData.Add(familyModelData.familyDataKey[i], familyModelData.familyDataValue[i]);
             }
+
+            _roleData.Clear();
+            for (int i = 0; i < familyModelData.roleDataKey.Count; i++)
+            {
+                _roleData.Add(familyModelData.roleDataKey[i], familyModelData.roleDataValue[i]);
+            }
         }
 
         public void InitializeModel()
@@ -72,11 +92,12 @@ namespace GameQFramework.FamilyModel
                 _familyData.Add(familyKey[i], new FamilyData(_familyCommonData[familyKey[i]]));
             }
 
+            _roleData.Clear();
             List<int> roleKey = new List<int>(_roleCommonData.Keys);
             for (int i = 0; i < roleKey.Count; i++)
             {
                 RoleCommonData roleCommonData = _roleCommonData[roleKey[i]];
-                _familyData[roleCommonData.FamilyId].familyRoleData.Add(new RoleData(roleCommonData));
+                _familyData[roleCommonData.FamilyId].familyRoleS.Add(roleCommonData.ID);
             }
         }
 
@@ -91,5 +112,7 @@ namespace GameQFramework.FamilyModel
     {
         public List<int> familyDataKey = new();
         public List<FamilyData> familyDataValue = new();
+        public List<int> roleDataKey = new();
+        public List<RoleData> roleDataValue = new();
     }
 }

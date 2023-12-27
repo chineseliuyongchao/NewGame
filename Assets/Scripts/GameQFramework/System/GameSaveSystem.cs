@@ -30,7 +30,7 @@ namespace GameQFramework
             for (int i = 0; i < _saveModels.Count; i++)
             {
                 string key = _saveModels[i].ModelName();
-                string json = JsonUtility.ToJson(_saveModels[i].SaveModel(), true);
+                string json = JsonUtility.ToJson(_saveModels[i].SaveModel());
                 gameData.DataKey.Add(key);
                 gameData.DataValue.Add(json);
             }

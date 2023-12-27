@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GameQFramework
 {
@@ -28,12 +29,18 @@ namespace GameQFramework
         /// </summary>
         public int level;
 
+        /// <summary>
+        /// 聚落中所有的角色
+        /// </summary>
+        public List<int> townRoleS;
+
         public TownData(TownCommonData townCommonData)
         {
             name = townCommonData.Name;
             wealth = townCommonData.InitWealth;
             population = townCommonData.InitPopulation;
             level = townCommonData.InitLevel;
+            townRoleS = new List<int>();
         }
     }
 }
