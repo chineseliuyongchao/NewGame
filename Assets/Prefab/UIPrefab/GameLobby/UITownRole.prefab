@@ -284,6 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6249112612470826865}
   - component: {fileID: 5188972403564678328}
+  - component: {fileID: 4284823138442637609}
   m_Layer: 5
   m_Name: root
   m_TagString: Untagged
@@ -322,6 +323,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3608850155439890745}
   m_CullTransparentMesh: 1
+--- !u!114 &4284823138442637609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608850155439890745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: root
+  CustomComment: 
+  mComponentName: RectTransform
 --- !u!1 &3773852039907513415
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +692,7 @@ MonoBehaviour:
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 1
   uiTownShowRole: {fileID: 1109646145912629365, guid: 99bfa5a7e087e4441a51d10c6bcd0a5e, type: 3}
+  root: {fileID: 6249112612470826865}
   Content: {fileID: 4776014844780364982}
   leaveButton: {fileID: 3386110957222670620}
 --- !u!1 &7708581656744618187

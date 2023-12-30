@@ -5,11 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:f1b783d4-cfc7-4fdf-833d-67cd4a70cd7a
+	// Generate Id:8367cdca-abfb-4d8b-8f59-a36b2e0570be
 	public partial class UITownRole
 	{
 		public const string Name = "UITownRole";
 		
+		[SerializeField]
+		private RectTransform root;
 		[SerializeField]
 		private RectTransform Content;
 		[SerializeField]
@@ -19,6 +21,7 @@ namespace UI
 		
 		protected override void ClearUIComponents()
 		{
+			root = null;
 			Content = null;
 			leaveButton = null;
 			

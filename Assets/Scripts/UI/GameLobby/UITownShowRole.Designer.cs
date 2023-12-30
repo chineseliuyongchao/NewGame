@@ -5,19 +5,25 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:7843a149-e039-4903-b9e8-2f212bf1e2c0
+	// Generate Id:f77612df-d21f-4e41-875f-e4643776e011
 	public partial class UITownShowRole
 	{
 		public const string Name = "UITownShowRole";
 		
 		[SerializeField]
 		private TMPro.TextMeshProUGUI roleName;
+		[SerializeField]
+		private TMPro.TextMeshProUGUI countryName;
+		[SerializeField]
+		private TMPro.TextMeshProUGUI familyName;
 		
 		private UITownShowRoleData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
 			roleName = null;
+			countryName = null;
+			familyName = null;
 			
 			mData = null;
 		}

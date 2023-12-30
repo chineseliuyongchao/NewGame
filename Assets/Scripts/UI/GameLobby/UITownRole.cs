@@ -84,5 +84,10 @@ namespace UI
                 UITownShowRole.UI_TOWN_SHOW_ROLE_ROW * UITownShowRole.UI_TOWN_SHOW_ROLE_HEIGHT;
             Content.GetComponent<RectTransform>().sizeDelta = size;
         }
+
+        protected override Transform AnimTransform()
+        {
+            return root;
+        }
     }
 }

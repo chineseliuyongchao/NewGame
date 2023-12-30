@@ -63,6 +63,15 @@ namespace UI
         {
             RoleData roleData = this.GetModel<IFamilyModel>().RoleData[roleId];
             roleName.text = roleData.roleName;
+            countryName.text = "暂未制作国家系统";
+            if (this.GetModel<IFamilyModel>().FamilyData.ContainsKey(roleData.familyId))
+            {
+                familyName.text = this.GetModel<IFamilyModel>().FamilyData[roleData.familyId].familyName;
+            }
+            else
+            {
+                familyName.text = "此人的家族籍籍无名";
+            }
         }
     }
 }

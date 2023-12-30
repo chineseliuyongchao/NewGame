@@ -96,7 +96,10 @@ namespace GameQFramework.FamilyModel
             for (int i = 0; i < roleKey.Count; i++)
             {
                 RoleCommonData roleCommonData = _roleCommonData[roleKey[i]];
-                _familyData[roleCommonData.FamilyId].familyRoleS.Add(roleCommonData.ID);
+                if (_familyData.ContainsKey(roleCommonData.FamilyId))
+                {
+                    _familyData[roleCommonData.FamilyId].familyRoleS.Add(roleCommonData.ID);
+                }
             }
 
             _roleData.Clear();
