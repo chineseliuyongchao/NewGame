@@ -64,7 +64,8 @@ namespace UI
         private void InitUI()
         {
             TownData townData = this.GetModel<ITownModel>().TownData[mData.townId];
-            townName.text = townData.name;
+            townName.text = townData.name + "（" + this.GetModel<ICountryModel>().CountryData[townData.countryId].name +
+                            "）";
             wealthValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.wealth, 5);
             populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.population, 5);
             levelValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.level, 5);
