@@ -96,6 +96,11 @@
         /// 角色配置表
         /// </summary>
         public const string ROLE_INFORMATION = "RoleInformation";
+
+        /// <summary>
+        /// 国家配置表
+        /// </summary>
+        public const string COUNTRY_INFORMATION = "CountryInformation";
     }
 
     /// <summary>

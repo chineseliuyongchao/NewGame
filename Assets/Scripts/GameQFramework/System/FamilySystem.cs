@@ -1,5 +1,4 @@
-﻿using GameQFramework.FamilyModel;
-using QFramework;
+﻿using QFramework;
 using UnityEngine;
 
 namespace GameQFramework

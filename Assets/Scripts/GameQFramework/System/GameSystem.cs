@@ -44,9 +44,11 @@ namespace GameQFramework
             var townTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.SETTLEMENT_INFORMATION);
             var familyTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.FAMILY_INFORMATION);
             var roleTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.ROLE_INFORMATION);
+            var countryAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.COUNTRY_INFORMATION);
             this.GetSystem<ITownSystem>().InitTownCommonData(townTextAsset);
             this.GetSystem<IFamilySystem>().InitFamilyCommonData(familyTextAsset);
             this.GetSystem<IFamilySystem>().InitRoleCommonData(roleTextAsset);
+            this.GetSystem<ICountrySystem>().InitCountryCommonData(countryAsset);
             this.GetModel<IMapModel>().Map =
                 ImageToMapController.Singleton.GetMap(MapConstant.MAP_PATH + MapConstant.GRID_MAP_FILE_NAME);
             _hasLoadCurrentData = true;

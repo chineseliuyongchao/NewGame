@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using QFramework;
 
-namespace GameQFramework.FamilyModel
+namespace GameQFramework
 {
     public interface IFamilyModel : IModel
     {

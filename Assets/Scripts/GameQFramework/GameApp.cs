@@ -1,5 +1,4 @@
-﻿using GameQFramework.FamilyModel;
-using QFramework;
+﻿using QFramework;
 
 namespace GameQFramework
 {
@@ -13,12 +12,14 @@ namespace GameQFramework
             RegisterSystem<ITownSystem>(new TownSystem());
             RegisterSystem<IGameSaveSystem>(new GameSaveSystem());
             RegisterSystem<IFamilySystem>(new FamilySystem());
+            RegisterSystem<ICountrySystem>(new CountrySystem());
 
             RegisterModel<IGameModel>(new GameModel());
             RegisterModel<IMapModel>(new MapModel());
             RegisterModel<ITownModel>(new TownModel());
             RegisterModel<IMyPlayerModel>(new MyPlayerModel());
-            RegisterModel<IFamilyModel>(new FamilyModel.FamilyModel());
+            RegisterModel<IFamilyModel>(new FamilyModel());
+            RegisterModel<ICountryModel>(new CountryModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
         }

@@ -34,12 +34,18 @@ namespace GameQFramework
         /// </summary>
         public List<int> townRoleS;
 
+        /// <summary>
+        /// 所属国家编号
+        /// </summary>
+        public int countryId;
+
         public TownData(TownCommonData townCommonData)
         {
             name = townCommonData.Name;
             wealth = townCommonData.InitWealth;
             population = townCommonData.InitPopulation;
             level = townCommonData.InitLevel;
+            countryId = townCommonData.CountryId;
             townRoleS = new List<int>();
         }
     }

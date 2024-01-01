@@ -1,4 +1,4 @@
-using GameQFramework.FamilyModel;
+using GameQFramework;
 using QFramework;
 
 namespace UI

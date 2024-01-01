@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using QFramework;
 using UnityEngine;
 
-namespace GameQFramework.FamilyModel
+namespace GameQFramework
 {
     public class FamilyModel : AbstractModel, IFamilyModel, ISaveModel
     {

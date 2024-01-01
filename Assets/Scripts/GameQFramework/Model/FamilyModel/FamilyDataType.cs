@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GameQFramework.FamilyModel
+namespace GameQFramework
 {
     /// <summary>
     /// 所有家族的通用数据，不同存档不同
@@ -29,11 +29,17 @@ namespace GameQFramework.FamilyModel
         /// </summary>
         public List<int> familyRoleS;
 
+        /// <summary>
+        /// 效忠国家编号
+        /// </summary>
+        public int countryId;
+
         public FamilyData(FamilyCommonData familyCommonData)
         {
             familyName = familyCommonData.Name;
             familyWealth = familyCommonData.FamilyWealth;
             familyLevel = familyCommonData.FamilyLevel;
+            countryId = familyCommonData.CountryId;
             familyRoleS = new List<int>();
         }
     }
