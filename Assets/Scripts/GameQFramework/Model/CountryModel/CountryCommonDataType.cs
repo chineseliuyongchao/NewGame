@@ -20,5 +20,11 @@ namespace GameQFramework
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public int CountryLevel;
+
+        /// <summary>
+        /// 统治家族编号
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int RulingFamilyId;
     }
 }

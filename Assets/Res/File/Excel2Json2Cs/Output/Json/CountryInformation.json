@@ -4,19 +4,22 @@
             "ID": 1,
             "Name": "国家1",
             "CountryWealth": 5000,
-            "CountryLevel": 1
+            "CountryLevel": 1,
+            "RulingFamilyId": 1
         },
         {
             "ID": 2,
             "Name": "国家2",
             "CountryWealth": 30000,
-            "CountryLevel": 1
+            "CountryLevel": 1,
+            "RulingFamilyId": 2
         },
         {
             "ID": 3,
             "Name": "国家3",
             "CountryWealth": 100,
-            "CountryLevel": 1
+            "CountryLevel": 1,
+            "RulingFamilyId": 3
         }
     ]
 }

@@ -34,11 +34,17 @@ namespace GameQFramework
         /// </summary>
         public List<int> countryTownS;
 
+        /// <summary>
+        /// 统治家族编号
+        /// </summary>
+        public int rulingFamilyId;
+
         public CountryData(CountryCommonData countryCommonData)
         {
             name = countryCommonData.Name;
             wealth = countryCommonData.CountryWealth;
             countryLevel = countryCommonData.CountryLevel;
+            rulingFamilyId = countryCommonData.RulingFamilyId;
             countryFamilyS = new List<int>();
             countryTownS = new List<int>();
         }
