@@ -13,8 +13,8 @@ namespace UI
     /// </summary>
     public partial class MapLattice : UIPanel
     {
-        public IntVector2 Pos;
-        public Action<IntVector2> Operate;
+        public IntVector2 pos;
+        public Action<IntVector2> operate;
 
         private void Awake()
         {
@@ -25,7 +25,7 @@ namespace UI
         {
             mData = uiData as MapLatticeData ?? new MapLatticeData();
             // please add init code here
-            button.onClick.AddListener(() => { Operate(Pos); });
+            button.onClick.AddListener(() => { operate(pos); });
         }
 
         protected override void OnOpen(IUIData uiData = null)

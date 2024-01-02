@@ -36,17 +36,17 @@ namespace SystemTool.Pathfinding
             {
                 PathfindingFindNode findNode = closeDictionary.Values.Last();
                 List<PathfindingMapNode> pathfindingMapNodes =
-                    map.FindAroundNode(findNode.PathfindingMapNode.Pos);
+                    map.FindAroundNode(findNode.pathfindingMapNode.pos);
                 for (int i = 0; i < pathfindingMapNodes.Count; i++)
                 {
                     PathfindingMapNode mapNode = pathfindingMapNodes[i];
-                    int key = GenerateKey(mapNode.Pos, map.MapSize());
+                    int key = GenerateKey(mapNode.pos, map.MapSize());
                     if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
                     {
                         DictionaryAdd(openDictionary, key,
                             CreatePathfindingFindNode(mapNode,
-                                AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
-                                findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode));
+                                AdjacentEuclideanDistance(mapNode.pos, findNode.pathfindingMapNode.pos) +
+                                findNode.lengthToStart, ManhattanDistance(mapNode.pos, endPos), findNode));
                     }
                 }
 
@@ -56,11 +56,11 @@ namespace SystemTool.Pathfinding
                 }
 
                 PathfindingFindNode minNode =
-                    openDictionary.OrderBy(kvp => kvp.Value.TotalLength).FirstOrDefault().Value;
-                DictionaryAdd(closeDictionary, GenerateKey(minNode.PathfindingMapNode.Pos, map.MapSize()), minNode);
+                    openDictionary.OrderBy(kvp => kvp.Value.totalLength).FirstOrDefault().Value;
+                DictionaryAdd(closeDictionary, GenerateKey(minNode.pathfindingMapNode.pos, map.MapSize()), minNode);
                 int keyToRemove = openDictionary.First(kvp => kvp.Value == minNode).Key;
                 openDictionary.Remove(keyToRemove);
-                if (minNode.PathfindingMapNode.Pos == endPos)
+                if (minNode.pathfindingMapNode.pos == endPos)
                 {
                     break;
                 }
@@ -71,11 +71,11 @@ namespace SystemTool.Pathfinding
             PathfindingFindNode node = closeDictionary.Values.Last();
             while (true)
             {
-                res.Insert(0, node.PathfindingMapNode);
-                if (node.FatherNode != null)
+                res.Insert(0, node.pathfindingMapNode);
+                if (node.fatherNode != null)
                 {
-                    length.Insert(0, node.LengthToStart - node.FatherNode.LengthToStart);
-                    node = node.FatherNode;
+                    length.Insert(0, node.lengthToStart - node.fatherNode.lengthToStart);
+                    node = node.fatherNode;
                 }
                 else
                 {
@@ -101,11 +101,11 @@ namespace SystemTool.Pathfinding
         {
             PathfindingFindNode findNode = new PathfindingFindNode
             {
-                PathfindingMapNode = pathfindingMapNode,
-                LengthToStart = lengthToStart,
-                LengthToEnd = lengthToEnd,
-                TotalLength = lengthToStart + lengthToEnd,
-                FatherNode = fatherNode
+                pathfindingMapNode = pathfindingMapNode,
+                lengthToStart = lengthToStart,
+                lengthToEnd = lengthToEnd,
+                totalLength = lengthToStart + lengthToEnd,
+                fatherNode = fatherNode
             };
             return findNode;
         }
@@ -154,7 +154,7 @@ namespace SystemTool.Pathfinding
             if (dictionary.ContainsKey(key))
             {
                 PathfindingFindNode oldNode = dictionary[key];
-                if (node.TotalLength < oldNode.TotalLength)
+                if (node.totalLength < oldNode.totalLength)
                 {
                     dictionary[key] = node;
                 }

@@ -34,14 +34,14 @@ namespace SystemTool.MapProcessing
                     bool canPass = grayPixel.r > 0.5f;
                     PathfindingMapNode pathfindingMapNode = new PathfindingMapNode
                     {
-                        Pos = new IntVector2(x, y),
-                        TerrainType = canPass ? TerrainType.CAN_PASS : TerrainType.CANNOT_PASS
+                        pos = new IntVector2(x, y),
+                        terrainType = canPass ? TerrainType.CAN_PASS : TerrainType.CANNOT_PASS
                     };
                     map.MapData[x, y] = pathfindingMapNode;
                 }
             }
 
-            map.MapData.ForEach((i, j, node) => { node.AroundNode = map.FindAroundNode(new IntVector2(i, j)); });
+            map.MapData.ForEach((i, j, node) => { node.aroundNode = map.FindAroundNode(new IntVector2(i, j)); });
             return map;
         }
     }

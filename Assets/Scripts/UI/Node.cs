@@ -42,14 +42,14 @@ namespace UI
             {
                 GameObject imageGo = Instantiate(mapLatticePrefab, _parentNode);
                 MapLattice mapLattice = imageGo.GetComponent<MapLattice>();
-                mapLattice.Pos = new IntVector2(i % width, i / width);
-                bool canPass = map.MapData[i % width, i / width].TerrainType == TerrainType.CAN_PASS;
+                mapLattice.pos = new IntVector2(i % width, i / width);
+                bool canPass = map.MapData[i % width, i / width].terrainType == TerrainType.CAN_PASS;
                 if (!canPass)
                 {
                     mapLattice.SetCannotPass();
                 }
 
-                mapLattice.Operate = pos =>
+                mapLattice.operate = pos =>
                 {
                     if (_startPos == new IntVector2(-1, -1))
                     {
@@ -61,9 +61,9 @@ namespace UI
 
                         PathfindingSingleMessage message =
                             PathfindingController.Singleton.Pathfinding(_startPos, _endPos, map);
-                        for (int j = 0; j < message.PathfindingResult.Count; j++)
+                        for (int j = 0; j < message.pathfindingResult.Count; j++)
                         {
-                            _mapLattice[message.PathfindingResult[j].Pos.X, message.PathfindingResult[j].Pos.Y]
+                            _mapLattice[message.pathfindingResult[j].pos.X, message.pathfindingResult[j].pos.Y]
                                 .ShowRoute1(true);
                         }
                     }

@@ -11,17 +11,17 @@ namespace SystemTool.Pathfinding
         /// <summary>
         /// 在地图中的位置
         /// </summary>
-        public IntVector2 Pos;
+        public IntVector2 pos;
 
         /// <summary>
         /// 地形
         /// </summary>
-        public TerrainType TerrainType;
+        public TerrainType terrainType;
 
         /// <summary>
         /// 记录周围所有可以同行的点
         /// </summary>
-        public List<PathfindingMapNode> AroundNode;
+        public List<PathfindingMapNode> aroundNode;
     }
 
     /// <summary>

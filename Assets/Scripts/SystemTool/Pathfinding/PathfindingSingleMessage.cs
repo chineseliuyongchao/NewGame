@@ -10,28 +10,28 @@ namespace SystemTool.Pathfinding
         /// <summary>
         /// 记录每个地图网格点
         /// </summary>
-        public List<PathfindingMapNode> PathfindingResult;
+        public List<PathfindingMapNode> pathfindingResult;
 
         /// <summary>
         /// 记录每个网格点到上一个点的距离
         /// </summary>
-        public List<float> Length;
+        public List<float> length;
 
         public PathfindingSingleMessage(List<PathfindingMapNode> pathfindingResult, List<float> length)
         {
-            PathfindingResult = pathfindingResult;
-            Length = length;
+            this.pathfindingResult = pathfindingResult;
+            this.length = length;
         }
 
         public override string ToString()
         {
             string toString = "";
-            for (int i = 0; i < PathfindingResult.Count; i++)
+            for (int i = 0; i < pathfindingResult.Count; i++)
             {
-                toString += PathfindingResult[i].Pos;
-                if (Length.Count > i)
+                toString += pathfindingResult[i].pos;
+                if (length.Count > i)
                 {
-                    toString += "  " + Length[i] + "  ";
+                    toString += "  " + length[i] + "  ";
                 }
             }
 

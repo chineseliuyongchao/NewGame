@@ -42,17 +42,17 @@ namespace SystemTool.Pathfinding
             while (true)
             {
                 PathfindingFindNode findNode = closeDictionary.Values.Last();
-                List<PathfindingMapNode> pathfindingMapNodes = findNode.PathfindingMapNode.AroundNode;
+                List<PathfindingMapNode> pathfindingMapNodes = findNode.pathfindingMapNode.aroundNode;
                 for (int i = 0; i < pathfindingMapNodes.Count; i++)
                 {
                     PathfindingMapNode mapNode = pathfindingMapNodes[i];
-                    int key = GenerateKey(mapNode.Pos, map.MapSize());
+                    int key = GenerateKey(mapNode.pos, map.MapSize());
                     if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
                     {
                         if (OpenDictionaryAdd(openDictionary, openDictionaryKey, key,
                                 CreatePathfindingFindNode(mapNode,
-                                    AdjacentEuclideanDistance(mapNode.Pos, findNode.PathfindingMapNode.Pos) +
-                                    findNode.LengthToStart, ManhattanDistance(mapNode.Pos, endPos), findNode)))
+                                    AdjacentEuclideanDistance(mapNode.pos, findNode.pathfindingMapNode.pos) +
+                                    findNode.lengthToStart, ManhattanDistance(mapNode.pos, endPos), findNode)))
                         {
                             //只有加入了之前没有的节点才需要在list中添加新的key
                             OpenListAdd(openDictionary, openDictionaryKey, key);
@@ -66,10 +66,10 @@ namespace SystemTool.Pathfinding
                 }
 
                 PathfindingFindNode minNode = openDictionary[openDictionaryKey[1]];
-                CloseDictionaryAdd(closeDictionary, GenerateKey(minNode.PathfindingMapNode.Pos, map.MapSize()),
+                CloseDictionaryAdd(closeDictionary, GenerateKey(minNode.pathfindingMapNode.pos, map.MapSize()),
                     minNode);
                 OpenListAddRemove(openDictionary, openDictionaryKey);
-                if (minNode.PathfindingMapNode.Pos == endPos)
+                if (minNode.pathfindingMapNode.pos == endPos)
                 {
                     break;
                 }
@@ -80,11 +80,11 @@ namespace SystemTool.Pathfinding
             PathfindingFindNode node = closeDictionary.Values.Last();
             while (true)
             {
-                res.Insert(0, node.PathfindingMapNode);
-                if (node.FatherNode != null)
+                res.Insert(0, node.pathfindingMapNode);
+                if (node.fatherNode != null)
                 {
-                    length.Insert(0, node.LengthToStart - node.FatherNode.LengthToStart);
-                    node = node.FatherNode;
+                    length.Insert(0, node.lengthToStart - node.fatherNode.lengthToStart);
+                    node = node.fatherNode;
                 }
                 else
                 {
@@ -110,11 +110,11 @@ namespace SystemTool.Pathfinding
         {
             PathfindingFindNode findNode = new PathfindingFindNode
             {
-                PathfindingMapNode = pathfindingMapNode,
-                LengthToStart = lengthToStart,
-                LengthToEnd = lengthToEnd,
-                TotalLength = lengthToStart + lengthToEnd,
-                FatherNode = fatherNode
+                pathfindingMapNode = pathfindingMapNode,
+                lengthToStart = lengthToStart,
+                lengthToEnd = lengthToEnd,
+                totalLength = lengthToStart + lengthToEnd,
+                fatherNode = fatherNode
             };
             return findNode;
         }
@@ -164,7 +164,7 @@ namespace SystemTool.Pathfinding
             if (dictionary.ContainsKey(key))
             {
                 PathfindingFindNode oldNode = dictionary[key];
-                if (node.TotalLength < oldNode.TotalLength)
+                if (node.totalLength < oldNode.totalLength)
                 {
                     dictionary[key] = node;
                     list.Remove(key);
@@ -186,7 +186,7 @@ namespace SystemTool.Pathfinding
             if (dictionary.ContainsKey(key))
             {
                 PathfindingFindNode oldNode = dictionary[key];
-                if (node.TotalLength < oldNode.TotalLength)
+                if (node.totalLength < oldNode.totalLength)
                 {
                     dictionary[key] = node;
                 }
@@ -217,7 +217,7 @@ namespace SystemTool.Pathfinding
                 int fatherNode = count >> 1;
                 PathfindingFindNode fatherFindNode = dictionary[list[fatherNode]];
                 PathfindingFindNode node = dictionary[list[count]];
-                if (fatherFindNode.TotalLength <= node.TotalLength)
+                if (fatherFindNode.totalLength <= node.totalLength)
                 {
                     break;
                 }
@@ -251,16 +251,16 @@ namespace SystemTool.Pathfinding
                 {
                     PathfindingFindNode childFindNode1 = dictionary[list[childNode1]];
                     PathfindingFindNode childFindNode2 = dictionary[list[childNode2]];
-                    if (childFindNode1.TotalLength > childFindNode2.TotalLength)
+                    if (childFindNode1.totalLength > childFindNode2.totalLength)
                     {
-                        if (node.TotalLength > childFindNode2.TotalLength)
+                        if (node.totalLength > childFindNode2.totalLength)
                         {
                             (list[count], list[childNode2]) = (list[childNode2], list[count]);
                             count = childNode2;
                             continue;
                         }
 
-                        if (node.TotalLength > childFindNode1.TotalLength)
+                        if (node.totalLength > childFindNode1.totalLength)
                         {
                             (list[count], list[childNode1]) = (list[childNode1], list[count]);
                             count = childNode1;
@@ -269,14 +269,14 @@ namespace SystemTool.Pathfinding
                     }
                     else
                     {
-                        if (node.TotalLength > childFindNode1.TotalLength)
+                        if (node.totalLength > childFindNode1.totalLength)
                         {
                             (list[count], list[childNode1]) = (list[childNode1], list[count]);
                             count = childNode1;
                             continue;
                         }
 
-                        if (node.TotalLength > childFindNode2.TotalLength)
+                        if (node.totalLength > childFindNode2.totalLength)
                         {
                             (list[count], list[childNode2]) = (list[childNode2], list[count]);
                             count = childNode2;
@@ -287,7 +287,7 @@ namespace SystemTool.Pathfinding
                 else if (childNode1 < list.Count)
                 {
                     PathfindingFindNode childFindNode1 = dictionary[list[childNode1]];
-                    if (node.TotalLength > childFindNode1.TotalLength)
+                    if (node.totalLength > childFindNode1.totalLength)
                     {
                         (list[count], list[childNode1]) = (list[childNode1], list[count]);
                         count = childNode1;
