@@ -39,6 +39,11 @@ namespace GameQFramework
         /// </summary>
         public int countryId;
 
+        /// <summary>
+        /// 所属家族编号（目前默认每个聚落都会被分封给国家中的某个家族）
+        /// </summary>
+        public int familyId;
+
         public TownData(TownCommonData townCommonData)
         {
             name = townCommonData.Name;
@@ -46,6 +51,7 @@ namespace GameQFramework
             population = townCommonData.InitPopulation;
             level = townCommonData.InitLevel;
             countryId = townCommonData.CountryId;
+            familyId = townCommonData.FamilyId;
             townRoleS = new List<int>();
         }
     }

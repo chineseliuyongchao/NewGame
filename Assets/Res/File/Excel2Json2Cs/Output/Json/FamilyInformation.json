@@ -9,22 +9,6 @@
             "FamilyLeaderId": 1
         },
         {
-            "ID": 2,
-            "Name": "家族2",
-            "FamilyWealth": 5000,
-            "FamilyLevel": 1,
-            "CountryId": 2,
-            "FamilyLeaderId": 4
-        },
-        {
-            "ID": 3,
-            "Name": "家族3",
-            "FamilyWealth": 12000,
-            "FamilyLevel": 2,
-            "CountryId": 3,
-            "FamilyLeaderId": 7
-        },
-        {
             "ID": 4,
             "Name": "家族4",
             "FamilyWealth": 50000,
@@ -33,12 +17,28 @@
             "FamilyLeaderId": 8
         },
         {
+            "ID": 2,
+            "Name": "家族2",
+            "FamilyWealth": 5000,
+            "FamilyLevel": 1,
+            "CountryId": 2,
+            "FamilyLeaderId": 4
+        },
+        {
             "ID": 5,
             "Name": "家族5",
             "FamilyWealth": 8000,
             "FamilyLevel": 1,
             "CountryId": 2,
             "FamilyLeaderId": 10
+        },
+        {
+            "ID": 3,
+            "Name": "家族3",
+            "FamilyWealth": 12000,
+            "FamilyLevel": 2,
+            "CountryId": 3,
+            "FamilyLeaderId": 7
         }
     ]
 }

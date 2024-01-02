@@ -38,5 +38,11 @@ namespace GameQFramework
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public int CountryId;
+
+        /// <summary>
+        /// 所属家族编号
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int FamilyId;
     }
 }

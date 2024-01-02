@@ -10,31 +10,8 @@
             "InitWealth": 100000,
             "InitPopulation": 10000,
             "InitLevel": 2,
-            "CountryId": 1
-        },
-        {
-            "ID": 2,
-            "Name": "城市2",
-            "TownPos": [
-                0.0,
-                1.0
-            ],
-            "InitWealth": 1234556,
-            "InitPopulation": 6000,
-            "InitLevel": 2,
-            "CountryId": 2
-        },
-        {
-            "ID": 3,
-            "Name": "城市3",
-            "TownPos": [
-                0.0,
-                2.0
-            ],
-            "InitWealth": 80000,
-            "InitPopulation": 30000,
-            "InitLevel": 3,
-            "CountryId": 3
+            "CountryId": 1,
+            "FamilyId": 1
         },
         {
             "ID": 4,
@@ -46,7 +23,21 @@
             "InitWealth": 100003,
             "InitPopulation": 4000,
             "InitLevel": 1,
-            "CountryId": 1
+            "CountryId": 1,
+            "FamilyId": 4
+        },
+        {
+            "ID": 2,
+            "Name": "城市2",
+            "TownPos": [
+                0.0,
+                1.0
+            ],
+            "InitWealth": 1234556,
+            "InitPopulation": 6000,
+            "InitLevel": 2,
+            "CountryId": 2,
+            "FamilyId": 2
         },
         {
             "ID": 5,
@@ -58,7 +49,21 @@
             "InitWealth": 60004,
             "InitPopulation": 10010,
             "InitLevel": 2,
-            "CountryId": 2
+            "CountryId": 2,
+            "FamilyId": 5
+        },
+        {
+            "ID": 3,
+            "Name": "城市3",
+            "TownPos": [
+                0.0,
+                2.0
+            ],
+            "InitWealth": 80000,
+            "InitPopulation": 30000,
+            "InitLevel": 3,
+            "CountryId": 3,
+            "FamilyId": 3
         }
     ]
 }
