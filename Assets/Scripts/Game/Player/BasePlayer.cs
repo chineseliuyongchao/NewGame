@@ -4,7 +4,6 @@ using GameQFramework;
 using QFramework;
 using SystemTool.Pathfinding;
 using UnityEngine;
-using Utils;
 using Utils.Constant;
 
 namespace Game.Player
@@ -22,7 +21,7 @@ namespace Game.Player
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
         /// <param name="callBack"></param>
-        protected void Move(IntVector2 startPos, IntVector2 endPos, MoveCloseBack callBack)
+        protected void Move(Vector2Int startPos, Vector2Int endPos, MoveCloseBack callBack)
         {
             if (_sequence == null || !_sequence.active)
             {
@@ -52,7 +51,7 @@ namespace Game.Player
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
         /// <param name="callBack"></param>
-        private void PlayerMove(IntVector2 startPos, IntVector2 endPos, MoveCloseBack callBack)
+        private void PlayerMove(Vector2Int startPos, Vector2Int endPos, MoveCloseBack callBack)
         {
             PathfindingSingleMessage message =
                 PathfindingController.Singleton.Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
@@ -85,7 +84,7 @@ namespace Game.Player
         /// 获取起点网格位置
         /// </summary>
         /// <returns></returns>
-        protected IntVector2 GetStartPos()
+        protected Vector2Int GetStartPos()
         {
             return this.GetSystem<IMapSystem>()
                 .GetGridMapPos(this.GetSystem<IMapSystem>().GetMapPos(transform));

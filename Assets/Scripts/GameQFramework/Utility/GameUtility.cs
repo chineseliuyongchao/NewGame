@@ -79,9 +79,9 @@ namespace GameQFramework
             }
         }
 
-        public int GenerateKey(IntVector2 pos, IntVector2 length)
+        public int GenerateKey(Vector2Int pos, Vector2Int length)
         {
-            return pos.X * length.Y + pos.Y;
+            return pos.x * length.y + pos.y;
         }
     }
 }

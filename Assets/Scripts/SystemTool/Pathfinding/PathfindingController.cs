@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameQFramework;
 using QFramework;
-using Utils;
+using UnityEngine;
 
 namespace SystemTool.Pathfinding
 {
@@ -18,7 +18,7 @@ namespace SystemTool.Pathfinding
         {
         }
 
-        public PathfindingSingleMessage Pathfinding(IntVector2 startPos, IntVector2 endPos,
+        public PathfindingSingleMessage Pathfinding(Vector2Int startPos, Vector2Int endPos,
             PathfindingMap map)
         {
             if (!map.IsWithinBounds(startPos) || !map.IsWithinBounds(endPos))
@@ -131,9 +131,9 @@ namespace SystemTool.Pathfinding
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
         /// <returns></returns>
-        private int ManhattanDistance(IntVector2 startPos, IntVector2 endPos)
+        private int ManhattanDistance(Vector2Int startPos, Vector2Int endPos)
         {
-            return Math.Abs(endPos.X - startPos.X) + Math.Abs(endPos.Y - startPos.Y);
+            return Math.Abs(endPos.x - startPos.x) + Math.Abs(endPos.y - startPos.y);
         }
 
         /// <summary>
@@ -142,10 +142,10 @@ namespace SystemTool.Pathfinding
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
         /// <returns></returns>
-        private float AdjacentEuclideanDistance(IntVector2 startPos, IntVector2 endPos)
+        private float AdjacentEuclideanDistance(Vector2Int startPos, Vector2Int endPos)
         {
-            return (float)Math.Sqrt(Math.Abs(endPos.X - startPos.X) * Math.Abs(endPos.X - startPos.X) +
-                                    Math.Abs(endPos.Y - startPos.Y) * Math.Abs(endPos.Y - startPos.Y));
+            return (float)Math.Sqrt(Math.Abs(endPos.x - startPos.x) * Math.Abs(endPos.x - startPos.x) +
+                                    Math.Abs(endPos.y - startPos.y) * Math.Abs(endPos.y - startPos.y));
         }
 
         private bool OpenDictionaryAdd(Dictionary<int, PathfindingFindNode> dictionary, List<int> list, int key,

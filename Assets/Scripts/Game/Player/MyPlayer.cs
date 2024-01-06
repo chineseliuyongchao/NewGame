@@ -2,7 +2,7 @@
 using GameQFramework;
 using QFramework;
 using UI;
-using Utils;
+using UnityEngine;
 
 namespace Game.Player
 {
@@ -16,7 +16,7 @@ namespace Game.Player
             base.OnListenEvent();
             this.RegisterEvent<SelectMapLocationEvent>(e =>
             {
-                IntVector2 endPos = this.GetSystem<IMapSystem>().GetGridMapPos(e.selectPos);
+                Vector2Int endPos = this.GetSystem<IMapSystem>().GetGridMapPos(e.selectPos);
                 Move(GetStartPos(), endPos, () =>
                 {
                     if (e.baseTown != null)

@@ -49,14 +49,14 @@ namespace Utils
         /// <param name="pos"></param>
         /// <param name="operate"></param>
         /// <returns></returns>
-        public bool HandleElement(IntVector2 pos, Action<T> operate)
+        public bool HandleElement(Vector2Int pos, Action<T> operate)
         {
-            if (pos.X < 0 || pos.X >= _mWidth || pos.Y < 0 || pos.Y >= _mHeight)
+            if (pos.x < 0 || pos.x >= _mWidth || pos.y < 0 || pos.y >= _mHeight)
             {
                 return false;
             }
 
-            operate(_mGrid[pos.X, pos.Y]);
+            operate(_mGrid[pos.x, pos.y]);
             return true;
         }
 
@@ -65,9 +65,9 @@ namespace Utils
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public bool IsWithinBounds(IntVector2 pos)
+        public bool IsWithinBounds(Vector2Int pos)
         {
-            return pos.X >= 0 && pos.X < _mWidth && pos.Y >= 0 && pos.Y < _mHeight;
+            return pos.x >= 0 && pos.x < _mWidth && pos.y >= 0 && pos.y < _mHeight;
         }
 
         /// <summary>

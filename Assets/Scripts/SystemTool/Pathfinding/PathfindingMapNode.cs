@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Utils;
+using UnityEngine;
 
 namespace SystemTool.Pathfinding
 {
@@ -11,12 +11,12 @@ namespace SystemTool.Pathfinding
         /// <summary>
         /// 在地图中的位置
         /// </summary>
-        public IntVector2 pos;
+        public Vector2Int pos;
 
         /// <summary>
         /// 节点大小
         /// </summary>
-        public IntVector2 size;
+        public Vector2Int size;
 
         /// <summary>
         /// 地形
@@ -28,9 +28,9 @@ namespace SystemTool.Pathfinding
         /// </summary>
         public Dictionary<int, PathfindingMapNode> aroundNode;
 
-        public IntVector2 PosCenter()
+        public Vector2Int PosCenter()
         {
-            return new IntVector2(pos.X + size.X / 2, pos.Y + size.Y / 2);
+            return new Vector2Int(pos.x + size.x / 2, pos.y + size.y / 2);
         }
     }
 

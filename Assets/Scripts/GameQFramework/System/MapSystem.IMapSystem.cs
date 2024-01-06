@@ -1,6 +1,5 @@
 ﻿using QFramework;
 using UnityEngine;
-using Utils;
 
 namespace GameQFramework
 {
@@ -31,12 +30,12 @@ namespace GameQFramework
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        IntVector2 GetGridMapPos(Vector2 pos);
+        Vector2Int GetGridMapPos(Vector2 pos);
 
         /// <summary>
         /// 根据网格获取在地图上面的对应位置
         /// </summary>
         /// <returns></returns>
-        Vector2 GetGridToMapPos(IntVector2 pos, Position position = Position.CENTER_BOTTOM);
+        Vector2 GetGridToMapPos(Vector2Int pos);
     }
 }

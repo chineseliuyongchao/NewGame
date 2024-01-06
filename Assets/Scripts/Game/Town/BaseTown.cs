@@ -1,7 +1,6 @@
 ﻿using GameQFramework;
 using QFramework;
 using UnityEngine;
-using Utils;
 
 namespace Game.Town
 {
@@ -26,7 +25,7 @@ namespace Game.Town
             _townData = this.GetModel<ITownModel>().TownData[townId];
             name = _townData.name;
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
-            IntVector2 gridPos = this.GetSystem<IMapSystem>()
+            Vector2Int gridPos = this.GetSystem<IMapSystem>()
                 .GetGridMapPos(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
             Vector2 pos = this.GetSystem<IMapSystem>().GetGridToMapPos(gridPos);
             transform.position = pos;

@@ -51,6 +51,6 @@ namespace GameQFramework
         /// <param name="pos"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        int GenerateKey(IntVector2 pos, IntVector2 length);
+        int GenerateKey(Vector2Int pos, Vector2Int length);
     }
 }

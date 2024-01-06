@@ -3,7 +3,6 @@ using GameQFramework;
 using QFramework;
 using SystemTool.Pathfinding;
 using UnityEngine;
-using Utils;
 
 namespace SystemTool.MapProcessing
 {
@@ -35,8 +34,8 @@ namespace SystemTool.MapProcessing
                     bool canPass = grayPixel.r > 0.5f;
                     PathfindingMapNode pathfindingMapNode = new PathfindingMapNode
                     {
-                        pos = new IntVector2(x, y),
-                        size = new IntVector2(1, 1),
+                        pos = new Vector2Int(x, y),
+                        size = new Vector2Int(1, 1),
                         terrainType = canPass ? TerrainType.CAN_PASS : TerrainType.CANNOT_PASS
                     };
                     map.MapData[x, y] = pathfindingMapNode;
@@ -63,7 +62,7 @@ namespace SystemTool.MapProcessing
         private void MergeMapMesh(PathfindingMap map)
         {
             Debug.Log(map.MapSize());
-            int[,] meshData = new int[map.MapSize().X, map.MapSize().Y];
+            int[,] meshData = new int[map.MapSize().x, map.MapSize().y];
             map.MapData.ForEach((i, j, node) => { meshData[i, j] = map.CheckPass(node) ? 1 : 0; });
 
             while (true)
@@ -130,7 +129,7 @@ namespace SystemTool.MapProcessing
                 }
                 else
                 {
-                    node.size = new IntVector2(resultRect.width, resultRect.height);
+                    node.size = new Vector2Int(resultRect.width, resultRect.height);
                 }
 
                 if (meshData[i, j] == 1)

@@ -29,7 +29,7 @@ namespace SystemTool.Pathfinding
             return GameApp.Interface;
         }
 
-        public bool IsWithinBounds(IntVector2 pos)
+        public bool IsWithinBounds(Vector2Int pos)
         {
             return _mapData.IsWithinBounds(pos);
         }
@@ -44,15 +44,15 @@ namespace SystemTool.Pathfinding
             Dictionary<int, PathfindingMapNode> surroundingElements = new Dictionary<int, PathfindingMapNode>();
             _mapData.ForEachAround(new RectInt
             {
-                x = node.pos.X,
-                y = node.pos.Y,
-                width = node.size.X,
-                height = node.size.Y
+                x = node.pos.x,
+                y = node.pos.y,
+                width = node.size.x,
+                height = node.size.y
             }, (i, j, aroundNode) =>
             {
                 if (CheckPass(aroundNode))
                 {
-                    int key = this.GetUtility<IGameUtility>().GenerateKey(new IntVector2(i, j), MapSize());
+                    int key = this.GetUtility<IGameUtility>().GenerateKey(new Vector2Int(i, j), MapSize());
                     surroundingElements.TryAdd(key, aroundNode);
                 }
             });
@@ -65,9 +65,9 @@ namespace SystemTool.Pathfinding
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public PathfindingMapNode GetPathfindingMapNode(IntVector2 pos)
+        public PathfindingMapNode GetPathfindingMapNode(Vector2Int pos)
         {
-            return _mapData[pos.X, pos.Y];
+            return _mapData[pos.x, pos.y];
         }
 
         public bool CheckPass(PathfindingMapNode pathfindingMapNode)
@@ -80,9 +80,9 @@ namespace SystemTool.Pathfinding
             return false;
         }
 
-        public IntVector2 MapSize()
+        public Vector2Int MapSize()
         {
-            return new IntVector2(_mapData.Width, _mapData.Height);
+            return new Vector2Int(_mapData.Width, _mapData.Height);
         }
     }
 }
