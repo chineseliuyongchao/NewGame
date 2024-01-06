@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Utils
 {
@@ -80,6 +81,52 @@ namespace Utils
                 for (var y = 0; y < _mHeight; y++)
                 {
                     operate(x, y, _mGrid[x, y]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 遍历一个矩形区域内的所有元素
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="operate">元素要执行的方法</param>
+        public void ForEach(RectInt rect, Action<int, int, T> operate)
+        {
+            if (rect.x < 0 || rect.y < 0 || rect.x + rect.width > _mWidth ||
+                rect.y + rect.height > _mHeight)
+            {
+                return;
+            }
+
+            for (var x = rect.x; x < rect.x + rect.width; x++)
+            {
+                for (var y = rect.y; y < rect.y + rect.height; y++)
+                {
+                    operate(x, y, _mGrid[x, y]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 遍历一个矩形区域周围一圈的元素
+        /// </summary>
+        /// <param name="rect"></param>
+        /// <param name="operate">元素要执行的方法</param>
+        public void ForEachAround(RectInt rect, Action<int, int, T> operate)
+        {
+            for (int i = rect.x - 1; i <= rect.xMax + 1; i++)
+            {
+                for (int j = rect.y - 1; j <= rect.yMax + 1; j++)
+                {
+                    // 检查坐标 (i, j) 是否在原始的 RectInt 的周围一圈
+                    if (i < rect.x || i > rect.xMax || j < rect.y || j > rect.yMax)
+                    {
+                        //检查越界
+                        if (i >= 0 && i < _mGrid.GetLength(0) && j >= 0 && j < _mGrid.GetLength(1))
+                        {
+                            operate(i, j, _mGrid[i, j]);
+                        }
+                    }
                 }
             }
         }

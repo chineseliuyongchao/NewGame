@@ -14,14 +14,24 @@ namespace SystemTool.Pathfinding
         public IntVector2 pos;
 
         /// <summary>
+        /// 节点大小
+        /// </summary>
+        public IntVector2 size;
+
+        /// <summary>
         /// 地形
         /// </summary>
         public TerrainType terrainType;
 
         /// <summary>
-        /// 记录周围所有可以同行的点
+        /// 记录周围所有可以通行的点
         /// </summary>
-        public List<PathfindingMapNode> aroundNode;
+        public Dictionary<int, PathfindingMapNode> aroundNode;
+
+        public IntVector2 PosCenter()
+        {
+            return new IntVector2(pos.X + size.X / 2, pos.Y + size.Y / 2);
+        }
     }
 
     /// <summary>

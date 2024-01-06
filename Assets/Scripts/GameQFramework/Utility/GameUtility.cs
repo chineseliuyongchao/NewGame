@@ -61,5 +61,27 @@ namespace GameQFramework
             JsonWrapper<T> jsonWrapper = JsonUtility.FromJson<JsonWrapper<T>>(jsonString);
             return jsonWrapper?.Sheet1;
         }
+
+        public void PrintArray(int[,] array)
+        {
+            int columns = array.GetLength(0);
+            int rows = array.GetLength(1);
+
+            for (int i = rows - 1; i >= 0; i--)
+            {
+                string str = "";
+                for (int j = 0; j < columns; j++)
+                {
+                    str += array[j, i] + " ";
+                }
+
+                Debug.Log(str);
+            }
+        }
+
+        public int GenerateKey(IntVector2 pos, IntVector2 length)
+        {
+            return pos.X * length.Y + pos.Y;
+        }
     }
 }

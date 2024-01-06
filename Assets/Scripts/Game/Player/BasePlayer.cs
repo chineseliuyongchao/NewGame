@@ -58,11 +58,11 @@ namespace Game.Player
                 PathfindingController.Singleton.Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
             if (message != null)
             {
-                for (int i = 0; i < message.PathfindingResult.Count; i++)
+                for (int i = 0; i < message.pathfindingResult.Count; i++)
                 {
                     Vector3 pos = this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent,
-                        this.GetSystem<IMapSystem>().GetGridToMapPos(message.PathfindingResult[i].Pos));
-                    _sequence.Append(transform.DOMove(pos, 0.1f * message.Length[i]).SetEase(Ease.Linear));
+                        this.GetSystem<IMapSystem>().GetGridToMapPos(message.pathfindingResult[i].pos));
+                    _sequence.Append(transform.DOMove(pos, 0.1f * message.length[i]).SetEase(Ease.Linear));
                 }
 
                 if (callBack != null)

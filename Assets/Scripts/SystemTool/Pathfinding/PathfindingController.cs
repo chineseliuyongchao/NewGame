@@ -35,24 +35,29 @@ namespace SystemTool.Pathfinding
             List<int> openDictionaryKey = new List<int>();
             openDictionaryKey.Add(0); //从第二个位置存储
             Dictionary<int, PathfindingFindNode> closeDictionary = new Dictionary<int, PathfindingFindNode>();
-            closeDictionary.Add(GenerateKey(startPos, map.MapSize()), CreatePathfindingFindNode(
-                map.GetPathfindingMapNode(startPos), 0,
-                ManhattanDistance(startPos, endPos), null));
+            PathfindingMapNode startNode = map.GetPathfindingMapNode(startPos);
+            PathfindingMapNode endNode = map.GetPathfindingMapNode(endPos);
+            closeDictionary.Add(this.GetUtility<IGameUtility>().GenerateKey(startNode.pos, map.MapSize()),
+                CreatePathfindingFindNode(startNode, 0, ManhattanDistance(startNode.PosCenter(), endNode.PosCenter()),
+                    null));
 
             while (true)
             {
                 PathfindingFindNode findNode = closeDictionary.Values.Last();
-                List<PathfindingMapNode> pathfindingMapNodes = findNode.pathfindingMapNode.aroundNode;
-                for (int i = 0; i < pathfindingMapNodes.Count; i++)
+                Dictionary<int, PathfindingMapNode> pathfindingMapAroundNodes = findNode.pathfindingMapNode.aroundNode;
+                List<int> pathfindingMapAroundNodeKey = new List<int>(pathfindingMapAroundNodes.Keys);
+                for (int i = 0; i < pathfindingMapAroundNodeKey.Count; i++)
                 {
-                    PathfindingMapNode mapNode = pathfindingMapNodes[i];
-                    int key = GenerateKey(mapNode.pos, map.MapSize());
+                    PathfindingMapNode mapNode = pathfindingMapAroundNodes[pathfindingMapAroundNodeKey[i]];
+                    int key = this.GetUtility<IGameUtility>().GenerateKey(mapNode.pos, map.MapSize());
                     if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
                     {
                         if (OpenDictionaryAdd(openDictionary, openDictionaryKey, key,
                                 CreatePathfindingFindNode(mapNode,
-                                    AdjacentEuclideanDistance(mapNode.pos, findNode.pathfindingMapNode.pos) +
-                                    findNode.lengthToStart, ManhattanDistance(mapNode.pos, endPos), findNode)))
+                                    AdjacentEuclideanDistance(mapNode.PosCenter(),
+                                        findNode.pathfindingMapNode.PosCenter()) +
+                                    findNode.lengthToStart, ManhattanDistance(mapNode.PosCenter(), endNode.PosCenter()),
+                                    findNode)))
                         {
                             //只有加入了之前没有的节点才需要在list中添加新的key
                             OpenListAdd(openDictionary, openDictionaryKey, key);
@@ -66,10 +71,11 @@ namespace SystemTool.Pathfinding
                 }
 
                 PathfindingFindNode minNode = openDictionary[openDictionaryKey[1]];
-                CloseDictionaryAdd(closeDictionary, GenerateKey(minNode.pathfindingMapNode.pos, map.MapSize()),
+                CloseDictionaryAdd(closeDictionary,
+                    this.GetUtility<IGameUtility>().GenerateKey(minNode.pathfindingMapNode.pos, map.MapSize()),
                     minNode);
                 OpenListAddRemove(openDictionary, openDictionaryKey);
-                if (minNode.pathfindingMapNode.pos == endPos)
+                if (minNode.pathfindingMapNode.pos == endNode.pos)
                 {
                     break;
                 }
@@ -138,24 +144,8 @@ namespace SystemTool.Pathfinding
         /// <returns></returns>
         private float AdjacentEuclideanDistance(IntVector2 startPos, IntVector2 endPos)
         {
-            int num = ManhattanDistance(startPos, endPos);
-            if (num == 2)
-            {
-                return 1.4f;
-            }
-
-            return 1;
-        }
-
-        /// <summary>
-        /// 根据位置和地图尺寸生成每个位置单独的key
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        private int GenerateKey(IntVector2 pos, IntVector2 length)
-        {
-            return pos.X * length.Y + pos.Y;
+            return (float)Math.Sqrt(Math.Abs(endPos.X - startPos.X) * Math.Abs(endPos.X - startPos.X) +
+                                    Math.Abs(endPos.Y - startPos.Y) * Math.Abs(endPos.Y - startPos.Y));
         }
 
         private bool OpenDictionaryAdd(Dictionary<int, PathfindingFindNode> dictionary, List<int> list, int key,

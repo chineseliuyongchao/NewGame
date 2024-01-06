@@ -37,5 +37,20 @@ namespace GameQFramework
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         T[] ParseJson<T>(string jsonString) where T : BaseJsonData;
+
+        /// <summary>
+        /// 输出二维数组
+        /// </summary>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        void PrintArray(int[,] array);
+
+        /// <summary>
+        /// 根据位置和大小生成每个位置单独的key
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        int GenerateKey(IntVector2 pos, IntVector2 length);
     }
 }
