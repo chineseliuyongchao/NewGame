@@ -66,6 +66,11 @@ namespace SystemTool.Pathfinding
 
         public bool CheckPass(PathfindingMapNode pathfindingMapNode)
         {
+            if (pathfindingMapNode == null)
+            {
+                return false;
+            }
+
             if (pathfindingMapNode.terrainType == TerrainType.CAN_PASS)
             {
                 return true;

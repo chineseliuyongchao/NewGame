@@ -11,7 +11,7 @@ namespace EditorUtils
             GetWindow(typeof(GenExcel2Json2Cs));
         }
 
-        void OnGUI()
+        private void OnGUI()
         {
             string excelPath = Application.dataPath + "/Res/File/Excel2Json2Cs/Output/Excel/";
             string jsonPath = Application.dataPath + "/Res/File/Excel2Json2Cs/Output/Json/";

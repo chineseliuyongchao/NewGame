@@ -37,5 +37,11 @@ namespace GameQFramework
         /// </summary>
         /// <returns></returns>
         Vector2 GetGridToMapPos(Vector2 pos);
+
+        /// <summary>
+        /// 初始化地图网格
+        /// </summary>
+        /// <param name="textAsset"></param>
+        void InitMapMeshData(TextAsset textAsset);
     }
 }

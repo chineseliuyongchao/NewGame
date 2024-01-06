@@ -103,6 +103,18 @@
         public const string COUNTRY_INFORMATION = "CountryInformation";
     }
 
+
+    /// <summary>
+    /// 地图数据配置表相关常量
+    /// </summary>
+    public abstract class MapConfigurationTableConstant
+    {
+        /// <summary>
+        /// 地图网格数据表
+        /// </summary>
+        public const string MAP_MESH_INFORMATION = "MapMeshInformation";
+    }
+
     /// <summary>
     /// 移动结束的回调
     /// </summary>

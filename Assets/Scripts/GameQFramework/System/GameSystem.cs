@@ -1,5 +1,4 @@
 ﻿using QFramework;
-using SystemTool.MapProcessing;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utils.Constant;
@@ -45,12 +44,12 @@ namespace GameQFramework
             var familyTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.FAMILY_INFORMATION);
             var roleTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.ROLE_INFORMATION);
             var countryAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.COUNTRY_INFORMATION);
+            var mapMeshAsset = resLoader.LoadSync<TextAsset>(MapConfigurationTableConstant.MAP_MESH_INFORMATION);
             this.GetSystem<ITownSystem>().InitTownCommonData(townTextAsset);
             this.GetSystem<IFamilySystem>().InitFamilyCommonData(familyTextAsset);
             this.GetSystem<IFamilySystem>().InitRoleCommonData(roleTextAsset);
             this.GetSystem<ICountrySystem>().InitCountryCommonData(countryAsset);
-            this.GetModel<IMapModel>().Map =
-                ImageToMapController.Singleton.GetMap(MapConstant.MAP_PATH + MapConstant.GRID_MAP_FILE_NAME);
+            this.GetSystem<IMapSystem>().InitMapMeshData(mapMeshAsset);
             _hasLoadCurrentData = true;
         }
     }

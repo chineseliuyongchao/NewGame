@@ -1,30 +1,27 @@
 ﻿using System;
-using GameQFramework;
-using QFramework;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using Newtonsoft.Json;
 using SystemTool.Pathfinding;
 using UnityEngine;
+using Utils.Constant;
 
-namespace SystemTool.MapProcessing
+namespace EditorUtils.MapToMesh
 {
     /// <summary>
     /// 根据网格图片获取地图信息
     /// </summary>
-    public class ImageToMapController : BaseGameController, ISingleton
+    public class ImageToMap
     {
-        public static ImageToMapController Singleton => MonoSingletonProperty<ImageToMapController>.Instance;
-
-        public void OnSingletonInit()
-        {
-        }
-
         /// <summary>
         /// 获取地图信息
         /// </summary>
+        /// <param name="originalTexture"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public PathfindingMap GetMap(string path)
+        public static void GetMap(Texture2D originalTexture, string path)
         {
-            Texture2D originalTexture = this.GetSystem<IResSystem>().LoadTexture(path);
             PathfindingMap map = new PathfindingMap(originalTexture.width, originalTexture.height);
             for (int x = 0; x < originalTexture.width; x++)
             {
@@ -42,23 +39,43 @@ namespace SystemTool.MapProcessing
             }
 
             MergeMapMesh(map);
-            map.MapData.ForEach((_, _, node) =>
+
+            List<MeshDataType> meshDataTypes = new List<MeshDataType>();
+            map.MapData.ForEach((i, j, node) =>
             {
-                if (map.CheckPass(node))
+                if (node.nodeRect.x == i && node.nodeRect.y == j && map.CheckPass(node))
                 {
-                    if (node.aroundNode == null)
+                    MeshDataType meshDataType = new MeshDataType
                     {
-                        node.aroundNode = map.FindAroundNode(node);
-                    }
+                        x = node.nodeRect.x,
+                        y = node.nodeRect.y,
+                        width = node.nodeRect.width,
+                        height = node.nodeRect.height
+                    };
+                    meshDataTypes.Add(meshDataType);
                 }
             });
-            return map;
+            Dictionary<string, object> allTable = new Dictionary<string, object>();
+            allTable.Add("Sheet1", meshDataTypes);
+            string json = JsonConvert.SerializeObject(allTable, Formatting.None);
+            json = ConvertJsonString(json);
+            string jsonFilePath = path + MapConfigurationTableConstant.MAP_MESH_INFORMATION + ".json";
+            //写入文件
+            using (FileStream fileStream = new FileStream(jsonFilePath, FileMode.Create, FileAccess.Write))
+            {
+                using (TextWriter textWriter = new StreamWriter(fileStream, Encoding.UTF8))
+                {
+                    textWriter.Write(json);
+                }
+            }
+
+            meshDataTypes.Clear();
         }
 
         /// <summary>
         /// 合并网格
         /// </summary>
-        private void MergeMapMesh(PathfindingMap map)
+        private static void MergeMapMesh(PathfindingMap map)
         {
             Debug.Log(map.MapSize());
             int[,] meshData = new int[map.MapSize().x, map.MapSize().y];
@@ -80,7 +97,7 @@ namespace SystemTool.MapProcessing
         /// <param name="meshData"></param>
         /// <param name="map"></param>
         /// <returns></returns>
-        private RectInt FindMaxMapMesh(int[,] meshData, PathfindingMap map)
+        private static RectInt FindMaxMapMesh(int[,] meshData, PathfindingMap map)
         {
             RectInt resultRect = new RectInt();
             int[,] meshHeight = new int[meshData.GetLength(0), meshData.GetLength(1)];
@@ -147,7 +164,7 @@ namespace SystemTool.MapProcessing
         /// </summary>
         /// <param name="heights"></param>
         /// <returns></returns>
-        private RectInt LargestRectangleArea(int[] heights)
+        private static RectInt LargestRectangleArea(int[] heights)
         {
             RectInt result = new RectInt();
             int n = heights.Length, top = 0, max = 0; // 注意top = 0，表示初始时栈即有一个元素，即具有stack[0]
@@ -174,6 +191,31 @@ namespace SystemTool.MapProcessing
             }
 
             return result;
+        }
+
+        private static string ConvertJsonString(string str)
+        {
+            //格式化json字符串
+            JsonSerializer serializer = new JsonSerializer();
+            TextReader tr = new StringReader(str);
+            JsonTextReader jtr = new JsonTextReader(tr);
+            object obj = serializer.Deserialize(jtr);
+            if (obj != null)
+            {
+                StringWriter textWriter = new StringWriter();
+                JsonTextWriter jsonWriter = new JsonTextWriter(textWriter)
+                {
+                    Formatting = Formatting.Indented,
+                    Indentation = 4,
+                    IndentChar = ' '
+                };
+                serializer.Serialize(jsonWriter, obj);
+                return textWriter.ToString();
+            }
+            else
+            {
+                return str;
+            }
         }
     }
 }

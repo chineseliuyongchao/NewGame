@@ -36,7 +36,15 @@ namespace GameQFramework
         /// <param name="jsonString"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        T[] ParseJson<T>(string jsonString) where T : BaseJsonData;
+        T[] ParseJson<T>(string jsonString);
+
+        /// <summary>
+        /// 将数据解析成列表
+        /// </summary>
+        /// <param name="jsonString"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T[] ParseJsonToList<T>(string jsonString);
 
         /// <summary>
         /// 输出二维数组

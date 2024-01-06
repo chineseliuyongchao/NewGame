@@ -55,11 +55,17 @@ namespace GameQFramework
             }
         }
 
-        public T[] ParseJson<T>(string jsonString) where T : BaseJsonData
+        public T[] ParseJson<T>(string jsonString)
         {
             // 将JSON数据转换成指定类型的对象数组
             JsonWrapper<T> jsonWrapper = JsonUtility.FromJson<JsonWrapper<T>>(jsonString);
             return jsonWrapper?.Sheet1;
+        }
+
+        public T[] ParseJsonToList<T>(string jsonString)
+        {
+            T[] tData = ParseJson<T>(jsonString);
+            return tData;
         }
 
         public void PrintArray(int[,] array)

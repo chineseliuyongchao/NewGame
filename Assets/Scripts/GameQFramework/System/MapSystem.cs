@@ -1,4 +1,6 @@
-﻿using QFramework;
+﻿using EditorUtils.MapToMesh;
+using QFramework;
+using SystemTool.Pathfinding;
 using UnityEngine;
 using Utils.Constant;
 
@@ -43,6 +45,36 @@ namespace GameQFramework
             Vector2 vector2 = new Vector2(pos.x, pos.y) * MapConstant.GRID_SIZE / MapConstant.MAP_PIXELS_PER_UNIT;
             vector2 -= this.GetModel<IMapModel>().MapSize / 2;
             return vector2;
+        }
+
+        public void InitMapMeshData(TextAsset textAsset)
+        {
+            MeshDataType[] meshDataTypes =
+                this.GetUtility<IGameUtility>().ParseJsonToList<MeshDataType>(textAsset.text);
+            PathfindingMap map = new PathfindingMap(MapConstant.MAP_MESH_WIDTH, MapConstant.MAP_MESH_HEIGHT);
+            for (int i = 0; i < meshDataTypes.Length; i++)
+            {
+                MeshDataType meshDataType = meshDataTypes[i];
+                PathfindingMapNode pathfindingMapNode = new PathfindingMapNode
+                {
+                    nodeRect = new RectInt(meshDataType.x, meshDataType.y, meshDataType.width, meshDataType.height),
+                    terrainType = TerrainType.CAN_PASS
+                };
+                map.MapData.ForEach(pathfindingMapNode.nodeRect,
+                    (x, y, node) => { map.MapData[x, y] = pathfindingMapNode; });
+                map.MapData.ForEach((_, _, node) =>
+                {
+                    if (map.CheckPass(node))
+                    {
+                        if (node.aroundNode == null)
+                        {
+                            node.aroundNode = map.FindAroundNode(node);
+                        }
+                    }
+                });
+            }
+
+            this.GetModel<IMapModel>().Map = map;
         }
     }
 }
