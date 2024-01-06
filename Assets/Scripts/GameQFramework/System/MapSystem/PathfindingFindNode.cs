@@ -1,4 +1,4 @@
-﻿namespace SystemTool.Pathfinding
+﻿namespace GameQFramework
 {
     /// <summary>
     /// 单次寻路系统的每个节点

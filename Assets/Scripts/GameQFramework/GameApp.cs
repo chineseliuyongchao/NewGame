@@ -13,6 +13,7 @@ namespace GameQFramework
             RegisterSystem<IGameSaveSystem>(new GameSaveSystem());
             RegisterSystem<IFamilySystem>(new FamilySystem());
             RegisterSystem<ICountrySystem>(new CountrySystem());
+            RegisterSystem<IPathfindingSystem>(new PathfindingSystem());
 
             RegisterModel<IGameModel>(new GameModel());
             RegisterModel<IMapModel>(new MapModel());

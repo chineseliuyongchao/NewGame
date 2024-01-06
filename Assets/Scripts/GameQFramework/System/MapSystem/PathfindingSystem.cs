@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameQFramework;
 using QFramework;
 using UnityEngine;
 
-namespace SystemTool.Pathfinding
+namespace GameQFramework
 {
-    /// <summary>
-    /// 寻路系统
-    /// </summary>
-    public class PathfindingController : BaseGameController, ISingleton
+    public class PathfindingSystem: AbstractSystem, IPathfindingSystem
     {
-        public static PathfindingController Singleton => MonoSingletonProperty<PathfindingController>.Instance;
-
-        public void OnSingletonInit()
+        protected override void OnInit()
         {
+            
         }
 
         public PathfindingSingleMessage Pathfinding(Vector2 startPos, Vector2 endPos,

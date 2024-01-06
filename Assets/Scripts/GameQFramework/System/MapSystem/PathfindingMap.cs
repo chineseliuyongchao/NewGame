@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using GameQFramework;
 using QFramework;
 using UnityEngine;
 using Utils;
 
-namespace SystemTool.Pathfinding
+namespace GameQFramework
 {
     /// <summary>
     /// 寻路系统的地图，记录所有节点

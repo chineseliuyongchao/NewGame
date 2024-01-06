@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SystemTool.Pathfinding
+namespace GameQFramework
 {
     /// <summary>
     /// 寻路系统对应地图中的每个节点的信息

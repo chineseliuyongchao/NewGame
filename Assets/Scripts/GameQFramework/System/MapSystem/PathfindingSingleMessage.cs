@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SystemTool.Pathfinding
+namespace GameQFramework
 {
     /// <summary>
     /// 用于记录寻路的单次结果信息

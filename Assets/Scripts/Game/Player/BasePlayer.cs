@@ -2,7 +2,6 @@
 using Game.Town;
 using GameQFramework;
 using QFramework;
-using SystemTool.Pathfinding;
 using UnityEngine;
 using Utils.Constant;
 
@@ -53,8 +52,8 @@ namespace Game.Player
         /// <param name="callBack"></param>
         private void PlayerMove(Vector2 startPos, Vector2 endPos, MoveCloseBack callBack)
         {
-            PathfindingSingleMessage message =
-                PathfindingController.Singleton.Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
+            PathfindingSingleMessage message = this.GetSystem<IPathfindingSystem>()
+                .Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
             if (message != null)
             {
                 for (int i = 0; i < message.pathfindingResult.Count - 1; i++)
