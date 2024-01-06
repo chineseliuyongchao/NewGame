@@ -38,9 +38,9 @@ namespace GameQFramework
             return res;
         }
 
-        public Vector2 GetGridToMapPos(Vector2Int pos)
+        public Vector2 GetGridToMapPos(Vector2 pos)
         {
-            Vector2 vector2 = new Vector2(pos.x, pos.y) * MapConstant.GRID_SIZE / 100;
+            Vector2 vector2 = new Vector2(pos.x, pos.y) * MapConstant.GRID_SIZE / MapConstant.MAP_PIXELS_PER_UNIT;
             vector2 -= this.GetModel<IMapModel>().MapSize / 2;
             return vector2;
         }

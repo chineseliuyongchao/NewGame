@@ -34,8 +34,7 @@ namespace SystemTool.MapProcessing
                     bool canPass = grayPixel.r > 0.5f;
                     PathfindingMapNode pathfindingMapNode = new PathfindingMapNode
                     {
-                        pos = new Vector2Int(x, y),
-                        size = new Vector2Int(1, 1),
+                        nodeRect = new RectInt(x, y, 1, 1),
                         terrainType = canPass ? TerrainType.CAN_PASS : TerrainType.CANNOT_PASS
                     };
                     map.MapData[x, y] = pathfindingMapNode;
@@ -129,7 +128,7 @@ namespace SystemTool.MapProcessing
                 }
                 else
                 {
-                    node.size = new Vector2Int(resultRect.width, resultRect.height);
+                    node.nodeRect.size = new Vector2Int(resultRect.width, resultRect.height);
                 }
 
                 if (meshData[i, j] == 1)

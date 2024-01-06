@@ -28,7 +28,7 @@ namespace SystemTool.Pathfinding
             string toString = "";
             for (int i = 0; i < pathfindingResult.Count; i++)
             {
-                toString += pathfindingResult[i].pos;
+                toString += pathfindingResult[i].nodeRect;
                 if (length.Count > i)
                 {
                     toString += "  " + length[i] + "  ";

@@ -12,6 +12,7 @@ namespace Game.Player
         {
             base.OnInit();
             _people = Instantiate(character, this.transform);
+            // _people.transform.position = new Vector3(-8.5f, -2);
         }
 
         protected override void OnListenEvent()

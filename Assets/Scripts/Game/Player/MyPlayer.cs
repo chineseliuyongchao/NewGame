@@ -16,8 +16,7 @@ namespace Game.Player
             base.OnListenEvent();
             this.RegisterEvent<SelectMapLocationEvent>(e =>
             {
-                Vector2Int endPos = this.GetSystem<IMapSystem>().GetGridMapPos(e.selectPos);
-                Move(GetStartPos(), endPos, () =>
+                Move(GetStartMapPos(), e.selectPos, () =>
                 {
                     if (e.baseTown != null)
                     {

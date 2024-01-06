@@ -9,14 +9,9 @@ namespace SystemTool.Pathfinding
     public class PathfindingMapNode
     {
         /// <summary>
-        /// 在地图中的位置
+        /// 记录地图节点的物理信息
         /// </summary>
-        public Vector2Int pos;
-
-        /// <summary>
-        /// 节点大小
-        /// </summary>
-        public Vector2Int size;
+        public RectInt nodeRect;
 
         /// <summary>
         /// 地形
@@ -27,11 +22,6 @@ namespace SystemTool.Pathfinding
         /// 记录周围所有可以通行的点
         /// </summary>
         public Dictionary<int, PathfindingMapNode> aroundNode;
-
-        public Vector2Int PosCenter()
-        {
-            return new Vector2Int(pos.x + size.x / 2, pos.y + size.y / 2);
-        }
     }
 
     /// <summary>

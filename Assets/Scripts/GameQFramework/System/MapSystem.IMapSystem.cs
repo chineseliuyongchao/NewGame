@@ -36,6 +36,6 @@ namespace GameQFramework
         /// 根据网格获取在地图上面的对应位置
         /// </summary>
         /// <returns></returns>
-        Vector2 GetGridToMapPos(Vector2Int pos);
+        Vector2 GetGridToMapPos(Vector2 pos);
     }
 }

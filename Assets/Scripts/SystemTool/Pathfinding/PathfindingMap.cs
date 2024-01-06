@@ -42,13 +42,7 @@ namespace SystemTool.Pathfinding
         public Dictionary<int, PathfindingMapNode> FindAroundNode(PathfindingMapNode node)
         {
             Dictionary<int, PathfindingMapNode> surroundingElements = new Dictionary<int, PathfindingMapNode>();
-            _mapData.ForEachAround(new RectInt
-            {
-                x = node.pos.x,
-                y = node.pos.y,
-                width = node.size.x,
-                height = node.size.y
-            }, (i, j, aroundNode) =>
+            _mapData.ForEachAround(node.nodeRect, (i, j, aroundNode) =>
             {
                 if (CheckPass(aroundNode))
                 {

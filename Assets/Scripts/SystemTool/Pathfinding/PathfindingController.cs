@@ -18,6 +18,13 @@ namespace SystemTool.Pathfinding
         {
         }
 
+        public PathfindingSingleMessage Pathfinding(Vector2 startPos, Vector2 endPos,
+            PathfindingMap map)
+        {
+            return Pathfinding(this.GetSystem<IMapSystem>().GetGridMapPos(startPos),
+                this.GetSystem<IMapSystem>().GetGridMapPos(endPos), map);
+        }
+
         public PathfindingSingleMessage Pathfinding(Vector2Int startPos, Vector2Int endPos,
             PathfindingMap map)
         {
@@ -37,8 +44,8 @@ namespace SystemTool.Pathfinding
             Dictionary<int, PathfindingFindNode> closeDictionary = new Dictionary<int, PathfindingFindNode>();
             PathfindingMapNode startNode = map.GetPathfindingMapNode(startPos);
             PathfindingMapNode endNode = map.GetPathfindingMapNode(endPos);
-            closeDictionary.Add(this.GetUtility<IGameUtility>().GenerateKey(startNode.pos, map.MapSize()),
-                CreatePathfindingFindNode(startNode, 0, ManhattanDistance(startNode.PosCenter(), endNode.PosCenter()),
+            closeDictionary.Add(this.GetUtility<IGameUtility>().GenerateKey(startNode.nodeRect.position, map.MapSize()),
+                CreatePathfindingFindNode(startNode, 0, ManhattanDistance(startNode.nodeRect.center, endNode.nodeRect.center),
                     null));
 
             while (true)
@@ -49,14 +56,14 @@ namespace SystemTool.Pathfinding
                 for (int i = 0; i < pathfindingMapAroundNodeKey.Count; i++)
                 {
                     PathfindingMapNode mapNode = pathfindingMapAroundNodes[pathfindingMapAroundNodeKey[i]];
-                    int key = this.GetUtility<IGameUtility>().GenerateKey(mapNode.pos, map.MapSize());
+                    int key = this.GetUtility<IGameUtility>().GenerateKey(mapNode.nodeRect.position, map.MapSize());
                     if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
                     {
                         if (OpenDictionaryAdd(openDictionary, openDictionaryKey, key,
                                 CreatePathfindingFindNode(mapNode,
-                                    AdjacentEuclideanDistance(mapNode.PosCenter(),
-                                        findNode.pathfindingMapNode.PosCenter()) +
-                                    findNode.lengthToStart, ManhattanDistance(mapNode.PosCenter(), endNode.PosCenter()),
+                                    AdjacentEuclideanDistance(mapNode.nodeRect.center,
+                                        findNode.pathfindingMapNode.nodeRect.center) +
+                                    findNode.lengthToStart, ManhattanDistance(mapNode.nodeRect.center, endNode.nodeRect.center),
                                     findNode)))
                         {
                             //只有加入了之前没有的节点才需要在list中添加新的key
@@ -72,10 +79,10 @@ namespace SystemTool.Pathfinding
 
                 PathfindingFindNode minNode = openDictionary[openDictionaryKey[1]];
                 CloseDictionaryAdd(closeDictionary,
-                    this.GetUtility<IGameUtility>().GenerateKey(minNode.pathfindingMapNode.pos, map.MapSize()),
+                    this.GetUtility<IGameUtility>().GenerateKey(minNode.pathfindingMapNode.nodeRect.position, map.MapSize()),
                     minNode);
                 OpenListAddRemove(openDictionary, openDictionaryKey);
-                if (minNode.pathfindingMapNode.pos == endNode.pos)
+                if (minNode.pathfindingMapNode.nodeRect.position == endNode.nodeRect.position)
                 {
                     break;
                 }
@@ -131,7 +138,7 @@ namespace SystemTool.Pathfinding
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
         /// <returns></returns>
-        private int ManhattanDistance(Vector2Int startPos, Vector2Int endPos)
+        private float ManhattanDistance(Vector2 startPos, Vector2 endPos)
         {
             return Math.Abs(endPos.x - startPos.x) + Math.Abs(endPos.y - startPos.y);
         }
@@ -142,7 +149,7 @@ namespace SystemTool.Pathfinding
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
         /// <returns></returns>
-        private float AdjacentEuclideanDistance(Vector2Int startPos, Vector2Int endPos)
+        private float AdjacentEuclideanDistance(Vector2 startPos, Vector2 endPos)
         {
             return (float)Math.Sqrt(Math.Abs(endPos.x - startPos.x) * Math.Abs(endPos.x - startPos.x) +
                                     Math.Abs(endPos.y - startPos.y) * Math.Abs(endPos.y - startPos.y));
