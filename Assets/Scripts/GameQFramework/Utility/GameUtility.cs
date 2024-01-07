@@ -89,20 +89,5 @@ namespace GameQFramework
         {
             return pos.x * length.y + pos.y;
         }
-
-        public int PointClosestToAPointOnALineSegment(int lineSegmentStart, int lineSegmentEnd, int point)
-        {
-            if (point <= lineSegmentStart)
-            {
-                return lineSegmentStart;
-            }
-
-            if (point >= lineSegmentEnd)
-            {
-                return lineSegmentEnd;
-            }
-
-            return point;
-        }
     }
 }

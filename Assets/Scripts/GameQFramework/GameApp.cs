@@ -23,6 +23,7 @@ namespace GameQFramework
             RegisterModel<ICountryModel>(new CountryModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
+            RegisterUtility<IMathUtility>(new MathUtility());
         }
     }
 }

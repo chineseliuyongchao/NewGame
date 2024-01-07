@@ -60,14 +60,5 @@ namespace GameQFramework
         /// <param name="length"></param>
         /// <returns></returns>
         int GenerateKey(Vector2Int pos, Vector2Int length);
-
-        /// <summary>
-        /// 获取一条线段距离一个点最近的点
-        /// </summary>
-        /// <param name="lineSegmentStart">线段起点</param>
-        /// <param name="lineSegmentEnd">线段终点</param>
-        /// <param name="point">目标点</param>
-        /// <returns></returns>
-        int PointClosestToAPointOnALineSegment(int lineSegmentStart, int lineSegmentEnd, int point);
     }
 }
