@@ -13,10 +13,12 @@ namespace GameQFramework
         private int _day;
         private int _time;
         private int _quarter;
+        private bool _timeIsPass;
 
         protected override void OnInit()
         {
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
+            _timeIsPass = true;
         }
 
         public int Year
@@ -67,6 +69,12 @@ namespace GameQFramework
                 _quarter = value;
                 this.SendEvent(new QuarterChangeEvent());
             }
+        }
+
+        public bool TimeIsPass
+        {
+            get => _timeIsPass;
+            set => _timeIsPass = value;
         }
 
         public Object SaveModel()

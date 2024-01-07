@@ -54,13 +54,42 @@ namespace GameQFramework
         }
 
         /// <summary>
-        /// 根据位置返回当前位置的节点信息
+        /// 根据网格位置返回当前位置的节点信息
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
         public PathfindingMapNode GetPathfindingMapNode(Vector2Int pos)
         {
             return _mapData[pos.x, pos.y];
+        }
+
+        /// <summary>
+        /// 根据网格位置返回最近的可通行的节点信息
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public PathfindingMapNode GetPathfindingLastMapNode(Vector2Int pos)
+        {
+            RectInt rect = new RectInt(pos.x, pos.y, 1, 1);
+            PathfindingMapNode mapNode = null;
+            while (true)
+            {
+                rect.x -= 1;
+                rect.y -= 1;
+                rect.width += 2;
+                rect.height += 2;
+                _mapData.ForEach(rect, (_, _, node) =>
+                {
+                    if (CheckPass(node))
+                    {
+                        mapNode = node;
+                    }
+                });
+                if (mapNode != null)
+                {
+                    return mapNode;
+                }
+            }
         }
 
         public bool CheckPass(PathfindingMapNode pathfindingMapNode)

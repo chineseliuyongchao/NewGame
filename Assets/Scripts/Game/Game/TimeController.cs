@@ -7,29 +7,23 @@ namespace Game.Game
 {
     public class TimeController : BaseGameController
     {
-        /// <summary>
-        /// 时间是否流逝
-        /// </summary>
-        private bool _isPass;
-
         private float _deltaTime;
 
         protected override void OnInit()
         {
             base.OnInit();
-            _isPass = true;
             _deltaTime = 0;
         }
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<TimePassEvent>(e => { _isPass = e.isPass; })
+            this.RegisterEvent<TimePassEvent>(e => { this.GetModel<IGameModel>().TimeIsPass = e.isPass; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void Update()
         {
-            if (_isPass)
+            if (this.GetModel<IGameModel>().TimeIsPass)
             {
                 _deltaTime += Time.deltaTime;
                 bool hasChange = false;

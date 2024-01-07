@@ -28,5 +28,10 @@ namespace GameQFramework
         /// 记录刻，默认从一刻开始
         /// </summary>
         public int Quarter { get; set; }
+
+        /// <summary>
+        /// 记录时间是否可以流逝
+        /// </summary>
+        public bool TimeIsPass { get; set; }
     }
 }

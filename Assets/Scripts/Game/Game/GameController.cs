@@ -13,7 +13,7 @@ namespace Game.Game
         {
             base.OnControllerStart();
             UIKit.OpenPanel<UIGameLobby>();
-            // 将寻路网格显示出来
+            // //将寻路网格显示出来
             // PathfindingMap map = this.GetModel<IMapModel>().Map;
             // int num = 0;
             // map.MapData.ForEach((i, j, value) =>

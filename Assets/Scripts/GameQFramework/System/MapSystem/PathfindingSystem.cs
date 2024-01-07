@@ -13,24 +13,33 @@ namespace GameQFramework
         }
 
         public PathfindingSingleMessage Pathfinding(Vector2 startPos, Vector2 endPos,
-            PathfindingMap map)
+            PathfindingMap map, out PathfindingResultType type)
         {
             return Pathfinding(this.GetSystem<IMapSystem>().GetGridMapPos(startPos),
-                this.GetSystem<IMapSystem>().GetGridMapPos(endPos), map);
+                this.GetSystem<IMapSystem>().GetGridMapPos(endPos), map, out type);
         }
 
         public PathfindingSingleMessage Pathfinding(Vector2Int startPos, Vector2Int endPos,
-            PathfindingMap map)
+            PathfindingMap map, out PathfindingResultType type)
         {
             if (!map.IsWithinBounds(startPos) || !map.IsWithinBounds(endPos))
             {
+                type = PathfindingResultType.DEST_CANNOT_PASS;
                 return null;
             }
 
             PathfindingMapNode startNode = map.GetPathfindingMapNode(startPos);
             PathfindingMapNode endNode = map.GetPathfindingMapNode(endPos);
+            if (endNode == null)
+            {
+                type = PathfindingResultType.DEST_CANNOT_PASS;
+                return null;
+            }
+
+            startNode ??= map.GetPathfindingLastMapNode(startPos); //如果当前位置不可通行，就寻找最近的可通行位置进行计算
             if (startNode.Equals(endNode))
             {
+                type = PathfindingResultType.DEST_NO_CHANGE;
                 return null;
             }
 
@@ -103,6 +112,7 @@ namespace GameQFramework
             }
 
             PathfindingSingleMessage pathfindingSingleMessage = new PathfindingSingleMessage(res, length);
+            type = PathfindingResultType.SUCCESS;
             return pathfindingSingleMessage;
         }
 
@@ -291,5 +301,26 @@ namespace GameQFramework
                 break;
             }
         }
+    }
+
+    /// <summary>
+    /// 寻路结果状态
+    /// </summary>
+    public enum PathfindingResultType
+    {
+        /// <summary>
+        /// 寻路成功
+        /// </summary>
+        SUCCESS,
+
+        /// <summary>
+        /// 目的地和起点在同一个网格
+        /// </summary>
+        DEST_NO_CHANGE,
+
+        /// <summary>
+        /// 目的地不可到达
+        /// </summary>
+        DEST_CANNOT_PASS
     }
 }

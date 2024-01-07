@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
 using Game.Town;
 using GameQFramework;
 using QFramework;
@@ -13,7 +12,50 @@ namespace Game.Player
     /// </summary>
     public class BasePlayer : BaseGameController
     {
-        private Sequence _sequence;
+        /// <summary>
+        /// 移动经过位置列表
+        /// </summary>
+        private List<Vector2> _movePosList;
+
+        /// <summary>
+        /// 移动结束以后得事件
+        /// </summary>
+        private MoveCloseBack _moveEndCallBack;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            _movePosList = new List<Vector2>();
+        }
+
+        private int _currentIndex;
+
+        private void Update()
+        {
+            if (this.GetModel<IGameModel>().TimeIsPass)
+            {
+                if (_currentIndex < _movePosList.Count)
+                {
+                    // 计算当前位置到目标位置的插值
+                    transform.position = Vector2.MoveTowards(transform.position, _movePosList[_currentIndex],
+                        MoveSpeed() * Time.deltaTime);
+                    // 检查是否已经接近目标位置
+                    if (Vector2.Distance(transform.position, _movePosList[_currentIndex]) < 0.1f)
+                    {
+                        // 移动到下一个目标位置
+                        _currentIndex++;
+                        // 如果已经到达最后一个位置，执行移动结束后的方法
+                        if (_currentIndex == _movePosList.Count)
+                        {
+                            if (_moveEndCallBack != null)
+                            {
+                                _moveEndCallBack();
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// 设置游戏角色的移动路径
@@ -23,26 +65,10 @@ namespace Game.Player
         /// <param name="callBack"></param>
         protected void Move(Vector2 startPos, Vector2 endPos, MoveCloseBack callBack)
         {
-            if (_sequence == null || !_sequence.active)
-            {
-                _sequence = DOTween.Sequence();
-
-                PlayerMove(startPos, endPos, callBack);
-            }
-            else if (!_sequence.IsPlaying())
-            {
-                _sequence = DOTween.Sequence();
-                PlayerMove(startPos, endPos, callBack);
-            }
-            else
-            {
-                _sequence.OnKill(() =>
-                {
-                    _sequence = DOTween.Sequence();
-                    PlayerMove(startPos, endPos, callBack);
-                });
-                _sequence.Kill();
-            }
+            _movePosList.Clear();
+            _currentIndex = 0;
+            _moveEndCallBack = callBack;
+            PlayerMove(startPos, endPos);
         }
 
         /// <summary>
@@ -50,14 +76,13 @@ namespace Game.Player
         /// </summary>
         /// <param name="startPos">角色当前地图位置</param>
         /// <param name="endPos">目标地图位置</param>
-        /// <param name="callBack"></param>
-        private void PlayerMove(Vector2 startPos, Vector2 endPos, MoveCloseBack callBack)
+        private void PlayerMove(Vector2 startPos, Vector2 endPos)
         {
             PathfindingSingleMessage message = this.GetSystem<IPathfindingSystem>()
-                .Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
+                .Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map, out PathfindingResultType type);
+            List<Vector2> meshPosList = new List<Vector2>();
             if (message != null)
             {
-                List<Vector2> meshPosList = new List<Vector2>(); //记录每一个要到达的位置
                 meshPosList.Add(this.GetSystem<IMapSystem>().GetGridMapPos(endPos));
                 for (int i = message.pathfindingResult.Count - 2; i >= 0; i--)
                 {
@@ -70,19 +95,12 @@ namespace Game.Player
                 {
                     Vector2 pos = this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent,
                         this.GetSystem<IMapSystem>().GetGridToMapPos(meshPosList[i]));
-                    _sequence.Append(transform.DOMove(pos, 1).SetEase(Ease.Linear));
+                    _movePosList.Add(pos);
                 }
             }
-            else //在同一个网格内移动
+            else if (type == PathfindingResultType.DEST_NO_CHANGE) //在同一个网格内移动
             {
-                _sequence.Append(transform
-                    .DOMove(this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent, endPos), 1)
-                    .SetEase(Ease.Linear));
-            }
-
-            if (callBack != null)
-            {
-                _sequence.AppendCallback(() => { callBack(); });
+                _movePosList.Add(this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent, endPos));
             }
         }
 
@@ -163,6 +181,15 @@ namespace Game.Player
         protected Vector2 GetStartMapPos()
         {
             return this.GetSystem<IMapSystem>().GetMapPos(transform);
+        }
+
+        /// <summary>
+        /// 获取移动速度
+        /// </summary>
+        /// <returns></returns>
+        protected float MoveSpeed()
+        {
+            return 5;
         }
     }
 }

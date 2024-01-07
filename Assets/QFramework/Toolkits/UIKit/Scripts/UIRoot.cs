@@ -1,6 +1,6 @@
 /****************************************************************************
  * Copyright (c) 2017 ~ 2020.1 liangxie
- * 
+ *
  * http://qframework.io
  * https://github.com/liangxiegame/QFramework
  *
@@ -10,10 +10,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,7 +29,7 @@ using UnityEngine.UI;
 namespace QFramework
 {
     [MonoSingletonPath("UIRoot")]
-    public class UIRoot : MonoBehaviour,ISingleton
+    public class UIRoot : MonoBehaviour, ISingleton
     {
         public Camera UICamera;
         public Canvas Canvas;
@@ -40,7 +40,7 @@ namespace QFramework
         public RectTransform Common;
         public RectTransform PopUI;
         public RectTransform CanvasPanel;
-        
+
         private static UIRoot mInstance;
 
         public static UIRoot Instance
@@ -88,7 +88,7 @@ namespace QFramework
 
         public void ScreenSpaceOverlayRenderMode()
         {
-            Canvas.renderMode = UnityEngine.RenderMode.ScreenSpaceOverlay;
+            Canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             UICamera.gameObject.SetActive(false);
         }
 
@@ -102,7 +102,6 @@ namespace QFramework
 
         public void SetLevelOfPanel(UILevel level, IPanel panel)
         {
-
             var canvas = panel.Transform.GetComponent<Canvas>();
 
             if (canvas)
@@ -131,9 +130,23 @@ namespace QFramework
             }
         }
 
+        public RectTransform GetTransform(UILevel level)
+        {
+            switch (level)
+            {
+                case UILevel.Bg:
+                    return Bg;
+                case UILevel.Common:
+                    return Common;
+                case UILevel.PopUI:
+                    return PopUI;
+            }
+
+            return CanvasPanel;
+        }
+
         public void OnSingletonInit()
         {
-            
         }
     }
 }
