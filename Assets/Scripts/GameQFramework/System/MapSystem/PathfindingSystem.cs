@@ -6,11 +6,10 @@ using UnityEngine;
 
 namespace GameQFramework
 {
-    public class PathfindingSystem: AbstractSystem, IPathfindingSystem
+    public class PathfindingSystem : AbstractSystem, IPathfindingSystem
     {
         protected override void OnInit()
         {
-            
         }
 
         public PathfindingSingleMessage Pathfinding(Vector2 startPos, Vector2 endPos,
@@ -28,7 +27,9 @@ namespace GameQFramework
                 return null;
             }
 
-            if (startPos.Equals(endPos))
+            PathfindingMapNode startNode = map.GetPathfindingMapNode(startPos);
+            PathfindingMapNode endNode = map.GetPathfindingMapNode(endPos);
+            if (startNode.Equals(endNode))
             {
                 return null;
             }
@@ -37,29 +38,28 @@ namespace GameQFramework
             List<int> openDictionaryKey = new List<int>();
             openDictionaryKey.Add(0); //从第二个位置存储
             Dictionary<int, PathfindingFindNode> closeDictionary = new Dictionary<int, PathfindingFindNode>();
-            PathfindingMapNode startNode = map.GetPathfindingMapNode(startPos);
-            PathfindingMapNode endNode = map.GetPathfindingMapNode(endPos);
             closeDictionary.Add(this.GetUtility<IGameUtility>().GenerateKey(startNode.nodeRect.position, map.MapSize()),
-                CreatePathfindingFindNode(startNode, 0, ManhattanDistance(startNode.nodeRect.center, endNode.nodeRect.center),
-                    null));
+                CreatePathfindingFindNode(startNode, 0,
+                    ManhattanDistance(startNode.nodeRect.center, endNode.nodeRect.center), null));
 
             while (true)
             {
-                PathfindingFindNode findNode = closeDictionary.Values.Last();
-                Dictionary<int, PathfindingMapNode> pathfindingMapAroundNodes = findNode.pathfindingMapNode.aroundNode;
+                PathfindingFindNode closeNode = closeDictionary.Values.Last();
+                Dictionary<int, PathfindingMapNode> pathfindingMapAroundNodes = closeNode.pathfindingMapNode.aroundNode;
                 List<int> pathfindingMapAroundNodeKey = new List<int>(pathfindingMapAroundNodes.Keys);
                 for (int i = 0; i < pathfindingMapAroundNodeKey.Count; i++)
                 {
-                    PathfindingMapNode mapNode = pathfindingMapAroundNodes[pathfindingMapAroundNodeKey[i]];
-                    int key = this.GetUtility<IGameUtility>().GenerateKey(mapNode.nodeRect.position, map.MapSize());
+                    PathfindingMapNode aroundNode = pathfindingMapAroundNodes[pathfindingMapAroundNodeKey[i]];
+                    int key = this.GetUtility<IGameUtility>().GenerateKey(aroundNode.nodeRect.position, map.MapSize());
                     if (!closeDictionary.ContainsKey(key)) //所有被加入到close字典中的都不会再被加入到open字典
                     {
                         if (OpenDictionaryAdd(openDictionary, openDictionaryKey, key,
-                                CreatePathfindingFindNode(mapNode,
-                                    AdjacentEuclideanDistance(mapNode.nodeRect.center,
-                                        findNode.pathfindingMapNode.nodeRect.center) +
-                                    findNode.lengthToStart, ManhattanDistance(mapNode.nodeRect.center, endNode.nodeRect.center),
-                                    findNode)))
+                                CreatePathfindingFindNode(aroundNode,
+                                    AdjacentEuclideanDistance(aroundNode.nodeRect.center,
+                                        closeNode.pathfindingMapNode.nodeRect.center) +
+                                    closeNode.lengthToStart,
+                                    ManhattanDistance(aroundNode.nodeRect.center, endNode.nodeRect.center),
+                                    closeNode)))
                         {
                             //只有加入了之前没有的节点才需要在list中添加新的key
                             OpenListAdd(openDictionary, openDictionaryKey, key);
@@ -74,7 +74,8 @@ namespace GameQFramework
 
                 PathfindingFindNode minNode = openDictionary[openDictionaryKey[1]];
                 CloseDictionaryAdd(closeDictionary,
-                    this.GetUtility<IGameUtility>().GenerateKey(minNode.pathfindingMapNode.nodeRect.position, map.MapSize()),
+                    this.GetUtility<IGameUtility>()
+                        .GenerateKey(minNode.pathfindingMapNode.nodeRect.position, map.MapSize()),
                     minNode);
                 OpenListAddRemove(openDictionary, openDictionaryKey);
                 if (minNode.pathfindingMapNode.nodeRect.position == endNode.nodeRect.position)

@@ -60,18 +60,19 @@ namespace GameQFramework
                     terrainType = TerrainType.CAN_PASS
                 };
                 map.MapData.ForEach(pathfindingMapNode.nodeRect,
-                    (x, y, node) => { map.MapData[x, y] = pathfindingMapNode; });
-                map.MapData.ForEach((_, _, node) =>
-                {
-                    if (map.CheckPass(node))
-                    {
-                        if (node.aroundNode == null)
-                        {
-                            node.aroundNode = map.FindAroundNode(node);
-                        }
-                    }
-                });
+                    (x, y, _) => { map.MapData[x, y] = pathfindingMapNode; });
             }
+
+            map.MapData.ForEach((_, _, node) =>
+            {
+                if (map.CheckPass(node))
+                {
+                    if (node.aroundNode == null)
+                    {
+                        map.FindAroundNode(node);
+                    }
+                }
+            });
 
             this.GetModel<IMapModel>().Map = map;
         }

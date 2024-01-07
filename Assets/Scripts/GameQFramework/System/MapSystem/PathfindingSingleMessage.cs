@@ -29,10 +29,6 @@ namespace GameQFramework
             for (int i = 0; i < pathfindingResult.Count; i++)
             {
                 toString += pathfindingResult[i].nodeRect;
-                if (length.Count > i)
-                {
-                    toString += "  " + length[i] + "  ";
-                }
             }
 
             return toString;

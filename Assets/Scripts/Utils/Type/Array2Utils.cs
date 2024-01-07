@@ -92,15 +92,15 @@ namespace Utils
         /// <param name="operate">元素要执行的方法</param>
         public void ForEach(RectInt rect, Action<int, int, T> operate)
         {
-            if (rect.x < 0 || rect.y < 0 || rect.x + rect.width > _mWidth ||
-                rect.y + rect.height > _mHeight)
+            if (rect.x < 0 || rect.y < 0 || rect.xMax > _mWidth ||
+                rect.yMax > _mHeight)
             {
                 return;
             }
 
-            for (var x = rect.x; x < rect.x + rect.width; x++)
+            for (var x = rect.x; x < rect.xMax; x++)
             {
-                for (var y = rect.y; y < rect.y + rect.height; y++)
+                for (var y = rect.y; y < rect.yMax; y++)
                 {
                     operate(x, y, _mGrid[x, y]);
                 }
@@ -114,12 +114,12 @@ namespace Utils
         /// <param name="operate">元素要执行的方法</param>
         public void ForEachAround(RectInt rect, Action<int, int, T> operate)
         {
-            for (int i = rect.x - 1; i <= rect.xMax + 1; i++)
+            for (int i = rect.x - 1; i <= rect.xMax; i++)
             {
-                for (int j = rect.y - 1; j <= rect.yMax + 1; j++)
+                for (int j = rect.y - 1; j <= rect.yMax; j++)
                 {
                     // 检查坐标 (i, j) 是否在原始的 RectInt 的周围一圈
-                    if (i < rect.x || i > rect.xMax || j < rect.y || j > rect.yMax)
+                    if (i < rect.x || i >= rect.xMax || j < rect.y || j >= rect.yMax)
                     {
                         //检查越界
                         if (i >= 0 && i < _mGrid.GetLength(0) && j >= 0 && j < _mGrid.GetLength(1))

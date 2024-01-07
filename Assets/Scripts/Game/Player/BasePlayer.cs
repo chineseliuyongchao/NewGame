@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using Game.Town;
 using GameQFramework;
 using QFramework;
@@ -56,30 +57,43 @@ namespace Game.Player
                 .Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map);
             if (message != null)
             {
-                for (int i = 0; i < message.pathfindingResult.Count - 1; i++)
+                List<Vector2> meshPosList = new List<Vector2>(); //记录每一个要到达的位置
+                meshPosList.Add(this.GetSystem<IMapSystem>().GetGridMapPos(endPos));
+                for (int i = message.pathfindingResult.Count - 2; i >= 0; i--)
                 {
-                    Vector3 pos = this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent,
-                        this.GetSystem<IMapSystem>().GetGridToMapPos(MoveNextPos(message.pathfindingResult[i].nodeRect,
-                            message.pathfindingResult[i + 1].nodeRect)));
-                    _sequence.Append(transform.DOMove(pos, 0.1f * message.length[i]).SetEase(Ease.Linear));
+                    Vector2 pos = MoveNextPos(message.pathfindingResult[i].nodeRect,
+                        message.pathfindingResult[i + 1].nodeRect, meshPosList[0]);
+                    meshPosList.Insert(0, pos);
                 }
 
-                _sequence.Append(transform.DOMove(endPos, 1).SetEase(Ease.Linear));
-
-                if (callBack != null)
+                for (int i = 0; i < meshPosList.Count; i++)
                 {
-                    _sequence.AppendCallback(() => { callBack(); });
+                    Vector2 pos = this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent,
+                        this.GetSystem<IMapSystem>().GetGridToMapPos(meshPosList[i]));
+                    _sequence.Append(transform.DOMove(pos, 1).SetEase(Ease.Linear));
                 }
+            }
+            else //在同一个网格内移动
+            {
+                _sequence.Append(transform
+                    .DOMove(this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent, endPos), 1)
+                    .SetEase(Ease.Linear));
+            }
+
+            if (callBack != null)
+            {
+                _sequence.AppendCallback(() => { callBack(); });
             }
         }
 
         /// <summary>
-        /// 获取要到达的下一个网格位置（当前节点和下一个要到达的节点的交界处）
+        /// 获取当前要达到的网格位置（当前节点和下一个要到达的节点的交界处）
         /// </summary>
         /// <param name="nodeRect">当前到达的节点</param>
         /// <param name="nextNodeRect">下一个要到达的节点</param>
+        /// <param name="nextPos">下一个达到的网格位置，当前位置要尽可能离下一个网格位置更近</param>
         /// <returns></returns>
-        private Vector2 MoveNextPos(RectInt nodeRect, RectInt nextNodeRect)
+        private Vector2 MoveNextPos(RectInt nodeRect, RectInt nextNodeRect, Vector2 nextPos)
         {
             if (nodeRect.xMax == nextNodeRect.x && nodeRect.y == nextNodeRect.yMax) //下一个节点在当前节点的右下角
             {
@@ -103,73 +117,33 @@ namespace Game.Player
 
             if (nodeRect.xMax == nextNodeRect.x) //下一个节点在当前节点的右边
             {
-                float posY;
-                if (nodeRect.height > nextNodeRect.height)
-                {
-                    posY = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nextNodeRect.y,
-                        nextNodeRect.yMax, (nodeRect.y + nodeRect.yMax) / 2);
-                }
-                else
-                {
-                    posY = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.y,
-                        nodeRect.yMax, (nextNodeRect.y + nextNodeRect.yMax) / 2);
-                }
-
+                float posY = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.y,
+                    nodeRect.yMax, (int)nextPos.y);
                 return new Vector2(nodeRect.xMax, posY);
             }
 
             if (nodeRect.x == nextNodeRect.xMax) //下一个节点在当前节点的左边
             {
-                float posY;
-                if (nodeRect.height > nextNodeRect.height)
-                {
-                    posY = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nextNodeRect.y,
-                        nextNodeRect.yMax, (nodeRect.y + nodeRect.yMax) / 2);
-                }
-                else
-                {
-                    posY = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.y,
-                        nodeRect.yMax, (nextNodeRect.y + nextNodeRect.yMax) / 2);
-                }
-
+                float posY = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.y,
+                    nodeRect.yMax, (int)nextPos.y);
                 return new Vector2(nodeRect.x, posY);
             }
 
             if (nodeRect.yMax == nextNodeRect.y) //下一个节点在当前节点的上边
             {
-                float posX;
-                if (nodeRect.width > nextNodeRect.width)
-                {
-                    posX = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nextNodeRect.x,
-                        nextNodeRect.xMax, (nodeRect.x + nodeRect.xMax) / 2);
-                }
-                else
-                {
-                    posX = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.x,
-                        nodeRect.xMax, (nextNodeRect.x + nextNodeRect.xMax) / 2);
-                }
-
+                float posX = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.x,
+                    nodeRect.xMax, (int)nextPos.x);
                 return new Vector2(posX, nodeRect.yMax);
             }
 
             if (nodeRect.y == nextNodeRect.yMax) //下一个节点在当前节点的下边
             {
-                float posX;
-                if (nodeRect.width > nextNodeRect.width)
-                {
-                    posX = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nextNodeRect.x,
-                        nextNodeRect.xMax, (nodeRect.x + nodeRect.xMax) / 2);
-                }
-                else
-                {
-                    posX = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.x,
-                        nodeRect.xMax, (nextNodeRect.x + nextNodeRect.xMax) / 2);
-                }
-
+                float posX = this.GetUtility<IGameUtility>().PointClosestToAPointOnALineSegment(nodeRect.x,
+                    nodeRect.xMax, (int)nextPos.x);
                 return new Vector2(posX, nodeRect.y);
             }
 
-            // 如果两个矩形不相邻，返回 Vector2.zero
+            // 如果两个矩形不相邻，返回 Vector2.zero，理论上不可能
             return Vector2.zero;
         }
 

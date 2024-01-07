@@ -34,23 +34,23 @@ namespace GameQFramework
         }
 
         /// <summary>
-        /// 获取一个节点的周围八个节点
+        /// 获取一个节点的周围所有可通行节点
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public Dictionary<int, PathfindingMapNode> FindAroundNode(PathfindingMapNode node)
+        public void FindAroundNode(PathfindingMapNode node)
         {
-            Dictionary<int, PathfindingMapNode> surroundingElements = new Dictionary<int, PathfindingMapNode>();
-            _mapData.ForEachAround(node.nodeRect, (i, j, aroundNode) =>
+            Dictionary<int, PathfindingMapNode> aroundNodeS = new Dictionary<int, PathfindingMapNode>();
+            _mapData.ForEachAround(node.nodeRect, (_, _, aroundNode) =>
             {
                 if (CheckPass(aroundNode))
                 {
-                    int key = this.GetUtility<IGameUtility>().GenerateKey(new Vector2Int(i, j), MapSize());
-                    surroundingElements.TryAdd(key, aroundNode);
+                    int key = this.GetUtility<IGameUtility>()
+                        .GenerateKey(new Vector2Int(aroundNode.nodeRect.x, aroundNode.nodeRect.y), MapSize());
+                    aroundNodeS.TryAdd(key, aroundNode);
                 }
             });
-
-            return surroundingElements;
+            node.aroundNode = aroundNodeS;
         }
 
         /// <summary>
