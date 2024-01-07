@@ -14,11 +14,11 @@ namespace GameQFramework
         private int _time;
         private int _quarter;
         private bool _timeIsPass;
+        private bool _hasShowDialog;
 
         protected override void OnInit()
         {
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
-            _timeIsPass = true;
         }
 
         public int Year
@@ -73,8 +73,14 @@ namespace GameQFramework
 
         public bool TimeIsPass
         {
-            get => _timeIsPass;
+            get => _timeIsPass && !_hasShowDialog; //时间可以流逝并且不能打开弹窗
             set => _timeIsPass = value;
+        }
+
+        public bool HasShowDialog
+        {
+            get => _hasShowDialog;
+            set => _hasShowDialog = value;
         }
 
         public Object SaveModel()
@@ -106,6 +112,12 @@ namespace GameQFramework
             _day = GameTimeConstant.INIT_DAY;
             _time = GameTimeConstant.INIT_TIME;
             _quarter = GameTimeConstant.INIT_QUARTER;
+        }
+
+        public void NewArchiveInitData()
+        {
+            _timeIsPass = false;
+            _hasShowDialog = false;
         }
 
         public string ModelName()

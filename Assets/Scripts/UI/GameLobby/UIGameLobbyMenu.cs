@@ -18,6 +18,7 @@ namespace UI
             mData = uiData as UIGameLobbyMenuData ?? new UIGameLobbyMenuData();
             // please add init code here
             base.OnInit(uiData);
+            this.SendCommand(new HasShowDialogCommand(true));
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -25,7 +26,6 @@ namespace UI
             mData = uiData as UIGameLobbyMenuData ?? new UIGameLobbyMenuData();
             // please add open code here
             base.OnOpen(uiData);
-            this.SendCommand(new TimePassCommand(false));
         }
 
         protected override void OnShow()
@@ -41,7 +41,7 @@ namespace UI
         protected override void OnClose()
         {
             base.OnClose();
-            this.SendCommand(new TimePassCommand(true));
+            this.SendCommand(new HasShowDialogCommand(false));
         }
 
         protected override void OnListenButton()

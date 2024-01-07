@@ -47,6 +47,7 @@ namespace GameQFramework
                 for (int i = 0; i < _saveModels.Count; i++)
                 {
                     _saveModels[i].InitializeModel();
+                    _saveModels[i].NewArchiveInitData();
                 }
             }
             else
@@ -65,6 +66,7 @@ namespace GameQFramework
                 {
                     string key = _saveModels[i].ModelName();
                     _saveModels[i].LoadModel(dataDictionary[key]);
+                    _saveModels[i].NewArchiveInitData();
                 }
 
                 file.Close();

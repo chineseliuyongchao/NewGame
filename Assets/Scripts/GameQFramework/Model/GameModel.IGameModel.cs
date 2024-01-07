@@ -33,5 +33,10 @@ namespace GameQFramework
         /// 记录时间是否可以流逝
         /// </summary>
         public bool TimeIsPass { get; set; }
+
+        /// <summary>
+        /// 记录是否可以打开主菜单（防止按键连续打开）
+        /// </summary>
+        public bool HasShowDialog { get; set; }
     }
 }

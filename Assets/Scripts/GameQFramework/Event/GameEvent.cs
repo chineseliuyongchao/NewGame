@@ -60,4 +60,17 @@
             this.isPass = isPass;
         }
     }
+
+    /// <summary>
+    /// 是否展示了弹窗
+    /// </summary>
+    public class HasShowDialogEvent
+    {
+        public bool hasShow;
+
+        public HasShowDialogEvent(bool hasShow)
+        {
+            this.hasShow = hasShow;
+        }
+    }
 }

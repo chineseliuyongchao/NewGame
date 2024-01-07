@@ -45,6 +45,10 @@ namespace UI
         protected override void OnListenButton()
         {
             menuButton.onClick.AddListener(() => { UIKit.OpenPanel<UIGameLobbyMenu>(); });
+            timeControlButton.onClick.AddListener(() =>
+            {
+                this.SendCommand(new TimePassCommand(!this.GetModel<IGameModel>().TimeIsPass));
+            });
         }
 
         protected override void OnListenEvent()
@@ -52,17 +56,35 @@ namespace UI
             this.RegisterEvent<ChangeTimeEvent>(_ => { UpdateTime(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<ChangeToMenuSceneEvent>(_ => { CloseSelf(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<TimePassEvent>(e => { UpdateTimePass(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<HasShowDialogEvent>(e => { UpdateTimePass(); })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
         private void InitUI()
         {
             UpdateTime();
+            UpdateTimePass();
         }
 
         private void UpdateTime()
         {
             timeView.text = this.GetModel<IGameModel>().Year + "年" + this.GetModel<IGameModel>().Month + "月" +
                             this.GetModel<IGameModel>().Day + "日" + this.GetModel<IGameModel>().Time + "时";
+        }
+
+        private void UpdateTimePass()
+        {
+            if (this.GetModel<IGameModel>().TimeIsPass)
+            {
+                timePass.gameObject.SetActive(true);
+                timePause.gameObject.SetActive(false);
+            }
+            else
+            {
+                timePass.gameObject.SetActive(false);
+                timePause.gameObject.SetActive(true);
+            }
         }
     }
 }

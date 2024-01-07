@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:c2397838-9c60-43f2-b122-437f9dc11b61
+	// Generate Id:83fd43f0-52ba-47b9-88ee-a5b140e7f4b2
 	public partial class UIGameLobby
 	{
 		public const string Name = "UIGameLobby";
@@ -14,6 +14,12 @@ namespace UI
 		private TMPro.TextMeshProUGUI timeView;
 		[SerializeField]
 		private UnityEngine.UI.Button menuButton;
+		[SerializeField]
+		private UnityEngine.UI.Button timeControlButton;
+		[SerializeField]
+		private UnityEngine.UI.Image timePause;
+		[SerializeField]
+		private UnityEngine.UI.Image timePass;
 		
 		private UIGameLobbyData mPrivateData = null;
 		
@@ -21,6 +27,9 @@ namespace UI
 		{
 			timeView = null;
 			menuButton = null;
+			timeControlButton = null;
+			timePause = null;
+			timePass = null;
 			
 			mData = null;
 		}

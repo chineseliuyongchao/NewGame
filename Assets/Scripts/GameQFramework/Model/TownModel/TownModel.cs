@@ -71,6 +71,10 @@ namespace GameQFramework
             }
         }
 
+        public void NewArchiveInitData()
+        {
+        }
+
         public string ModelName()
         {
             return "TownData";

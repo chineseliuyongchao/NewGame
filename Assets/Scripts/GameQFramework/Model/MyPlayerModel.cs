@@ -38,6 +38,10 @@ namespace GameQFramework
             _accessTown = 0;
         }
 
+        public void NewArchiveInitData()
+        {
+        }
+
         public string ModelName()
         {
             return "MyPlayerData";

@@ -24,6 +24,11 @@ namespace GameQFramework
         void InitializeModel();
 
         /// <summary>
+        /// 初始化新存档需要初始化但是不需要保存在存档中的数据
+        /// </summary>
+        void NewArchiveInitData();
+
+        /// <summary>
         /// 用于存取数据时的名字
         /// </summary>
         /// <returns></returns>

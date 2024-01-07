@@ -60,7 +60,27 @@ namespace GameQFramework
 
         protected override void OnExecute()
         {
+            this.GetModel<IGameModel>().TimeIsPass = _isPass;
             this.SendEvent(new TimePassEvent(_isPass));
+        }
+    }
+
+    /// <summary>
+    /// 是否展示了弹窗
+    /// </summary>
+    public class HasShowDialogCommand : AbstractCommand
+    {
+        private readonly bool _hasShow;
+
+        public HasShowDialogCommand(bool hasShow)
+        {
+            _hasShow = hasShow;
+        }
+
+        protected override void OnExecute()
+        {
+            this.GetModel<IGameModel>().HasShowDialog = _hasShow;
+            this.SendEvent(new HasShowDialogEvent(_hasShow));
         }
     }
 }

@@ -15,12 +15,6 @@ namespace Game.Game
             _deltaTime = 0;
         }
 
-        protected override void OnListenEvent()
-        {
-            this.RegisterEvent<TimePassEvent>(e => { this.GetModel<IGameModel>().TimeIsPass = e.isPass; })
-                .UnRegisterWhenGameObjectDestroyed(gameObject);
-        }
-
         private void Update()
         {
             if (this.GetModel<IGameModel>().TimeIsPass)

@@ -36,5 +36,21 @@ namespace Game.Game
             // });
             // Debug.Log("网格数量：" + num);
         }
+
+        private void Update()
+        {
+            if (!this.GetModel<IGameModel>().HasShowDialog) //没有打开弹窗时才能监听按键事件
+            {
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    UIKit.OpenPanel<UIGameLobbyMenu>();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    this.SendCommand(new TimePassCommand(!this.GetModel<IGameModel>().TimeIsPass));
+                }
+            }
+        }
     }
 }

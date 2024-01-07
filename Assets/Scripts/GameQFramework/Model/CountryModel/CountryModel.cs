@@ -61,7 +61,7 @@ namespace GameQFramework
             List<int> countryKey = new List<int>(_countryCommonData.Keys);
             for (int i = 0; i < countryKey.Count; i++)
             {
-                _countryData.Add(countryKey[i],new CountryData(_countryCommonData[countryKey[i]]));
+                _countryData.Add(countryKey[i], new CountryData(_countryCommonData[countryKey[i]]));
             }
 
             Dictionary<int, FamilyCommonData> familyCommonDataS = this.GetModel<IFamilyModel>().FamilyCommonData;
@@ -79,6 +79,10 @@ namespace GameQFramework
                 TownCommonData townCommonData = townCommonDataS[townKey[i]];
                 _countryData[townCommonData.CountryId].countryTownS.Add(townCommonData.ID);
             }
+        }
+
+        public void NewArchiveInitData()
+        {
         }
 
         public string ModelName()
