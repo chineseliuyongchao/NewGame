@@ -15,7 +15,13 @@ namespace Editor
             Clear();
             UnityEngine.Object.DestroyImmediate(_editor);
             _editor = UnityEditor.Editor.CreateEditor(nodeView.baseNode);
-            IMGUIContainer container = new IMGUIContainer(() => { _editor.OnInspectorGUI(); });
+            IMGUIContainer container = new IMGUIContainer(() =>
+            {
+                if (_editor.target)
+                {
+                    _editor.OnInspectorGUI();
+                }
+            });
             Add(container);
         }
     }

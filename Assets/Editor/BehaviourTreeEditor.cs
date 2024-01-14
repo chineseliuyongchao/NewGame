@@ -1,5 +1,6 @@
 using Game.BehaviourTree;
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,6 +16,20 @@ namespace Editor
         {
             BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();
             wnd.titleContent = new GUIContent("BehaviourTreeEditor");
+        }
+
+        [OnOpenAsset]
+        public static bool OnOpenAsset(int instanceId, int line)
+        {
+            // 检查打开的对象是否为 BehaviourTree 类型
+            if (Selection.activeObject is BehaviourTree)
+            {
+                // 如果是，调用 OpenWidow 方法打开自定义窗口
+                OpenWidow();
+                return true;
+            }
+
+            return false;
         }
 
         public void CreateGUI()

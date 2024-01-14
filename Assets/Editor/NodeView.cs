@@ -1,7 +1,9 @@
 ﻿using System;
 using Game.BehaviourTree;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Editor
 {
@@ -12,7 +14,7 @@ namespace Editor
         public Port input;
         public Port output;
 
-        public NodeView(BaseNode baseNode)
+        public NodeView(BaseNode baseNode) : base("Assets/Editor/NodeView.uxml")
         {
             this.baseNode = baseNode;
             title = baseNode.name;
@@ -23,6 +25,7 @@ namespace Editor
 
             CreateInputPorts();
             CreateOutputPorts();
+            SetupClasses();
         }
 
         public sealed override string title
@@ -34,8 +37,11 @@ namespace Editor
         public override void SetPosition(Rect newPos)
         {
             base.SetPosition(newPos);
+            //告诉 Unity 的撤销系统记录 baseNode 对象的状态。如果在之后的操作中需要撤销，Unity 将回滚到这个记录的状态。"Behaviour Tree (Set Position)" 是记录的名称，用于标识这个操作在撤销列表中的显示。
+            Undo.RecordObject(baseNode, "Behaviour Tree (SetPosition)");
             baseNode.position.x = newPos.xMin;
             baseNode.position.y = newPos.yMin;
+            EditorUtility.SetDirty(baseNode);
         }
 
         /// <summary>
@@ -45,15 +51,15 @@ namespace Editor
         {
             if (baseNode is BaseActionNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (baseNode is BaseCompositeNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (baseNode is BaseDecoratorNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
             else if (baseNode is RootNode)
             {
@@ -62,6 +68,8 @@ namespace Editor
             if (input != null)
             {
                 input.portName = "";
+                //设置 input 元素的子元素排列方向为纵向列（从上到下）。
+                input.style.flexDirection = FlexDirection.Column;
                 inputContainer.Add(input);
             }
         }
@@ -76,21 +84,50 @@ namespace Editor
             }
             else if (baseNode is BaseCompositeNode)
             {
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
             }
             else if (baseNode is BaseDecoratorNode)
             {
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
             else if (baseNode is RootNode)
             {
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
 
             if (output != null)
             {
                 output.portName = "";
+                //设置 output 元素的子元素排列方向为纵向列的反向（从下到上）。
+                output.style.flexDirection = FlexDirection.ColumnReverse;
                 outputContainer.Add(output);
+            }
+        }
+
+        /// <summary>
+        /// 设置节点视图的样式类别，用于样式化不同类型的节点。
+        /// </summary>
+        private void SetupClasses()
+        {
+            // 如果节点是基础动作节点
+            if (baseNode is BaseActionNode)
+            {
+                AddToClassList("action"); // 将 "action" 样式类添加到节点视图中
+            }
+            // 如果节点是基础组合节点
+            else if (baseNode is BaseCompositeNode)
+            {
+                AddToClassList("composite"); // 将 "composite" 样式类添加到节点视图中
+            }
+            // 如果节点是基础装饰节点
+            else if (baseNode is BaseDecoratorNode)
+            {
+                AddToClassList("decorator"); // 将 "decorator" 样式类添加到节点视图中
+            }
+            // 如果节点是根节点
+            else if (baseNode is RootNode)
+            {
+                AddToClassList("root"); // 将 "root" 样式类添加到节点视图中
             }
         }
 

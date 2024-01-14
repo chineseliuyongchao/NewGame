@@ -28,6 +28,14 @@ namespace Editor
 
             var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
             styleSheets.Add(styleSheet);
+
+            Undo.undoRedoPerformed += OnUndoRedo;
+        }
+
+        private void OnUndoRedo()
+        {
+            PopulateView(_tree);
+            AssetDatabase.SaveAssets();
         }
 
         private NodeView FindNodeView(BaseNode node)
