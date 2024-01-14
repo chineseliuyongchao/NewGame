@@ -7,7 +7,7 @@ using Excel;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace EditorUtils
+namespace Editor
 {
     public abstract class Generator
     {

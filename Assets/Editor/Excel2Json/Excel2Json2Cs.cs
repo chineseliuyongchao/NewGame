@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace EditorUtils
+namespace Editor
 {
     public class GenExcel2Json2Cs : EditorWindow
     {

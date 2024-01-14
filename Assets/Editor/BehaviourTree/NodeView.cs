@@ -14,7 +14,7 @@ namespace Editor
         public Port input;
         public Port output;
 
-        public NodeView(BaseNode baseNode) : base("Assets/Editor/NodeView.uxml")
+        public NodeView(BaseNode baseNode) : base("Assets/Editor/BehaviourTree/NodeView.uxml")
         {
             this.baseNode = baseNode;
             title = baseNode.name;

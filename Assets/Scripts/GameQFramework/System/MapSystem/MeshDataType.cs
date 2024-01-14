@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EditorUtils.MapToMesh
+namespace GameQFramework
 {
     /// <summary>
     /// 用于保存寻路节点的对象

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorUtils.MapToMesh
+namespace Editor
 {
     public class MapToMesh : EditorWindow
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace EditorUtils.MapToMesh
+namespace Editor
 {
     /// <summary>
     /// 地图图片->网格图

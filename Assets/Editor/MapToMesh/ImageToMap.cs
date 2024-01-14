@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using Utils.Constant;
 
-namespace EditorUtils.MapToMesh
+namespace Editor
 {
     /// <summary>
     /// 根据网格图片获取地图信息

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Game.BehaviourTree
@@ -18,16 +20,15 @@ namespace Game.BehaviourTree
         /// 更新行为
         /// </summary>
         /// <returns></returns>
-        public BehaviourTreeState Update()
+        public void Update()
         {
             if (rootNode.behaviourTreeState == BehaviourTreeState.RUNNING)
             {
                 treeState = rootNode.Update();
             }
-
-            return treeState;
         }
 
+#if UNITY_EDITOR
         public BaseNode CreateNode(System.Type type)
         {
             BaseNode node = CreateInstance(type) as BaseNode;
@@ -37,7 +38,7 @@ namespace Game.BehaviourTree
                 node.guid = GUID.Generate().ToString();
                 Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
                 nodes.Add(node);
-                if (!Application.isPlaying)//游戏运行时不能创建节点
+                if (!Application.isPlaying) //游戏运行时不能创建节点
                 {
                     AssetDatabase.AddObjectToAsset(node, this);
                 }
@@ -112,6 +113,7 @@ namespace Game.BehaviourTree
                 EditorUtility.SetDirty(compositeNode);
             }
         }
+#endif
 
         public List<BaseNode> GetChildren(BaseNode parent)
         {

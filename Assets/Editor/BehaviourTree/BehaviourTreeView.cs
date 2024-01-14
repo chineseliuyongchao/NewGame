@@ -26,7 +26,7 @@ namespace Editor
             this.AddManipulator(new SelectionDragger()); //添加选择拖拽器
             this.AddManipulator(new RectangleSelector()); //添加矩形选择器
 
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTreeEditor.uss");
+            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
             styleSheets.Add(styleSheet);
 
             Undo.undoRedoPerformed += OnUndoRedo;
