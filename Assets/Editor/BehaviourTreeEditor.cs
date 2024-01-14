@@ -52,18 +52,70 @@ namespace Editor
             OnSelectionChange();
         }
 
+        private void OnEnable()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeStateCHanged;
+            EditorApplication.playModeStateChanged += OnPlayModeStateCHanged;
+        }
+
+        private void OnDisable()
+        {
+            EditorApplication.playModeStateChanged -= OnPlayModeStateCHanged;
+        }
+
+        private void OnPlayModeStateCHanged(PlayModeStateChange obj)
+        {
+            switch (obj)
+            {
+                case PlayModeStateChange.EnteredEditMode:
+                    OnSelectionChange();
+                    break;
+                case PlayModeStateChange.ExitingEditMode:
+                    break;
+                case PlayModeStateChange.EnteredPlayMode:
+                    OnSelectionChange();
+                    break;
+                case PlayModeStateChange.ExitingPlayMode:
+                    break;
+            }
+        }
+
         private void OnSelectionChange()
         {
             BehaviourTree tree = Selection.activeObject as BehaviourTree;
-            if (tree && AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
+            if (!tree)
             {
-                _treeView.PopulateView(tree);
+                if (Selection.activeGameObject)
+                {
+                    IGetBehaviourTree getTree = Selection.activeGameObject.GetComponent<IGetBehaviourTree>();
+                    if (getTree != null)
+                    {
+                        tree = getTree.GetTree();
+                    }
+                }
+            }
+
+            if (tree)
+            {
+                if (Application.isPlaying)
+                {
+                    _treeView.PopulateView(tree);
+                }
+                else if (AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
+                {
+                    _treeView.PopulateView(tree);
+                }
             }
         }
 
         private void OnNodeSelectionChanged(NodeView nodeView)
         {
             _inspectorView.UpdateSelection(nodeView);
+        }
+
+        private void OnInspectorUpdate()
+        {
+            _treeView?.UpdateNodeState();
         }
     }
 }

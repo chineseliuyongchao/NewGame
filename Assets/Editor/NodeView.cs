@@ -136,5 +136,45 @@ namespace Editor
             base.OnSelected();
             onNodeSelected?.Invoke(this);
         }
+
+        public void SortChildren()
+        {
+            BaseCompositeNode compositeNode = baseNode as BaseCompositeNode;
+            if (compositeNode)
+            {
+                compositeNode.children.Sort(SortByHorizontalPosition);
+            }
+        }
+
+        private int SortByHorizontalPosition(BaseNode left, BaseNode right)
+        {
+            return left.position.x < right.position.x ? -1 : 1;
+        }
+
+        public void UpdateState()
+        {
+            RemoveFromClassList("running");
+            RemoveFromClassList("failure");
+            RemoveFromClassList("success");
+            if (Application.isPlaying)
+            {
+                switch (baseNode.behaviourTreeState)
+                {
+                    case BehaviourTreeState.RUNNING:
+                        if (baseNode.started)
+                        {
+                            AddToClassList("running");
+                        }
+
+                        break;
+                    case BehaviourTreeState.FAILURE:
+                        AddToClassList("failure");
+                        break;
+                    case BehaviourTreeState.SUCCESS:
+                        AddToClassList("success");
+                        break;
+                }
+            }
+        }
     }
 }

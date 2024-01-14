@@ -134,6 +134,17 @@ namespace Editor
                 });
             }
 
+            if (graphViewChange.movedElements != null)
+            {
+                nodes.ForEach(n =>
+                {
+                    if (n is NodeView nodeView)
+                    {
+                        nodeView.SortChildren();
+                    }
+                });
+            }
+
             // 返回经过处理后的 GraphViewChange 对象
             return graphViewChange;
         }
@@ -191,6 +202,17 @@ namespace Editor
             NodeView nodeView = new NodeView(node);
             nodeView.onNodeSelected = onNodeSelected;
             AddElement(nodeView);
+        }
+
+        public void UpdateNodeState()
+        {
+            nodes.ForEach(n =>
+            {
+                if (n is NodeView nodeView)
+                {
+                    nodeView.UpdateState();
+                }
+            });
         }
     }
 }

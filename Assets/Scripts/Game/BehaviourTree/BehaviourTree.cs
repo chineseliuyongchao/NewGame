@@ -37,7 +37,11 @@ namespace Game.BehaviourTree
                 node.guid = GUID.Generate().ToString();
                 Undo.RecordObject(this, "Behaviour Tree (CreateNode)");
                 nodes.Add(node);
-                AssetDatabase.AddObjectToAsset(node, this);
+                if (!Application.isPlaying)//游戏运行时不能创建节点
+                {
+                    AssetDatabase.AddObjectToAsset(node, this);
+                }
+
                 Undo.RegisterCreatedObjectUndo(node, "Behaviour Tree (CreateNode)");
                 AssetDatabase.SaveAssets();
                 return node;
@@ -134,10 +138,40 @@ namespace Game.BehaviourTree
             return children;
         }
 
+        /// <summary>
+        /// 递归遍历行为树的节点，并对每个节点执行指定的操作。
+        /// </summary>
+        /// <param name="node">当前要遍历的节点</param>
+        /// <param name="visiter">要执行的操作</param>
+        private void Traverse(BaseNode node, System.Action<BaseNode> visiter)
+        {
+            // 如果节点不为空
+            if (node)
+            {
+                // 执行指定操作
+                visiter.Invoke(node);
+                // 获取当前节点的子节点列表
+                var children = GetChildren(node);
+                // 递归遍历子节点并执行相同的操作
+                children.ForEach(n => Traverse(n, visiter));
+            }
+        }
+
+        /// <summary>
+        /// 克隆整个行为树。
+        /// </summary>
+        /// <returns>克隆后的行为树</returns>
         public BehaviourTree Clone()
         {
+            // 克隆当前行为树实例
             BehaviourTree tree = Instantiate(this);
+            // 克隆根节点，并设置为新行为树的根节点
             tree.rootNode = tree.rootNode.Clone();
+            // 初始化新行为树的节点列表
+            tree.nodes = new List<BaseNode>();
+            // 使用 Traverse 方法遍历整个行为树，将每个节点添加到新行为树的节点列表中
+            Traverse(tree.rootNode, n => { tree.nodes.Add(n); });
+            // 返回克隆后的行为树
             return tree;
         }
     }

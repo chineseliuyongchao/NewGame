@@ -1,3 +1,4 @@
+using Game.BehaviourTree;
 using GameQFramework;
 using QFramework;
 using UI;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Game.Game
 {
-    public class GameController : BaseGameController
+    public class GameController : BaseGameController, IGetBehaviourTree
     {
         public GameObject meshPrefab;
         public BehaviourTree.BehaviourTree behaviourTree;
@@ -60,6 +61,11 @@ namespace Game.Game
             }
 
             behaviourTree.Update();
+        }
+
+        public BehaviourTree.BehaviourTree GetTree()
+        {
+            return behaviourTree;
         }
     }
 }

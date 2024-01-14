@@ -96,3 +96,23 @@
     background-color: rgba(255, 230, 109, 255);
     min-height: 20px;
 }
+
+#noded-state {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.running #noded-state {
+    background-color: rgba(27, 153, 139, 255);
+}
+
+.failure #noded-state {
+    background-color: rgba(46, 41, 78, 255);
+}
+
+.success #noded-state {
+    background-color: rgba(231, 29, 54, 255);
+}
