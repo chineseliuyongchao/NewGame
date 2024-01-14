@@ -8,6 +8,13 @@ namespace Game.Game
     public class GameController : BaseGameController
     {
         public GameObject meshPrefab;
+        public BehaviourTree.BehaviourTree behaviourTree;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            behaviourTree = behaviourTree.Clone();
+        }
 
         protected override void OnControllerStart()
         {
@@ -51,6 +58,8 @@ namespace Game.Game
                     this.SendCommand(new TimePassCommand(!this.GetModel<IGameModel>().TimeIsPass));
                 }
             }
+
+            behaviourTree.Update();
         }
     }
 }

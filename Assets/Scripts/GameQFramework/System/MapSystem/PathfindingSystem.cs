@@ -86,7 +86,7 @@ namespace GameQFramework
                     this.GetUtility<IGameUtility>()
                         .GenerateKey(minNode.pathfindingMapNode.nodeRect.position, map.MapSize()),
                     minNode);
-                OpenListAddRemove(openDictionary, openDictionaryKey);
+                OpenListRemove(openDictionary, openDictionaryKey);
                 if (minNode.pathfindingMapNode.nodeRect.position == endNode.nodeRect.position)
                 {
                     break;
@@ -233,7 +233,7 @@ namespace GameQFramework
         /// <summary>
         /// 二叉堆移除key值（直接移除第二个，第一个占位）
         /// </summary>
-        private void OpenListAddRemove(Dictionary<int, PathfindingFindNode> dictionary, List<int> list)
+        private void OpenListRemove(Dictionary<int, PathfindingFindNode> dictionary, List<int> list)
         {
             int count = list.Count - 1;
             dictionary.Remove(list[1]); //最小的值被去除，在字典中移除对应值

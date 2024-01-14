@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshPrefab: {fileID: 629630012268418067, guid: 679099ec6788e80468a7483f77a1b6bc, type: 3}
+  behaviourTree: {fileID: 11400000, guid: c67791a21ea7fc744a2a569dc983a603, type: 2}
 --- !u!114 &1761946154
 MonoBehaviour:
   m_ObjectHideFlags: 0
