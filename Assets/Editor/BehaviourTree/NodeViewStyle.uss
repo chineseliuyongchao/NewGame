@@ -1,10 +1,10 @@
 #node-border {
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
     background-color: rgb(56, 56, 56);
-    border-left-color: rgba(32, 32, 32, 255);
-    border-right-color: rgba(32, 32, 32, 255);
-    border-top-color: rgba(32, 32, 32, 255);
-    border-bottom-color: rgba(32, 32, 32, 255);
+    border-left-color: rgb(32, 32, 32);
+    border-right-color: rgb(32, 32, 32);
+    border-top-color: rgb(32, 32, 32);
+    border-bottom-color: rgb(32, 32, 32);
     border-left-width: 1px;
     border-right-width: 1px;
     border-top-width: 1px;
@@ -20,10 +20,10 @@
 }
 
 #selection-border {
-    border-left-color: rgba(0, 134, 255, 255);
-    border-right-color: rgba(0, 134, 255, 255);
-    border-top-color: rgba(0, 134, 255, 255);
-    border-bottom-color: rgba(0, 134, 255, 255);
+    border-left-color: rgb(0, 134, 255);
+    border-right-color: rgb(0, 134, 255);
+    border-top-color: rgb(0, 134, 255);
+    border-bottom-color: rgb(0, 134, 255);
     border-left-width: 0;
     border-right-width: 0;
     border-top-width: 0;
@@ -81,19 +81,19 @@
 }
 
 .action #input {
-    background-color: rgba(255, 107, 107, 255);
+    background-color: rgb(255, 107, 107);
 }
 
 .composite #input {
-    background-color: rgba(26, 83, 92, 255);
+    background-color: rgb(26, 83, 92);
 }
 
 .decorator #input {
-    background-color: rgba(78, 205, 196, 255);
+    background-color: rgb(78, 205, 196);
 }
 
 .root #input {
-    background-color: rgba(255, 230, 109, 255);
+    background-color: rgb(255, 230, 109);
     min-height: 20px;
 }
 
@@ -106,13 +106,17 @@
 }
 
 .running #noded-state {
-    background-color: rgba(27, 153, 139, 255);
+    background-color: rgb(27, 153, 139);
 }
 
 .failure #noded-state {
-    background-color: rgba(46, 41, 78, 255);
+    background-color: rgb(46, 41, 78);
 }
 
 .success #noded-state {
-    background-color: rgba(231, 29, 54, 255);
+    background-color: rgb(231, 29, 54);
+}
+
+.condition #input {
+    background-color: rgba(46, 41, 78, 255);
 }

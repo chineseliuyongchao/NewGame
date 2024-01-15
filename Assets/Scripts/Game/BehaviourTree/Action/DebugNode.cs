@@ -5,7 +5,7 @@ namespace Game.BehaviourTree
     /// <summary>
     /// 输出日志的节点
     /// </summary>
-    public class PrintNode : BaseActionNode
+    public class DebugNode : BaseActionNode
     {
         public string message;
 

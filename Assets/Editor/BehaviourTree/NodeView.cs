@@ -53,6 +53,10 @@ namespace Editor
             {
                 input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }
+            else if (baseNode is BaseConditionNode)
+            {
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+            }
             else if (baseNode is BaseCompositeNode)
             {
                 input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
@@ -82,6 +86,9 @@ namespace Editor
             if (baseNode is BaseActionNode)
             {
             }
+            else if (baseNode is BaseConditionNode)
+            {
+            }
             else if (baseNode is BaseCompositeNode)
             {
                 output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
@@ -109,10 +116,15 @@ namespace Editor
         /// </summary>
         private void SetupClasses()
         {
-            // 如果节点是基础动作节点
+            // 如果节点是动作节点
             if (baseNode is BaseActionNode)
             {
                 AddToClassList("action"); // 将 "action" 样式类添加到节点视图中
+            }
+            // 如果节点是条件节点
+            if (baseNode is BaseConditionNode)
+            {
+                AddToClassList("condition"); // 将 "condition" 样式类添加到节点视图中
             }
             // 如果节点是基础组合节点
             else if (baseNode is BaseCompositeNode)

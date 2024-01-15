@@ -38,12 +38,14 @@ namespace Editor
             VisualElement root = rootVisualElement;
 
             // Import UXML
-            var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uxml");
+            var visualTree =
+                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uxml");
             visualTree.CloneTree(root);
 
             // A stylesheet can be added to a VisualElement.
             // The style will be applied to the VisualElement and all of its children.
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
+            var styleSheet =
+                AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
             root.styleSheets.Add(styleSheet);
 
             _treeView = root.Q<BehaviourTreeView>();
@@ -54,56 +56,69 @@ namespace Editor
 
         private void OnEnable()
         {
+            // 在脚本启用时，先移除之前注册的回调函数，避免重复注册
             EditorApplication.playModeStateChanged -= OnPlayModeStateCHanged;
+            // 注册编辑器播放模式状态变化的回调函数
             EditorApplication.playModeStateChanged += OnPlayModeStateCHanged;
         }
 
         private void OnDisable()
         {
+            // 在脚本禁用时移除编辑器播放模式状态变化的回调函数
             EditorApplication.playModeStateChanged -= OnPlayModeStateCHanged;
         }
 
+        /// <summary>
+        /// 编辑器播放模式状态变化时的回调函数
+        /// </summary>
+        /// <param name="obj"></param>
         private void OnPlayModeStateCHanged(PlayModeStateChange obj)
         {
             switch (obj)
             {
                 case PlayModeStateChange.EnteredEditMode:
+                    // 当进入编辑模式时，调用选择变化的方法
                     OnSelectionChange();
                     break;
                 case PlayModeStateChange.ExitingEditMode:
+                    // 当退出编辑模式时，可以在这里执行相应的操作
                     break;
                 case PlayModeStateChange.EnteredPlayMode:
+                    // 当进入播放模式时，调用选择变化的方法
                     OnSelectionChange();
                     break;
                 case PlayModeStateChange.ExitingPlayMode:
+                    // 当退出播放模式时，可以在这里执行相应的操作
                     break;
             }
         }
 
+        /// <summary>
+        /// 当选择发生变化时的回调函数
+        /// </summary>
         private void OnSelectionChange()
         {
+            // 尝试获取当前选中的对象是否为 BehaviourTree 类型
             BehaviourTree tree = Selection.activeObject as BehaviourTree;
-            if (!tree)
+            // 如果不是 BehaviourTree，尝试从选中的游戏对象获取 IGetBehaviourTree 接口
+            if (!tree && Selection.activeGameObject)
             {
-                if (Selection.activeGameObject)
+                IGetBehaviourTree getTree = Selection.activeGameObject.GetComponent<IGetBehaviourTree>();
+                // 如果接口不为空，获取 BehaviourTree 实例
+                if (getTree != null)
                 {
-                    IGetBehaviourTree getTree = Selection.activeGameObject.GetComponent<IGetBehaviourTree>();
-                    if (getTree != null)
-                    {
-                        tree = getTree.GetTree();
-                    }
+                    tree = getTree.GetTree();
                 }
             }
 
+            // 如果成功获取到 BehaviourTree 实例
             if (tree)
             {
-                if (Application.isPlaying)
+                // 如果当前处于播放模式，或者 BehaviourTree 可以在编辑器中打开
+                if (Application.isPlaying || AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
                 {
-                    _treeView.PopulateView(tree);
-                }
-                else if (AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
-                {
-                    _treeView.PopulateView(tree);
+                    // 刷新行为树视图
+                    _treeView?.PopulateView(tree);
                 }
             }
         }

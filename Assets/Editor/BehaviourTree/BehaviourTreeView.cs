@@ -162,6 +162,16 @@ namespace Editor
                 }
             }
             {
+                var types = TypeCache.GetTypesDerivedFrom<BaseConditionNode>();
+                foreach (var type in types)
+                {
+                    if (type.BaseType != null)
+                    {
+                        evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}", _ => CreateNode(type));
+                    }
+                }
+            }
+            {
                 var types = TypeCache.GetTypesDerivedFrom<BaseCompositeNode>();
                 foreach (var type in types)
                 {
