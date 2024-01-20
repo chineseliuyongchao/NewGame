@@ -18,5 +18,10 @@
             child.Update();
             return BehaviourTreeState.RUNNING;
         }
+
+        public override string GetDescription()
+        {
+            return "重复执行子节点";
+        }
     }
 }

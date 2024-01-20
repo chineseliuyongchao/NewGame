@@ -30,7 +30,12 @@
                     break;
             }
 
-            return _current == children.Count  ? BehaviourTreeState.SUCCESS : BehaviourTreeState.RUNNING;
+            return _current == children.Count ? BehaviourTreeState.SUCCESS : BehaviourTreeState.RUNNING;
+        }
+
+        public override string GetDescription()
+        {
+            return "顺序执行所有子节点";
         }
     }
 }

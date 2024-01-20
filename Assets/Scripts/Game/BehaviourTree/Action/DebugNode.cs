@@ -22,5 +22,10 @@ namespace Game.BehaviourTree
             Debug.Log("OnUpdate:  "+message);
             return BehaviourTreeState.SUCCESS;
         }
+
+        public override string GetDescription()
+        {
+            return "输出日志";
+        }
     }
 }

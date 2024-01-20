@@ -15,6 +15,11 @@
         {
         }
 
+        public override string GetDescription()
+        {
+            return "这是一个测试条件节点是否有效的临时节点";
+        }
+
         protected override bool JudgeResult()
         {
             return result;

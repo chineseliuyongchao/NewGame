@@ -26,5 +26,10 @@
             node.child = child.Clone();
             return node;
         }
+
+        public override string GetDescription()
+        {
+            return "每棵行为树的根节点";
+        }
     }
 }

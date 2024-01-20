@@ -47,10 +47,7 @@ namespace Game.BehaviourTree
             return Instantiate(this);
         }
 
-        public virtual string GetDescription()
-        {
-            return "这是一个节点";
-        }
+        public abstract string GetDescription();
     }
 
     public enum BehaviourTreeState

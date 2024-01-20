@@ -7,7 +7,7 @@ namespace Game.BehaviourTree
     /// </summary>
     public class WaitNode : BaseActionNode
     {
-        public float durtion = 1;
+        public float duration = 1;
         private float _startTime;
 
         protected override void OnStart()
@@ -21,12 +21,17 @@ namespace Game.BehaviourTree
 
         protected override BehaviourTreeState OnUpdate()
         {
-            if (Time.time - _startTime > durtion)
+            if (Time.time - _startTime > duration)
             {
                 return BehaviourTreeState.SUCCESS;
             }
 
             return BehaviourTreeState.RUNNING;
+        }
+
+        public override string GetDescription()
+        {
+            return "延迟一定时间";
         }
     }
 }
