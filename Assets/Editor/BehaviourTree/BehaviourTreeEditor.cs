@@ -10,6 +10,10 @@ namespace Editor
     {
         private BehaviourTreeView _treeView;
         private InspectorView _inspectorView;
+        private IMGUIContainer _blackBoardView;
+
+        private SerializedProperty _blackBoardProperty;
+        private SerializedObject _treeObject;
 
         [MenuItem("Tools/BehaviourTreeEditor")]
         public static void OpenWidow()
@@ -50,6 +54,24 @@ namespace Editor
 
             _treeView = root.Q<BehaviourTreeView>();
             _inspectorView = root.Q<InspectorView>();
+            _blackBoardView = root.Q<IMGUIContainer>();
+            // 为黑板视图添加自定义的 GUI 处理器
+            _blackBoardView.onGUIHandler = () =>
+            {
+                if (_treeObject != null && _blackBoardView != null)
+                {
+                    // 在每一帧绘制 GUI 之前，确保 SerializedObject 已更新
+                    _treeObject.Update();
+                    if (_blackBoardProperty != null)
+                    {
+                        //此方法无法遍历到子属性，暂时未发现原因
+                        EditorGUILayout.PropertyField(_blackBoardProperty, true);
+                    }
+
+                    // 将修改后的属性值应用到 SerializedObject
+                    _treeObject.ApplyModifiedProperties();
+                }
+            };
             _treeView.onNodeSelected = OnNodeSelectionChanged;
             OnSelectionChange();
         }
@@ -120,6 +142,12 @@ namespace Editor
                     // 刷新行为树视图
                     _treeView?.PopulateView(tree);
                 }
+            }
+
+            if (tree != null)
+            {
+                _treeObject = new SerializedObject(tree);
+                _blackBoardProperty = _treeObject.FindProperty("blackboard");
             }
         }
 

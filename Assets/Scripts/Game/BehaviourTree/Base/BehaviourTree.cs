@@ -13,18 +13,34 @@ namespace Game.BehaviourTree
     public class BehaviourTree : ScriptableObject
     {
         public BaseNode rootNode;
-        public BehaviourTreeState treeState = BehaviourTreeState.RUNNING;
+        public BehaviourTreeState treeState = BehaviourTreeState.INACTIVE;
         public List<BaseNode> nodes = new();
+        [HideInInspector] public Blackboard blackboard;
 
         /// <summary>
-        /// 更新行为
+        /// 行为树开始运转
+        /// </summary>
+        public void StartTree()
+        {
+            if (treeState == BehaviourTreeState.INACTIVE)
+            {
+                treeState = BehaviourTreeState.RUNNING;
+            }
+        }
+
+        /// <summary>
+        /// 更新行为树的行为
         /// </summary>
         /// <returns></returns>
-        public void Update()
+        public void UpdateTree()
         {
-            if (rootNode.behaviourTreeState == BehaviourTreeState.RUNNING)
+            if (treeState == BehaviourTreeState.RUNNING)
             {
                 treeState = rootNode.Update();
+                if (treeState == BehaviourTreeState.FAILURE || treeState == BehaviourTreeState.SUCCESS)
+                {
+                    treeState = BehaviourTreeState.INACTIVE;
+                }
             }
         }
 
@@ -175,6 +191,15 @@ namespace Game.BehaviourTree
             Traverse(tree.rootNode, n => { tree.nodes.Add(n); });
             // 返回克隆后的行为树
             return tree;
+        }
+
+        public void Bind(AiAgent aiAgent)
+        {
+            Traverse(rootNode, node =>
+            {
+                node.aiAgent = aiAgent;
+                node.blackboard = blackboard;
+            });
         }
     }
 }

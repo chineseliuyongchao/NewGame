@@ -2,6 +2,7 @@
 using Game.BehaviourTree;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,6 +27,14 @@ namespace Editor
             CreateInputPorts();
             CreateOutputPorts();
             SetupClasses();
+
+            // 在UI中找到名为"description"的Label元素
+            Label descriptionLabel = this.Q<Label>("description");
+            // 将Label元素的bindingPath设置为"description"这表示Label元素将绑定到SerializedObject的"description"字段
+            descriptionLabel.bindingPath = "description";
+            baseNode.description = baseNode.GetDescription();
+            // 使用SerializedObject进行数据绑定，将Label元素与baseNode对应的SerializedObject的"description"字段关联起来
+            descriptionLabel.Bind(new SerializedObject(baseNode));
         }
 
         public sealed override string title
@@ -121,6 +130,7 @@ namespace Editor
             {
                 AddToClassList("action"); // 将 "action" 样式类添加到节点视图中
             }
+
             // 如果节点是条件节点
             if (baseNode is BaseConditionNode)
             {

@@ -15,6 +15,7 @@ namespace Game.Game
         {
             base.OnInit();
             behaviourTree = behaviourTree.Clone();
+            behaviourTree.Bind(gameObject.AddComponent<AiAgent>());
         }
 
         protected override void OnControllerStart()
@@ -43,6 +44,8 @@ namespace Game.Game
             //     }
             // });
             // Debug.Log("网格数量：" + num);
+
+            behaviourTree.StartTree();
         }
 
         private void Update()
@@ -60,7 +63,7 @@ namespace Game.Game
                 }
             }
 
-            behaviourTree.Update();
+            behaviourTree.UpdateTree();
         }
 
         public BehaviourTree.BehaviourTree GetTree()

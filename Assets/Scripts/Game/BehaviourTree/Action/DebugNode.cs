@@ -19,7 +19,7 @@ namespace Game.BehaviourTree
 
         protected override BehaviourTreeState OnUpdate()
         {
-            Debug.Log(message);
+            Debug.Log("OnUpdate:  "+message);
             return BehaviourTreeState.SUCCESS;
         }
     }

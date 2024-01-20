@@ -75,6 +75,8 @@
 
 #description {
     font-size: 10px;
+    white-space: normal;
+    max-width: 150px;
 }
 
 #divider {
@@ -118,5 +120,5 @@
 }
 
 .condition #input {
-    background-color: rgba(46, 41, 78, 255);
+    background-color: rgb(46, 41, 78);
 }
