@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Game.BehaviourTree;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -26,7 +27,8 @@ namespace Editor
             this.AddManipulator(new SelectionDragger()); //添加选择拖拽器
             this.AddManipulator(new RectangleSelector()); //添加矩形选择器
 
-            var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
+            var styleSheet =
+                AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
             styleSheets.Add(styleSheet);
 
             Undo.undoRedoPerformed += OnUndoRedo;
@@ -149,46 +151,45 @@ namespace Editor
             return graphViewChange;
         }
 
+        /// <summary>
+        /// 创建右键行为树视图时的菜单
+        /// </summary>
+        /// <param name="evt"></param>
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
             {
                 var types = TypeCache.GetTypesDerivedFrom<BaseActionNode>();
-                foreach (var type in types)
-                {
-                    if (type.BaseType != null)
-                    {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
-                    }
-                }
+                MenuAppendAction(types, evt);
             }
             {
                 var types = TypeCache.GetTypesDerivedFrom<BaseConditionNode>();
-                foreach (var type in types)
-                {
-                    if (type.BaseType != null)
-                    {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
-                    }
-                }
+                MenuAppendAction(types, evt);
             }
             {
                 var types = TypeCache.GetTypesDerivedFrom<BaseCompositeNode>();
-                foreach (var type in types)
-                {
-                    if (type.BaseType != null)
-                    {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
-                    }
-                }
+                MenuAppendAction(types, evt);
             }
             {
                 var types = TypeCache.GetTypesDerivedFrom<BaseDecoratorNode>();
-                foreach (var type in types)
+                MenuAppendAction(types, evt);
+            }
+        }
+
+        private void MenuAppendAction(TypeCache.TypeCollection types, ContextualMenuPopulateEvent evt)
+        {
+            foreach (var type in types)
+            {
+                if (type.BaseType != null)
                 {
-                    if (type.BaseType != null)
+                    MethodInfo methodInfo = type.GetMethod("FunctionPath"); //通过反射获取类的FunctionPath静态方法
+                    string functionPath = ""; //存放FunctionPath静态方法中返回的三级目录
+                    if (methodInfo != null && methodInfo.IsStatic)
                     {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
+                        // 如果方法是静态的，直接调用并获取返回值
+                        functionPath = (string)methodInfo.Invoke(null, null);
                     }
+
+                    evt.menu.AppendAction($"[{type.BaseType.Name}]/{functionPath}{type.Name}", _ => CreateNode(type));
                 }
             }
         }

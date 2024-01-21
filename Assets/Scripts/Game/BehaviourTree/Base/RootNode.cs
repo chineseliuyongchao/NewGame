@@ -20,6 +20,15 @@
             return child.Update();
         }
 
+        public override void Resetting()
+        {
+            base.Resetting();
+            if (child != null)
+            {
+                child.Resetting();
+            }
+        }
+
         public override BaseNode Clone()
         {
             RootNode node = Instantiate(this);

@@ -25,6 +25,7 @@ namespace Game.BehaviourTree
             if (treeState == BehaviourTreeState.INACTIVE)
             {
                 treeState = BehaviourTreeState.RUNNING;
+                rootNode.Resetting();
             }
         }
 

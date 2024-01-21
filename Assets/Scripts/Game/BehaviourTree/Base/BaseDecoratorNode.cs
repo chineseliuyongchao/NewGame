@@ -10,7 +10,10 @@
         public override void Resetting()
         {
             base.Resetting();
-            child.Resetting();
+            if (child != null)
+            {
+                child.Resetting();
+            }
         }
 
         public override BaseNode Clone()

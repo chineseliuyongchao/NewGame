@@ -59,22 +59,22 @@
         /// <summary>
         /// 刻换算时辰
         /// </summary>
-        public const int CONVERT_TIME = 8;
+        public const int QUARTER_CONVERT_TIME = 8;
 
         /// <summary>
         /// 时辰换算日
         /// </summary>
-        public const int CONVERT_DAY = 12;
+        public const int TIME_CONVERT_DAY = 12;
 
         /// <summary>
         /// 日换算月
         /// </summary>
-        public const int CONVERT_MONTH = 30;
+        public const int DAY_CONVERT_MONTH = 30;
 
         /// <summary>
         /// 月换算年
         /// </summary>
-        public const int CONVERT_YEAR = 12;
+        public const int MONTH_CONVERT_YEAR = 12;
     }
 
     /// <summary>
@@ -102,7 +102,6 @@
         /// </summary>
         public const string COUNTRY_INFORMATION = "CountryInformation";
     }
-
 
     /// <summary>
     /// 地图数据配置表相关常量

@@ -1,4 +1,5 @@
-using Game.BehaviourTree;
+using System.Collections.Generic;
+using Game.Game.Family;
 using GameQFramework;
 using QFramework;
 using UI;
@@ -6,22 +7,15 @@ using UnityEngine;
 
 namespace Game.Game
 {
-    public class GameController : BaseGameController, IGetBehaviourTree
+    public class GameController : BaseGameController
     {
         public GameObject meshPrefab;
-        public BehaviourTree.BehaviourTree behaviourTree;
-
-        protected override void OnInit()
-        {
-            base.OnInit();
-            behaviourTree = behaviourTree.Clone();
-            behaviourTree.Bind(gameObject.AddComponent<AiAgent>());
-        }
+        public GameObject familyPrefab;
+        private List<FamilyController> _families;
 
         protected override void OnControllerStart()
         {
             base.OnControllerStart();
-            UIKit.OpenPanel<UIGameLobby>();
             // //将寻路网格显示出来
             // PathfindingMap map = this.GetModel<IMapModel>().Map;
             // int num = 0;
@@ -45,7 +39,17 @@ namespace Game.Game
             // });
             // Debug.Log("网格数量：" + num);
 
-            behaviourTree.StartTree();
+            _families = new List<FamilyController>();
+            List<int> familyKey = new List<int>(this.GetModel<IFamilyModel>().FamilyData.Keys);
+            for (int i = 0; i < familyKey.Count; i++)
+            {
+                GameObject family = Instantiate(familyPrefab, transform);
+                FamilyController familyController = family.GetComponent<FamilyController>();
+                familyController.Init(familyKey[i]);
+                _families.Add(familyController);
+            }
+
+            UIKit.OpenPanel<UIGameLobby>();
         }
 
         private void Update()
@@ -62,13 +66,6 @@ namespace Game.Game
                     this.SendCommand(new TimePassCommand(!this.GetModel<IGameModel>().TimeIsPass));
                 }
             }
-
-            behaviourTree.UpdateTree();
-        }
-
-        public BehaviourTree.BehaviourTree GetTree()
-        {
-            return behaviourTree;
         }
     }
 }

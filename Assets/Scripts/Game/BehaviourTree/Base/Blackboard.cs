@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-
-namespace Game.BehaviourTree
+﻿namespace Game.BehaviourTree
 {
+    /// <summary>
+    /// 黑板类
+    /// </summary>
     [System.Serializable]
     public class Blackboard
     {
-        public Vector3 moveToPosition;
-
-        // public GameObject moveToObject;
     }
 }

@@ -29,19 +29,19 @@ namespace Game.Game
                     hasChange = true;
                 }
 
-                if (this.GetModel<IGameModel>().Time >= GameTimeConstant.CONVERT_DAY)
+                if (this.GetModel<IGameModel>().Time >= GameTimeConstant.TIME_CONVERT_DAY)
                 {
                     this.GetModel<IGameModel>().Time = 0;
                     this.GetModel<IGameModel>().Day++;
                 }
 
-                if (this.GetModel<IGameModel>().Day >= GameTimeConstant.CONVERT_MONTH)
+                if (this.GetModel<IGameModel>().Day >= GameTimeConstant.DAY_CONVERT_MONTH)
                 {
                     this.GetModel<IGameModel>().Day = 0;
                     this.GetModel<IGameModel>().Month++;
                 }
 
-                if (this.GetModel<IGameModel>().Month >= GameTimeConstant.CONVERT_YEAR)
+                if (this.GetModel<IGameModel>().Month >= GameTimeConstant.MONTH_CONVERT_YEAR)
                 {
                     this.GetModel<IGameModel>().Month = 0;
                     this.GetModel<IGameModel>().Year++;
