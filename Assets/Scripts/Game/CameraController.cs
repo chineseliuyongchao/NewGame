@@ -2,7 +2,7 @@ using GameQFramework;
 using QFramework;
 using UnityEngine;
 
-namespace Game.Game
+namespace Game
 {
     /// <summary>
     /// 控制摄像机的移动

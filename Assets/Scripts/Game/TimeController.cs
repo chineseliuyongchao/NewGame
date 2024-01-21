@@ -3,7 +3,7 @@ using QFramework;
 using UnityEngine;
 using Utils.Constant;
 
-namespace Game.Game
+namespace Game
 {
     public class TimeController : BaseGameController
     {

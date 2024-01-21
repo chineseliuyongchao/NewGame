@@ -9,6 +9,8 @@ namespace GameQFramework
 
     public class BaseGameController : MonoBehaviour, IBaseGameController
     {
+        protected ResLoader resLoader;
+
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;
@@ -16,6 +18,7 @@ namespace GameQFramework
 
         void Awake()
         {
+            resLoader = ResLoader.Allocate();
             // please add init code here
             OnInit();
         }

@@ -4,14 +4,23 @@ using GameQFramework;
 using QFramework;
 using UI;
 using UnityEngine;
+using Utils.Constant;
 
-namespace Game.Game
+namespace Game
 {
     public class GameController : BaseGameController
     {
-        public GameObject meshPrefab;
-        public GameObject familyPrefab;
+        private GameObject _meshPrefab;
+        private GameObject _familyPrefab;
         private List<FamilyController> _families;
+
+        protected override void OnInit()
+        {
+            base.OnInit();
+            _meshPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.MESH_PREFAB);
+            _familyPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.FAMILY);
+            _families = new List<FamilyController>();
+        }
 
         protected override void OnControllerStart()
         {
@@ -39,11 +48,10 @@ namespace Game.Game
             // });
             // Debug.Log("网格数量：" + num);
 
-            _families = new List<FamilyController>();
             List<int> familyKey = new List<int>(this.GetModel<IFamilyModel>().FamilyData.Keys);
             for (int i = 0; i < familyKey.Count; i++)
             {
-                GameObject family = Instantiate(familyPrefab, transform);
+                GameObject family = Instantiate(_familyPrefab, transform);
                 FamilyController familyController = family.GetComponent<FamilyController>();
                 familyController.Init(familyKey[i]);
                 _families.Add(familyController);

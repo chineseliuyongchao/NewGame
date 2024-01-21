@@ -3,12 +3,12 @@ using GameQFramework;
 using QFramework;
 using UI;
 
-namespace Game.Player
+namespace Game.Army
 {
     /// <summary>
-    /// 玩家游戏角色
+    /// 玩家自身的军队
     /// </summary>
-    public class MyPlayer : BasePlayer
+    public class PlayerArmy : BaseArmy
     {
         protected override void OnListenEvent()
         {

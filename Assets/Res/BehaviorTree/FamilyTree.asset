@@ -32,10 +32,10 @@ MonoBehaviour:
   treeState: 0
   started: 0
   guid: 32baf24666772604db455c9921da8ba3
-  position: {x: 309.59998, y: -249.696}
+  position: {x: 310, y: -254}
   aiAgent: {fileID: 0}
   description: "\u6BCF\u68F5\u884C\u4E3A\u6811\u7684\u6839\u8282\u70B9"
-  child: {fileID: 0}
+  child: {fileID: 9085523669174624397}
 --- !u!114 &9085523669174624397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,6 +51,6 @@ MonoBehaviour:
   treeState: 0
   started: 0
   guid: 2d2d66f74dff69848b0b3dc89eb80833
-  position: {x: -4.9999204, y: 142.6}
+  position: {x: 310, y: -153.69998}
   aiAgent: {fileID: 0}
   description: "\u7528\u4E8E\u5224\u65AD\u662F\u5426\u53EF\u4EE5\u7EC4\u5EFA\u65B0\u7684\u519B\u961F"

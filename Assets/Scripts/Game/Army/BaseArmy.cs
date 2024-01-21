@@ -6,12 +6,12 @@ using QFramework;
 using UnityEngine;
 using Utils.Constant;
 
-namespace Game.Player
+namespace Game.Army
 {
     /// <summary>
-    /// 所有游戏角色的基类
+    /// 所有军队的基类（可以在大地图移动的单位均视作军队）
     /// </summary>
-    public class BasePlayer : BaseGameController
+    public abstract class BaseArmy : BaseGameController
     {
         /// <summary>
         /// 移动经过位置列表
@@ -19,7 +19,7 @@ namespace Game.Player
         private List<Vector2> _movePosList;
 
         /// <summary>
-        /// 移动结束以后得事件
+        /// 移动结束以后的事件
         /// </summary>
         private MoveCloseBack _moveEndCallBack;
 
@@ -272,7 +272,7 @@ namespace Game.Player
         /// <returns></returns>
         protected float MoveSpeed()
         {
-            return 5;
+            return GameConstant.BASE_MOVE_SPEED;
         }
     }
 }

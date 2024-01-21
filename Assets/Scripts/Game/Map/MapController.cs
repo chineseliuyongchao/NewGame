@@ -4,6 +4,7 @@ using GameQFramework;
 using QFramework;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Utils.Constant;
 
 namespace Game.Map
 {
@@ -12,13 +13,15 @@ namespace Game.Map
     /// </summary>
     public class MapController : BaseGameController
     {
-        public MapNode mapNode;
-        public TownNode townNode;
+        private GameObject _mapNodePrefab;
+        private GameObject _townNodePrefab;
 
         protected override void OnInit()
         {
-            Instantiate(mapNode, transform);
-            Instantiate(townNode, transform);
+            _mapNodePrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.MAP_NODE);
+            _townNodePrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.TONN_NODE);
+            Instantiate(_mapNodePrefab, transform);
+            Instantiate(_townNodePrefab, transform);
         }
 
         private void Update()

@@ -19,6 +19,11 @@
         /// 保存游戏存档数据的文件
         /// </summary>
         public const string GAME_FILE_DATA = "/gameFileData.txt";
+
+        /// <summary>
+        /// 军队基础移动速度
+        /// </summary>
+        public const int BASE_MOVE_SPEED = 5;
     }
 
     /// <summary>
@@ -101,6 +106,42 @@
         /// 国家配置表
         /// </summary>
         public const string COUNTRY_INFORMATION = "CountryInformation";
+    }
+
+    /// <summary>
+    /// 游戏预制体相关变量
+    /// </summary>
+    public abstract class GamePrefabConstant
+    {
+        /// <summary>
+        /// 聚落预制体
+        /// </summary>
+        public const string TOWN = "Town";
+
+        /// <summary>
+        /// 用于调试地图的预制体
+        /// </summary>
+        public const string MESH_PREFAB = "MeshPrefab";
+
+        /// <summary>
+        /// 家族预制体
+        /// </summary>
+        public const string FAMILY = "Family";
+
+        /// <summary>
+        /// 地图节点预制体
+        /// </summary>
+        public const string MAP_NODE = "MapNode";
+
+        /// <summary>
+        /// 聚落节点预制体
+        /// </summary>
+        public const string TONN_NODE = "TownNode";
+
+        /// <summary>
+        /// 玩家军队预制体
+        /// </summary>
+        public const string PLAYER_ARMY = "PlayerArmy";
     }
 
     /// <summary>
