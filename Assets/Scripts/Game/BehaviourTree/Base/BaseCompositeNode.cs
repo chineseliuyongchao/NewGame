@@ -9,6 +9,15 @@ namespace Game.BehaviourTree
     {
         public List<BaseNode> children = new();
 
+        public override void Resetting()
+        {
+            base.Resetting();
+            for (int i = 0; i < children.Count; i++)
+            {
+                children[i].Resetting();
+            }
+        }
+
         public override BaseNode Clone()
         {
             BaseCompositeNode node = Instantiate(this);

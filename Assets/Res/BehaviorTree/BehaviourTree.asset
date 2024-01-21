@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ed1dc7339742fe800ed1a4f0d31017, type: 3}
   m_Name: WaitNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: efeacb4eb6ea2a848b54618a7bcb4552
-  position: {x: 486.40024, y: 320.65002}
+  position: {x: 482.40002, y: 322.4}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}
@@ -33,15 +33,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35fd6f4658a4219bf4adec8618f463a, type: 3}
   m_Name: RepeatNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: 5c9398cf442b88c44a4b7bb87826f86f
-  position: {x: 309.59998, y: 74.2}
+  position: {x: 309.80005, y: -126.600006}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}
   description: "\u91CD\u590D\u6267\u884C\u5B50\u8282\u70B9"
-  child: {fileID: 868607834113040214}
+  child: {fileID: 0}
 --- !u!114 &-6189334771165311200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,10 +54,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e481a4082c455990d75e689a389da3, type: 3}
   m_Name: PrintNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: e095b18580905dc4b94cd7b44ead6514
-  position: {x: 288.8, y: 322.4}
+  position: {x: 290.8, y: 321.60004}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e481a4082c455990d75e689a389da3, type: 3}
   m_Name: PrintNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: 5f9d79cb5a8b0054ab202d4a75214344
   position: {x: 691.55, y: 319.44998}
@@ -96,10 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d61ff2ba7e473f868a6d4c2ebc71da, type: 3}
   m_Name: ConditionNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: f546785b7e0d0b1448da4eb824d84630
-  position: {x: -89.400024, y: 319.19998}
+  position: {x: -89.60004, y: 319.19998}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}
@@ -129,6 +129,8 @@ MonoBehaviour:
   - {fileID: -3740052664747378394}
   - {fileID: -7252577042076976030}
   - {fileID: -2236878299378752736}
+  - {fileID: 7536699949652085851}
+  - {fileID: 8058496853535403666}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &868607834113040214
@@ -143,17 +145,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4097421504434b36aac857dfc8bfe95f, type: 3}
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: 5465363d804247e41a8923467fa81a7c
-  position: {x: 309.59998, y: 179.2}
+  position: {x: 411.20007, y: 9.599998}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}
-  description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9"
+  description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u5931\u8D25"
   children:
   - {fileID: 8415338904387070406}
-  - {fileID: -2236878299378752736}
   - {fileID: 1056165920753373783}
   - {fileID: -6189334771165311200}
   - {fileID: -7328987293336804908}
@@ -170,10 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66ed1dc7339742fe800ed1a4f0d31017, type: 3}
   m_Name: WaitNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: f302393f0500d524c91d1f192435305d
-  position: {x: 106.30007, y: 322.00003}
+  position: {x: 125.80002, y: 320}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}
@@ -191,15 +192,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4bfd23d1c04452ebca83086d28797d6, type: 3}
   m_Name: RootNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: 32baf24666772604db455c9921da8ba3
-  position: {x: 309.59998, y: -35.88986}
+  position: {x: 309.59998, y: -249.696}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}
   description: "\u6BCF\u68F5\u884C\u4E3A\u6811\u7684\u6839\u8282\u70B9"
-  child: {fileID: -7252577042076976030}
+  child: {fileID: 8058496853535403666}
+--- !u!114 &7536699949652085851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36b89df6a5a469b838cfb28152c580f, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: ce0da21bb0949224988b85fac0567eeb
+  position: {x: 126.39996, y: -0.80000305}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+  aiAgent: {fileID: 0}
+  description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u6210\u529F"
+  children: []
+--- !u!114 &8058496853535403666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2947dec1414d4a9892540c01b323aa, type: 3}
+  m_Name: RandomSelectorNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: 43c28387195f5654f90c81bceedc9425
+  position: {x: -89.60004, y: -0.80000305}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+  aiAgent: {fileID: 0}
+  description: "\u968F\u673A\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u6210\u529F"
+  children: []
 --- !u!114 &8415338904387070406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,10 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e481a4082c455990d75e689a389da3, type: 3}
   m_Name: PrintNode
   m_EditorClassIdentifier: 
-  behaviourTreeState: 0
+  treeState: 0
   started: 0
   guid: c43433809d79be34e9e99b949eab341a
-  position: {x: -281.60007, y: 319.2}
+  position: {x: -279.8, y: 319.99997}
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
   aiAgent: {fileID: 0}

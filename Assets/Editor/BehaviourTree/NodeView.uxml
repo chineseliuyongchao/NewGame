@@ -4,7 +4,7 @@
     <ui:VisualElement name="node-border">
         <ui:VisualElement name="contents">
             <ui:VisualElement name="top">
-                <ui:VisualElement name="input" />
+                <ui:VisualElement name="input" style="min-width: auto; min-height: auto;" />
                 <ui:VisualElement name="divider" class="horizontal" style="min-height: 1px; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(87, 87, 87);" />
                 <ui:VisualElement name="title">
                     <ui:Label name="title-label" text="PrintNode" class="unity-text-element unity-label" />

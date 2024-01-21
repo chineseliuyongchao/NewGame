@@ -15,6 +15,12 @@
 
         protected override BehaviourTreeState OnUpdate()
         {
+            if (child.treeState == BehaviourTreeState.FAILURE || child.treeState == BehaviourTreeState.SUCCESS)
+            {
+                //如果子节点已经执行完，那就重置子节点继续执行
+                child.Resetting();
+            }
+
             child.Update();
             return BehaviourTreeState.RUNNING;
         }

@@ -180,7 +180,7 @@ namespace Editor
             RemoveFromClassList("success");
             if (Application.isPlaying)
             {
-                switch (baseNode.behaviourTreeState)
+                switch (baseNode.treeState)
                 {
                     case BehaviourTreeState.RUNNING:
                         if (baseNode.started)

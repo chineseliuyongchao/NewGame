@@ -1,9 +1,9 @@
 ﻿namespace Game.BehaviourTree
 {
     /// <summary>
-    /// 序列节点，顺序执行所有的子节点，如果某一个子节点失败，则失败，如果所有子节点成功，则完成
+    /// 选择节点，顺序执行所有的节点，如果一个节点失败就执行下一个，直到有一个成功，如果全部子节点都失败，就返回失败
     /// </summary>
-    public class SequenceNode : BaseCompositeNode
+    public class SelectorNode : BaseCompositeNode
     {
         private int _current;
 
@@ -24,18 +24,18 @@
                 case BehaviourTreeState.RUNNING:
                     return BehaviourTreeState.RUNNING;
                 case BehaviourTreeState.FAILURE:
-                    return BehaviourTreeState.FAILURE;
-                case BehaviourTreeState.SUCCESS:
                     _current++;
                     break;
+                case BehaviourTreeState.SUCCESS:
+                    return BehaviourTreeState.SUCCESS;
             }
 
-            return _current == children.Count ? BehaviourTreeState.SUCCESS : BehaviourTreeState.RUNNING;
+            return _current == children.Count ? BehaviourTreeState.FAILURE : BehaviourTreeState.RUNNING;
         }
 
         public override string GetDescription()
         {
-            return "顺序执行所有子节点，直到有子节点失败";
+            return "顺序执行所有子节点，直到有子节点成功";
         }
     }
 }

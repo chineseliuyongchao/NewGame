@@ -13,6 +13,8 @@
 
 #input {
     align-items: center;
+    min-width: auto;
+    min-height: auto;
 }
 
 #output {
@@ -76,7 +78,7 @@
 #description {
     font-size: 10px;
     white-space: normal;
-    max-width: 150px;
+    max-width: 140px;
 }
 
 #divider {

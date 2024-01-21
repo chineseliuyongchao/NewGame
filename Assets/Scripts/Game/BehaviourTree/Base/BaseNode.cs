@@ -7,7 +7,7 @@ namespace Game.BehaviourTree
     /// </summary>
     public abstract class BaseNode : ScriptableObject
     {
-        public BehaviourTreeState behaviourTreeState = BehaviourTreeState.INACTIVE;
+        public BehaviourTreeState treeState = BehaviourTreeState.INACTIVE;
         public bool started;
         [HideInInspector] public string guid;
         [HideInInspector] public Vector2 position;
@@ -21,21 +21,34 @@ namespace Game.BehaviourTree
         /// <returns></returns>
         public BehaviourTreeState Update()
         {
+            if (treeState == BehaviourTreeState.FAILURE || treeState == BehaviourTreeState.SUCCESS)
+            {
+                //如果节点已经执行完，就直接返回执行完的状态
+                return treeState;
+            }
+
             if (!started)
             {
                 OnStart();
                 started = true;
             }
 
-            behaviourTreeState = OnUpdate();
-            if (behaviourTreeState == BehaviourTreeState.FAILURE || behaviourTreeState == BehaviourTreeState.SUCCESS)
+            treeState = OnUpdate();
+            if (treeState == BehaviourTreeState.FAILURE || treeState == BehaviourTreeState.SUCCESS)
             {
                 OnStop();
                 started = false;
-                behaviourTreeState = BehaviourTreeState.INACTIVE;
             }
 
-            return behaviourTreeState;
+            return treeState;
+        }
+
+        /// <summary>
+        /// 重置状态
+        /// </summary>
+        public virtual void Resetting()
+        {
+            treeState = BehaviourTreeState.INACTIVE;
         }
 
         protected abstract void OnStart();

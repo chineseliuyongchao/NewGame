@@ -157,7 +157,7 @@ namespace Editor
                 {
                     if (type.BaseType != null)
                     {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}", _ => CreateNode(type));
+                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
                     }
                 }
             }
@@ -167,7 +167,7 @@ namespace Editor
                 {
                     if (type.BaseType != null)
                     {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}", _ => CreateNode(type));
+                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
                     }
                 }
             }
@@ -177,7 +177,7 @@ namespace Editor
                 {
                     if (type.BaseType != null)
                     {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}", _ => CreateNode(type));
+                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
                     }
                 }
             }
@@ -187,7 +187,7 @@ namespace Editor
                 {
                     if (type.BaseType != null)
                     {
-                        evt.menu.AppendAction($"[{type.BaseType.Name}]{type.Name}", _ => CreateNode(type));
+                        evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name}", _ => CreateNode(type));
                     }
                 }
             }

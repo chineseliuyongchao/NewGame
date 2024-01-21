@@ -7,6 +7,12 @@
     {
         public BaseNode child;
 
+        public override void Resetting()
+        {
+            base.Resetting();
+            child.Resetting();
+        }
+
         public override BaseNode Clone()
         {
             BaseDecoratorNode node = Instantiate(this);
