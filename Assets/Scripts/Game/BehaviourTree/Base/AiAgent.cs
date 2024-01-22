@@ -18,6 +18,24 @@ namespace Game.BehaviourTree
             return false;
         }
 
+        /// <summary>
+        /// 为将要组建的军队挑选一位将军
+        /// </summary>
+        /// <returns>是否挑选成功</returns>
+        public virtual bool SelectArmyGeneral()
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// 组建一支军队
+        /// </summary>
+        /// <returns>是否组建成功</returns>
+        public virtual bool BuildArmy()
+        {
+            return false;
+        }
+
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;

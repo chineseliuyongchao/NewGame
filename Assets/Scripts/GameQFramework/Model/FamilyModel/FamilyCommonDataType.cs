@@ -57,5 +57,11 @@ namespace GameQFramework
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public int TownId;
+
+        /// <summary>
+        /// 人物默认状态
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int RoleType;
     }
 }

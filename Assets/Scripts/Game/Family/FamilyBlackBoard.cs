@@ -1,6 +1,6 @@
 ﻿using Game.BehaviourTree;
 
-namespace Game.Game.Family
+namespace Game.Family
 {
     /// <summary>
     /// 家族的行为树黑板

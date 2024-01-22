@@ -1,10 +1,21 @@
-﻿namespace Game.BehaviourTree
+﻿using System;
+
+namespace Game.BehaviourTree
 {
     /// <summary>
     /// 黑板类
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class Blackboard
     {
+        /// <summary>
+        /// 军队的将领的人物id
+        /// </summary>
+        public int armyGeneralId;
+
+        /// <summary>
+        /// 组建军队
+        /// </summary>
+        public Action<int> buildArmy;
     }
 }

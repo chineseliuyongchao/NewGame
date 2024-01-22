@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Game.Game.Family;
+using Game.Family;
 using GameQFramework;
 using QFramework;
 using UI;

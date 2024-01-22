@@ -7,14 +7,14 @@
                 <ui:VisualElement name="input" style="min-width: auto; min-height: auto;" />
                 <ui:VisualElement name="divider" class="horizontal" style="min-height: 1px; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(87, 87, 87);" />
                 <ui:VisualElement name="title">
-                    <ui:Label name="title-label" text="PrintNode" class="unity-text-element unity-label" />
+                    <ui:Label name="title-label" text="PrintNode" display-tooltip-when-elided="true" class="unity-text-element unity-label" style="white-space: normal;" />
                     <ui:VisualElement name="title-button-container">
                         <ui:VisualElement name="collapse-button">
                             <ui:VisualElement name="icon" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:Label text="This is a deddcription" display-tooltip-when-elided="true" name="description" style="font-size: 12px;" />
+                <ui:Label text="This is a deddcription" display-tooltip-when-elided="true" name="description" style="font-size: 12px; -unity-font-style: bold;" />
                 <ui:VisualElement name="divider" class="horizontal" style="min-height: 1px; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(87, 87, 87);" />
                 <ui:VisualElement name="output" />
             </ui:VisualElement>

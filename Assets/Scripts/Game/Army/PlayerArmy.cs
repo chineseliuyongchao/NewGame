@@ -10,6 +10,12 @@ namespace Game.Army
     /// </summary>
     public class PlayerArmy : BaseArmy
     {
+        protected override void OnInit()
+        {
+            base.OnInit();
+            this.GetModel<IGameModel>().PlayerArmy = this;
+        }
+
         protected override void OnListenEvent()
         {
             base.OnListenEvent();

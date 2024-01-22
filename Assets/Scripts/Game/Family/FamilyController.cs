@@ -1,11 +1,12 @@
-﻿using System;
-using Game.BehaviourTree;
+﻿using Game.BehaviourTree;
 using GameQFramework;
 using QFramework;
 using Unity.VisualScripting;
+using UnityEngine;
 using Utils.Constant;
+using Random = System.Random;
 
-namespace Game.Game.Family
+namespace Game.Family
 {
     /// <summary>
     /// 家族控制器，处理家族的逻辑
@@ -16,6 +17,7 @@ namespace Game.Game.Family
         private int _familyId;
         private FamilyBlackBoard _familyBlackBoard;
         private FamilyAiAgent _familyAiAgent;
+        private GameObject _armyPrefab;
 
         /// <summary>
         /// 是否每月尝试组建一支军队（默认是每天尝试一次）
@@ -35,8 +37,12 @@ namespace Game.Game.Family
         protected override void OnInit()
         {
             base.OnInit();
+            _armyPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.ARMY);
             behaviourTree = behaviourTree.Clone();
-            _familyBlackBoard = new FamilyBlackBoard();
+            _familyBlackBoard = new FamilyBlackBoard
+            {
+                buildArmy = BuildArmy
+            };
             behaviourTree.blackboard = _familyBlackBoard;
             _familyAiAgent = this.AddComponent<FamilyAiAgent>();
             behaviourTree.Bind(_familyAiAgent);
@@ -92,6 +98,25 @@ namespace Game.Game.Family
         private void Update()
         {
             behaviourTree.UpdateTree();
+        }
+
+        /// <summary>
+        /// 组建一支军队
+        /// </summary>
+        /// <param name="roleId"></param>
+        private void BuildArmy(int roleId)
+        {
+            this.GetModel<IFamilyModel>().RoleData[roleId].roleType = RoleType.GENERAL;
+
+            GameObject army = Instantiate(_armyPrefab);
+            army.Parent(this.GetModel<IGameModel>().PlayerArmy.transform.parent);
+
+            int townId = this.GetModel<IFamilyModel>().RoleData[roleId].townId;
+            TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
+            Vector2Int gridPos = this.GetSystem<IMapSystem>()
+                .GetGridMapPos(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
+            Vector2 pos = this.GetSystem<IMapSystem>().GetGridToMapPos(gridPos);
+            army.Position(pos);
         }
 
         public BehaviourTree.BehaviourTree GetTree()

@@ -76,12 +76,34 @@ namespace GameQFramework
         /// </summary>
         public int townId;
 
+        /// <summary>
+        /// 人物状态
+        /// </summary>
+        public RoleType roleType;
+
         public RoleData(RoleCommonData roleCommonData)
         {
             roleName = roleCommonData.Name;
             roleAge = roleCommonData.Age;
             familyId = roleCommonData.FamilyId;
             townId = roleCommonData.TownId;
+            roleType = (RoleType)roleCommonData.RoleType;
         }
+    }
+
+    /// <summary>
+    /// 人物的状态
+    /// </summary>
+    public enum RoleType
+    {
+        /// <summary>
+        /// 闲置状态
+        /// </summary>
+        INACTIVE,
+
+        /// <summary>
+        /// 担任军队的将军
+        /// </summary>
+        GENERAL,
     }
 }

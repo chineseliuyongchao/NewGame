@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using Game.Army;
+using QFramework;
 
 namespace GameQFramework
 {
@@ -28,6 +29,11 @@ namespace GameQFramework
         /// 记录刻，默认从一刻开始
         /// </summary>
         public int Quarter { get; set; }
+
+        /// <summary>
+        /// 玩家军队的实例（有且仅有一个）
+        /// </summary>
+        public PlayerArmy PlayerArmy { get; set; }
 
         /// <summary>
         /// 记录时间是否可以流逝

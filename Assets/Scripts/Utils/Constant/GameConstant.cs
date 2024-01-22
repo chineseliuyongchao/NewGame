@@ -142,6 +142,11 @@
         /// 玩家军队预制体
         /// </summary>
         public const string PLAYER_ARMY = "PlayerArmy";
+
+        /// <summary>
+        /// ai军队预制体
+        /// </summary>
+        public const string ARMY = "Army";
     }
 
     /// <summary>

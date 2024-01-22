@@ -3,7 +3,7 @@ using GameQFramework;
 using QFramework;
 using UnityEngine;
 
-namespace Game.Game.Family
+namespace Game.Family
 {
     /// <summary>
     /// 家族的ai代理
@@ -11,12 +11,14 @@ namespace Game.Game.Family
     public class FamilyAiAgent : AiAgent
     {
         private int _familyId;
+        private FamilyData _familyData;
         private FamilyBlackBoard _familyBlackBoard;
-        private bool _isInit = false;
+        private bool _isInit;
 
         public void Init(int familyId, FamilyBlackBoard familyBlackBoard)
         {
             _familyId = familyId;
+            _familyData = this.GetModel<IFamilyModel>().FamilyData[_familyId];
             _familyBlackBoard = familyBlackBoard;
             _isInit = true;
         }
@@ -35,6 +37,43 @@ namespace Game.Game.Family
             }
 
             return false;
+        }
+
+        public override bool SelectArmyGeneral()
+        {
+            if (!_isInit)
+            {
+                return base.SelectArmyGeneral();
+            }
+
+            for (int i = 0; i < _familyData.familyRoleS.Count; i++)
+            {
+                int roleId = _familyData.familyRoleS[i];
+                if (this.GetModel<IFamilyModel>().RoleData[roleId].roleType == RoleType.INACTIVE)
+                {
+                    _familyBlackBoard.armyGeneralId = roleId;
+                    break;
+                }
+            }
+
+            return true;
+        }
+
+        public override bool BuildArmy()
+        {
+            if (!_isInit)
+            {
+                return base.BuildArmy();
+            }
+
+            if (_familyBlackBoard.armyGeneralId <= 0)
+            {
+                return false;
+            }
+
+            _familyBlackBoard.buildArmy?.Invoke(_familyBlackBoard.armyGeneralId);
+
+            return true;
         }
     }
 }

@@ -2,7 +2,7 @@
 using QFramework;
 using UI;
 
-namespace Game.Game
+namespace Game
 {
     public class GameMenuController : BaseGameController
     {
