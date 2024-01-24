@@ -42,8 +42,8 @@ MonoBehaviour:
   description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u5931\u8D25"
   children:
   - {fileID: 9085523669174624397}
-  - {fileID: -8953517628249768344}
   - {fileID: -465751665398615562}
+  - {fileID: -8953517628249768344}
 --- !u!114 &-465751665398615562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   treeState: 0
   started: 0
   guid: 27a7af3f87437e54a892cdd3f2e27a19
-  position: {x: 515, y: -70}
+  position: {x: 509, y: -70}
   blackboard:
     armyGeneralId: 0
   aiAgent: {fileID: 0}

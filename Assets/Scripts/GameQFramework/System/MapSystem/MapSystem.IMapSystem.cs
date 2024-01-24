@@ -26,14 +26,14 @@ namespace GameQFramework
         Vector2 GetMapToRealPos(Transform transform, Vector2 mapPos);
 
         /// <summary>
-        /// 根据地图上的位置计算出网格地图的位置
+        /// 根据地图位置计算出网格位置
         /// </summary>
         /// <param name="pos"></param>
         /// <returns></returns>
         Vector2Int GetGridMapPos(Vector2 pos);
 
         /// <summary>
-        /// 根据网格获取在地图上面的对应位置
+        /// 根据网格位置获取地图位置
         /// </summary>
         /// <returns></returns>
         Vector2 GetGridToMapPos(Vector2 pos);

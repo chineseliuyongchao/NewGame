@@ -17,5 +17,10 @@ namespace Game.BehaviourTree
         /// 组建军队
         /// </summary>
         public Action<int> buildArmy;
+
+        public virtual void Resetting()
+        {
+            armyGeneralId = 0;
+        }
     }
 }

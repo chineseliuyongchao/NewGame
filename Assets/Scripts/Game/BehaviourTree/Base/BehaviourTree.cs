@@ -26,6 +26,7 @@ namespace Game.BehaviourTree
             {
                 treeState = BehaviourTreeState.RUNNING;
                 rootNode.Resetting();
+                blackboard.Resetting();
             }
         }
 

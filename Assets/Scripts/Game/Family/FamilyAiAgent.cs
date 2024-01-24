@@ -32,7 +32,6 @@ namespace Game.Family
 
             if (this.GetModel<IFamilyModel>().FamilyData[_familyId].familyWealth > 10000)
             {
-                Debug.Log(this.GetModel<IFamilyModel>().FamilyData[_familyId].familyName + "家族可以组建军队  ");
                 return true;
             }
 
@@ -71,6 +70,8 @@ namespace Game.Family
                 return false;
             }
 
+            Debug.Log(this.GetModel<IFamilyModel>().FamilyData[_familyId].familyName + "家族组建军队，将领是" +
+                      this.GetModel<IFamilyModel>().RoleData[_familyBlackBoard.armyGeneralId].roleName);
             _familyBlackBoard.buildArmy?.Invoke(_familyBlackBoard.armyGeneralId);
 
             return true;

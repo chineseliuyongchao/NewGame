@@ -113,10 +113,7 @@ namespace Game.Family
 
             int townId = this.GetModel<IFamilyModel>().RoleData[roleId].townId;
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
-            Vector2Int gridPos = this.GetSystem<IMapSystem>()
-                .GetGridMapPos(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
-            Vector2 pos = this.GetSystem<IMapSystem>().GetGridToMapPos(gridPos);
-            army.Position(pos);
+            army.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
         }
 
         public BehaviourTree.BehaviourTree GetTree()
