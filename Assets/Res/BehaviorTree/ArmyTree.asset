@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7807685200397735444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4bfd23d1c04452ebca83086d28797d6, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: 0507fa300c3ea714b95f6bb7378cd408
+  position: {x: 417.00003, y: 214.60002}
+  blackboard:
+    armyGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u6BCF\u68F5\u884C\u4E3A\u6811\u7684\u6839\u8282\u70B9"
+  child: {fileID: -7680577813037803495}
+--- !u!114 &-7680577813037803495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36b89df6a5a469b838cfb28152c580f, type: 3}
+  m_Name: SelectorNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: 8bffe6fb5a7b1a040b48a569ab58e193
+  position: {x: 417, y: 309.64}
+  blackboard:
+    armyGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u6210\u529F"
+  children:
+  - {fileID: 6952977259562853932}
+--- !u!114 &-3584562886716250618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4097421504434b36aac857dfc8bfe95f, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: ff84303a985d7074d9681bee99ed0ccf
+  position: {x: 88.84, y: 454}
+  blackboard:
+    armyGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u5931\u8D25"
+  children: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97244ac161764bc790b297f33bdd7a3d, type: 3}
+  m_Name: ArmyTree
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: -7807685200397735444}
+  treeState: 0
+  nodes:
+  - {fileID: -7807685200397735444}
+  - {fileID: -7680577813037803495}
+  - {fileID: 4505630919249639482}
+  - {fileID: 8241959082789056083}
+  - {fileID: 6952977259562853932}
+  - {fileID: -3584562886716250618}
+  blackboard:
+    armyGeneralId: 0
+    targetTownId: 0
+--- !u!114 &4505630919249639482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0c093e5a8664f1c88fdd045da136c63, type: 3}
+  m_Name: CanMoveToBuildNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: f8633018e7d9b1944b70a6cb621f84cc
+  position: {x: 102, y: 607.1001}
+  blackboard:
+    armyGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u7528\u4E8E\u5224\u65AD\u662F\u5426\u524D\u5F80\u805A\u843D"
+--- !u!114 &6952977259562853932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9815a6f9953e4df49ba38a62dd2e19e3, type: 3}
+  m_Name: PatrolNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: 177c5ec1a565e774c8607ec66aae0256
+  position: {x: 552.0001, y: 469.24603}
+  blackboard:
+    armyGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u5DE1\u903B"
+--- !u!114 &8241959082789056083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c9c21110b234b3b943a8f40b57a7c87, type: 3}
+  m_Name: MoveToTownNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: 69e5c3fdebebccb4cb66f9dfaed0b0fd
+  position: {x: 305.90002, y: 607}
+  blackboard:
+    armyGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u79FB\u52A8\u5230\u805A\u843D"

@@ -1,4 +1,4 @@
-﻿namespace Game.BehaviourTree.Condition
+﻿namespace Game.BehaviourTree
 {
     /// <summary>
     /// 测试条件节点

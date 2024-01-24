@@ -18,6 +18,11 @@ namespace Game.BehaviourTree
         /// </summary>
         public Action<int> buildArmy;
 
+        /// <summary>
+        /// 目标聚落
+        /// </summary>
+        public int targetTownId;
+
         public virtual void Resetting()
         {
             armyGeneralId = 0;
