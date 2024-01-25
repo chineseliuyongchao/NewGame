@@ -24,6 +24,12 @@ namespace GameQFramework
             return peopleRelativePosition;
         }
 
+        public Vector2 GetRealPosToMapPos(Vector2 realPos)
+        {
+            Vector3 peopleRelativePosition = _map.transform.InverseTransformPoint(realPos);
+            return peopleRelativePosition;
+        }
+
         public Vector2 GetMapToRealPos(Transform transform, Vector2 mapPos)
         {
             Vector3 peopleRelativePosition = transform.InverseTransformPoint(mapPos);

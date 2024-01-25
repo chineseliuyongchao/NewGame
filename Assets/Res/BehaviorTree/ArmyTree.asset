@@ -44,6 +44,7 @@ MonoBehaviour:
   aiAgent: {fileID: 0}
   description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u6210\u529F"
   children:
+  - {fileID: -3584562886716250618}
   - {fileID: 6952977259562853932}
 --- !u!114 &-3584562886716250618
 MonoBehaviour:
@@ -60,13 +61,15 @@ MonoBehaviour:
   treeState: 0
   started: 0
   guid: ff84303a985d7074d9681bee99ed0ccf
-  position: {x: 88.84, y: 454}
+  position: {x: 252, y: 449}
   blackboard:
     armyGeneralId: 0
     targetTownId: 0
   aiAgent: {fileID: 0}
   description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u5931\u8D25"
-  children: []
+  children:
+  - {fileID: 4505630919249639482}
+  - {fileID: 8241959082789056083}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

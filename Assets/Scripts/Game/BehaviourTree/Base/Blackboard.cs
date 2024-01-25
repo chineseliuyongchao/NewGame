@@ -23,6 +23,11 @@ namespace Game.BehaviourTree
         /// </summary>
         public int targetTownId;
 
+        /// <summary>
+        /// 移动至聚落
+        /// </summary>
+        public Action<int> moveToTown;
+
         public virtual void Resetting()
         {
             armyGeneralId = 0;

@@ -1,5 +1,4 @@
-﻿using Game.Town;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameQFramework
 {
@@ -9,12 +8,12 @@ namespace GameQFramework
     public class SelectMapLocationEvent
     {
         public Vector2 selectPos;
-        public readonly BaseTown baseTown;
+        public readonly int townId;
 
-        public SelectMapLocationEvent(Vector2 selectPos, BaseTown baseTown)
+        public SelectMapLocationEvent(Vector2 selectPos, int townId)
         {
             this.selectPos = selectPos;
-            this.baseTown = baseTown;
+            this.townId = townId;
         }
     }
 }

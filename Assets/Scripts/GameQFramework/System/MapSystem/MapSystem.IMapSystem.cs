@@ -18,6 +18,13 @@ namespace GameQFramework
         Vector2 GetMapPos(Transform transform);
 
         /// <summary>
+        /// 根据实际位置获取地图位置
+        /// </summary>
+        /// <param name="realPos"></param>
+        /// <returns></returns>
+        Vector2 GetRealPosToMapPos(Vector2 realPos);
+
+        /// <summary>
         /// 根据地图位置获取实际位置
         /// </summary>
         /// <param name="transform">当前角色的transform</param>

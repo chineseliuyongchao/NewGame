@@ -24,6 +24,7 @@ namespace Game.Army
         public override void MoveToTown()
         {
             Debug.Log("移动到聚落：  " + _armyBlackBoard.targetTownId);
+            _armyBlackBoard?.moveToTown(_armyBlackBoard.targetTownId);
         }
 
         public override void Patrol()

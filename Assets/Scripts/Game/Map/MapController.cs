@@ -55,7 +55,9 @@ namespace Game.Map
                         }
                     }
 
-                    this.SendCommand(new SelectMapLocationCommand(worldPosition, baseTown));
+                    this.SendCommand(baseTown != null
+                        ? new SelectMapLocationCommand(worldPosition, baseTown.TownId)
+                        : new SelectMapLocationCommand(worldPosition, 0));
                 }
             }
         }

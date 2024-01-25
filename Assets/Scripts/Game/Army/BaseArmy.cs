@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Town;
 using GameQFramework;
 using QFramework;
 using UnityEngine;
@@ -32,6 +31,11 @@ namespace Game.Army
         private int _currentIndex;
 
         private void Update()
+        {
+            UpdateArmy();
+        }
+
+        protected virtual void UpdateArmy()
         {
             if (this.GetModel<IGameModel>().TimeIsPass)
             {
@@ -251,10 +255,8 @@ namespace Game.Army
         /// <summary>
         /// 游戏角色移动到某个聚落
         /// </summary>
-        /// <param name="baseTown"></param>
-        protected virtual void MoveToTown(BaseTown baseTown)
+        protected virtual void ArriveInTown(int townId)
         {
-            Debug.Log("moveToTown:  " + baseTown.name);
         }
 
         /// <summary>

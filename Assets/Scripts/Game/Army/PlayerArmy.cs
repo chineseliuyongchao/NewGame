@@ -23,18 +23,18 @@ namespace Game.Army
             {
                 Move(GetStartMapPos(), e.selectPos, () =>
                 {
-                    if (e.baseTown != null)
+                    if (e.townId != 0)
                     {
-                        MoveToTown(e.baseTown);
+                        ArriveInTown(e.townId);
                         this.GetModel<IMyPlayerModel>().AccessTown++;
                     }
                 });
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
-        protected override void MoveToTown(BaseTown baseTown)
+        protected override void ArriveInTown(int townId)
         {
-            UIKit.OpenPanel<UITown>(new UITownData(baseTown.TownId));
+            UIKit.OpenPanel<UITown>(new UITownData(townId));
         }
     }
 }

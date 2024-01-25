@@ -110,10 +110,10 @@ namespace Game.Family
 
             GameObject army = Instantiate(_armyPrefab);
             army.Parent(this.GetModel<IGameModel>().PlayerArmy.transform.parent);
-
             int townId = this.GetModel<IFamilyModel>().RoleData[roleId].townId;
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
             army.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
+            army.name = this.GetModel<IFamilyModel>().RoleData[roleId].roleName;
         }
 
         public BehaviourTree.BehaviourTree GetTree()
