@@ -28,6 +28,11 @@ namespace Game.BehaviourTree
         /// </summary>
         public Action<int> moveToTown;
 
+        /// <summary>
+        /// 巡逻
+        /// </summary>
+        public Action<int> patrol;
+
         public virtual void Resetting()
         {
             armyGeneralId = 0;

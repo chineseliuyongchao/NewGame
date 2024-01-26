@@ -30,6 +30,7 @@ namespace Game.Army
         public override void Patrol()
         {
             Debug.Log("开始巡逻");
+            _armyBlackBoard?.patrol(2); //暂时先沿着聚落2巡逻
         }
     }
 }

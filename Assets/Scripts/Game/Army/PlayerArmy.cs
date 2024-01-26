@@ -21,7 +21,7 @@ namespace Game.Army
             base.OnListenEvent();
             this.RegisterEvent<SelectMapLocationEvent>(e =>
             {
-                Move(GetStartMapPos(), e.selectPos, () =>
+                SetMoveTarget(GetStartMapPos(), e.selectPos, () =>
                 {
                     if (e.townId != 0)
                     {

@@ -15,20 +15,25 @@ namespace Game.Army
         /// <summary>
         /// 移动经过位置列表
         /// </summary>
-        private List<Vector2> _movePosList;
+        protected List<Vector2> movePosList;
 
         /// <summary>
         /// 移动结束以后的事件
         /// </summary>
         private MoveCloseBack _moveEndCallBack;
 
+        /// <summary>
+        /// 军队状态
+        /// </summary>
+        protected ArmyType ArmyType { get; set; }
+
         protected override void OnInit()
         {
             base.OnInit();
-            _movePosList = new List<Vector2>();
+            movePosList = new List<Vector2>();
         }
 
-        private int _currentIndex;
+        protected int CurrentIndex { get; set; }
 
         private void Update()
         {
@@ -39,18 +44,18 @@ namespace Game.Army
         {
             if (this.GetModel<IGameModel>().TimeIsPass)
             {
-                if (_currentIndex < _movePosList.Count)
+                if (CurrentIndex < movePosList.Count)
                 {
                     // 计算当前位置到目标位置的插值
-                    transform.position = Vector2.MoveTowards(transform.position, _movePosList[_currentIndex],
+                    transform.position = Vector2.MoveTowards(transform.position, movePosList[CurrentIndex],
                         MoveSpeed() * Time.deltaTime);
                     // 检查是否已经接近目标位置
-                    if (Vector2.Distance(transform.position, _movePosList[_currentIndex]) < 0.1f)
+                    if (Vector2.Distance(transform.position, movePosList[CurrentIndex]) < 0.1f)
                     {
                         // 移动到下一个目标位置
-                        _currentIndex++;
+                        CurrentIndex++;
                         // 如果已经到达最后一个位置，执行移动结束后的方法
-                        if (_currentIndex == _movePosList.Count)
+                        if (CurrentIndex == movePosList.Count)
                         {
                             if (_moveEndCallBack != null)
                             {
@@ -68,12 +73,12 @@ namespace Game.Army
         /// <param name="startPos"></param>
         /// <param name="endPos"></param>
         /// <param name="callBack"></param>
-        protected void Move(Vector2 startPos, Vector2 endPos, MoveCloseBack callBack)
+        protected void SetMoveTarget(Vector2 startPos, Vector2 endPos, MoveCloseBack callBack)
         {
-            _movePosList.Clear();
-            _currentIndex = 0;
+            movePosList.Clear();
+            CurrentIndex = 0;
             _moveEndCallBack = callBack;
-            PlayerMove(startPos, endPos);
+            MoveTarget(startPos, endPos);
         }
 
         /// <summary>
@@ -81,7 +86,7 @@ namespace Game.Army
         /// </summary>
         /// <param name="startPos">角色当前地图位置</param>
         /// <param name="endPos">目标地图位置</param>
-        private void PlayerMove(Vector2 startPos, Vector2 endPos)
+        private void MoveTarget(Vector2 startPos, Vector2 endPos)
         {
             PathfindingSingleMessage message = this.GetSystem<IPathfindingSystem>()
                 .Pathfinding(startPos, endPos, this.GetModel<IMapModel>().Map, out PathfindingResultType type);
@@ -109,12 +114,12 @@ namespace Game.Army
                 {
                     Vector2 pos = this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent,
                         this.GetSystem<IMapSystem>().GetGridToMapPos(meshPosList[i]));
-                    _movePosList.Add(pos);
+                    movePosList.Add(pos);
                 }
             }
             else if (type == PathfindingResultType.DEST_NO_CHANGE) //在同一个网格内移动
             {
-                _movePosList.Add(this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent, endPos));
+                movePosList.Add(this.GetSystem<IMapSystem>().GetMapToRealPos(transform.parent, endPos));
             }
         }
 
@@ -276,5 +281,36 @@ namespace Game.Army
         {
             return GameConstant.BASE_MOVE_SPEED;
         }
+    }
+
+    /// <summary>
+    /// 军队状态
+    /// </summary>
+    public enum ArmyType
+    {
+        /// <summary>
+        /// 在聚落驻扎
+        /// </summary>
+        HUT_TOWN,
+
+        /// <summary>
+        /// 在野外驻扎
+        /// </summary>
+        HUT_FIELD,
+
+        /// <summary>
+        /// 移动至聚落
+        /// </summary>
+        MOVE_TO_TOWN,
+
+        /// <summary>
+        /// 移动至军队
+        /// </summary>
+        MOVE_TO_ARMY,
+
+        /// <summary>
+        /// 巡逻
+        /// </summary>
+        PATROL
     }
 }
