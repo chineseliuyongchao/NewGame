@@ -65,7 +65,7 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            newGameButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMainGameScene(); });
+            newGameButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeGameCreateScene(); });
             newFileButton.onClick.AddListener(() => { UIKit.OpenPanel<UINewFile>(new UINewFileData()); });
             backToMenuButton.onClick.AddListener(CloseSelf);
             backToGameButton.onClick.AddListener(CloseSelf);

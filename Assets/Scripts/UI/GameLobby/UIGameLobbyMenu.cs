@@ -46,11 +46,7 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            backToMenuButton.onClick.AddListener(() =>
-            {
-                this.SendCommand(new ChangeToMenuSceneCommand());
-                this.GetSystem<IGameSystem>().ChangeMenuScene();
-            });
+            backToMenuButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMenuScene(); });
             saveButton.onClick.AddListener(() =>
             {
                 UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData(false, false));

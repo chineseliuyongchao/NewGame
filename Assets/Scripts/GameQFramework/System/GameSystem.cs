@@ -18,6 +18,7 @@ namespace GameQFramework
 
         public void ChangeMenuScene()
         {
+            this.SendEvent(new ChangeToMenuSceneEvent());
             SceneManager.LoadScene("MenuScene");
         }
 
@@ -26,7 +27,14 @@ namespace GameQFramework
             this.SendEvent(new ChangeToMainGameSceneEvent());
             LoadCurrentData();
             this.GetSystem<IGameSaveSystem>().LoadGame(fileName);
+            InitNewGameData(fileName);
             SceneManager.LoadScene("MainGameScene");
+        }
+
+        public void ChangeGameCreateScene()
+        {
+            this.SendEvent(new ChangeToGameCreateSceneEvent());
+            SceneManager.LoadScene("CreateGameScene");
         }
 
         /// <summary>
@@ -51,6 +59,25 @@ namespace GameQFramework
             this.GetSystem<ICountrySystem>().InitCountryCommonData(countryAsset);
             this.GetSystem<IMapSystem>().InitMapMeshData(mapMeshAsset);
             _hasLoadCurrentData = true;
+        }
+
+        /// <summary>
+        /// 初始化新游戏的数据
+        /// </summary>
+        private void InitNewGameData(string fileName)
+        {
+            if (fileName != null)
+            {
+                return;
+            }
+
+            CreateGameData data = this.GetModel<IMyPlayerModel>().CreateGameData;
+            int roleId = this.GetSystem<IFamilySystem>().AddNewRole(new RoleData
+            {
+                roleName = data.name,
+                roleAge = data.age
+            });
+            this.GetModel<IMyPlayerModel>().RoleId = roleId;
         }
     }
 }

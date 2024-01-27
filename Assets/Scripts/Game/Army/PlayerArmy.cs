@@ -1,5 +1,4 @@
-﻿using Game.Town;
-using GameQFramework;
+﻿using GameQFramework;
 using QFramework;
 using UI;
 

@@ -23,7 +23,7 @@
         /// <summary>
         /// 军队基础移动速度
         /// </summary>
-        public const int BASE_MOVE_SPEED = 5;
+        public const int BASE_MOVE_SPEED = 2;
     }
 
     /// <summary>

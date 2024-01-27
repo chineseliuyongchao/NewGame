@@ -42,6 +42,13 @@
     }
 
     /// <summary>
+    /// 切换到游戏创建场景
+    /// </summary>
+    public class ChangeToGameCreateSceneEvent
+    {
+    }
+
+    /// <summary>
     /// 保存了存档
     /// </summary>
     public class SaveFileDataEvent

@@ -20,5 +20,12 @@ namespace GameQFramework
             this.GetUtility<IGameUtility>()
                 .AnalysisJsonConfigurationTable(textAsset, this.GetModel<IFamilyModel>().RoleCommonData);
         }
+
+        public int AddNewRole(RoleData roleData)
+        {
+            int roleId = this.GetModel<IFamilyModel>().RoleData.Count + 1;
+            this.GetModel<IFamilyModel>().RoleData.Add(roleId, roleData);
+            return roleId;
+        }
     }
 }

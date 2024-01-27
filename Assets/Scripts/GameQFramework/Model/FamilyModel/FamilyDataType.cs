@@ -81,6 +81,10 @@ namespace GameQFramework
         /// </summary>
         public RoleType roleType;
 
+        public RoleData()
+        {
+        }
+
         public RoleData(RoleCommonData roleCommonData)
         {
             roleName = roleCommonData.Name;

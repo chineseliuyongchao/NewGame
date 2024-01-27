@@ -7,6 +7,8 @@ namespace GameQFramework
     public class MyPlayerModel : AbstractModel, IMyPlayerModel, ISaveModel
     {
         private int _accessTown;
+        private CreateGameData _createGameData;
+        private int _roleId;
 
         protected override void OnInit()
         {
@@ -19,11 +21,24 @@ namespace GameQFramework
             set => _accessTown = value;
         }
 
+        public CreateGameData CreateGameData
+        {
+            get => _createGameData;
+            set => _createGameData = value;
+        }
+
+        public int RoleId
+        {
+            get => _roleId;
+            set => _roleId = value;
+        }
+
         public object SaveModel()
         {
             return new MyPlayerModelData
             {
-                accessTown = _accessTown
+                accessTown = _accessTown,
+                roleId = _roleId
             };
         }
 
@@ -31,11 +46,13 @@ namespace GameQFramework
         {
             MyPlayerModelData myPlayerModelData = JsonUtility.FromJson<MyPlayerModelData>(data);
             _accessTown = myPlayerModelData.accessTown;
+            _roleId = myPlayerModelData.roleId;
         }
 
         public void InitializeModel()
         {
             _accessTown = 0;
+            _roleId = 0;
         }
 
         public void NewArchiveInitData()
@@ -52,5 +69,12 @@ namespace GameQFramework
     public class MyPlayerModelData
     {
         public int accessTown;
+        public int roleId;
+    }
+
+    public class CreateGameData
+    {
+        public string name;
+        public int age;
     }
 }

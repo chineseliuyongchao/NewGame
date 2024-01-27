@@ -14,5 +14,12 @@ namespace GameQFramework
         /// 初始化角色通用数据
         /// </summary>
         void InitRoleCommonData(TextAsset textAsset);
+
+        /// <summary>
+        /// 添加一位新的角色
+        /// </summary>
+        /// <param name="roleData"></param>
+        /// <returns></returns>
+        int AddNewRole(RoleData roleData);
     }
 }
