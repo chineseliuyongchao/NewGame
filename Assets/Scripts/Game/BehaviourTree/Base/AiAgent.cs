@@ -10,28 +10,28 @@ namespace Game.BehaviourTree
     public class AiAgent : MonoBehaviour, IController
     {
         /// <summary>
-        /// 是否可以组建新的军队
+        /// 是否可以组建新的队伍
         /// </summary>
         /// <returns></returns>
-        public virtual bool CanBuildArmy()
+        public virtual bool CanBuildTeam()
         {
             return false;
         }
 
         /// <summary>
-        /// 为将要组建的军队挑选一位将军
+        /// 为将要组建的队伍挑选一位将军
         /// </summary>
         /// <returns>是否挑选成功</returns>
-        public virtual bool SelectArmyGeneral()
+        public virtual bool SelectTeamGeneral()
         {
             return false;
         }
 
         /// <summary>
-        /// 组建一支军队
+        /// 组建一支队伍
         /// </summary>
         /// <returns>是否组建成功</returns>
-        public virtual bool BuildArmy()
+        public virtual bool BuildTeam()
         {
             return false;
         }

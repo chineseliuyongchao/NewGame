@@ -23,11 +23,11 @@ namespace Game.Family
             _isInit = true;
         }
 
-        public override bool CanBuildArmy()
+        public override bool CanBuildTeam()
         {
             if (!_isInit)
             {
-                return base.CanBuildArmy();
+                return base.CanBuildTeam();
             }
 
             if (this.GetModel<IFamilyModel>().FamilyData[_familyId].familyWealth > 10000)
@@ -38,11 +38,11 @@ namespace Game.Family
             return false;
         }
 
-        public override bool SelectArmyGeneral()
+        public override bool SelectTeamGeneral()
         {
             if (!_isInit)
             {
-                return base.SelectArmyGeneral();
+                return base.SelectTeamGeneral();
             }
 
             for (int i = 0; i < _familyData.familyRoleS.Count; i++)
@@ -50,7 +50,7 @@ namespace Game.Family
                 int roleId = _familyData.familyRoleS[i];
                 if (this.GetModel<IFamilyModel>().RoleData[roleId].roleType == RoleType.INACTIVE)
                 {
-                    _familyBlackBoard.armyGeneralId = roleId;
+                    _familyBlackBoard.teamGeneralId = roleId;
                     break;
                 }
             }
@@ -58,21 +58,21 @@ namespace Game.Family
             return true;
         }
 
-        public override bool BuildArmy()
+        public override bool BuildTeam()
         {
             if (!_isInit)
             {
-                return base.BuildArmy();
+                return base.BuildTeam();
             }
 
-            if (_familyBlackBoard.armyGeneralId <= 0)
+            if (_familyBlackBoard.teamGeneralId <= 0)
             {
                 return false;
             }
 
-            Debug.Log(this.GetModel<IFamilyModel>().FamilyData[_familyId].familyName + "家族组建军队，将领是" +
-                      this.GetModel<IFamilyModel>().RoleData[_familyBlackBoard.armyGeneralId].roleName);
-            _familyBlackBoard.buildArmy?.Invoke(_familyBlackBoard.armyGeneralId);
+            Debug.Log(this.GetModel<IFamilyModel>().FamilyData[_familyId].familyName + "家族组建队伍，将领是" +
+                      this.GetModel<IFamilyModel>().RoleData[_familyBlackBoard.teamGeneralId].roleName);
+            _familyBlackBoard.buildTeam?.Invoke(_familyBlackBoard.teamGeneralId);
 
             return true;
         }

@@ -2,17 +2,17 @@
 using QFramework;
 using UI;
 
-namespace Game.Army
+namespace Game.Team
 {
     /// <summary>
-    /// 玩家自身的军队
+    /// 玩家自身的队伍
     /// </summary>
-    public class PlayerArmy : BaseArmy
+    public class PlayerTeam : BaseTeam
     {
         protected override void OnInit()
         {
             base.OnInit();
-            this.GetModel<IGameModel>().PlayerArmy = this;
+            this.GetModel<IGameModel>().PlayerTeam = this;
         }
 
         protected override void OnListenEvent()

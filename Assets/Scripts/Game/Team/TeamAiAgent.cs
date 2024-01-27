@@ -1,18 +1,18 @@
 ﻿using Game.BehaviourTree;
 using UnityEngine;
 
-namespace Game.Army
+namespace Game.Team
 {
     /// <summary>
-    /// 军队的ai代理
+    /// 队伍的ai代理
     /// </summary>
-    public class ArmyAiAgent : AiAgent
+    public class TeamAiAgent : AiAgent
     {
-        private ArmyBlackBoard _armyBlackBoard;
+        private TeamBlackBoard _teamBlackBoard;
 
-        public void Init(ArmyBlackBoard armyBlackBoard)
+        public void Init(TeamBlackBoard teamBlackBoard)
         {
-            _armyBlackBoard = armyBlackBoard;
+            _teamBlackBoard = teamBlackBoard;
         }
 
         public override bool CanMoveToTown(out int townId)
@@ -23,14 +23,14 @@ namespace Game.Army
 
         public override void MoveToTown()
         {
-            Debug.Log("移动到聚落：  " + _armyBlackBoard.targetTownId);
-            _armyBlackBoard?.moveToTown(_armyBlackBoard.targetTownId);
+            Debug.Log("移动到聚落：  " + _teamBlackBoard.targetTownId);
+            _teamBlackBoard?.moveToTown(_teamBlackBoard.targetTownId);
         }
 
         public override void Patrol()
         {
             Debug.Log("开始巡逻");
-            _armyBlackBoard?.patrol(2); //暂时先沿着聚落2巡逻
+            _teamBlackBoard?.patrol(2); //暂时先沿着聚落2巡逻
         }
     }
 }

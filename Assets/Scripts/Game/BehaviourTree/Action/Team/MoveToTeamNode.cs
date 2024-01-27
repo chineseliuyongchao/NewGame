@@ -1,9 +1,9 @@
 ﻿namespace Game.BehaviourTree
 {
     /// <summary>
-    /// 判断是否可以组建新军队的节点
+    /// 移动到聚落的节点
     /// </summary>
-    public class CanBuildArmyNode : BaseConditionNode
+    public class MoveToTeamNode : BaseActionNode
     {
         protected override void OnStart()
         {
@@ -13,14 +13,15 @@
         {
         }
 
-        public override string GetDescription()
+        protected override BehaviourTreeState OnUpdate()
         {
-            return "用于判断是否可以组建新的军队";
+            aiAgent.MoveToTown();
+            return BehaviourTreeState.SUCCESS;
         }
 
-        protected override bool JudgeResult()
+        public override string GetDescription()
         {
-            return aiAgent.CanBuildArmy();
+            return "移动到聚落";
         }
 
         /// <summary>
@@ -29,7 +30,7 @@
         /// <returns></returns>
         public static string FunctionPath()
         {
-            return "Army/";
+            return "Team/";
         }
     }
 }

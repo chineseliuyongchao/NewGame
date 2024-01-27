@@ -20,8 +20,8 @@ namespace GameQFramework
         public int RoleId { get; set; }
 
         /// <summary>
-        /// 玩家的军队id，开始游戏以后，玩家默认都要创建一只军队，即便只有一个人
+        /// 玩家的队伍id，开始游戏以后，玩家默认都要创建一只队伍，即便只有一个人
         /// </summary>
-        public int ArmyId { get; set; }
+        public int TeamId { get; set; }
     }
 }

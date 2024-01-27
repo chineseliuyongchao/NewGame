@@ -79,12 +79,12 @@ namespace GameQFramework
             });
             this.GetModel<IMyPlayerModel>().RoleId = roleId;
 
-            int armyId = this.GetSystem<IArmySystem>().AddArmy(new ArmyData
+            int teamId = this.GetSystem<ITeamSystem>().AddTeam(new TeamData
             {
                 generalRoleId = roleId,
                 number = 1
             });
-            this.GetModel<IMyPlayerModel>().ArmyId = armyId;
+            this.GetModel<IMyPlayerModel>().TeamId = teamId;
         }
     }
 }

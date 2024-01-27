@@ -1,9 +1,9 @@
 ﻿namespace Game.BehaviourTree
 {
     /// <summary>
-    /// 为军队挑选将军的节点
+    /// 组建队伍的节点
     /// </summary>
-    public class SelectArmyGeneralNode : BaseActionNode
+    public class BuildTeamNode : BaseActionNode
     {
         protected override void OnStart()
         {
@@ -15,7 +15,7 @@
 
         protected override BehaviourTreeState OnUpdate()
         {
-            if (aiAgent.SelectArmyGeneral())
+            if (aiAgent.BuildTeam())
             {
                 return BehaviourTreeState.SUCCESS;
             }
@@ -25,7 +25,7 @@
 
         public override string GetDescription()
         {
-            return "为将要组建的军队挑选一位将军";
+            return "组建一支队伍";
         }
 
         /// <summary>
@@ -34,7 +34,7 @@
         /// <returns></returns>
         public static string FunctionPath()
         {
-            return "Army/";
+            return "Team/";
         }
     }
 }

@@ -17,31 +17,31 @@ namespace Game.Family
         private int _familyId;
         private FamilyBlackBoard _familyBlackBoard;
         private FamilyAiAgent _familyAiAgent;
-        private GameObject _armyPrefab;
+        private GameObject _teamPrefab;
 
         /// <summary>
-        /// 是否每月尝试组建一支军队（默认是每天尝试一次）
+        /// 是否每月尝试组建一支队伍（默认是每天尝试一次）
         /// </summary>
-        private bool _checkBuildArmyByMonth;
+        private bool _checkBuildTeamByMonth;
 
         /// <summary>
-        /// 每月的第几天尝试组建军队
+        /// 每月的第几天尝试组建队伍
         /// </summary>
-        private int _checkBuildArmyDay;
+        private int _checkBuildTeamDay;
 
         /// <summary>
-        /// 每天的第几个时辰尝试组建军队
+        /// 每天的第几个时辰尝试组建队伍
         /// </summary>
-        private int _checkBuildArmyTime;
+        private int _checkBuildTeamTime;
 
         protected override void OnInit()
         {
             base.OnInit();
-            _armyPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.ARMY);
+            _teamPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.TEAM);
             behaviourTree = behaviourTree.Clone();
             _familyBlackBoard = new FamilyBlackBoard
             {
-                buildArmy = BuildArmy
+                buildTeam = BuildTeam
             };
             behaviourTree.blackboard = _familyBlackBoard;
             _familyAiAgent = this.AddComponent<FamilyAiAgent>();
@@ -63,32 +63,32 @@ namespace Game.Family
             _familyAiAgent.Init(_familyId, _familyBlackBoard);
 
             Random random = new Random();
-            _checkBuildArmyDay = random.Next(GameTimeConstant.DAY_CONVERT_MONTH);
-            _checkBuildArmyTime = random.Next(GameTimeConstant.TIME_CONVERT_DAY);
+            _checkBuildTeamDay = random.Next(GameTimeConstant.DAY_CONVERT_MONTH);
+            _checkBuildTeamTime = random.Next(GameTimeConstant.TIME_CONVERT_DAY);
         }
 
         protected override void OnListenEvent()
         {
             this.RegisterEvent<ChangeTimeEvent>(_ =>
             {
-                bool canCheckBuildArmy = false;
-                if (_checkBuildArmyByMonth)
+                bool canCheckBuildTeam = false;
+                if (_checkBuildTeamByMonth)
                 {
-                    if (this.GetModel<IGameModel>().Day == _checkBuildArmyDay &&
-                        this.GetModel<IGameModel>().Time == _checkBuildArmyTime)
+                    if (this.GetModel<IGameModel>().Day == _checkBuildTeamDay &&
+                        this.GetModel<IGameModel>().Time == _checkBuildTeamTime)
                     {
-                        canCheckBuildArmy = true;
+                        canCheckBuildTeam = true;
                     }
                 }
                 else
                 {
-                    if (this.GetModel<IGameModel>().Time == _checkBuildArmyTime)
+                    if (this.GetModel<IGameModel>().Time == _checkBuildTeamTime)
                     {
-                        canCheckBuildArmy = true;
+                        canCheckBuildTeam = true;
                     }
                 }
 
-                if (canCheckBuildArmy)
+                if (canCheckBuildTeam)
                 {
                     behaviourTree.StartTree();
                 }
@@ -101,20 +101,20 @@ namespace Game.Family
         }
 
         /// <summary>
-        /// 组建一支军队
+        /// 组建一支队伍
         /// </summary>
         /// <param name="roleId"></param>
-        private void BuildArmy(int roleId)
+        private void BuildTeam(int roleId)
         {
             this.GetModel<IFamilyModel>().RoleData[roleId].roleType = RoleType.GENERAL;
 
-            GameObject armyObject = Instantiate(_armyPrefab);
-            armyObject.Parent(this.GetModel<IGameModel>().PlayerArmy.transform.parent);
+            GameObject teamObject = Instantiate(_teamPrefab);
+            teamObject.Parent(this.GetModel<IGameModel>().PlayerTeam.transform.parent);
             int townId = this.GetModel<IFamilyModel>().RoleData[roleId].townId;
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
-            armyObject.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
-            Army.Army army = armyObject.GetComponent<Army.Army>();
-            army.ArmyId = this.GetSystem<IArmySystem>().AddArmy(new ArmyData
+            teamObject.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
+            Team.Team team = teamObject.GetComponent<Team.Team>();
+            team.TeamId = this.GetSystem<ITeamSystem>().AddTeam(new TeamData
             {
                 generalRoleId = roleId,
                 number = 1

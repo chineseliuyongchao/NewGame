@@ -4,18 +4,18 @@ using QFramework;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Game.Army
+namespace Game.Team
 {
     /// <summary>
-    /// 普通ai军队
+    /// 普通ai队伍
     /// </summary>
-    public class Army : BaseArmy, IGetBehaviourTree
+    public class Team : BaseTeam, IGetBehaviourTree
     {
         public BehaviourTree.BehaviourTree behaviourTree;
         private int _generalId;
-        public int ArmyId { get; set; }
-        private ArmyBlackBoard _armyBlackBoard;
-        private ArmyAiAgent _aiAgent;
+        public int TeamId { get; set; }
+        private TeamBlackBoard _teamBlackBoard;
+        private TeamAiAgent _aiAgent;
         private int _targetTownId;
         private readonly float _patrolRadius = 1; // 巡逻半径
 
@@ -23,29 +23,29 @@ namespace Game.Army
         {
             base.OnInit();
             behaviourTree = behaviourTree.Clone();
-            _armyBlackBoard = new ArmyBlackBoard
+            _teamBlackBoard = new TeamBlackBoard
             {
                 moveToTown = MoveToTown,
                 patrol = Patrol
             };
-            behaviourTree.blackboard = _armyBlackBoard;
-            _aiAgent = this.AddComponent<ArmyAiAgent>();
+            behaviourTree.blackboard = _teamBlackBoard;
+            _aiAgent = this.AddComponent<TeamAiAgent>();
             behaviourTree.Bind(_aiAgent);
         }
 
         protected override void OnControllerStart()
         {
-            _aiAgent.Init(_armyBlackBoard);
+            _aiAgent.Init(_teamBlackBoard);
             behaviourTree.StartTree();
         }
 
-        protected override void UpdateArmy()
+        protected override void UpdateTeam()
         {
-            base.UpdateArmy();
+            base.UpdateTeam();
             behaviourTree.UpdateTree();
-            switch (ArmyType)
+            switch (TeamType)
             {
-                case ArmyType.PATROL:
+                case TeamType.PATROL:
                     if (CurrentIndex == movePosList.Count)
                     {
                         float randomAngle = Random.Range(0f, 360f);
@@ -80,7 +80,7 @@ namespace Game.Army
         /// <param name="townId">巡逻的聚落</param>
         private void Patrol(int townId)
         {
-            ArmyType = ArmyType.PATROL;
+            TeamType = TeamType.PATROL;
             _targetTownId = townId;
         }
 

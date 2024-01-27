@@ -1,4 +1,4 @@
-﻿using Game.Army;
+﻿using Game.Team;
 using QFramework;
 
 namespace GameQFramework
@@ -31,9 +31,9 @@ namespace GameQFramework
         public int Quarter { get; set; }
 
         /// <summary>
-        /// 玩家军队的实例（有且仅有一个）
+        /// 玩家队伍的实例（有且仅有一个）
         /// </summary>
-        public PlayerArmy PlayerArmy { get; set; }
+        public PlayerTeam PlayerTeam { get; set; }
 
         /// <summary>
         /// 记录时间是否可以流逝

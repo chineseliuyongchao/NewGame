@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97244ac161764bc790b297f33bdd7a3d, type: 3}
-  m_Name: ArmyTree
+  m_Name: TeamTree
   m_EditorClassIdentifier: 
   rootNode: {fileID: -7807685200397735444}
   treeState: 0

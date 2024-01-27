@@ -9,14 +9,14 @@ namespace Game.BehaviourTree
     public class Blackboard
     {
         /// <summary>
-        /// 军队的将领的人物id
+        /// 队伍的将领的人物id
         /// </summary>
-        public int armyGeneralId;
+        public int teamGeneralId;
 
         /// <summary>
-        /// 组建军队
+        /// 组建队伍
         /// </summary>
-        public Action<int> buildArmy;
+        public Action<int> buildTeam;
 
         /// <summary>
         /// 目标聚落
@@ -35,7 +35,7 @@ namespace Game.BehaviourTree
 
         public virtual void Resetting()
         {
-            armyGeneralId = 0;
+            teamGeneralId = 0;
         }
     }
 }

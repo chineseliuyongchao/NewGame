@@ -1,5 +1,5 @@
 ﻿using System;
-using Game.Army;
+using Game.Team;
 using QFramework;
 using UnityEngine;
 using Utils.Constant;
@@ -16,7 +16,7 @@ namespace GameQFramework
         private int _quarter;
         private bool _timeIsPass;
         private bool _hasShowDialog;
-        private PlayerArmy _playerArmy;
+        private PlayerTeam _playerTeam;
 
         protected override void OnInit()
         {
@@ -85,10 +85,10 @@ namespace GameQFramework
             set => _hasShowDialog = value;
         }
 
-        public PlayerArmy PlayerArmy
+        public PlayerTeam PlayerTeam
         {
-            get => _playerArmy;
-            set => _playerArmy = value;
+            get => _playerTeam;
+            set => _playerTeam = value;
         }
 
         public Object SaveModel()

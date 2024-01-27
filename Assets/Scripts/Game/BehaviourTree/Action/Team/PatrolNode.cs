@@ -1,9 +1,9 @@
 ﻿namespace Game.BehaviourTree
 {
     /// <summary>
-    /// 组建军队的节点
+    /// 巡逻的节点
     /// </summary>
-    public class BuildArmyNode : BaseActionNode
+    public class PatrolNode : BaseActionNode
     {
         protected override void OnStart()
         {
@@ -15,17 +15,13 @@
 
         protected override BehaviourTreeState OnUpdate()
         {
-            if (aiAgent.BuildArmy())
-            {
-                return BehaviourTreeState.SUCCESS;
-            }
-
-            return BehaviourTreeState.FAILURE;
+            aiAgent.Patrol();
+            return BehaviourTreeState.SUCCESS;
         }
 
         public override string GetDescription()
         {
-            return "组建一支军队";
+            return "巡逻";
         }
 
         /// <summary>
@@ -34,7 +30,7 @@
         /// <returns></returns>
         public static string FunctionPath()
         {
-            return "Army/";
+            return "Team/";
         }
     }
 }

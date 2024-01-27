@@ -5,12 +5,12 @@ using QFramework;
 using UnityEngine;
 using Utils.Constant;
 
-namespace Game.Army
+namespace Game.Team
 {
     /// <summary>
-    /// 所有军队的基类（可以在大地图移动的单位均视作军队）
+    /// 所有队伍的基类（可以在大地图移动的单位均视作队伍）
     /// </summary>
-    public abstract class BaseArmy : BaseGameController
+    public abstract class BaseTeam : BaseGameController
     {
         /// <summary>
         /// 移动经过位置列表
@@ -23,9 +23,9 @@ namespace Game.Army
         private MoveCloseBack _moveEndCallBack;
 
         /// <summary>
-        /// 军队状态
+        /// 队伍状态
         /// </summary>
-        protected ArmyType ArmyType { get; set; }
+        protected TeamType TeamType { get; set; }
 
         protected override void OnInit()
         {
@@ -37,10 +37,10 @@ namespace Game.Army
 
         private void Update()
         {
-            UpdateArmy();
+            UpdateTeam();
         }
 
-        protected virtual void UpdateArmy()
+        protected virtual void UpdateTeam()
         {
             if (this.GetModel<IGameModel>().TimeIsPass)
             {

@@ -21,7 +21,7 @@
         public const string GAME_FILE_DATA = "/gameFileData.txt";
 
         /// <summary>
-        /// 军队基础移动速度
+        /// 队伍基础移动速度
         /// </summary>
         public const int BASE_MOVE_SPEED = 2;
     }
@@ -139,14 +139,14 @@
         public const string TONN_NODE = "TownNode";
 
         /// <summary>
-        /// 玩家军队预制体
+        /// 玩家队伍预制体
         /// </summary>
-        public const string PLAYER_ARMY = "PlayerArmy";
+        public const string PLAYER_TEAM = "PlayerTeam";
 
         /// <summary>
-        /// ai军队预制体
+        /// ai队伍预制体
         /// </summary>
-        public const string ARMY = "Army";
+        public const string TEAM = "Team";
     }
 
     /// <summary>

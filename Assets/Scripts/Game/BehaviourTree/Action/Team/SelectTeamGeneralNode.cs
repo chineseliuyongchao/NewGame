@@ -1,9 +1,9 @@
 ﻿namespace Game.BehaviourTree
 {
     /// <summary>
-    /// 移动到聚落的节点
+    /// 为队伍挑选将军的节点
     /// </summary>
-    public class MoveToTownNode : BaseActionNode
+    public class SelectTeamGeneralNode : BaseActionNode
     {
         protected override void OnStart()
         {
@@ -15,13 +15,17 @@
 
         protected override BehaviourTreeState OnUpdate()
         {
-            aiAgent.MoveToTown();
-            return BehaviourTreeState.SUCCESS;
+            if (aiAgent.SelectTeamGeneral())
+            {
+                return BehaviourTreeState.SUCCESS;
+            }
+
+            return BehaviourTreeState.FAILURE;
         }
 
         public override string GetDescription()
         {
-            return "移动到聚落";
+            return "为将要组建的队伍挑选一位将军";
         }
 
         /// <summary>
@@ -30,7 +34,7 @@
         /// <returns></returns>
         public static string FunctionPath()
         {
-            return "Army/";
+            return "Team/";
         }
     }
 }

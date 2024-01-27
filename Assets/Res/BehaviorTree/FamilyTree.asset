@@ -1,25 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8953517628249768344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d6c2fc23d0f400887f5ed6c0248366c, type: 3}
-  m_Name: BuildArmyNode
-  m_EditorClassIdentifier: 
-  treeState: 0
-  started: 0
-  guid: 89e939ff83db3914e9f285636266a899
-  position: {x: 746, y: -70}
-  blackboard:
-    armyGeneralId: 0
-  aiAgent: {fileID: 0}
-  description: "\u7EC4\u5EFA\u4E00\u652F\u519B\u961F"
 --- !u!114 &-2859361609901263597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,35 +15,16 @@ MonoBehaviour:
   treeState: 0
   started: 0
   guid: 3cce0ff129ac1e842ab3cdcdd41ec08f
-  position: {x: 310, y: -223}
+  position: {x: 310, y: -208}
   blackboard:
-    armyGeneralId: 0
+    teamGeneralId: 0
+    targetTownId: 0
   aiAgent: {fileID: 0}
   description: "\u987A\u5E8F\u6267\u884C\u6240\u6709\u5B50\u8282\u70B9\uFF0C\u76F4\u5230\u6709\u5B50\u8282\u70B9\u5931\u8D25"
   children:
-  - {fileID: 9085523669174624397}
-  - {fileID: -465751665398615562}
-  - {fileID: -8953517628249768344}
---- !u!114 &-465751665398615562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdb3300aac3941ee8bc705269942b6b3, type: 3}
-  m_Name: SelectArmyGeneralNode
-  m_EditorClassIdentifier: 
-  treeState: 0
-  started: 0
-  guid: 27a7af3f87437e54a892cdd3f2e27a19
-  position: {x: 509, y: -70}
-  blackboard:
-    armyGeneralId: 0
-  aiAgent: {fileID: 0}
-  description: "\u4E3A\u5C06\u8981\u7EC4\u5EFA\u7684\u519B\u961F\u6311\u9009\u4E00\u4F4D\u5C06\u519B"
+  - {fileID: 7889708901952650199}
+  - {fileID: 2574362022136316909}
+  - {fileID: 8763413306589047493}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,12 +41,34 @@ MonoBehaviour:
   treeState: 0
   nodes:
   - {fileID: 3576389305906485743}
-  - {fileID: 9085523669174624397}
-  - {fileID: -8953517628249768344}
   - {fileID: -2859361609901263597}
-  - {fileID: -465751665398615562}
+  - {fileID: 7889708901952650199}
+  - {fileID: 2574362022136316909}
+  - {fileID: 8763413306589047493}
   blackboard:
-    armyGeneralId: 0
+    teamGeneralId: 0
+    targetTownId: 0
+--- !u!114 &2574362022136316909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb3300aac3941ee8bc705269942b6b3, type: 3}
+  m_Name: SelectTeamGeneralNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: 0593baf686fa034469fdbcf31fa0a70b
+  position: {x: 509, y: -28}
+  blackboard:
+    teamGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u4E3A\u5C06\u8981\u7EC4\u5EFA\u7684\u961F\u4F0D\u6311\u9009\u4E00\u4F4D\u5C06\u519B"
 --- !u!114 &3576389305906485743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,13 +84,14 @@ MonoBehaviour:
   treeState: 0
   started: 0
   guid: 32baf24666772604db455c9921da8ba3
-  position: {x: 310, y: -337.8}
+  position: {x: 310.00006, y: -332.7501}
   blackboard:
-    armyGeneralId: 0
+    teamGeneralId: 0
+    targetTownId: 0
   aiAgent: {fileID: 0}
   description: "\u6BCF\u68F5\u884C\u4E3A\u6811\u7684\u6839\u8282\u70B9"
   child: {fileID: -2859361609901263597}
---- !u!114 &9085523669174624397
+--- !u!114 &7889708901952650199
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,13 +101,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7396b40b8a44042ab442c9152d3651f, type: 3}
-  m_Name: CanBuildArmyNode
+  m_Name: CanBuildTeamNode
   m_EditorClassIdentifier: 
   treeState: 0
   started: 0
-  guid: 2d2d66f74dff69848b0b3dc89eb80833
-  position: {x: 310, y: -69.99999}
+  guid: b2e2f0b618a08164e8e6961c383baf87
+  position: {x: 310, y: -28}
   blackboard:
-    armyGeneralId: 0
+    teamGeneralId: 0
+    targetTownId: 0
   aiAgent: {fileID: 0}
-  description: "\u7528\u4E8E\u5224\u65AD\u662F\u5426\u53EF\u4EE5\u7EC4\u5EFA\u65B0\u7684\u519B\u961F"
+  description: "\u7528\u4E8E\u5224\u65AD\u662F\u5426\u53EF\u4EE5\u7EC4\u5EFA\u65B0\u7684\u961F\u4F0D"
+--- !u!114 &8763413306589047493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6c2fc23d0f400887f5ed6c0248366c, type: 3}
+  m_Name: BuildTeamNode
+  m_EditorClassIdentifier: 
+  treeState: 0
+  started: 0
+  guid: dd74a4604ef4bed418f7d04afe066c31
+  position: {x: 734, y: -12}
+  blackboard:
+    teamGeneralId: 0
+    targetTownId: 0
+  aiAgent: {fileID: 0}
+  description: "\u7EC4\u5EFA\u4E00\u652F\u961F\u4F0D"

@@ -106,7 +106,7 @@ namespace GameQFramework
         INACTIVE,
 
         /// <summary>
-        /// 担任军队的将军
+        /// 担任队伍的将军
         /// </summary>
         GENERAL,
     }

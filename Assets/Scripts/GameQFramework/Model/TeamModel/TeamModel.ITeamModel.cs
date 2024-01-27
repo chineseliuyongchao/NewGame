@@ -3,11 +3,11 @@ using QFramework;
 
 namespace GameQFramework
 {
-    public interface IArmyModel : IModel
+    public interface ITeamModel : IModel
     {
         /// <summary>
-        /// 军队数据
+        /// 队伍数据
         /// </summary>
-        public Dictionary<int, ArmyData> ArmyData { get; set; }
+        public Dictionary<int, TeamData> TeamData { get; set; }
     }
 }

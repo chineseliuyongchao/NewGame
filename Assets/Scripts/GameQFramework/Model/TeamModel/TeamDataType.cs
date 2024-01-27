@@ -3,10 +3,10 @@
 namespace GameQFramework
 {
     /// <summary>
-    /// 所有军队的数据，不同存档不同
+    /// 所有队伍的数据，不同存档不同
     /// </summary>
     [Serializable]
-    public class ArmyData
+    public class TeamData
     {
         /// <summary>
         /// 将领角色id
@@ -14,19 +14,15 @@ namespace GameQFramework
         public int generalRoleId;
 
         /// <summary>
-        /// 军队人数
+        /// 队伍人数
         /// </summary>
         public int number;
-
-        public ArmyData()
-        {
-        }
     }
 
     /// <summary>
-    /// 军队状态
+    /// 队伍状态
     /// </summary>
-    public enum ArmyType
+    public enum TeamType
     {
         /// <summary>
         /// 在聚落驻扎
@@ -44,9 +40,9 @@ namespace GameQFramework
         MOVE_TO_TOWN,
 
         /// <summary>
-        /// 移动至军队
+        /// 移动至队伍
         /// </summary>
-        MOVE_TO_ARMY,
+        MOVE_TO_TEAM,
 
         /// <summary>
         /// 巡逻

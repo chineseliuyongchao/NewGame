@@ -1,9 +1,9 @@
 ﻿namespace Game.BehaviourTree
 {
     /// <summary>
-    /// 巡逻的节点
+    /// 判断是否可以组建新队伍的节点
     /// </summary>
-    public class PatrolNode : BaseActionNode
+    public class CanBuildTeamNode : BaseConditionNode
     {
         protected override void OnStart()
         {
@@ -13,15 +13,14 @@
         {
         }
 
-        protected override BehaviourTreeState OnUpdate()
-        {
-            aiAgent.Patrol();
-            return BehaviourTreeState.SUCCESS;
-        }
-
         public override string GetDescription()
         {
-            return "巡逻";
+            return "用于判断是否可以组建新的队伍";
+        }
+
+        protected override bool JudgeResult()
+        {
+            return aiAgent.CanBuildTeam();
         }
 
         /// <summary>
@@ -30,7 +29,7 @@
         /// <returns></returns>
         public static string FunctionPath()
         {
-            return "Army/";
+            return "Team/";
         }
     }
 }
