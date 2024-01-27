@@ -282,35 +282,4 @@ namespace Game.Army
             return GameConstant.BASE_MOVE_SPEED;
         }
     }
-
-    /// <summary>
-    /// 军队状态
-    /// </summary>
-    public enum ArmyType
-    {
-        /// <summary>
-        /// 在聚落驻扎
-        /// </summary>
-        HUT_TOWN,
-
-        /// <summary>
-        /// 在野外驻扎
-        /// </summary>
-        HUT_FIELD,
-
-        /// <summary>
-        /// 移动至聚落
-        /// </summary>
-        MOVE_TO_TOWN,
-
-        /// <summary>
-        /// 移动至军队
-        /// </summary>
-        MOVE_TO_ARMY,
-
-        /// <summary>
-        /// 巡逻
-        /// </summary>
-        PATROL
-    }
 }

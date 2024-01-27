@@ -13,6 +13,7 @@ namespace Game.Army
     {
         public BehaviourTree.BehaviourTree behaviourTree;
         private int _generalId;
+        public int ArmyId { get; set; }
         private ArmyBlackBoard _armyBlackBoard;
         private ArmyAiAgent _aiAgent;
         private int _targetTownId;

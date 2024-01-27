@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace GameQFramework
 {
     /// <summary>
-    /// 所有家族的通用数据，不同存档不同
+    /// 所有家族的数据，不同存档不同
     /// </summary>
     [Serializable]
     public class FamilyData

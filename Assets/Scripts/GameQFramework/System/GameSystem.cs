@@ -78,6 +78,13 @@ namespace GameQFramework
                 roleAge = data.age
             });
             this.GetModel<IMyPlayerModel>().RoleId = roleId;
+
+            int armyId = this.GetSystem<IArmySystem>().AddArmy(new ArmyData
+            {
+                generalRoleId = roleId,
+                number = 1
+            });
+            this.GetModel<IMyPlayerModel>().ArmyId = armyId;
         }
     }
 }

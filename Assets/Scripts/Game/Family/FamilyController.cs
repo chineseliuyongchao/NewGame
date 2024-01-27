@@ -108,12 +108,17 @@ namespace Game.Family
         {
             this.GetModel<IFamilyModel>().RoleData[roleId].roleType = RoleType.GENERAL;
 
-            GameObject army = Instantiate(_armyPrefab);
-            army.Parent(this.GetModel<IGameModel>().PlayerArmy.transform.parent);
+            GameObject armyObject = Instantiate(_armyPrefab);
+            armyObject.Parent(this.GetModel<IGameModel>().PlayerArmy.transform.parent);
             int townId = this.GetModel<IFamilyModel>().RoleData[roleId].townId;
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
-            army.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
-            army.name = this.GetModel<IFamilyModel>().RoleData[roleId].roleName;
+            armyObject.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
+            Army.Army army = armyObject.GetComponent<Army.Army>();
+            army.ArmyId = this.GetSystem<IArmySystem>().AddArmy(new ArmyData
+            {
+                generalRoleId = roleId,
+                number = 1
+            });
         }
 
         public BehaviourTree.BehaviourTree GetTree()

@@ -9,6 +9,7 @@ namespace GameQFramework
         private int _accessTown;
         private CreateGameData _createGameData;
         private int _roleId;
+        private int _armyId;
 
         protected override void OnInit()
         {
@@ -31,6 +32,12 @@ namespace GameQFramework
         {
             get => _roleId;
             set => _roleId = value;
+        }
+
+        public int ArmyId
+        {
+            get => _armyId;
+            set => _armyId = value;
         }
 
         public object SaveModel()
