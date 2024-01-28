@@ -23,7 +23,7 @@
         /// <summary>
         /// 队伍基础移动速度
         /// </summary>
-        public const int BASE_MOVE_SPEED = 2;
+        public const int BASE_MOVE_SPEED = 1;
     }
 
     /// <summary>

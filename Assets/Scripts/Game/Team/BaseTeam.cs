@@ -281,9 +281,60 @@ namespace Game.Team
         /// 获取移动速度
         /// </summary>
         /// <returns></returns>
-        protected float MoveSpeed()
+        protected virtual float MoveSpeed()
         {
             return GameConstant.BASE_MOVE_SPEED;
+        }
+
+        /// <summary>
+        /// 设置队伍状态
+        /// </summary>
+        /// <param name="teamType"></param>
+        protected void SetTeamType(TeamType teamType)
+        {
+            TeamData data = this.GetModel<ITeamModel>().TeamData[TeamId];
+            TeamType oldType = data.teamType;
+            if (teamType == TeamType.HUT_TOWN)
+            {
+                if (oldType != TeamType.HUT_TOWN)
+                {
+                    //进入聚落
+                    data.townId = data.targetTownId;
+                    this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].townId = data.targetTownId;
+                    this.GetModel<ITownModel>().TownData[data.targetTownId].townRoleS.Add(data.generalRoleId);
+                }
+            }
+            else
+            {
+                if (oldType == TeamType.HUT_TOWN)
+                {
+                    //离开聚落
+                    ITownModel townModel = this.GetModel<ITownModel>();
+                    if (townModel.TownData.ContainsKey(data.townId))
+                    {
+                        if (townModel.TownData[data.townId].townRoleS.Contains(data.generalRoleId))
+                        {
+                            townModel.TownData[data.townId].townRoleS.Remove(data.generalRoleId);
+                        }
+                        else
+                        {
+                            Debug.LogError("聚落：" + townModel.TownData[data.targetTownId].name + "没有加入军队：" +
+                                           this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].roleName +
+                                           "的军队，但是要从聚落中移除");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogError("人物：" + this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].roleName +
+                                       "的军队没有设置一个聚落为目标，但是要从聚落离开");
+                    }
+
+                    data.townId = 0;
+                    this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].townId = 0;
+                }
+            }
+
+            this.GetModel<ITeamModel>().TeamData[TeamId].teamType = teamType;
         }
     }
 }

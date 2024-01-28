@@ -118,7 +118,8 @@ namespace Game.Family
             {
                 generalRoleId = roleId,
                 number = 1,
-                teamType = TeamType.HUT_TOWN
+                teamType = TeamType.HUT_TOWN,
+                townId = townId
             });
         }
 

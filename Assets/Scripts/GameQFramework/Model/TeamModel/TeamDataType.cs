@@ -25,7 +25,7 @@ namespace GameQFramework
         public Vector2 pos;
 
         /// <summary>
-        /// 记录队伍当前状态
+        /// 记录队伍当前状态，在游戏中设置状态时不要直接调用Model，要通过调用BaseTeam.SetTeamType方法
         /// </summary>
         public TeamType teamType;
 
@@ -33,6 +33,11 @@ namespace GameQFramework
         /// 目标聚落的id
         /// </summary>
         public int targetTownId;
+
+        /// <summary>
+        /// 所在聚落id
+        /// </summary>
+        public int townId;
     }
 
     /// <summary>

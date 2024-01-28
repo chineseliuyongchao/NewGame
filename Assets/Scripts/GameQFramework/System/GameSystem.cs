@@ -83,7 +83,7 @@ namespace GameQFramework
             {
                 generalRoleId = roleId,
                 number = 1,
-                teamType = TeamType.HUT_TOWN
+                teamType = TeamType.HUT_FIELD
             });
             this.GetModel<IMyPlayerModel>().TeamId = teamId;
         }

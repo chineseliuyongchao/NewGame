@@ -21,13 +21,14 @@ namespace Game.Team
             base.OnListenEvent();
             this.RegisterEvent<SelectMapLocationEvent>(e =>
             {
+                this.GetModel<ITeamModel>().TeamData[TeamId].targetTownId = e.townId;
                 if (e.townId != 0)
                 {
-                    this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.MOVE_TO_TOWN;
+                    SetTeamType(TeamType.MOVE_TO_TOWN);
                 }
                 else
                 {
-                    this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.MOVE_TO_FIELD;
+                    SetTeamType(TeamType.MOVE_TO_FIELD);
                 }
 
                 SetMoveTarget(GetStartMapPos(), e.selectPos, () =>
@@ -36,11 +37,11 @@ namespace Game.Team
                     {
                         ArriveInTown(e.townId);
                         this.GetModel<IMyPlayerModel>().AccessTown++;
-                        this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.HUT_TOWN;
+                        SetTeamType(TeamType.HUT_TOWN);
                     }
                     else
                     {
-                        this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.HUT_FIELD;
+                        SetTeamType(TeamType.HUT_FIELD);
                     }
                 });
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -49,6 +50,11 @@ namespace Game.Team
         protected override void ArriveInTown(int townId)
         {
             UIKit.OpenPanel<UITown>(new UITownData(townId));
+        }
+
+        protected override float MoveSpeed()
+        {
+            return base.MoveSpeed() * 5;
         }
     }
 }

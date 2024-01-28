@@ -23,6 +23,7 @@ namespace UI
             mData = uiData as UITownData ?? new UITownData();
             // please add init code here
             base.OnInit(uiData);
+            this.SendCommand(new HasShowDialogCommand(true));
             InitUI();
         }
 
@@ -46,6 +47,7 @@ namespace UI
         protected override void OnClose()
         {
             base.OnClose();
+            this.SendCommand(new HasShowDialogCommand(false));
         }
 
         protected override void OnListenButton()
