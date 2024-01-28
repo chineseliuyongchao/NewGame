@@ -49,6 +49,13 @@
     }
 
     /// <summary>
+    /// 保存存档之前发送，用于将数据更新到Model中
+    /// </summary>
+    public class SoonSaveFileEvent
+    {
+    }
+
+    /// <summary>
     /// 保存了存档
     /// </summary>
     public class SaveFileDataEvent

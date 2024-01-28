@@ -54,6 +54,7 @@ namespace UI
             determineButton.onClick.AddListener(() =>
             {
                 string dataName = inputFileData.text;
+                this.SendCommand(new SoonSaveFileCommand());
                 this.GetSystem<IGameSaveSystem>()
                     .SaveGame(dataName.Equals("") ? this.GetUtility<IGameUtility>().TimeYToS() : dataName);
                 this.SendCommand(new SaveFileDataCommand());

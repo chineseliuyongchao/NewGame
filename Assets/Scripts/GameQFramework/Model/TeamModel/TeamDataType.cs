@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace GameQFramework
 {
@@ -17,6 +18,21 @@ namespace GameQFramework
         /// 队伍人数
         /// </summary>
         public int number;
+
+        /// <summary>
+        /// 记录队伍当前位置
+        /// </summary>
+        public Vector2 pos;
+
+        /// <summary>
+        /// 记录队伍当前状态
+        /// </summary>
+        public TeamType teamType;
+
+        /// <summary>
+        /// 目标聚落的id
+        /// </summary>
+        public int targetTownId;
     }
 
     /// <summary>
@@ -43,6 +59,11 @@ namespace GameQFramework
         /// 移动至队伍
         /// </summary>
         MOVE_TO_TEAM,
+
+        /// <summary>
+        /// 移动至野外
+        /// </summary>
+        MOVE_TO_FIELD,
 
         /// <summary>
         /// 巡逻

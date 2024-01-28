@@ -117,7 +117,8 @@ namespace Game.Family
             team.TeamId = this.GetSystem<ITeamSystem>().AddTeam(new TeamData
             {
                 generalRoleId = roleId,
-                number = 1
+                number = 1,
+                teamType = TeamType.HUT_TOWN
             });
         }
 

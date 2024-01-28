@@ -22,10 +22,8 @@ namespace Game.Team
         /// </summary>
         private MoveCloseBack _moveEndCallBack;
 
-        /// <summary>
-        /// 队伍状态
-        /// </summary>
-        protected TeamType TeamType { get; set; }
+        public int TeamId { get; set; }
+        protected int CurrentIndex { get; set; }
 
         protected override void OnInit()
         {
@@ -33,7 +31,13 @@ namespace Game.Team
             movePosList = new List<Vector2>();
         }
 
-        protected int CurrentIndex { get; set; }
+        protected override void OnListenEvent()
+        {
+            this.RegisterEvent<SoonSaveFileEvent>(_ =>
+            {
+                this.GetModel<ITeamModel>().TeamData[TeamId].pos = transform.position;
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
 
         private void Update()
         {

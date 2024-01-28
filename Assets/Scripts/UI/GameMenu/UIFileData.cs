@@ -70,6 +70,7 @@ namespace UI
             });
             coverButton.onClick.AddListener(() =>
             {
+                this.SendCommand(new SoonSaveFileCommand());
                 this.GetSystem<IGameSaveSystem>().SaveGame(_fileNameValue);
                 this.SendCommand(new SaveFileDataCommand());
             });

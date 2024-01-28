@@ -82,7 +82,8 @@ namespace GameQFramework
             int teamId = this.GetSystem<ITeamSystem>().AddTeam(new TeamData
             {
                 generalRoleId = roleId,
-                number = 1
+                number = 1,
+                teamType = TeamType.HUT_TOWN
             });
             this.GetModel<IMyPlayerModel>().TeamId = teamId;
         }

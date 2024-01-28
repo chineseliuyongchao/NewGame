@@ -12,11 +12,8 @@ namespace Game.Team
     public class Team : BaseTeam, IGetBehaviourTree
     {
         public BehaviourTree.BehaviourTree behaviourTree;
-        private int _generalId;
-        public int TeamId { get; set; }
         private TeamBlackBoard _teamBlackBoard;
         private TeamAiAgent _aiAgent;
-        private int _targetTownId;
         private readonly float _patrolRadius = 1; // 巡逻半径
 
         protected override void OnInit()
@@ -36,15 +33,29 @@ namespace Game.Team
         protected override void OnControllerStart()
         {
             _aiAgent.Init(_teamBlackBoard);
-            behaviourTree.StartTree();
         }
 
         protected override void UpdateTeam()
         {
             base.UpdateTeam();
             behaviourTree.UpdateTree();
-            switch (TeamType)
+            switch (this.GetModel<ITeamModel>().TeamData[TeamId].teamType)
             {
+                case TeamType.HUT_TOWN:
+                    behaviourTree.StartTree();
+                    break;
+                case TeamType.HUT_FIELD:
+                    behaviourTree.StartTree();
+                    break;
+                case TeamType.MOVE_TO_TOWN:
+                    if (CurrentIndex == movePosList.Count)
+                    {
+                        MoveToTown(this.GetModel<ITeamModel>().TeamData[TeamId].targetTownId);
+                    }
+
+                    break;
+                case TeamType.MOVE_TO_TEAM:
+                    break;
                 case TeamType.PATROL:
                     if (CurrentIndex == movePosList.Count)
                     {
@@ -52,7 +63,8 @@ namespace Game.Team
                         // 根据新的角度计算新的位置
                         float x = Mathf.Cos(randomAngle) * _patrolRadius;
                         float y = Mathf.Sin(randomAngle) * _patrolRadius;
-                        TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[_targetTownId];
+                        TownCommonData townCommonData = this.GetModel<ITownModel>()
+                            .TownCommonData[this.GetModel<ITeamModel>().TeamData[TeamId].targetTownId];
                         SetMoveTarget(GetStartMapPos(), this.GetSystem<IMapSystem>().GetRealPosToMapPos(
                                 new Vector2(townCommonData.TownPos[0] + x, townCommonData.TownPos[1] + y)),
                             () => { });
@@ -68,6 +80,7 @@ namespace Game.Team
         /// <param name="townId"></param>
         private void MoveToTown(int townId)
         {
+            this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.MOVE_TO_TOWN;
             TownCommonData townData = this.GetModel<ITownModel>().TownCommonData[townId];
             SetMoveTarget(GetStartMapPos(),
                 this.GetSystem<IMapSystem>().GetRealPosToMapPos(new Vector2(townData.TownPos[0], townData.TownPos[1])),
@@ -80,8 +93,13 @@ namespace Game.Team
         /// <param name="townId">巡逻的聚落</param>
         private void Patrol(int townId)
         {
-            TeamType = TeamType.PATROL;
-            _targetTownId = townId;
+            this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.PATROL;
+            this.GetModel<ITeamModel>().TeamData[TeamId].targetTownId = townId;
+        }
+
+        protected override void ArriveInTown(int townId)
+        {
+            this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.HUT_TOWN;
         }
 
         public BehaviourTree.BehaviourTree GetTree()

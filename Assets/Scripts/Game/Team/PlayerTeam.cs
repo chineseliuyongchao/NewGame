@@ -12,6 +12,7 @@ namespace Game.Team
         protected override void OnInit()
         {
             base.OnInit();
+            TeamId = this.GetModel<IMyPlayerModel>().TeamId;
             this.GetModel<IGameModel>().PlayerTeam = this;
         }
 
@@ -20,12 +21,26 @@ namespace Game.Team
             base.OnListenEvent();
             this.RegisterEvent<SelectMapLocationEvent>(e =>
             {
+                if (e.townId != 0)
+                {
+                    this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.MOVE_TO_TOWN;
+                }
+                else
+                {
+                    this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.MOVE_TO_FIELD;
+                }
+
                 SetMoveTarget(GetStartMapPos(), e.selectPos, () =>
                 {
                     if (e.townId != 0)
                     {
                         ArriveInTown(e.townId);
                         this.GetModel<IMyPlayerModel>().AccessTown++;
+                        this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.HUT_TOWN;
+                    }
+                    else
+                    {
+                        this.GetModel<ITeamModel>().TeamData[TeamId].teamType = TeamType.HUT_FIELD;
                     }
                 });
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
