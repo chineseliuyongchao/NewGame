@@ -1,0 +1,120 @@
+#node-border {
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    background-color: rgb(56, 56, 56);
+    border-left-color: rgb(32, 32, 32);
+    border-right-color: rgb(32, 32, 32);
+    border-top-color: rgb(32, 32, 32);
+    border-bottom-color: rgb(32, 32, 32);
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+#input {
+    align-items: center;
+    min-width: auto;
+    min-height: auto;
+}
+
+#output {
+    align-items: center;
+}
+
+#selection-border {
+    border-left-color: rgb(0, 134, 255);
+    border-right-color: rgb(0, 134, 255);
+    border-top-color: rgb(0, 134, 255);
+    border-bottom-color: rgb(0, 134, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+:hover#selection-border {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+:selected > #selection-border {
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+}
+
+:hover:selected > #selection-border {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+}
+
+.node {
+    min-width: 150px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#title {
+    -unity-font-style: bold;
+    font-size: 14px;
+    max-width: 140px;
+    white-space: normal;
+}
+
+#description {
+    font-size: 10px;
+    white-space: normal;
+    max-width: 140px;
+    -unity-font-style: bold;
+}
+
+#divider {
+}
+
+.root #input {
+    background-color: rgb(146, 55, 77);
+}
+
+#noded-state {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.waiting #noded-state {
+    background-color: rgb(27, 153, 139);
+}
+
+.inactive #noded-state {
+    background-color: rgb(46, 41, 78);
+}
+
+.stopped #noded-state {
+    background-color: rgb(231, 29, 54);
+}
+
+.player #input {
+    background-color: rgb(140, 83, 131);
+}
+
+.npc #input {
+    background-color: rgb(74, 88, 153);
+}

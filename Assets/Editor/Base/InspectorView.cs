@@ -10,11 +10,11 @@ namespace Editor
 
         private UnityEditor.Editor _editor;
 
-        public void UpdateSelection(NodeView nodeView)
+        public void UpdateSelection(UnityEngine.Object targetObject)
         {
             Clear();
             UnityEngine.Object.DestroyImmediate(_editor);
-            _editor = UnityEditor.Editor.CreateEditor(nodeView.baseNode);
+            _editor = UnityEditor.Editor.CreateEditor(targetObject);
             IMGUIContainer container = new IMGUIContainer(() =>
             {
                 if (_editor.target)

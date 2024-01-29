@@ -1,32 +1,32 @@
-using Game.BehaviourTree;
+using Game.Dialogue;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Editor
+namespace Editor.DialogueTreeEditor
 {
-    public class BehaviourTreeEditor : EditorWindow
+    public class DialogueTreeEditor : EditorWindow
     {
-        private BehaviourTreeView _treeView;
+        private DialogueTreeView _treeView;
         private InspectorView _inspectorView;
         private IMGUIContainer _blackBoardView;
 
         private SerializedProperty _blackBoardProperty;
         private SerializedObject _treeObject;
 
-        [MenuItem("Tools/BehaviourTreeEditor")]
+        [MenuItem("Tools/DialogueTreeEditor")]
         public static void OpenWidow()
         {
-            BehaviourTreeEditor wnd = GetWindow<BehaviourTreeEditor>();
-            wnd.titleContent = new GUIContent("BehaviourTreeEditor");
+            DialogueTreeEditor wnd = GetWindow<DialogueTreeEditor>();
+            wnd.titleContent = new GUIContent("DialogueTreeEditor");
         }
 
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId, int line)
         {
-            // 检查打开的对象是否为 BehaviourTree 类型
-            if (Selection.activeObject is BehaviourTree)
+            // 检查打开的对象是否为 DialogueTree 类型
+            if (Selection.activeObject is DialogueTree)
             {
                 // 如果是，调用 OpenWidow 方法打开自定义窗口
                 OpenWidow();
@@ -43,16 +43,16 @@ namespace Editor
 
             // Import UXML
             var visualTree =
-                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uxml");
+                AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/DialogueTreeEditor/DialogueTreeEditor.uxml");
             visualTree.CloneTree(root);
 
             // A stylesheet can be added to a VisualElement.
             // The style will be applied to the VisualElement and all of its children.
             var styleSheet =
-                AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/BehaviourTree/BehaviourTreeEditor.uss");
+                AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/DialogueTreeEditor/DialogueTreeEditor.uss");
             root.styleSheets.Add(styleSheet);
 
-            _treeView = root.Q<BehaviourTreeView>();
+            _treeView = root.Q<DialogueTreeView>();
             _inspectorView = root.Q<InspectorView>();
             _blackBoardView = root.Q<IMGUIContainer>();
             // 为黑板视图添加自定义的 GUI 处理器
@@ -120,26 +120,26 @@ namespace Editor
         /// </summary>
         private void OnSelectionChange()
         {
-            // 尝试获取当前选中的对象是否为 BehaviourTree 类型
-            BehaviourTree tree = Selection.activeObject as BehaviourTree;
-            // 如果不是 BehaviourTree，尝试从选中的游戏对象获取 IGetBehaviourTree 接口
+            // 尝试获取当前选中的对象是否为 DialogueTree 类型
+            DialogueTree tree = Selection.activeObject as DialogueTree;
+            // 如果不是 DialogueTree，尝试从选中的游戏对象获取 IGetDialogueTree 接口
             if (!tree && Selection.activeGameObject)
             {
-                IGetBehaviourTree getTree = Selection.activeGameObject.GetComponent<IGetBehaviourTree>();
-                // 如果接口不为空，获取 BehaviourTree 实例
+                IGetDialogueTree getTree = Selection.activeGameObject.GetComponent<IGetDialogueTree>();
+                // 如果接口不为空，获取 DialogueTree 实例
                 if (getTree != null)
                 {
                     tree = getTree.GetTree();
                 }
             }
 
-            // 如果成功获取到 BehaviourTree 实例
+            // 如果成功获取到 DialogueTree 实例
             if (tree)
             {
-                // 如果当前处于播放模式，或者 BehaviourTree 可以在编辑器中打开
+                // 如果当前处于播放模式，或者 DialogueTree 可以在编辑器中打开
                 if (Application.isPlaying || AssetDatabase.CanOpenAssetInEditor(tree.GetInstanceID()))
                 {
-                    // 刷新行为树视图
+                    // 刷新对话树视图
                     _treeView?.PopulateView(tree);
                 }
             }
@@ -151,9 +151,9 @@ namespace Editor
             }
         }
 
-        private void OnNodeSelectionChanged(NodeView nodeView)
+        private void OnNodeSelectionChanged(DialogueNodeView dialogueNodeView)
         {
-            _inspectorView.UpdateSelection(nodeView.baseNode);
+            _inspectorView.UpdateSelection(dialogueNodeView.dialogueNode);
         }
 
         private void OnInspectorUpdate()

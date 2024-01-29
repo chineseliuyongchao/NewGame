@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8333572679626573314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4686c950154db7acd67ab668f94322, type: 3}
+  m_Name: RootDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: c485bba6f0ef3144b8a2c331e5539b85
+  position: {x: 362, y: 139.92}
+  optionToThis: 
+  content: 
+  children:
+  - {fileID: 5429792684832385336}
+--- !u!114 &-7391053713757054369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399403dfd5704c4f98e1e7f74b981afa, type: 3}
+  m_Name: NpcDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: acf36b7194311a346a8a595251ce6baa
+  position: {x: 472.99988, y: 516.9999}
+  optionToThis: 
+  content: 
+  children: []
+--- !u!114 &-6912263257416232541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d0156645f84978b1e7fb5b7fe4ca41, type: 3}
+  m_Name: PlayerDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: 18b8dca8076758d47a775d907853a1a0
+  position: {x: 238.32251, y: 381.00006}
+  optionToThis: 1
+  content: 123
+  children:
+  - {fileID: 2280071481796285575}
+--- !u!114 &-86850454721087665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d0156645f84978b1e7fb5b7fe4ca41, type: 3}
+  m_Name: PlayerDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: 0b163788502628742af0eb02bf95fd91
+  position: {x: 473.45502, y: 381.00003}
+  optionToThis: 2
+  content: 123
+  children:
+  - {fileID: -7391053713757054369}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35556cde501e47b981afae5a9426c9b2, type: 3}
+  m_Name: New Dialogue Tree
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  nodes:
+  - {fileID: -8333572679626573314}
+  - {fileID: 5429792684832385336}
+  - {fileID: -6912263257416232541}
+  - {fileID: -86850454721087665}
+  - {fileID: 2280071481796285575}
+  - {fileID: -7391053713757054369}
+  rootNode: {fileID: -8333572679626573314}
+--- !u!114 &2280071481796285575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399403dfd5704c4f98e1e7f74b981afa, type: 3}
+  m_Name: NpcDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: d5c839e7dfbc2344ab24bb94b83caaaa
+  position: {x: 237.99997, y: 517.2406}
+  optionToThis: 
+  content: 
+  children: []
+--- !u!114 &5429792684832385336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399403dfd5704c4f98e1e7f74b981afa, type: 3}
+  m_Name: NpcDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: f8fdbff2f9ceba243af714518267ab0f
+  position: {x: 362, y: 260.64502}
+  optionToThis: 
+  content: 123
+  children:
+  - {fileID: -6912263257416232541}
+  - {fileID: -86850454721087665}
