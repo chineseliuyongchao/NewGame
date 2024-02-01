@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4686c950154db7acd67ab668f94322, type: 3}
   m_Name: RootDialogueNode
   m_EditorClassIdentifier: 
-  dialogueType: 0
+  dialogueType: 2
   guid: c485bba6f0ef3144b8a2c331e5539b85
-  position: {x: 362, y: 139.92}
+  position: {x: 362, y: 137.68695}
   optionToThis: 
   content: 
   children:
@@ -33,10 +33,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueType: 0
   guid: acf36b7194311a346a8a595251ce6baa
-  position: {x: 472.99988, y: 516.9999}
+  position: {x: 473, y: 517}
   optionToThis: 
-  content: 
-  children: []
+  content: "\u90A3\u592A\u7CDF\u7CD5\u4E86"
+  children:
+  - {fileID: 8931070324841546765}
+  - {fileID: -6428688885565061138}
 --- !u!114 &-6912263257416232541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,13 +51,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d0156645f84978b1e7fb5b7fe4ca41, type: 3}
   m_Name: PlayerDialogueNode
   m_EditorClassIdentifier: 
-  dialogueType: 0
+  dialogueType: 2
   guid: 18b8dca8076758d47a775d907853a1a0
   position: {x: 238.32251, y: 381.00006}
-  optionToThis: 1
-  content: 123
+  optionToThis: "\u662F"
+  content: "\u662F\u7684\uFF0C\u6211\u662F\u81EA\u5DF1\u4EBA"
   children:
   - {fileID: 2280071481796285575}
+--- !u!114 &-6428688885565061138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d0156645f84978b1e7fb5b7fe4ca41, type: 3}
+  m_Name: PlayerDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: d8d3b04d0369c674b98e1c250a7b6731
+  position: {x: 595, y: 669}
+  optionToThis: "\u79BB\u5F00"
+  content: "\u6211\u8981\u79BB\u5F00\u4E86"
+  children:
+  - {fileID: 5115280339431747483}
+--- !u!114 &-3903366599053276613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399403dfd5704c4f98e1e7f74b981afa, type: 3}
+  m_Name: NpcDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: ac0962a3d575f5b4fa577059d9891b36
+  position: {x: 376, y: 789}
+  optionToThis: 
+  content: "\u90A3\u5C31\u53D7\u6B7B\u5427"
+  children: []
 --- !u!114 &-86850454721087665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,8 +110,8 @@ MonoBehaviour:
   dialogueType: 0
   guid: 0b163788502628742af0eb02bf95fd91
   position: {x: 473.45502, y: 381.00003}
-  optionToThis: 2
-  content: 123
+  optionToThis: "\u4E0D\u662F"
+  content: "\u6211\u4E0D\u662F\u81EA\u5DF1\u4EBA"
   children:
   - {fileID: -7391053713757054369}
 --- !u!114 &11400000
@@ -85,9 +124,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35556cde501e47b981afae5a9426c9b2, type: 3}
-  m_Name: New Dialogue Tree
+  m_Name: NewDialogueTree
   m_EditorClassIdentifier: 
-  dialogueType: 0
+  dialogueType: 1
   nodes:
   - {fileID: -8333572679626573314}
   - {fileID: 5429792684832385336}
@@ -95,6 +134,10 @@ MonoBehaviour:
   - {fileID: -86850454721087665}
   - {fileID: 2280071481796285575}
   - {fileID: -7391053713757054369}
+  - {fileID: 8931070324841546765}
+  - {fileID: -6428688885565061138}
+  - {fileID: -3903366599053276613}
+  - {fileID: 5115280339431747483}
   rootNode: {fileID: -8333572679626573314}
 --- !u!114 &2280071481796285575
 MonoBehaviour:
@@ -108,11 +151,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399403dfd5704c4f98e1e7f74b981afa, type: 3}
   m_Name: NpcDialogueNode
   m_EditorClassIdentifier: 
-  dialogueType: 0
+  dialogueType: 2
   guid: d5c839e7dfbc2344ab24bb94b83caaaa
   position: {x: 237.99997, y: 517.2406}
   optionToThis: 
-  content: 
+  content: "\u90A3\u771F\u662F\u592A\u68D2\u4E86"
+  children: []
+--- !u!114 &5115280339431747483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399403dfd5704c4f98e1e7f74b981afa, type: 3}
+  m_Name: NpcDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: 1d2eb4aa07fa6dd4b9dd54263c84fd95
+  position: {x: 595, y: 789}
+  optionToThis: 
+  content: "\u597D\u7684\uFF0C\u540E\u4F1A\u6709\u671F"
   children: []
 --- !u!114 &5429792684832385336
 MonoBehaviour:
@@ -126,11 +187,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399403dfd5704c4f98e1e7f74b981afa, type: 3}
   m_Name: NpcDialogueNode
   m_EditorClassIdentifier: 
-  dialogueType: 0
+  dialogueType: 2
   guid: f8fdbff2f9ceba243af714518267ab0f
   position: {x: 362, y: 260.64502}
   optionToThis: 
-  content: 123
+  content: "\u4F60\u597D\uFF0C\u4F60\u662F\u81EA\u5DF1\u4EBA\u5417\uFF1F"
   children:
   - {fileID: -6912263257416232541}
   - {fileID: -86850454721087665}
+--- !u!114 &8931070324841546765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d0156645f84978b1e7fb5b7fe4ca41, type: 3}
+  m_Name: PlayerDialogueNode
+  m_EditorClassIdentifier: 
+  dialogueType: 0
+  guid: 8ba38a21bed8f094ebdbe0153d2a3209
+  position: {x: 376, y: 653}
+  optionToThis: "\u653B\u51FB"
+  content: "\u4F60\u8981\u6295\u964D\u5417\uFF0C\u4E0D\u6295\u964D\u53EA\u6709\u6B7B\u8DEF\u4E00\u6761"
+  children:
+  - {fileID: -3903366599053276613}

@@ -15,7 +15,7 @@ namespace UI
     public abstract class UIBase : UIPanel, IController
     {
         private IArchitecture _mArchitecture;
-        private ResLoader _mResLoader = ResLoader.Allocate();
+        protected ResLoader mResLoader = ResLoader.Allocate();
         private GameObject _mMaskObject;
 
         #region 通用弹窗效果
@@ -24,8 +24,8 @@ namespace UI
         public bool needOpenAnim;
         public float performTime = 0.3f; //开启或关闭时间
         public Vector3 animScale = new(1.04f, 1.04f, 1.04f); //弹性尺寸
-        protected Sequence ShowSequence;
-        protected CanvasGroup CanvasGroup;
+        protected Sequence showSequence;
+        protected CanvasGroup canvasGroup;
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace UI
 
             if (_mMaskObject == null)
             {
-                var prefab = _mResLoader.LoadSync<GameObject>("UIMask");
+                var prefab = mResLoader.LoadSync<GameObject>("UIMask");
                 _mMaskObject = Instantiate(prefab, parent);
                 _mMaskObject.transform.SetSiblingIndex(0);
             }
@@ -54,10 +54,10 @@ namespace UI
 
         protected override void OnInit(IUIData uiData = null)
         {
-            CanvasGroup = GetComponent<CanvasGroup>();
-            if (CanvasGroup == null)
+            canvasGroup = GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
             {
-                CanvasGroup = gameObject.AddComponent<CanvasGroup>();
+                canvasGroup = gameObject.AddComponent<CanvasGroup>();
             }
 
             OnListenButton();
@@ -88,8 +88,8 @@ namespace UI
 
         protected override void OnClose()
         {
-            _mResLoader.Recycle2Cache();
-            _mResLoader = null;
+            mResLoader.Recycle2Cache();
+            mResLoader = null;
             DOTween.Kill(gameObject);
         }
 
@@ -100,7 +100,7 @@ namespace UI
                 CloseAnim(() =>
                 {
                     base.CloseSelf();
-                    CanvasGroup.interactable = true;
+                    canvasGroup.interactable = true;
                 });
             }
             else
@@ -131,12 +131,12 @@ namespace UI
         /// </summary>
         protected virtual void OpenAnim()
         {
-            ShowSequence = DOTween.Sequence();
+            showSequence = DOTween.Sequence();
             AnimTransform().localScale = Vector3.zero;
-            CanvasGroup.alpha = 0;
-            ShowSequence.Append(AnimTransform().DOScale(animScale, performTime / 2));
-            ShowSequence.Join(CanvasGroup.DOFade(1, performTime));
-            ShowSequence.Append(AnimTransform().DOScale(Vector3.one, performTime));
+            canvasGroup.alpha = 0;
+            showSequence.Append(AnimTransform().DOScale(animScale, performTime / 2));
+            showSequence.Join(canvasGroup.DOFade(1, performTime));
+            showSequence.Append(AnimTransform().DOScale(Vector3.one, performTime));
         }
 
         /// <summary>
@@ -144,13 +144,13 @@ namespace UI
         /// </summary>
         protected virtual void CloseAnim(UICloseBack callBack)
         {
-            ShowSequence = DOTween.Sequence();
+            showSequence = DOTween.Sequence();
             AnimTransform().localScale = Vector3.one;
-            CanvasGroup.alpha = 1;
-            ShowSequence.Append(AnimTransform().DOScale(animScale, performTime / 2));
-            ShowSequence.Append(AnimTransform().DOScale(Vector3.zero, performTime));
-            ShowSequence.Join(CanvasGroup.DOFade(0, performTime));
-            ShowSequence.AppendCallback(() =>
+            canvasGroup.alpha = 1;
+            showSequence.Append(AnimTransform().DOScale(animScale, performTime / 2));
+            showSequence.Append(AnimTransform().DOScale(Vector3.zero, performTime));
+            showSequence.Join(canvasGroup.DOFade(0, performTime));
+            showSequence.AppendCallback(() =>
             {
                 callBack?.Invoke();
             });

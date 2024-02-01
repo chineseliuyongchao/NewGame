@@ -126,22 +126,22 @@ namespace UI
 
         protected override void OpenAnim()
         {
-            ShowSequence = DOTween.Sequence();
+            showSequence = DOTween.Sequence();
             RectTransform rectTransform = AnimTransform().GetComponent<RectTransform>();
             rectTransform.anchoredPosition = new Vector2(-600, 0);
-            CanvasGroup.alpha = 0;
-            ShowSequence.Join(CanvasGroup.DOFade(1, performTime));
-            ShowSequence.Append(rectTransform.DOAnchorPos(Vector2.one, performTime).SetEase(Ease.OutQuart));
+            canvasGroup.alpha = 0;
+            showSequence.Join(canvasGroup.DOFade(1, performTime));
+            showSequence.Append(rectTransform.DOAnchorPos(Vector2.one, performTime).SetEase(Ease.OutQuart));
         }
 
         protected override void CloseAnim(UICloseBack callBack)
         {
-            ShowSequence = DOTween.Sequence();
+            showSequence = DOTween.Sequence();
             RectTransform rectTransform = AnimTransform().GetComponent<RectTransform>();
-            CanvasGroup.alpha = 1;
-            ShowSequence.Append(rectTransform.DOAnchorPos(new Vector2(-600, 0), performTime));
-            ShowSequence.Join(CanvasGroup.DOFade(0, performTime));
-            ShowSequence.AppendCallback(() => { callBack?.Invoke(); });
+            canvasGroup.alpha = 1;
+            showSequence.Append(rectTransform.DOAnchorPos(new Vector2(-600, 0), performTime));
+            showSequence.Join(canvasGroup.DOFade(0, performTime));
+            showSequence.AppendCallback(() => { callBack?.Invoke(); });
         }
     }
 }

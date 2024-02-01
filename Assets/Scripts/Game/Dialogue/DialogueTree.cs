@@ -36,7 +36,11 @@ namespace Game.Dialogue
         public BaseDialogueNode UpdateDialogue(int jumpIndex)
         {
             _nowNode = _nowNode.JumpNextDialogue(jumpIndex);
-            _nowNode.dialogueType = DialogueType.WAITING;
+            if (_nowNode != null)
+            {
+                _nowNode.dialogueType = DialogueType.WAITING;
+            }
+
             return _nowNode;
         }
 

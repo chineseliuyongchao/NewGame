@@ -58,6 +58,8 @@ namespace Game
             }
 
             UIKit.OpenPanel<UIGameLobby>();
+
+            // UIKit.OpenPanel<UIDialogue>(new UIDialogueData(DialogueConstant.NEW_DIALOGUE_TREE));
         }
 
         private void Update()
