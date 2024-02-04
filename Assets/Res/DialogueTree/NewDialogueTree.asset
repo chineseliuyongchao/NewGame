@@ -17,6 +17,8 @@ MonoBehaviour:
   position: {x: 362, y: 137.68695}
   optionToThis: 
   content: 
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children:
   - {fileID: 5429792684832385336}
 --- !u!114 &-7391053713757054369
@@ -36,6 +38,8 @@ MonoBehaviour:
   position: {x: 473, y: 517}
   optionToThis: 
   content: "\u90A3\u592A\u7CDF\u7CD5\u4E86"
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children:
   - {fileID: 8931070324841546765}
   - {fileID: -6428688885565061138}
@@ -56,6 +60,8 @@ MonoBehaviour:
   position: {x: 238.32251, y: 381.00006}
   optionToThis: "\u662F"
   content: "\u662F\u7684\uFF0C\u6211\u662F\u81EA\u5DF1\u4EBA"
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children:
   - {fileID: 2280071481796285575}
 --- !u!114 &-6428688885565061138
@@ -75,6 +81,8 @@ MonoBehaviour:
   position: {x: 595, y: 669}
   optionToThis: "\u79BB\u5F00"
   content: "\u6211\u8981\u79BB\u5F00\u4E86"
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children:
   - {fileID: 5115280339431747483}
 --- !u!114 &-3903366599053276613
@@ -94,6 +102,8 @@ MonoBehaviour:
   position: {x: 376, y: 789}
   optionToThis: 
   content: "\u90A3\u5C31\u53D7\u6B7B\u5427"
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children: []
 --- !u!114 &-86850454721087665
 MonoBehaviour:
@@ -112,6 +122,8 @@ MonoBehaviour:
   position: {x: 473.45502, y: 381.00003}
   optionToThis: "\u4E0D\u662F"
   content: "\u6211\u4E0D\u662F\u81EA\u5DF1\u4EBA"
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children:
   - {fileID: -7391053713757054369}
 --- !u!114 &11400000
@@ -155,7 +167,9 @@ MonoBehaviour:
   guid: d5c839e7dfbc2344ab24bb94b83caaaa
   position: {x: 237.99997, y: 517.2406}
   optionToThis: 
-  content: "\u90A3\u771F\u662F\u592A\u68D2\u4E86"
+  content: "{0}\u90A3\u771F\u662F\u592A\u68D2\u4E86{1}"
+  dialogValueIndex: 0100000002000000
+  dialogueActionIndex: 1
   children: []
 --- !u!114 &5115280339431747483
 MonoBehaviour:
@@ -174,6 +188,8 @@ MonoBehaviour:
   position: {x: 595, y: 789}
   optionToThis: 
   content: "\u597D\u7684\uFF0C\u540E\u4F1A\u6709\u671F"
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children: []
 --- !u!114 &5429792684832385336
 MonoBehaviour:
@@ -191,7 +207,9 @@ MonoBehaviour:
   guid: f8fdbff2f9ceba243af714518267ab0f
   position: {x: 362, y: 260.64502}
   optionToThis: 
-  content: "\u4F60\u597D\uFF0C\u4F60\u662F\u81EA\u5DF1\u4EBA\u5417\uFF1F"
+  content: "\u4F60\u597D{0}\uFF0C\u4F60\u662F\u81EA\u5DF1\u4EBA\u5417\uFF1F"
+  dialogValueIndex: 00000000
+  dialogueActionIndex: 0
   children:
   - {fileID: -6912263257416232541}
   - {fileID: -86850454721087665}
@@ -212,5 +230,7 @@ MonoBehaviour:
   position: {x: 376, y: 653}
   optionToThis: "\u653B\u51FB"
   content: "\u4F60\u8981\u6295\u964D\u5417\uFF0C\u4E0D\u6295\u964D\u53EA\u6709\u6B7B\u8DEF\u4E00\u6761"
+  dialogValueIndex: 
+  dialogueActionIndex: -1
   children:
   - {fileID: -3903366599053276613}

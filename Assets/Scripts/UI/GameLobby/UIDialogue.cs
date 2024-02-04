@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Dialogue;
 using GameQFramework;
@@ -14,9 +15,22 @@ namespace UI
         /// </summary>
         public string dialoguePath;
 
-        public UIDialogueData(string dialoguePath = null)
+        /// <summary>
+        /// 用于填充对话内可以变动的部分
+        /// </summary>
+        public List<string> dialogueValue;
+
+        /// <summary>
+        /// 对话结束后发生的事件
+        /// </summary>
+        public List<Action> dialogueAction;
+
+        public UIDialogueData(string dialoguePath = null, List<string> dialogueValue = null,
+            List<Action> dialogueAction = null)
         {
             this.dialoguePath = dialoguePath;
+            this.dialogueValue = dialogueValue ?? new List<string>();
+            this.dialogueAction = dialogueAction ?? new List<Action>();
         }
     }
 
@@ -66,6 +80,11 @@ namespace UI
                 var i1 = i;
                 chooseButtons[i].onClick.AddListener(() =>
                 {
+                    if (mData.dialogueAction.Count > _node.dialogueActionIndex && _node.dialogueActionIndex >= 0)
+                    {
+                        mData.dialogueAction[_node.dialogueActionIndex]();
+                    }
+
                     _node = _dialogueTree.UpdateDialogue(i1);
                     ShowDialogue();
                 });
@@ -95,15 +114,26 @@ namespace UI
                 return;
             }
 
+            object[] value = new object[_node.dialogValueIndex.Count];
+            for (int i = 0; i < value.Length; i++)
+            {
+                if (mData.dialogueValue.Count > _node.dialogValueIndex[i])
+                {
+                    value[i] = mData.dialogueValue[_node.dialogValueIndex[i]];
+                }
+            }
+
+            string dialogueText = string.Format(_node.content, value);
+
             if (_node.NodeType() == DialogueNodeType.NPC)
             {
-                npcText.text = _node.content;
+                npcText.text = dialogueText;
                 npcDialogBox.gameObject.SetActive(true);
                 playerDialogBox.gameObject.SetActive(false);
             }
             else if (_node.NodeType() == DialogueNodeType.PLAYER)
             {
-                playText.text = _node.content;
+                playText.text = dialogueText;
                 npcDialogBox.gameObject.SetActive(false);
                 playerDialogBox.gameObject.SetActive(true);
             }

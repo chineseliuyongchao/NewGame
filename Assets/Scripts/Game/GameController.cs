@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game.Family;
 using GameQFramework;
@@ -59,7 +60,10 @@ namespace Game
 
             UIKit.OpenPanel<UIGameLobby>();
 
-            // UIKit.OpenPanel<UIDialogue>(new UIDialogueData(DialogueConstant.NEW_DIALOGUE_TREE));
+            List<string> dialogueValue = new List<string>();
+            List<Action> dialogueAction = new List<Action>();
+            UIKit.OpenPanel<UIDialogue>(new UIDialogueData(DialogueConstant.NEW_DIALOGUE_TREE, dialogueValue,
+                dialogueAction));
         }
 
         private void Update()

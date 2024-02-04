@@ -19,6 +19,16 @@ namespace Game.Dialogue
         /// </summary>
         public string content;
 
+        /// <summary>
+        /// 节点填充变量的索引
+        /// </summary>
+        public List<int> dialogValueIndex = new();
+
+        /// <summary>
+        /// 节点填充方法的索引
+        /// </summary>
+        public int dialogueActionIndex = -1;
+
         public List<BaseDialogueNode> children = new();
 
         /// <summary>
