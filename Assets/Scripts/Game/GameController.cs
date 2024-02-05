@@ -59,16 +59,11 @@ namespace Game
             }
 
             UIKit.OpenPanel<UIGameLobby>();
-
-            List<string> dialogueValue = new List<string>();
-            List<Action> dialogueAction = new List<Action>();
-            UIKit.OpenPanel<UIDialogue>(new UIDialogueData(DialogueConstant.NEW_DIALOGUE_TREE, dialogueValue,
-                dialogueAction));
         }
 
         private void Update()
         {
-            if (!this.GetModel<IGameModel>().HasShowDialog) //没有打开弹窗时才能监听按键事件
+            if (this.GetModel<IGameModel>().OpenStopTimeUITime == 0) //没有打开弹窗时才能监听按键事件
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {

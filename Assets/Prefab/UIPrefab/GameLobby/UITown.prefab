@@ -2002,6 +2002,7 @@ MonoBehaviour:
   performTime: 0.3
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 1
+  stopTime: 1
   showRoleButton: {fileID: 7000168386154000757}
   leaveButton: {fileID: 5652858214593395434}
   townName: {fileID: 4263370933821204513}

@@ -57,7 +57,7 @@ namespace UI
             this.RegisterEvent<ChangeToMenuSceneEvent>(_ => { CloseSelf(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<TimePassEvent>(e => { UpdateTimePass(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<HasShowDialogEvent>(e => { UpdateTimePass(); })
+            this.RegisterEvent<ShowDialogEvent>(e => { UpdateTimePass(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 

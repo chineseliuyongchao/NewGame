@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using GameQFramework;
 using QFramework;
+using Utils.Constant;
 
 namespace UI
 {
@@ -21,6 +24,11 @@ namespace UI
         /// 一个UITownShowRole占的高度
         /// </summary>
         public const float UI_TOWN_SHOW_ROLE_HEIGHT = 350;
+
+        private void Awake()
+        {
+            OnInit();
+        }
 
         protected override void OnInit(IUIData uiData = null)
         {
@@ -53,6 +61,13 @@ namespace UI
 
         protected override void OnListenButton()
         {
+            dialogue.onClick.AddListener(() =>
+            {
+                List<string> dialogueValue = new List<string>();
+                List<Action> dialogueAction = new List<Action>();
+                UIKit.OpenPanel<UIDialogue>(new UIDialogueData(DialogueConstant.NEW_DIALOGUE_TREE, dialogueValue,
+                    dialogueAction));
+            });
         }
 
         protected override void OnListenEvent()

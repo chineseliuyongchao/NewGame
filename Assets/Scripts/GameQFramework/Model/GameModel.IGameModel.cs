@@ -41,8 +41,8 @@ namespace GameQFramework
         public bool TimeIsPass { get; set; }
 
         /// <summary>
-        /// 记录是否可以打开主菜单（防止按键连续打开）
+        /// 可以暂停时间的弹窗打开的次数
         /// </summary>
-        public bool HasShowDialog { get; set; }
+        public int OpenStopTimeUITime { get; set; }
     }
 }

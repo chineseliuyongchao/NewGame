@@ -78,13 +78,13 @@
     /// <summary>
     /// 是否展示了弹窗
     /// </summary>
-    public class HasShowDialogEvent
+    public class ShowDialogEvent
     {
-        public bool hasShow;
+        public bool isShow;
 
-        public HasShowDialogEvent(bool hasShow)
+        public ShowDialogEvent(bool isShow)
         {
-            this.hasShow = hasShow;
+            this.isShow = isShow;
         }
     }
 }

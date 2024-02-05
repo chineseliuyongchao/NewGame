@@ -895,6 +895,7 @@ MonoBehaviour:
   performTime: 0.3
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 1
+  stopTime: 1
   root: {fileID: 2808590622691661898}
   backToMenuButton: {fileID: 611209450372793872}
   saveButton: {fileID: 7250896869914346968}

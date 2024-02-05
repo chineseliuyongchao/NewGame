@@ -30,6 +30,7 @@ namespace UI
         #endregion
 
         [Header("遮罩")] public bool bShowMask;
+        [Header("暂停时间")] public bool stopTime;
 
         IArchitecture IBelongToArchitecture.GetArchitecture()
         {
@@ -67,6 +68,10 @@ namespace UI
         protected override void OnOpen(IUIData uiData = null)
         {
             ShowUIMask(transform);
+            if (stopTime)
+            {
+                this.SendCommand(new ShowDialogCommand(true));
+            }
         }
 
         protected override void OnShow()
@@ -84,6 +89,10 @@ namespace UI
 
         protected override void OnHide()
         {
+            if (stopTime)
+            {
+                this.SendCommand(new ShowDialogCommand(false));
+            }
         }
 
         protected override void OnClose()

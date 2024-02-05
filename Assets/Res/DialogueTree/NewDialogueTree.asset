@@ -37,7 +37,7 @@ MonoBehaviour:
   guid: acf36b7194311a346a8a595251ce6baa
   position: {x: 473, y: 517}
   optionToThis: 
-  content: "\u90A3\u592A\u7CDF\u7CD5\u4E86"
+  content: "\u4F60\u600E\u4E48\u5982\u6B64\u6CA1\u6709\u793C\u8C8C"
   dialogValueIndex: 
   dialogueActionIndex: -1
   children:
@@ -58,8 +58,8 @@ MonoBehaviour:
   dialogueType: 2
   guid: 18b8dca8076758d47a775d907853a1a0
   position: {x: 238.32251, y: 381.00006}
-  optionToThis: "\u662F"
-  content: "\u662F\u7684\uFF0C\u6211\u662F\u81EA\u5DF1\u4EBA"
+  optionToThis: "\u53CB\u5584"
+  content: "\u5F88\u9AD8\u5174\u89C1\u5230\u4F60"
   dialogValueIndex: 
   dialogueActionIndex: -1
   children:
@@ -79,8 +79,8 @@ MonoBehaviour:
   dialogueType: 0
   guid: d8d3b04d0369c674b98e1c250a7b6731
   position: {x: 595, y: 669}
-  optionToThis: "\u79BB\u5F00"
-  content: "\u6211\u8981\u79BB\u5F00\u4E86"
+  optionToThis: "\u7EE7\u7EED"
+  content: "\u4F60\u4E0D\u670D\u6C14\u5417"
   dialogValueIndex: 
   dialogueActionIndex: -1
   children:
@@ -101,7 +101,7 @@ MonoBehaviour:
   guid: ac0962a3d575f5b4fa577059d9891b36
   position: {x: 376, y: 789}
   optionToThis: 
-  content: "\u90A3\u5C31\u53D7\u6B7B\u5427"
+  content: "\u8FD9\u8FD8\u5DEE\u4E0D\u591A"
   dialogValueIndex: 
   dialogueActionIndex: -1
   children: []
@@ -120,8 +120,8 @@ MonoBehaviour:
   dialogueType: 0
   guid: 0b163788502628742af0eb02bf95fd91
   position: {x: 473.45502, y: 381.00003}
-  optionToThis: "\u4E0D\u662F"
-  content: "\u6211\u4E0D\u662F\u81EA\u5DF1\u4EBA"
+  optionToThis: "\u51F6\u72E0"
+  content: "\u4F60\u662F\u4F55\u4EBA"
   dialogValueIndex: 
   dialogueActionIndex: -1
   children:
@@ -167,8 +167,8 @@ MonoBehaviour:
   guid: d5c839e7dfbc2344ab24bb94b83caaaa
   position: {x: 237.99997, y: 517.2406}
   optionToThis: 
-  content: "{0}\u90A3\u771F\u662F\u592A\u68D2\u4E86{1}"
-  dialogValueIndex: 0100000002000000
+  content: "\u6765\u4E00\u8D77\u559D\u9152\u5427"
+  dialogValueIndex: 
   dialogueActionIndex: 1
   children: []
 --- !u!114 &5115280339431747483
@@ -187,7 +187,7 @@ MonoBehaviour:
   guid: 1d2eb4aa07fa6dd4b9dd54263c84fd95
   position: {x: 595, y: 789}
   optionToThis: 
-  content: "\u597D\u7684\uFF0C\u540E\u4F1A\u6709\u671F"
+  content: "\u6765\u6BD4\u5212\u6BD4\u5212\u5417"
   dialogValueIndex: 
   dialogueActionIndex: -1
   children: []
@@ -207,7 +207,7 @@ MonoBehaviour:
   guid: f8fdbff2f9ceba243af714518267ab0f
   position: {x: 362, y: 260.64502}
   optionToThis: 
-  content: "\u4F60\u597D{0}\uFF0C\u4F60\u662F\u81EA\u5DF1\u4EBA\u5417\uFF1F"
+  content: "\u4F60\u597D\uFF0C\u5F88\u9AD8\u5174\u89C1\u5230\u4F60"
   dialogValueIndex: 00000000
   dialogueActionIndex: 0
   children:
@@ -228,8 +228,8 @@ MonoBehaviour:
   dialogueType: 0
   guid: 8ba38a21bed8f094ebdbe0153d2a3209
   position: {x: 376, y: 653}
-  optionToThis: "\u653B\u51FB"
-  content: "\u4F60\u8981\u6295\u964D\u5417\uFF0C\u4E0D\u6295\u964D\u53EA\u6709\u6B7B\u8DEF\u4E00\u6761"
+  optionToThis: "\u6094\u6539"
+  content: "\u4E0D\u597D\u610F\u601D\uFF0C\u521A\u521A\u6655\u4E86\u5934\u4E86"
   dialogValueIndex: 
   dialogueActionIndex: -1
   children:

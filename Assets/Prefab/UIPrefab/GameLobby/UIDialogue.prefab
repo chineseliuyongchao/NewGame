@@ -1376,6 +1376,7 @@ MonoBehaviour:
   performTime: 0.3
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 0
+  stopTime: 1
   chooseButtons:
   - {fileID: 5553017289761877526}
   - {fileID: 7283680094496610693}

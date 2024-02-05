@@ -1,4 +1,5 @@
 ﻿using QFramework;
+using UnityEngine;
 
 namespace GameQFramework
 {
@@ -57,19 +58,26 @@ namespace GameQFramework
     /// <summary>
     /// 是否展示了弹窗
     /// </summary>
-    public class HasShowDialogCommand : AbstractCommand
+    public class ShowDialogCommand : AbstractCommand
     {
-        private readonly bool _hasShow;
+        private readonly bool _isShow;
 
-        public HasShowDialogCommand(bool hasShow)
+        public ShowDialogCommand(bool isShow)
         {
-            _hasShow = hasShow;
+            _isShow = isShow;
         }
 
         protected override void OnExecute()
         {
-            this.GetModel<IGameModel>().HasShowDialog = _hasShow;
-            this.SendEvent(new HasShowDialogEvent(_hasShow));
+            if (_isShow)
+            {
+                this.GetModel<IGameModel>().OpenStopTimeUITime++;
+            }
+            else
+            {
+                this.GetModel<IGameModel>().OpenStopTimeUITime--;
+            }
+            this.SendEvent(new ShowDialogEvent(_isShow));
         }
     }
 }

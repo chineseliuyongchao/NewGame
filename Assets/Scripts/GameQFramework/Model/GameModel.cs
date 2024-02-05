@@ -15,8 +15,8 @@ namespace GameQFramework
         private int _time;
         private int _quarter;
         private bool _timeIsPass;
-        private bool _hasShowDialog;
         private PlayerTeam _playerTeam;
+        private int _openStopTimeUITime;
 
         protected override void OnInit()
         {
@@ -75,20 +75,20 @@ namespace GameQFramework
 
         public bool TimeIsPass
         {
-            get => _timeIsPass && !_hasShowDialog; //时间可以流逝并且不能打开弹窗
+            get => _timeIsPass && _openStopTimeUITime == 0; //时间可以流逝并且不能打开弹窗
             set => _timeIsPass = value;
-        }
-
-        public bool HasShowDialog
-        {
-            get => _hasShowDialog;
-            set => _hasShowDialog = value;
         }
 
         public PlayerTeam PlayerTeam
         {
             get => _playerTeam;
             set => _playerTeam = value;
+        }
+
+        public int OpenStopTimeUITime
+        {
+            get => _openStopTimeUITime;
+            set => _openStopTimeUITime = value;
         }
 
         public Object SaveModel()
@@ -125,7 +125,7 @@ namespace GameQFramework
         public void NewArchiveInitData()
         {
             _timeIsPass = false;
-            _hasShowDialog = false;
+            _openStopTimeUITime = 0;
         }
 
         public string ModelName()
