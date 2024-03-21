@@ -1,25 +1,5 @@
 ﻿namespace GameQFramework
 {
-    public class YearChangeEvent
-    {
-    }
-
-    public class MonthChangeEvent
-    {
-    }
-
-    public class DayChangeEvent
-    {
-    }
-
-    public class TimeChangeEvent
-    {
-    }
-
-    public class QuarterChangeEvent
-    {
-    }
-
     /// <summary>
     /// 用于通知时间更新
     /// </summary>
