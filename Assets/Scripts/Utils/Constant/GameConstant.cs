@@ -52,19 +52,9 @@
         public const int INIT_TIME = 1;
 
         /// <summary>
-        /// 游戏初始刻
+        /// 现实秒换算游戏时
         /// </summary>
-        public const int INIT_QUARTER = 1;
-
-        /// <summary>
-        /// 现实秒换算游戏刻
-        /// </summary>
-        public const float CONVERT_QUARTER = 1.5f;
-
-        /// <summary>
-        /// 刻换算时辰
-        /// </summary>
-        public const int QUARTER_CONVERT_TIME = 8;
+        public const float CONVERT_TIME = 1.5f;
 
         /// <summary>
         /// 时辰换算日

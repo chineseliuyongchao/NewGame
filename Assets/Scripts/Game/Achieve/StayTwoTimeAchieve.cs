@@ -9,7 +9,7 @@ namespace Game.Achieve
 
         public override bool CheckFinish()
         {
-            return this.GetModel<IGameModel>().Time > 2;
+            return this.GetModel<IGameModel>().NowTime.Time > 2;
         }
     }
 }

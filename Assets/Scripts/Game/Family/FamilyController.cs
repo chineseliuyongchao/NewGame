@@ -4,7 +4,6 @@ using QFramework;
 using Unity.VisualScripting;
 using UnityEngine;
 using Utils.Constant;
-using Random = System.Random;
 
 namespace Game.Family
 {
@@ -25,14 +24,9 @@ namespace Game.Family
         private bool _checkBuildTeamByMonth;
 
         /// <summary>
-        /// 每月的第几天尝试组建队伍
+        /// 尝试组建军队的时间
         /// </summary>
-        private int _checkBuildTeamDay;
-
-        /// <summary>
-        /// 每天的第几个时辰尝试组建队伍
-        /// </summary>
-        private int _checkBuildTeamTime;
+        private GameTime _checkBuildTeamTime;
 
         protected override void OnInit()
         {
@@ -61,34 +55,14 @@ namespace Game.Family
             _familyId = familyId;
             name = this.GetModel<IFamilyModel>().FamilyData[_familyId].familyName;
             _familyAiAgent.Init(_familyId, _familyBlackBoard);
-
-            Random random = new Random();
-            _checkBuildTeamDay = random.Next(GameTimeConstant.DAY_CONVERT_MONTH);
-            _checkBuildTeamTime = random.Next(GameTimeConstant.TIME_CONVERT_DAY);
+            _checkBuildTeamTime = GameTime.GetRandomTime(false, false, _checkBuildTeamByMonth);
         }
 
         protected override void OnListenEvent()
         {
             this.RegisterEvent<ChangeTimeEvent>(_ =>
             {
-                bool canCheckBuildTeam = false;
-                if (_checkBuildTeamByMonth)
-                {
-                    if (this.GetModel<IGameModel>().Day == _checkBuildTeamDay &&
-                        this.GetModel<IGameModel>().Time == _checkBuildTeamTime)
-                    {
-                        canCheckBuildTeam = true;
-                    }
-                }
-                else
-                {
-                    if (this.GetModel<IGameModel>().Time == _checkBuildTeamTime)
-                    {
-                        canCheckBuildTeam = true;
-                    }
-                }
-
-                if (canCheckBuildTeam)
+                if (this.GetModel<IGameModel>().NowTime.Equals(_checkBuildTeamTime))
                 {
                     behaviourTree.StartTree();
                 }

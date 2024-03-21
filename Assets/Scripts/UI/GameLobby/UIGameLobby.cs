@@ -69,8 +69,7 @@ namespace UI
 
         private void UpdateTime()
         {
-            timeView.text = this.GetModel<IGameModel>().Year + "年" + this.GetModel<IGameModel>().Month + "月" +
-                            this.GetModel<IGameModel>().Day + "日" + this.GetModel<IGameModel>().Time + "时";
+            timeView.text = this.GetModel<IGameModel>().NowTime.ToString();
         }
 
         private void UpdateTimePass()

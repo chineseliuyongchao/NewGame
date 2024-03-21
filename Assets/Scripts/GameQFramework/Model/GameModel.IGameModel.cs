@@ -1,4 +1,5 @@
-﻿using Game.Team;
+﻿using Game;
+using Game.Team;
 using QFramework;
 
 namespace GameQFramework
@@ -6,29 +7,9 @@ namespace GameQFramework
     public interface IGameModel : IModel
     {
         /// <summary>
-        /// 记录年，默认从一年开始
+        /// 当前的时间
         /// </summary>
-        public int Year { get; set; }
-
-        /// <summary>
-        /// 记录月，默认从一月开始
-        /// </summary>
-        public int Month { get; set; }
-
-        /// <summary>
-        /// 记录日，默认从一天开始
-        /// </summary>
-        public int Day { get; set; }
-
-        /// <summary>
-        /// 记录时辰，默认从子时开始
-        /// </summary>
-        public int Time { get; set; }
-
-        /// <summary>
-        /// 记录刻，默认从一刻开始
-        /// </summary>
-        public int Quarter { get; set; }
+        public GameTime NowTime { get; set; }
 
         /// <summary>
         /// 玩家队伍的实例（有且仅有一个）
