@@ -20,9 +20,14 @@ namespace GameQFramework
         public long wealth;
 
         /// <summary>
-        /// 人口
+        /// 男性人口
         /// </summary>
-        public int population;
+        public int malePopulation;
+
+        /// <summary>
+        /// 女性人口
+        /// </summary>
+        public int femalePopulation;
 
         /// <summary>
         /// 等级
@@ -48,11 +53,17 @@ namespace GameQFramework
         {
             name = townCommonData.Name;
             wealth = townCommonData.InitWealth;
-            population = townCommonData.InitPopulation;
+            malePopulation = townCommonData.InitMalePopulation;
+            femalePopulation = townCommonData.InitFemalePopulation;
             level = townCommonData.InitLevel;
             countryId = townCommonData.CountryId;
             familyId = townCommonData.FamilyId;
             townRoleS = new List<int>();
+        }
+
+        public int GetPopulation()
+        {
+            return malePopulation + femalePopulation;
         }
     }
 }

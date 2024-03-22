@@ -66,7 +66,7 @@ namespace UI
             TownData townData = this.GetModel<ITownModel>().TownData[mData.townId];
             townName.text = townData.name;
             wealthValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.wealth, 5);
-            populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.population, 5);
+            populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.GetPopulation(), 5);
             levelValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.level, 5);
             introduce.text = "这个聚落属于" + this.GetModel<ICountryModel>().CountryData[townData.countryId].name + "的" +
                              this.GetModel<IFamilyModel>().FamilyData[townData.familyId].familyName + "家族统治";

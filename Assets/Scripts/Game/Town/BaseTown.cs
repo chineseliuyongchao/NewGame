@@ -1,4 +1,5 @@
-﻿using GameQFramework;
+﻿using System;
+using GameQFramework;
 using QFramework;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace Game.Town
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<ChangeTimeEvent>(e =>
+            this.RegisterEvent<ChangeTimeEvent>(_ =>
             {
                 if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshPopulationTime))
                 {
@@ -44,14 +45,30 @@ namespace Game.Town
         /// </summary>
         protected virtual void UpdatePopulationGrowth()
         {
-            // 获取当前聚落的人口数据
-            TownData townData = this.GetModel<ITownModel>().TownData[_townId];
-            // 假设每天的自然增长率为 0.1%
-            float naturalGrowthRate = 0.001f;
-            // 计算今天的自然增长量
-            int naturalGrowth = (int)(townData.population * naturalGrowthRate);
-            // 更新人口数据
-            townData.population += naturalGrowth;
+            // 获取上一天的总人口数量
+            int lastPopulation = _townData.GetPopulation();
+            // 自然死亡率，假设为 0.01（1%）
+            float deathRate = 0.005f;
+            // 自然出生率，假设为 0.02（2%）
+            float birthRate = 0.01f;
+            // 人口结构参数
+            float populationParameter =
+                Math.Min(_townData.malePopulation, _townData.femalePopulation) * 2f / lastPopulation;
+            // 计算男性自然死亡量
+            int maleDeaths = (int)(lastPopulation * deathRate * _townData.malePopulation / lastPopulation);
+            // 计算女性自然死亡量
+            int femaleDeaths = (int)(lastPopulation * deathRate * _townData.femalePopulation / lastPopulation);
+            // 计算男性自然出生量
+            int maleBirths = (int)(lastPopulation * birthRate * populationParameter * 0.5f);
+            // 计算女性自然出生量
+            int femaleBirths = (int)(lastPopulation * birthRate * populationParameter * 0.5f);
+            // 当天自然增长量 = 男性自然增长量 + 女性自然增长量
+            int populationGrowth = -maleDeaths - femaleDeaths + maleBirths + femaleBirths;
+            // 更新总人口数量
+            _townData.malePopulation += maleBirths - maleDeaths;
+            _townData.femalePopulation += femaleBirths - femaleDeaths;
+            // // 输出自然增长量
+            Debug.Log(_townData.name + "今天的人口自然增长量为：" + populationGrowth);
         }
     }
 }

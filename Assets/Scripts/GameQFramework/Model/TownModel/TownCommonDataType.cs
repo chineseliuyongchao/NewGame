@@ -22,10 +22,16 @@ namespace GameQFramework
         public long InitWealth;
 
         /// <summary>
-        /// 默认人口
+        /// 默认男性人口
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        public int InitPopulation;
+        public int InitMalePopulation;
+
+        /// <summary>
+        /// 默认女性人口
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int InitFemalePopulation;
 
         /// <summary>
         /// 默认等级
