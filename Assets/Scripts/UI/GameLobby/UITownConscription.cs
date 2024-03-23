@@ -60,7 +60,7 @@ namespace UI
             });
             leaveButton.onClick.AddListener(() =>
             {
-                SoldierStructure soldierStructure = new SoldierStructure()
+                SoldierStructure soldierStructure = new SoldierStructure
                 {
                     num = _chooseNum
                 };

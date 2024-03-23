@@ -1,4 +1,5 @@
 ﻿using Game.BehaviourTree;
+using Game.Town;
 using GameQFramework;
 using QFramework;
 using Unity.VisualScripting;
@@ -101,6 +102,24 @@ namespace Game.Team
         protected override void ArriveInTown(int townId)
         {
             SetTeamType(TeamType.HUT_TOWN);
+            //临时处理，ai军队到达聚落以后就会征集一次军队
+            Conscription(townId);
+        }
+
+        /// <summary>
+        /// 征兵
+        /// </summary>
+        /// <param name="townId"></param>
+        private void Conscription(int townId)
+        {
+            ConscriptionData data = this.GetSystem<ITownSystem>().Conscription(townId);
+            int num = Random.Range(0, data.canConscription.num);
+            SoldierStructure soldierStructure = new SoldierStructure
+            {
+                num = num
+            };
+            data.realConscription(soldierStructure);
+            UpdateTeamNum(soldierStructure);
         }
 
         public BehaviourTree.BehaviourTree GetTree()
