@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Team;
 using GameQFramework;
 using QFramework;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Game.Player
             _player = Instantiate(_playerPrefab, transform);
             int playerTeamId = this.GetModel<IMyPlayerModel>().TeamId;
             _player.transform.position = this.GetModel<ITeamModel>().TeamData[playerTeamId].pos;
+            PlayerTeam playerTeam = _player.GetComponent<PlayerTeam>();
+            playerTeam.InitTeam(playerTeamId);
 
             _teamPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.TEAM);
             List<int> teamDataKey = new List<int>(this.GetModel<ITeamModel>().TeamData.Keys);
@@ -33,7 +36,7 @@ namespace Game.Player
                 GameObject teamObject = Instantiate(_teamPrefab, transform);
                 teamObject.transform.position = teamData.pos;
                 Team.Team team = teamObject.GetComponent<Team.Team>();
-                team.TeamId = teamDataKey[i];
+                team.InitTeam(teamDataKey[i]);
             }
         }
 

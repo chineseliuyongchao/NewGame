@@ -88,13 +88,14 @@ namespace Game.Family
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
             teamObject.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
             Team.Team team = teamObject.GetComponent<Team.Team>();
-            team.TeamId = this.GetSystem<ITeamSystem>().AddTeam(new TeamData
+            int teamId = this.GetSystem<ITeamSystem>().AddTeam(new TeamData
             {
                 generalRoleId = roleId,
                 number = 1,
                 teamType = TeamType.HUT_TOWN,
                 townId = townId
             });
+            team.InitTeam(teamId);
         }
 
         public BehaviourTree.BehaviourTree GetTree()

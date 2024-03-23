@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Game.Town;
 using GameQFramework;
 using QFramework;
 using UnityEngine;
@@ -22,13 +23,26 @@ namespace Game.Team
         /// </summary>
         private MoveCloseBack _moveEndCallBack;
 
-        public int TeamId { get; set; }
+        private int _teamId;
+
+        public int TeamId => _teamId;
+
         protected int CurrentIndex { get; set; }
+
+        private TeamData _teamData;
+
+        public TeamData TeamData => _teamData;
 
         protected override void OnInit()
         {
             base.OnInit();
             movePosList = new List<Vector2>();
+        }
+
+        public void InitTeam(int teamId)
+        {
+            _teamId = teamId;
+            _teamData = this.GetModel<ITeamModel>().TeamData[teamId];
         }
 
         protected override void OnListenEvent()
@@ -42,6 +56,15 @@ namespace Game.Team
         private void Update()
         {
             UpdateTeam();
+        }
+
+        /// <summary>
+        /// 更新队伍人数
+        /// </summary>
+        /// <param name="soldierStructure"></param>
+        public void UpdateTeamNum(SoldierStructure soldierStructure)
+        {
+            _teamData.number += soldierStructure.num;
         }
 
         protected virtual void UpdateTeam()

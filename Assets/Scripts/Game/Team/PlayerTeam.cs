@@ -12,7 +12,6 @@ namespace Game.Team
         protected override void OnInit()
         {
             base.OnInit();
-            TeamId = this.GetModel<IMyPlayerModel>().TeamId;
             this.GetModel<IGameModel>().PlayerTeam = this;
         }
 

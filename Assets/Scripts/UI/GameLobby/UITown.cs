@@ -1,3 +1,4 @@
+using Game.Town;
 using GameQFramework;
 using QFramework;
 
@@ -53,6 +54,11 @@ namespace UI
             showRoleButton.onClick.AddListener(() =>
             {
                 UIKit.OpenPanel<UITownRole>(new UITownRoleData(mData.townId));
+            });
+            conscriptionButton.onClick.AddListener(() =>
+            {
+                ConscriptionData data = this.GetSystem<ITownSystem>().Conscription(mData.townId);
+                UIKit.OpenPanel<UITownConscription>(new UITownConscriptionData(data));
             });
             leaveButton.onClick.AddListener(CloseSelf);
         }

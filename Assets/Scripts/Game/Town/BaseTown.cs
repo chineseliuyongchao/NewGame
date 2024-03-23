@@ -70,5 +70,56 @@ namespace Game.Town
             // // 输出自然增长量
             Debug.Log(_townData.name + "今天的人口自然增长量为：" + populationGrowth);
         }
+
+        /// <summary>
+        /// 征兵
+        /// </summary>
+        /// <returns></returns>
+        public virtual ConscriptionData Conscription()
+        {
+            ConscriptionData conscriptionData = new ConscriptionData
+            {
+                canConscription = new SoldierStructure
+                {
+                    //目标可以提供的兵员数量为聚落男性的百分之一
+                    num = _townData.malePopulation / 100
+                },
+                realConscription = RealConscription
+            };
+            return conscriptionData;
+        }
+
+        /// <summary>
+        /// 队伍完成征兵后的回调
+        /// </summary>
+        /// <param name="structure"></param>
+        private void RealConscription(SoldierStructure structure)
+        {
+            _townData.malePopulation -= structure.num;
+        }
+    }
+
+    /// <summary>
+    /// 征兵数据
+    /// </summary>
+    public class ConscriptionData
+    {
+        /// <summary>
+        /// 可以征集的士兵
+        /// </summary>
+        public SoldierStructure canConscription;
+
+        /// <summary>
+        /// 实际征集的士兵
+        /// </summary>
+        public Action<SoldierStructure> realConscription;
+    }
+
+    /// <summary>
+    /// 士兵组成
+    /// </summary>
+    public class SoldierStructure
+    {
+        public int num;
     }
 }

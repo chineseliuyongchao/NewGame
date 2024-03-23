@@ -18,6 +18,7 @@ namespace Game.Town
             base.OnInit();
             _towns = new Dictionary<int, BaseTown>();
             InitTown();
+            this.GetSystem<ITownSystem>().InitTownNode(this);
         }
 
         /// <summary>
@@ -34,6 +35,12 @@ namespace Game.Town
                 town.InitTown(key);
                 _towns.Add(key, town);
             }
+        }
+
+        public ConscriptionData Conscription(int townId)
+        {
+            BaseTown baseTown = _towns[townId];
+            return baseTown.Conscription();
         }
     }
 }
