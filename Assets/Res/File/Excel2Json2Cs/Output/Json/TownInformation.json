@@ -12,7 +12,8 @@
             "InitFemalePopulation": 10000,
             "InitLevel": 2,
             "CountryId": 1,
-            "FamilyId": 1
+            "FamilyId": 1,
+            "MilitiaNum": 200
         },
         {
             "ID": 4,
@@ -26,7 +27,8 @@
             "InitFemalePopulation": 4000,
             "InitLevel": 1,
             "CountryId": 1,
-            "FamilyId": 4
+            "FamilyId": 4,
+            "MilitiaNum": 200
         },
         {
             "ID": 2,
@@ -40,7 +42,8 @@
             "InitFemalePopulation": 6000,
             "InitLevel": 2,
             "CountryId": 2,
-            "FamilyId": 2
+            "FamilyId": 2,
+            "MilitiaNum": 200
         },
         {
             "ID": 5,
@@ -54,7 +57,8 @@
             "InitFemalePopulation": 10010,
             "InitLevel": 2,
             "CountryId": 2,
-            "FamilyId": 5
+            "FamilyId": 5,
+            "MilitiaNum": 200
         },
         {
             "ID": 3,
@@ -68,7 +72,8 @@
             "InitFemalePopulation": 30000,
             "InitLevel": 3,
             "CountryId": 3,
-            "FamilyId": 3
+            "FamilyId": 3,
+            "MilitiaNum": 200
         }
     ]
 }

@@ -50,5 +50,11 @@ namespace GameQFramework
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public int FamilyId;
+
+        /// <summary>
+        /// 默认民兵数量
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int MilitiaNum;
     }
 }

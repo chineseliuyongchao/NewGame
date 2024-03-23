@@ -37,6 +37,11 @@ namespace Game.Town
                 {
                     UpdatePopulationGrowth();
                 }
+
+                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshMilitiaTime))
+                {
+                    UpdateMilitia();
+                }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
@@ -70,6 +75,30 @@ namespace Game.Town
             // // 输出自然增长量
             Debug.Log(_townData.name + "今天的人口自然增长量为：" + populationGrowth);
         }
+
+        /// <summary>
+        /// 更新民兵数量
+        /// </summary>
+        protected virtual void UpdateMilitia()
+        {
+            // 计算合理的民兵数量
+            int reasonableMilitiaCount = (int)(_townData.malePopulation * 0.05);
+            if (_townData.malePopulation < 100)
+            {
+                //如果男性数量小于100，就不会有民兵
+                reasonableMilitiaCount = 0;
+            }
+
+            // 计算需要增加或减少的比例
+            float ratio = 0.1f; // 假设每次变化的比例为10%
+            // 计算需要增加或减少的数量
+            int delta = reasonableMilitiaCount - _townData.militiaNum;
+            // 计算实际增加或减少的数量
+            int changeAmount = (int)(delta * ratio);
+            _townData.militiaNum += changeAmount;
+            Debug.Log(_townData.name + "民兵数量：" + _townData.militiaNum + "  变化量： " + changeAmount);
+        }
+
 
         /// <summary>
         /// 征兵

@@ -49,6 +49,11 @@ namespace GameQFramework
         /// </summary>
         public int familyId;
 
+        /// <summary>
+        /// 默认民兵数量
+        /// </summary>
+        public int militiaNum;
+
         public TownData(TownCommonData townCommonData)
         {
             name = townCommonData.Name;
@@ -58,6 +63,7 @@ namespace GameQFramework
             level = townCommonData.InitLevel;
             countryId = townCommonData.CountryId;
             familyId = townCommonData.FamilyId;
+            militiaNum = townCommonData.MilitiaNum;
             townRoleS = new List<int>();
         }
 

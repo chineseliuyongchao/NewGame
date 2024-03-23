@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:2bd9f30f-ccbf-472c-a65a-a49b08b160a6
+	// Generate Id:188ddca3-9319-489a-8187-3f1f5935d412
 	public partial class UITown
 	{
 		public const string Name = "UITown";
@@ -25,6 +25,8 @@ namespace UI
 		[SerializeField]
 		private TMPro.TextMeshProUGUI levelValue;
 		[SerializeField]
+		private TMPro.TextMeshProUGUI militiaValue;
+		[SerializeField]
 		private TMPro.TextMeshProUGUI introduce;
 		
 		private UITownData mPrivateData = null;
@@ -38,6 +40,7 @@ namespace UI
 			wealthValue = null;
 			populationValue = null;
 			levelValue = null;
+			militiaValue = null;
 			introduce = null;
 			
 			mData = null;

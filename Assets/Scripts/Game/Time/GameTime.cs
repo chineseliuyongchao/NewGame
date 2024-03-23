@@ -37,13 +37,18 @@ namespace Game
         /// <summary>
         /// 游戏初始时间
         /// </summary>
-        public static readonly GameTime InitialTime = new GameTime(GameTimeConstant.INIT_YEAR,
-            GameTimeConstant.INIT_MONTH, GameTimeConstant.INIT_DAY, GameTimeConstant.INIT_TIME);
+        public static readonly GameTime InitialTime = new(GameTimeConstant.INIT_YEAR, GameTimeConstant.INIT_MONTH,
+            GameTimeConstant.INIT_DAY, GameTimeConstant.INIT_TIME);
 
         /// <summary>
         /// 刷新人口的时间
         /// </summary>
-        public static readonly GameTime RefreshPopulationTime = new GameTime(-1, -1, -1, 0);
+        public static readonly GameTime RefreshPopulationTime = new(-1, -1, -1, 0);
+
+        /// <summary>
+        /// 刷新民兵的时间
+        /// </summary>
+        public static readonly GameTime RefreshMilitiaTime = new(-1, -1, -1, 3);
 
         /// <summary>
         /// 更新时间
