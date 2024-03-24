@@ -51,6 +51,11 @@ namespace Game
         public static readonly GameTime RefreshMilitiaTime = new(-1, -1, -1, 3);
 
         /// <summary>
+        /// 刷新粮食的时间
+        /// </summary>
+        public static readonly GameTime RefreshGrainTime = new(-1, -1, -1, 8);
+
+        /// <summary>
         /// 更新时间
         /// </summary>
         public void UpdateTime()

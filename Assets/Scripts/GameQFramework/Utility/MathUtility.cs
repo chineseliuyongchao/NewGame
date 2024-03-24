@@ -50,5 +50,24 @@ namespace GameQFramework
 
             return -1; // 如果传入的x和y只能有一个为-1
         }
+
+        public int CrossTheBorder(int num, int max, int min)
+        {
+            if (max < min)
+            {
+                return num;
+            }
+
+            if (num < min)
+            {
+                num = min;
+            }
+            else if (num > max)
+            {
+                num = max;
+            }
+
+            return num;
+        }
     }
 }

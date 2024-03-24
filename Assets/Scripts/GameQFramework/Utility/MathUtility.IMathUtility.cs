@@ -23,5 +23,14 @@ namespace GameQFramework
         /// <param name="y"></param>
         /// <returns></returns>
         int Intersection(Vector2 pos1, Vector2 pos2, int x, int y);
+
+        /// <summary>
+        /// 越界规避
+        /// </summary>
+        /// <param name="num"></param>
+        /// <param name="max"></param>
+        /// <param name="min"></param>
+        /// <returns></returns>
+        int CrossTheBorder(int num, int max, int min);
     }
 }

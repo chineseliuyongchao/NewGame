@@ -56,5 +56,29 @@ namespace GameQFramework
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public int MilitiaNum;
+
+        /// <summary>
+        /// 农田数量
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int FarmlandNum;
+
+        /// <summary>
+        /// 农田上限
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int FarmlandUpperLimit;
+
+        /// <summary>
+        /// 粮仓等级
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int GranaryLevel;
+
+        /// <summary>
+        /// 粮食储量
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int GrainReserves;
     }
 }

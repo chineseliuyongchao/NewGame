@@ -13,7 +13,11 @@
             "InitLevel": 2,
             "CountryId": 1,
             "FamilyId": 1,
-            "MilitiaNum": 200
+            "MilitiaNum": 200,
+            "FarmlandNum": 200,
+            "FarmlandUpperLimit": 400,
+            "GranaryLevel": 5,
+            "GrainReserves": 0
         },
         {
             "ID": 4,
@@ -28,7 +32,11 @@
             "InitLevel": 1,
             "CountryId": 1,
             "FamilyId": 4,
-            "MilitiaNum": 200
+            "MilitiaNum": 200,
+            "FarmlandNum": 200,
+            "FarmlandUpperLimit": 400,
+            "GranaryLevel": 5,
+            "GrainReserves": 0
         },
         {
             "ID": 2,
@@ -43,7 +51,11 @@
             "InitLevel": 2,
             "CountryId": 2,
             "FamilyId": 2,
-            "MilitiaNum": 200
+            "MilitiaNum": 200,
+            "FarmlandNum": 200,
+            "FarmlandUpperLimit": 400,
+            "GranaryLevel": 5,
+            "GrainReserves": 0
         },
         {
             "ID": 5,
@@ -58,7 +70,11 @@
             "InitLevel": 2,
             "CountryId": 2,
             "FamilyId": 5,
-            "MilitiaNum": 200
+            "MilitiaNum": 200,
+            "FarmlandNum": 200,
+            "FarmlandUpperLimit": 400,
+            "GranaryLevel": 5,
+            "GrainReserves": 0
         },
         {
             "ID": 3,
@@ -73,7 +89,11 @@
             "InitLevel": 3,
             "CountryId": 3,
             "FamilyId": 3,
-            "MilitiaNum": 200
+            "MilitiaNum": 200,
+            "FarmlandNum": 200,
+            "FarmlandUpperLimit": 400,
+            "GranaryLevel": 5,
+            "GrainReserves": 0
         }
     ]
 }

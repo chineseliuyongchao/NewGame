@@ -54,6 +54,27 @@ namespace GameQFramework
         /// </summary>
         public int militiaNum;
 
+        /// <summary>
+        /// 农田数量
+        /// </summary>
+        public int farmlandNum;
+
+        /// <summary>
+        /// 农田上限
+        /// </summary>
+        public int farmlandUpperLimit;
+
+        /// <summary>
+        /// 粮仓等级
+        /// </summary>
+        public int granaryLevel;
+
+        /// <summary>
+        /// 粮食储量
+        /// </summary>
+        // ReSharper disable once InconsistentNaming
+        public int grainReserves;
+
         public TownData(TownCommonData townCommonData)
         {
             name = townCommonData.Name;
@@ -64,12 +85,30 @@ namespace GameQFramework
             countryId = townCommonData.CountryId;
             familyId = townCommonData.FamilyId;
             militiaNum = townCommonData.MilitiaNum;
+            farmlandNum = townCommonData.FarmlandNum;
+            farmlandUpperLimit = townCommonData.FarmlandUpperLimit;
+            granaryLevel = townCommonData.GranaryLevel;
+            grainReserves = townCommonData.GrainReserves;
             townRoleS = new List<int>();
         }
 
         public int GetPopulation()
         {
             return malePopulation + femalePopulation;
+        }
+
+        /// <summary>
+        /// 所有修改人口的操作走同一方法，便于debug
+        /// </summary>
+        /// <param name="addNum"></param>
+        public void UpdateMalePopulation(int addNum)
+        {
+            malePopulation += addNum;
+        }
+
+        public void UpdateFemalePopulation(int addNum)
+        {
+            femalePopulation += addNum;
         }
     }
 }
