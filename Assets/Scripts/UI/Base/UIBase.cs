@@ -1,8 +1,7 @@
 ﻿using DG.Tweening;
-using GameQFramework;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
-using Utils.Constant;
 using DOTween = DG.Tweening.DOTween;
 using Sequence = DG.Tweening.Sequence;
 

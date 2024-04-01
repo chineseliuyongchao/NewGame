@@ -1,4 +1,4 @@
-﻿using GameQFramework;
+﻿using Game.Player;
 using QFramework;
 
 namespace Game.Achieve

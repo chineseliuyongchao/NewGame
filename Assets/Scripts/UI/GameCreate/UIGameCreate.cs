@@ -1,4 +1,5 @@
-using GameQFramework;
+using Game.GameBase;
+using Game.Player;
 using QFramework;
 
 namespace UI

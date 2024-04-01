@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Game.Dialogue;
-using GameQFramework;
 using QFramework;
 using TMPro;
 using UnityEngine.UI;

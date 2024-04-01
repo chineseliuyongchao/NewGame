@@ -1,5 +1,5 @@
 ﻿using System;
-using Utils.Constant;
+using Game.GameBase;
 
 namespace Game
 {

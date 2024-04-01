@@ -1,4 +1,4 @@
-using GameQFramework;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 

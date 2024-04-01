@@ -1,10 +1,9 @@
 ﻿using System.Linq;
+using Game.GameBase;
 using Game.Town;
-using GameQFramework;
 using QFramework;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Utils.Constant;
 
 namespace Game.Map
 {

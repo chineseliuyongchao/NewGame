@@ -1,8 +1,8 @@
 ﻿using System;
-using GameQFramework;
+using Game.GameBase;
+using Game.GameUtils;
 using QFramework;
 using UnityEngine;
-using Utils.Constant;
 
 namespace Game.Town
 {

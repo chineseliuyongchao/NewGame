@@ -1,4 +1,6 @@
-﻿using GameQFramework;
+﻿using Game.GameBase;
+using Game.Map;
+using Game.Player;
 using QFramework;
 using UI;
 

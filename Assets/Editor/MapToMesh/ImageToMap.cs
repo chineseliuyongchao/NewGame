@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using GameQFramework;
+using Game.GameBase;
+using Game.Map;
 using Newtonsoft.Json;
 using UnityEngine;
-using Utils.Constant;
 
 namespace Editor
 {

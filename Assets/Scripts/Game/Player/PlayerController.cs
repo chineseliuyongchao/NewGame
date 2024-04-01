@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
+using Game.GameBase;
 using Game.Team;
-using GameQFramework;
 using QFramework;
 using UnityEngine;
-using Utils.Constant;
 
 namespace Game.Player
 {

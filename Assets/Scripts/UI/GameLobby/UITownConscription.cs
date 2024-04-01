@@ -1,5 +1,5 @@
+using Game.GameBase;
 using Game.Town;
-using GameQFramework;
 using QFramework;
 
 namespace UI

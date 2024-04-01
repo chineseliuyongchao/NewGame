@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using GameQFramework;
+using Game.GameBase;
 using QFramework;
-using Utils.Constant;
 
 namespace Game.Town
 {

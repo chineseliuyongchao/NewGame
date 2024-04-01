@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using GameQFramework;
+using Game.Town;
 using QFramework;
 using UnityEngine;
 

@@ -1,9 +1,10 @@
 ﻿using Game.BehaviourTree;
-using GameQFramework;
+using Game.GameBase;
+using Game.Team;
+using Game.Town;
 using QFramework;
 using Unity.VisualScripting;
 using UnityEngine;
-using Utils.Constant;
 
 namespace Game.Family
 {

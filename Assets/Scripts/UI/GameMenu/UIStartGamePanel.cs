@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using DG.Tweening;
-using GameQFramework;
+using Game.GameBase;
+using Game.GameMenu;
+using Game.GameSave;
 using QFramework;
 using UnityEngine;
-using Utils.Constant;
 
 namespace UI
 {

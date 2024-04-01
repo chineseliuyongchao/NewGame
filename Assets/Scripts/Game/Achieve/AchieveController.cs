@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GameQFramework;
+using Game.GameBase;
 using UnityEngine;
 
 namespace Game.Achieve
