@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 8095292364248172847}
   - component: {fileID: 1051219923438297132}
   m_Layer: 5
-  m_Name: wealthValue
+  m_Name: prosperityValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2165,7 +2165,7 @@ GameObject:
   - component: {fileID: 7849830577718720256}
   - component: {fileID: 4539919620393604221}
   m_Layer: 5
-  m_Name: wealthGroup
+  m_Name: prosperityGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2365,7 +2365,7 @@ GameObject:
   - component: {fileID: 3861748746104769293}
   - component: {fileID: 7974776616895682842}
   m_Layer: 5
-  m_Name: wealthTitle
+  m_Name: prosperityTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2419,7 +2419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u8D22\u5BCC\uFF1A"
+  m_text: "\u7E41\u8363\u5EA6\uFF1A"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
   m_sharedMaterial: {fileID: -4955988612771916369, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
@@ -2570,7 +2570,7 @@ MonoBehaviour:
   conscriptionButton: {fileID: 2783304679086570223}
   leaveButton: {fileID: 5652858214593395434}
   townName: {fileID: 4263370933821204513}
-  wealthValue: {fileID: 8095292364248172847}
+  prosperityValue: {fileID: 8095292364248172847}
   populationValue: {fileID: 8918155565133068738}
   levelValue: {fileID: 6768982282911438223}
   militiaValue: {fileID: 3195029895286026963}

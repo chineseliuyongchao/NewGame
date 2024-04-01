@@ -65,11 +65,11 @@ namespace UI
         private void InitUI()
         {
             _uiTownShowRoles = new List<UITownShowRole>();
-            TownData townData = this.GetModel<ITownModel>().TownData[mData.townId];
-            for (int i = 0; i < townData.townRoleS.Count; i++)
+            TownDataStorage townDataStorage = this.GetModel<ITownModel>().TownData[mData.townId].storage;
+            for (int i = 0; i < townDataStorage.townRoleS.Count; i++)
             {
                 UITownShowRole townShowRole = Instantiate(uiTownShowRole, Content);
-                townShowRole.InitUI(townData.townRoleS[i]);
+                townShowRole.InitUI(townDataStorage.townRoleS[i]);
                 _uiTownShowRoles.Add(townShowRole);
             }
 

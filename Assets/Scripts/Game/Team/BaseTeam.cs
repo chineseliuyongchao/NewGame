@@ -324,7 +324,7 @@ namespace Game.Team
                     //进入聚落
                     data.townId = data.targetTownId;
                     this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].townId = data.targetTownId;
-                    this.GetModel<ITownModel>().TownData[data.targetTownId].townRoleS.Add(data.generalRoleId);
+                    this.GetModel<ITownModel>().TownData[data.targetTownId].storage.townRoleS.Add(data.generalRoleId);
                 }
             }
             else
@@ -335,13 +335,13 @@ namespace Game.Team
                     ITownModel townModel = this.GetModel<ITownModel>();
                     if (townModel.TownData.ContainsKey(data.townId))
                     {
-                        if (townModel.TownData[data.townId].townRoleS.Contains(data.generalRoleId))
+                        if (townModel.TownData[data.townId].storage.townRoleS.Contains(data.generalRoleId))
                         {
-                            townModel.TownData[data.townId].townRoleS.Remove(data.generalRoleId);
+                            townModel.TownData[data.townId].storage.townRoleS.Remove(data.generalRoleId);
                         }
                         else
                         {
-                            Debug.LogError("聚落：" + townModel.TownData[data.targetTownId].name + "没有加入军队：" +
+                            Debug.LogError("聚落：" + townModel.TownData[data.targetTownId].storage.name + "没有加入军队：" +
                                            this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].roleName +
                                            "的军队，但是要从聚落中移除");
                         }

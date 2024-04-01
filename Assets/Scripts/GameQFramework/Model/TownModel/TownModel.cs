@@ -37,7 +37,7 @@ namespace GameQFramework
             };
             for (int i = 0; i < _townData.Count; i++)
             {
-                townModelData.townDataValue.Add(_townData[townModelData.townDataKey[i]]);
+                townModelData.townDataValue.Add(_townData[townModelData.townDataKey[i]].storage);
             }
 
             return townModelData;
@@ -49,7 +49,7 @@ namespace GameQFramework
             _townData.Clear();
             for (int i = 0; i < townModelData.townDataKey.Count; i++)
             {
-                _townData.Add(townModelData.townDataKey[i], townModelData.townDataValue[i]);
+                _townData.Add(townModelData.townDataKey[i], new TownData(townModelData.townDataValue[i]));
             }
         }
 
@@ -59,7 +59,7 @@ namespace GameQFramework
             List<int> key = new List<int>(_townCommonData.Keys);
             for (int i = 0; i < key.Count; i++)
             {
-                _townData.Add(key[i], new TownData(_townCommonData[key[i]]));
+                _townData.Add(key[i], new TownData(new TownDataStorage(_townCommonData[key[i]])));
             }
 
             Dictionary<int, RoleCommonData> roleCommonDataS = this.GetModel<IFamilyModel>().RoleCommonData;
@@ -67,7 +67,7 @@ namespace GameQFramework
             for (int i = 0; i < roleKey.Count; i++)
             {
                 RoleCommonData roleCommonData = roleCommonDataS[roleKey[i]];
-                _townData[roleCommonData.TownId].townRoleS.Add(roleCommonData.ID);
+                _townData[roleCommonData.TownId].storage.townRoleS.Add(roleCommonData.ID);
             }
         }
 
@@ -85,6 +85,6 @@ namespace GameQFramework
     public class TownModelData
     {
         public List<int> townDataKey = new();
-        public List<TownData> townDataValue = new();
+        public List<TownDataStorage> townDataValue = new();
     }
 }

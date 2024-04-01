@@ -27,6 +27,7 @@ namespace GameQFramework
             this.SendEvent(new ChangeToMainGameSceneEvent());
             LoadCurrentData();
             this.GetSystem<IGameSaveSystem>().LoadGame(fileName);
+            LoadNoStorageData();
             InitNewGameData(fileName);
             SceneManager.LoadScene("MainGameScene");
         }
@@ -59,6 +60,14 @@ namespace GameQFramework
             this.GetSystem<ICountrySystem>().InitCountryCommonData(countryAsset);
             this.GetSystem<IMapSystem>().InitMapMeshData(mapMeshAsset);
             _hasLoadCurrentData = true;
+        }
+
+        /// <summary>
+        /// 初始化不要保存的数据，这些数据都是由需要保存的数据算出，所以要在存档读取完成以后调用system计算
+        /// </summary>
+        private void LoadNoStorageData()
+        {
+            this.GetSystem<ITownSystem>().InitTownNoStorageData();
         }
 
         /// <summary>

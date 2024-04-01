@@ -16,12 +16,6 @@ namespace GameQFramework
         public float[] TownPos;
 
         /// <summary>
-        /// 默认财富
-        /// </summary>
-        // ReSharper disable once InconsistentNaming
-        public long InitWealth;
-
-        /// <summary>
         /// 默认男性人口
         /// </summary>
         // ReSharper disable once InconsistentNaming

@@ -12,6 +12,11 @@ namespace GameQFramework
         void InitTownCommonData(TextAsset textAsset);
 
         /// <summary>
+        /// 初始化聚落中不需要保存的数据
+        /// </summary>
+        void InitTownNoStorageData();
+
+        /// <summary>
         /// 初始化聚落节点
         /// </summary>
         /// <param name="townNode"></param>
@@ -23,5 +28,11 @@ namespace GameQFramework
         /// <param name="townId"></param>
         /// <returns></returns>
         ConscriptionData Conscription(int townId);
+
+        /// <summary>
+        /// 单日粮食产量
+        /// </summary>
+        /// <returns>农田数量</returns>
+        int DailyGrainYield(int farmlandNum);
     }
 }

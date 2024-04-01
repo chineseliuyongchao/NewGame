@@ -6,18 +6,29 @@ namespace GameQFramework
     /// <summary>
     /// 单个聚落的数据
     /// </summary>
-    [Serializable]
     public class TownData
+    {
+        // ReSharper disable once FieldCanBeMadeReadOnly.Global
+        public TownDataStorage storage;
+        // ReSharper disable once UnassignedField.Global
+        public TownDataNoStorage noStorage;
+
+        public TownData(TownDataStorage storage)
+        {
+            this.storage = storage;
+        }
+    }
+
+    /// <summary>
+    /// 单个聚落需要保存的数据
+    /// </summary>
+    [Serializable]
+    public class TownDataStorage
     {
         /// <summary>
         /// 聚落名字
         /// </summary>
         public string name;
-
-        /// <summary>
-        /// 财富
-        /// </summary>
-        public long wealth;
 
         /// <summary>
         /// 男性人口
@@ -50,7 +61,7 @@ namespace GameQFramework
         public int familyId;
 
         /// <summary>
-        /// 默认民兵数量
+        /// 民兵数量
         /// </summary>
         public int militiaNum;
 
@@ -75,10 +86,9 @@ namespace GameQFramework
         // ReSharper disable once InconsistentNaming
         public int grainReserves;
 
-        public TownData(TownCommonData townCommonData)
+        public TownDataStorage(TownCommonData townCommonData)
         {
             name = townCommonData.Name;
-            wealth = townCommonData.InitWealth;
             malePopulation = townCommonData.InitMalePopulation;
             femalePopulation = townCommonData.InitFemalePopulation;
             level = townCommonData.InitLevel;
@@ -110,5 +120,16 @@ namespace GameQFramework
         {
             femalePopulation += addNum;
         }
+    }
+
+    /// <summary>
+    /// 单个聚落不需要保存的数据，数据都是由TownDataStorage算出来的
+    /// </summary>
+    public class TownDataNoStorage
+    {
+        /// <summary>
+        /// 繁荣度
+        /// </summary>
+        public int prosperity;
     }
 }
