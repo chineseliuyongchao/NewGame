@@ -11,10 +11,11 @@ namespace Game.Family
     /// <summary>
     /// 家族控制器，处理家族的逻辑
     /// </summary>
-    public class FamilyController : BaseGameController, IGetBehaviourTree
+    public class BaseFamily : BaseGameController, IGetBehaviourTree
     {
         public BehaviourTree.BehaviourTree behaviourTree;
         private int _familyId;
+        private FamilyData _familyData;
         private FamilyBlackBoard _familyBlackBoard;
         private FamilyAiAgent _familyAiAgent;
         private GameObject _teamPrefab;
@@ -54,8 +55,11 @@ namespace Game.Family
         public void Init(int familyId)
         {
             _familyId = familyId;
-            name = this.GetModel<IFamilyModel>().FamilyData[_familyId].familyName;
-            _familyAiAgent.Init(_familyId, _familyBlackBoard);
+            _familyData = this.GetModel<IFamilyModel>().FamilyData[_familyId];
+            _familyBlackBoard.familyId = _familyId;
+            _familyBlackBoard.familyData = _familyData;
+            name = _familyData.storage.familyName;
+            _familyAiAgent.Init(_familyBlackBoard);
             _checkBuildTeamTime = GameTime.GetRandomTime(false, false, _checkBuildTeamByMonth);
         }
 
@@ -67,6 +71,11 @@ namespace Game.Family
                 {
                     behaviourTree.StartTree();
                 }
+
+                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshEconomyTime))
+                {
+                    UpdateEconomy();
+                }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
@@ -76,13 +85,31 @@ namespace Game.Family
         }
 
         /// <summary>
+        /// 刷新家族经济
+        /// </summary>
+        private void UpdateEconomy()
+        {
+            //税收
+            int taxation = 0;
+            for (int i = 0; i < _familyData.storage.familyTownS.Count; i++)
+            {
+                TownData townData = this.GetModel<ITownModel>().TownData[_familyData.storage.familyTownS[i]];
+                taxation += (int)(townData.noStorage.prosperity * FamilyConstant.PROSPERITY_TAX_COEFFICIENT);
+            }
+
+            //工场收入
+            int workShopRevenue = 1000; //暂定工场收入
+            _familyData.storage.familyWealth += taxation + workShopRevenue;
+            Debug.Log("家族财富刷新：" + _familyData.storage.familyName + "  " + _familyData.storage.familyWealth);
+        }
+
+        /// <summary>
         /// 组建一支队伍
         /// </summary>
         /// <param name="roleId"></param>
         private void BuildTeam(int roleId)
         {
             this.GetModel<IFamilyModel>().RoleData[roleId].roleType = RoleType.GENERAL;
-
             GameObject teamObject = Instantiate(_teamPrefab);
             teamObject.Parent(this.GetModel<IGameModel>().PlayerTeam.transform.parent);
             int townId = this.GetModel<IFamilyModel>().RoleData[roleId].townId;

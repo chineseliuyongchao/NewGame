@@ -7,5 +7,7 @@ namespace Game.Family
     /// </summary>
     public class FamilyBlackBoard : Blackboard
     {
+        public int familyId;
+        public FamilyData familyData;
     }
 }

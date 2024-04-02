@@ -10,14 +10,14 @@ namespace Game.GameBase
     {
         private GameObject _meshPrefab;
         private GameObject _familyPrefab;
-        private List<FamilyController> _families;
+        private List<BaseFamily> _families;
 
         protected override void OnInit()
         {
             base.OnInit();
             _meshPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.MESH_PREFAB);
             _familyPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.FAMILY);
-            _families = new List<FamilyController>();
+            _families = new List<BaseFamily>();
         }
 
         protected override void OnControllerStart()
@@ -50,9 +50,9 @@ namespace Game.GameBase
             for (int i = 0; i < familyKey.Count; i++)
             {
                 GameObject family = Instantiate(_familyPrefab, transform);
-                FamilyController familyController = family.GetComponent<FamilyController>();
-                familyController.Init(familyKey[i]);
-                _families.Add(familyController);
+                BaseFamily baseFamily = family.GetComponent<BaseFamily>();
+                baseFamily.Init(familyKey[i]);
+                _families.Add(baseFamily);
             }
 
             UIKit.OpenPanel<UIGameLobby>();

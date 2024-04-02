@@ -48,6 +48,11 @@ namespace Game.Town
                 {
                     UpdateGrain();
                 }
+
+                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshTownNoStorageTime))
+                {
+                    this.GetSystem<ITownSystem>().UpdateTownNoStorageData(_townData);
+                }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 

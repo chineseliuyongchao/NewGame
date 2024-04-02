@@ -16,6 +16,11 @@ namespace Game.Town
         void InitTownNoStorageData();
 
         /// <summary>
+        /// 刷新聚落中不需要保存的数据
+        /// </summary>
+        void UpdateTownNoStorageData(TownData townData);
+
+        /// <summary>
         /// 初始化聚落节点
         /// </summary>
         /// <param name="townNode"></param>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Game.GameSave;
+using Game.Town;
 using QFramework;
 using UnityEngine;
 
@@ -50,14 +51,14 @@ namespace Game.Family
 
         public object SaveModel()
         {
-            FamilyModelData familyModelData = new FamilyModelData()
+            FamilyModelData familyModelData = new FamilyModelData
             {
                 familyDataKey = new List<int>(_familyData.Keys),
                 roleDataKey = new List<int>(_roleData.Keys)
             };
             for (int i = 0; i < _familyData.Count; i++)
             {
-                familyModelData.familyDataValue.Add(_familyData[familyModelData.familyDataKey[i]]);
+                familyModelData.familyDataValue.Add(_familyData[familyModelData.familyDataKey[i]].storage);
             }
 
             for (int i = 0; i < _roleData.Count; i++)
@@ -74,7 +75,7 @@ namespace Game.Family
             _familyData.Clear();
             for (int i = 0; i < familyModelData.familyDataKey.Count; i++)
             {
-                _familyData.Add(familyModelData.familyDataKey[i], familyModelData.familyDataValue[i]);
+                _familyData.Add(familyModelData.familyDataKey[i], new FamilyData(familyModelData.familyDataValue[i]));
             }
 
             _roleData.Clear();
@@ -90,7 +91,7 @@ namespace Game.Family
             List<int> familyKey = new List<int>(_familyCommonData.Keys);
             for (int i = 0; i < familyKey.Count; i++)
             {
-                _familyData.Add(familyKey[i], new FamilyData(_familyCommonData[familyKey[i]]));
+                _familyData.Add(familyKey[i], new FamilyData(new FamilyDataStorage(_familyCommonData[familyKey[i]])));
             }
 
             List<int> roleKey = new List<int>(_roleCommonData.Keys);
@@ -99,8 +100,16 @@ namespace Game.Family
                 RoleCommonData roleCommonData = _roleCommonData[roleKey[i]];
                 if (_familyData.ContainsKey(roleCommonData.FamilyId))
                 {
-                    _familyData[roleCommonData.FamilyId].familyRoleS.Add(roleCommonData.ID);
+                    _familyData[roleCommonData.FamilyId].storage.familyRoleS.Add(roleCommonData.ID);
                 }
+            }
+
+            Dictionary<int, TownCommonData> townCommonDataS = this.GetModel<ITownModel>().TownCommonData;
+            List<int> townKey = new List<int>(townCommonDataS.Keys);
+            for (int i = 0; i < townKey.Count; i++)
+            {
+                TownCommonData townCommonData = townCommonDataS[townKey[i]];
+                _familyData[townCommonData.FamilyId].storage.familyTownS.Add(townCommonData.ID);
             }
 
             _roleData.Clear();
@@ -124,7 +133,7 @@ namespace Game.Family
     public class FamilyModelData
     {
         public List<int> familyDataKey = new();
-        public List<FamilyData> familyDataValue = new();
+        public List<FamilyDataStorage> familyDataValue = new();
         public List<int> roleDataKey = new();
         public List<RoleData> roleDataValue = new();
     }

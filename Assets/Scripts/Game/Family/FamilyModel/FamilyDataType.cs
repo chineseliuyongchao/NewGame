@@ -4,10 +4,27 @@ using System.Collections.Generic;
 namespace Game.Family
 {
     /// <summary>
+    /// 单个聚落的数据
+    /// </summary>
+    public class FamilyData
+    {
+        // ReSharper disable once FieldCanBeMadeReadOnly.Global
+        public FamilyDataStorage storage;
+
+        // ReSharper disable once UnassignedField.Global
+        public FamilyDataNoStorage noStorage;
+
+        public FamilyData(FamilyDataStorage storage)
+        {
+            this.storage = storage;
+        }
+    }
+
+    /// <summary>
     /// 所有家族的数据，不同存档不同
     /// </summary>
     [Serializable]
-    public class FamilyData
+    public class FamilyDataStorage
     {
         /// <summary>
         /// 家族名字
@@ -25,11 +42,6 @@ namespace Game.Family
         public int familyLevel;
 
         /// <summary>
-        /// 家族所有角色
-        /// </summary>
-        public List<int> familyRoleS;
-
-        /// <summary>
         /// 效忠国家编号
         /// </summary>
         public int countryId;
@@ -39,7 +51,17 @@ namespace Game.Family
         /// </summary>
         public int familyLeaderId;
 
-        public FamilyData(FamilyCommonData familyCommonData)
+        /// <summary>
+        /// 家族所有角色
+        /// </summary>
+        public List<int> familyRoleS;
+
+        /// <summary>
+        /// 家族所有聚落
+        /// </summary>
+        public List<int> familyTownS;
+
+        public FamilyDataStorage(FamilyCommonData familyCommonData)
         {
             familyName = familyCommonData.Name;
             familyWealth = familyCommonData.FamilyWealth;
@@ -47,7 +69,15 @@ namespace Game.Family
             countryId = familyCommonData.CountryId;
             familyLeaderId = familyCommonData.FamilyLeaderId;
             familyRoleS = new List<int>();
+            familyTownS = new List<int>();
         }
+    }
+
+    /// <summary>
+    /// 单个家族不需要保存的数据，数据都是由FamilyDataStorage算出来的
+    /// </summary>
+    public class FamilyDataNoStorage
+    {
     }
 
     /// <summary>

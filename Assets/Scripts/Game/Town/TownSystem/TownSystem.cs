@@ -32,6 +32,11 @@ namespace Game.Town
             }
         }
 
+        public void UpdateTownNoStorageData(TownData townData)
+        {
+            ComputeProsperity(townData.storage, townData.noStorage);
+        }
+
         /// <summary>
         /// 计算繁荣度
         /// </summary>
@@ -39,10 +44,11 @@ namespace Game.Town
         /// <param name="noStorage"></param>
         private void ComputeProsperity(TownDataStorage storage, TownDataNoStorage noStorage)
         {
-            int workShopRevenue = 1000; //暂定工厂收入
+            int workShopRevenue = 1000; //暂定工场收入
             int revenue = workShopRevenue + DailyGrainYield(storage.farmlandNum) * TownConstant.GRAIN_PRICE;
             noStorage.prosperity = (int)(storage.GetPopulation() * TownConstant.POPULATION_GRAIN_CONSUME +
                                          revenue * TownConstant.INCOME_PROSPERITY_COEFFICIENT);
+            Debug.Log("聚落繁荣度：" + storage.name + "  " + noStorage.prosperity);
         }
 
         public void InitTownNode(TownNode townNode)

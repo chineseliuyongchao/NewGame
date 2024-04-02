@@ -74,6 +74,7 @@ namespace Game.GameBase
         private void LoadNoStorageData()
         {
             this.GetSystem<ITownSystem>().InitTownNoStorageData();
+            this.GetSystem<IFamilySystem>().InitFamilyNoStorageData();
         }
 
         /// <summary>

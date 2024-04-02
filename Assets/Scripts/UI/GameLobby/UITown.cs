@@ -78,7 +78,7 @@ namespace UI
             levelValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.level, 5);
             militiaValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.militiaNum, 5);
             introduce.text = "这个聚落属于" + this.GetModel<ICountryModel>().CountryData[townData.storage.countryId].name + "的" +
-                             this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].familyName + "家族统治";
+                             this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].storage.familyName + "家族统治";
         }
     }
 }

@@ -82,8 +82,8 @@ namespace UI
             if (this.GetModel<IFamilyModel>().FamilyData.ContainsKey(roleData.familyId))
             {
                 FamilyData familyData = this.GetModel<IFamilyModel>().FamilyData[roleData.familyId];
-                familyName.text = familyData.familyName;
-                countryName.text = this.GetModel<ICountryModel>().CountryData[familyData.countryId].name;
+                familyName.text = familyData.storage.familyName;
+                countryName.text = this.GetModel<ICountryModel>().CountryData[familyData.storage.countryId].name;
             }
             else
             {

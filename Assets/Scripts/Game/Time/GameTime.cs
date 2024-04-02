@@ -56,6 +56,16 @@ namespace Game
         public static readonly GameTime RefreshGrainTime = new(-1, -1, -1, 8);
 
         /// <summary>
+        /// 刷新聚落非存储数据的时间
+        /// </summary>
+        public static readonly GameTime RefreshTownNoStorageTime = new GameTime(-1, -1, -1, 8);
+
+        /// <summary>
+        /// 刷新经济的时间
+        /// </summary>
+        public static readonly GameTime RefreshEconomyTime = new GameTime(-1, -1, -1, 10);
+
+        /// <summary>
         /// 更新时间
         /// </summary>
         public void UpdateTime()

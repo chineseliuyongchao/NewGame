@@ -11,6 +11,11 @@ namespace Game.Family
         void InitFamilyCommonData(TextAsset textAsset);
 
         /// <summary>
+        /// 初始化家族中不需要保存的数据
+        /// </summary>
+        void InitFamilyNoStorageData();
+
+        /// <summary>
         /// 初始化角色通用数据
         /// </summary>
         void InitRoleCommonData(TextAsset textAsset);

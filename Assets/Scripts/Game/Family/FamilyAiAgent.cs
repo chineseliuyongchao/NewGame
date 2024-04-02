@@ -9,16 +9,12 @@ namespace Game.Family
     /// </summary>
     public class FamilyAiAgent : AiAgent
     {
-        private int _familyId;
-        private FamilyData _familyData;
-        private FamilyBlackBoard _familyBlackBoard;
+        private FamilyBlackBoard _blackBoard;
         private bool _isInit;
 
-        public void Init(int familyId, FamilyBlackBoard familyBlackBoard)
+        public void Init(FamilyBlackBoard familyBlackBoard)
         {
-            _familyId = familyId;
-            _familyData = this.GetModel<IFamilyModel>().FamilyData[_familyId];
-            _familyBlackBoard = familyBlackBoard;
+            _blackBoard = familyBlackBoard;
             _isInit = true;
         }
 
@@ -29,7 +25,7 @@ namespace Game.Family
                 return base.CanBuildTeam();
             }
 
-            if (this.GetModel<IFamilyModel>().FamilyData[_familyId].familyWealth > 10000)
+            if (_blackBoard.familyData.storage.familyWealth > 10000)
             {
                 return true;
             }
@@ -44,12 +40,12 @@ namespace Game.Family
                 return base.SelectTeamGeneral();
             }
 
-            for (int i = 0; i < _familyData.familyRoleS.Count; i++)
+            for (int i = 0; i < _blackBoard.familyData.storage.familyRoleS.Count; i++)
             {
-                int roleId = _familyData.familyRoleS[i];
+                int roleId = _blackBoard.familyData.storage.familyRoleS[i];
                 if (this.GetModel<IFamilyModel>().RoleData[roleId].roleType == RoleType.INACTIVE)
                 {
-                    _familyBlackBoard.teamGeneralId = roleId;
+                    _blackBoard.teamGeneralId = roleId;
                     break;
                 }
             }
@@ -64,14 +60,14 @@ namespace Game.Family
                 return base.BuildTeam();
             }
 
-            if (_familyBlackBoard.teamGeneralId <= 0)
+            if (_blackBoard.teamGeneralId <= 0)
             {
                 return false;
             }
 
-            Debug.Log(this.GetModel<IFamilyModel>().FamilyData[_familyId].familyName + "家族组建队伍，将领是" +
-                      this.GetModel<IFamilyModel>().RoleData[_familyBlackBoard.teamGeneralId].roleName);
-            _familyBlackBoard.buildTeam?.Invoke(_familyBlackBoard.teamGeneralId);
+            Debug.Log(_blackBoard.familyData.storage.familyName + "家族组建队伍，将领是" +
+                      this.GetModel<IFamilyModel>().RoleData[_blackBoard.teamGeneralId].roleName);
+            _blackBoard.buildTeam?.Invoke(_blackBoard.teamGeneralId);
 
             return true;
         }
