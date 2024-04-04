@@ -26,8 +26,9 @@ namespace Game.Team
         private MoveCloseBack _moveEndCallBack;
 
         private int _teamId;
-
         public int TeamId => _teamId;
+        private int _familyId;
+        public int FamilyId => _familyId;
 
         protected int CurrentIndex { get; set; }
 
@@ -41,9 +42,10 @@ namespace Game.Team
             movePosList = new List<Vector2>();
         }
 
-        public void InitTeam(int teamId)
+        public void InitTeam(int teamId,int familyId)
         {
             _teamId = teamId;
+            _familyId = familyId;
             _teamData = this.GetModel<ITeamModel>().TeamData[teamId];
         }
 

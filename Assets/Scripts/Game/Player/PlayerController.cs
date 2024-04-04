@@ -18,9 +18,10 @@ namespace Game.Player
             _playerPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.PLAYER_TEAM);
             _player = Instantiate(_playerPrefab, transform);
             int playerTeamId = this.GetModel<IMyPlayerModel>().TeamId;
+            int familyId = this.GetModel<IMyPlayerModel>().FamilyId;
             _player.transform.position = this.GetModel<ITeamModel>().TeamData[playerTeamId].pos;
             PlayerTeam playerTeam = _player.GetComponent<PlayerTeam>();
-            playerTeam.InitTeam(playerTeamId);
+            playerTeam.InitTeam(playerTeamId, familyId);
 
             _teamPrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.TEAM);
             List<int> teamDataKey = new List<int>(this.GetModel<ITeamModel>().TeamData.Keys);
@@ -35,7 +36,7 @@ namespace Game.Player
                 GameObject teamObject = Instantiate(_teamPrefab, transform);
                 teamObject.transform.position = teamData.pos;
                 Team.Team team = teamObject.GetComponent<Team.Team>();
-                team.InitTeam(teamDataKey[i]);
+                team.InitTeam(teamDataKey[i], familyId);
             }
         }
 

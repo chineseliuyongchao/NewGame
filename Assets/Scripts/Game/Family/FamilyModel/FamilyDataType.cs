@@ -61,6 +61,10 @@ namespace Game.Family
         /// </summary>
         public List<int> familyTownS;
 
+        public FamilyDataStorage()
+        {
+        }
+
         public FamilyDataStorage(FamilyCommonData familyCommonData)
         {
             familyName = familyCommonData.Name;
@@ -70,6 +74,15 @@ namespace Game.Family
             familyLeaderId = familyCommonData.FamilyLeaderId;
             familyRoleS = new List<int>();
             familyTownS = new List<int>();
+        }
+
+        /// <summary>
+        /// 所有影响家族财富的都调用该方法，方便调试
+        /// </summary>
+        /// <param name="addMoney"></param>
+        public void UpdateWealth(int addMoney)
+        {
+            familyWealth += addMoney;
         }
     }
 

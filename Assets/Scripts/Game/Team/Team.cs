@@ -118,6 +118,7 @@ namespace Game.Team
             {
                 num = num
             };
+            this.GetSystem<ITeamSystem>().ComputeMoneyWithConscription(soldierStructure, FamilyId);
             data.realConscription(soldierStructure);
             UpdateTeamNum(soldierStructure);
         }

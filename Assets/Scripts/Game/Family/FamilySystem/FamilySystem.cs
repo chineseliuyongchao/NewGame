@@ -41,5 +41,14 @@ namespace Game.Family
             this.GetModel<IFamilyModel>().RoleData.Add(roleId, roleData);
             return roleId;
         }
+
+        public int AddNewFamily(FamilyData familyData)
+        {
+            int familyId = this.GetModel<IFamilyModel>().FamilyData.Count + 1;
+            FamilyDataNoStorage noStorage = new FamilyDataNoStorage();
+            familyData.noStorage = noStorage;
+            this.GetModel<IFamilyModel>().FamilyData.Add(familyId, familyData);
+            return familyId;
+        }
     }
 }

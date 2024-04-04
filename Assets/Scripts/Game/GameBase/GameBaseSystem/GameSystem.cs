@@ -1,4 +1,5 @@
-﻿using Game.Country;
+﻿using System.Collections.Generic;
+using Game.Country;
 using Game.Family;
 using Game.GameSave;
 using Game.Map;
@@ -90,10 +91,22 @@ namespace Game.GameBase
             CreateGameData data = this.GetModel<IMyPlayerModel>().CreateGameData;
             int roleId = this.GetSystem<IFamilySystem>().AddNewRole(new RoleData
             {
-                roleName = data.name,
-                roleAge = data.age
+                roleName = data.playerName,
+                roleAge = data.playerAge
             });
             this.GetModel<IMyPlayerModel>().RoleId = roleId;
+
+            int familyId = this.GetSystem<IFamilySystem>().AddNewFamily(new FamilyData(new FamilyDataStorage
+            {
+                familyName = data.familyName,
+                familyWealth = 1000, //家族开局默认1000
+                familyLevel = 1,
+                countryId = -1, //开局没有效忠的国家
+                familyLeaderId = roleId,
+                familyRoleS = new List<int>(roleId),
+                familyTownS = new List<int>()
+            }));
+            this.GetModel<IMyPlayerModel>().FamilyId = familyId;
 
             int teamId = this.GetSystem<ITeamSystem>().AddTeam(new TeamData
             {

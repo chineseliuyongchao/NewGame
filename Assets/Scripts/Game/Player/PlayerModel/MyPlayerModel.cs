@@ -10,6 +10,7 @@ namespace Game.Player
         private int _accessTown;
         private CreateGameData _createGameData;
         private int _roleId;
+        private int _familyId;
         private int _teamId;
 
         protected override void OnInit()
@@ -33,6 +34,12 @@ namespace Game.Player
         {
             get => _roleId;
             set => _roleId = value;
+        }
+
+        public int FamilyId
+        {
+            get => _familyId;
+            set => _familyId = value;
         }
 
         public int TeamId
@@ -82,7 +89,8 @@ namespace Game.Player
 
     public class CreateGameData
     {
-        public string name;
-        public int age;
+        public string playerName;
+        public int playerAge;
+        public string familyName;
     }
 }

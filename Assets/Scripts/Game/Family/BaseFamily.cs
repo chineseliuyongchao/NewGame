@@ -99,7 +99,7 @@ namespace Game.Family
 
             //工场收入
             int workShopRevenue = 1000; //暂定工场收入
-            _familyData.storage.familyWealth += taxation + workShopRevenue;
+            _familyData.storage.UpdateWealth(taxation + workShopRevenue);
             Debug.Log("家族财富刷新：" + _familyData.storage.familyName + "  " + _familyData.storage.familyWealth);
         }
 
@@ -123,7 +123,7 @@ namespace Game.Family
                 teamType = TeamType.HUT_TOWN,
                 townId = townId
             });
-            team.InitTeam(teamId);
+            team.InitTeam(teamId, _familyId);
         }
 
         public BehaviourTree.BehaviourTree GetTree()

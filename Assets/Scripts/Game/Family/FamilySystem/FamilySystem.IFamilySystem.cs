@@ -26,5 +26,12 @@ namespace Game.Family
         /// <param name="roleData"></param>
         /// <returns></returns>
         int AddNewRole(RoleData roleData);
+
+        /// <summary>
+        /// 添加一个新家族
+        /// </summary>
+        /// <param name="familyData"></param>
+        /// <returns></returns>
+        int AddNewFamily(FamilyData familyData);
     }
 }

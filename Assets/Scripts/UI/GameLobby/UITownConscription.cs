@@ -1,4 +1,6 @@
 using Game.GameBase;
+using Game.Player;
+using Game.Team;
 using Game.Town;
 using QFramework;
 
@@ -64,6 +66,8 @@ namespace UI
                 {
                     num = _chooseNum
                 };
+                this.GetSystem<ITeamSystem>()
+                    .ComputeMoneyWithConscription(soldierStructure, this.GetModel<IMyPlayerModel>().FamilyId);
                 mData.data.realConscription(soldierStructure);
                 this.GetModel<IGameModel>().PlayerTeam.UpdateTeamNum(soldierStructure);
                 CloseSelf();

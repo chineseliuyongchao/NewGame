@@ -48,8 +48,9 @@ namespace UI
             {
                 this.GetModel<IMyPlayerModel>().CreateGameData = new CreateGameData
                 {
-                    name = inputName.text.Equals("") ? "玩家" : inputName.text,
-                    age = inputAge.text.ToInt(20)
+                    playerName = inputName.text.Equals("") ? "玩家" : inputName.text,
+                    playerAge = inputAge.text.ToInt(20),
+                    familyName = inputFamilyName.text.Equals("") ? "玩家家族" : inputFamilyName.text
                 };
                 CloseSelf();
                 this.GetSystem<IGameSystem>().ChangeMainGameScene();

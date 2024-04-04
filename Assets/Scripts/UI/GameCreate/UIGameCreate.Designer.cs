@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:f0512d6f-b5a2-427e-bb13-95144c54c350
+	// Generate Id:3fd33e05-64e0-426c-95e6-51b91622e79c
 	public partial class UIGameCreate
 	{
 		public const string Name = "UIGameCreate";
@@ -18,6 +18,8 @@ namespace UI
 		private TMPro.TMP_InputField inputName;
 		[SerializeField]
 		private TMPro.TMP_InputField inputAge;
+		[SerializeField]
+		private TMPro.TMP_InputField inputFamilyName;
 		
 		private UIGameCreateData mPrivateData = null;
 		
@@ -27,6 +29,7 @@ namespace UI
 			leaveButton = null;
 			inputName = null;
 			inputAge = null;
+			inputFamilyName = null;
 			
 			mData = null;
 		}
