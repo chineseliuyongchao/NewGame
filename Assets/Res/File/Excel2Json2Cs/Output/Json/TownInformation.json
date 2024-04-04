@@ -31,8 +31,8 @@
             "CountryId": 1,
             "FamilyId": 4,
             "MilitiaNum": 200,
-            "FarmlandNum": 200,
-            "FarmlandUpperLimit": 400,
+            "FarmlandNum": 230,
+            "FarmlandUpperLimit": 300,
             "GranaryLevel": 5,
             "GrainReserves": 4000
         },
@@ -67,8 +67,8 @@
             "CountryId": 2,
             "FamilyId": 5,
             "MilitiaNum": 200,
-            "FarmlandNum": 200,
-            "FarmlandUpperLimit": 400,
+            "FarmlandNum": 100,
+            "FarmlandUpperLimit": 300,
             "GranaryLevel": 5,
             "GrainReserves": 6000
         },
@@ -85,7 +85,7 @@
             "CountryId": 3,
             "FamilyId": 3,
             "MilitiaNum": 200,
-            "FarmlandNum": 200,
+            "FarmlandNum": 250,
             "FarmlandUpperLimit": 400,
             "GranaryLevel": 5,
             "GrainReserves": 7000
