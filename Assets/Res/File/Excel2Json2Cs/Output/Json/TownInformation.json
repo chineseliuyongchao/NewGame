@@ -16,7 +16,7 @@
             "FarmlandNum": 200,
             "FarmlandUpperLimit": 400,
             "GranaryLevel": 5,
-            "GrainReserves": 0
+            "GrainReserves": 3000
         },
         {
             "ID": 4,
@@ -34,7 +34,7 @@
             "FarmlandNum": 200,
             "FarmlandUpperLimit": 400,
             "GranaryLevel": 5,
-            "GrainReserves": 0
+            "GrainReserves": 4000
         },
         {
             "ID": 2,
@@ -52,7 +52,7 @@
             "FarmlandNum": 200,
             "FarmlandUpperLimit": 400,
             "GranaryLevel": 5,
-            "GrainReserves": 0
+            "GrainReserves": 5000
         },
         {
             "ID": 5,
@@ -70,7 +70,7 @@
             "FarmlandNum": 200,
             "FarmlandUpperLimit": 400,
             "GranaryLevel": 5,
-            "GrainReserves": 0
+            "GrainReserves": 6000
         },
         {
             "ID": 3,
@@ -88,7 +88,7 @@
             "FarmlandNum": 200,
             "FarmlandUpperLimit": 400,
             "GranaryLevel": 5,
-            "GrainReserves": 0
+            "GrainReserves": 7000
         }
     ]
 }

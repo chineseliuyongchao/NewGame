@@ -10,6 +10,7 @@ namespace Game.Town
     {
         // ReSharper disable once FieldCanBeMadeReadOnly.Global
         public TownDataStorage storage;
+
         // ReSharper disable once UnassignedField.Global
         public TownDataNoStorage noStorage;
 
@@ -102,9 +103,22 @@ namespace Game.Town
             townRoleS = new List<int>();
         }
 
+        /// <summary>
+        /// 获取聚落总人口
+        /// </summary>
+        /// <returns></returns>
         public int GetPopulation()
         {
             return malePopulation + femalePopulation;
+        }
+
+        /// <summary>
+        /// 获取聚落单日粮食消耗
+        /// </summary>
+        /// <returns></returns>
+        public int DailyGrainConsumption()
+        {
+            return (int)(GetPopulation() * TownConstant.POPULATION_GRAIN_CONSUME);
         }
 
         /// <summary>

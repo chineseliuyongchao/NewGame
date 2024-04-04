@@ -28,11 +28,21 @@
         /// <summary>
         /// 人口繁荣度系数
         /// </summary>
-        public const float POPULATION_PROSPERITY_COEFFICIENT = 0.5f;
+        public const float POPULATION_PROSPERITY_COEFFICIENT = 0.05f;
 
         /// <summary>
         /// 收入繁荣度系数
         /// </summary>
         public const float INCOME_PROSPERITY_COEFFICIENT = 0.3f;
+
+        /// <summary>
+        /// 聚落民兵数量系数
+        /// </summary>
+        public const float MILITIA_COUNT_COEFFICIENT = 0.05f;
+
+        /// <summary>
+        /// 聚落民兵变化系数
+        /// </summary>
+        public const float MILITIA_CHANGE_COEFFICIENT = 0.05f;
     }
 }

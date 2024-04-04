@@ -46,7 +46,7 @@ namespace Game.Town
         {
             int workShopRevenue = 1000; //暂定工场收入
             int revenue = workShopRevenue + DailyGrainYield(storage.farmlandNum) * TownConstant.GRAIN_PRICE;
-            noStorage.prosperity = (int)(storage.GetPopulation() * TownConstant.POPULATION_GRAIN_CONSUME +
+            noStorage.prosperity = (int)(storage.GetPopulation() * TownConstant.POPULATION_PROSPERITY_COEFFICIENT +
                                          revenue * TownConstant.INCOME_PROSPERITY_COEFFICIENT);
             Debug.Log("聚落繁荣度：" + storage.name + "  " + noStorage.prosperity);
         }

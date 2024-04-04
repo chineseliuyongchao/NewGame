@@ -92,20 +92,20 @@ namespace Game.Town
         /// </summary>
         protected virtual void UpdateMilitia()
         {
+            int baseMilitiaCount = Math.Min(_townData.storage.malePopulation, (int)(
+                _townData.storage.grainReserves / (TownConstant.POPULATION_GRAIN_CONSUME * 10)));
             // 计算合理的民兵数量
-            int reasonableMilitiaCount = (int)(_townData.storage.malePopulation * 0.05);
-            if (_townData.storage.malePopulation < 100)
+            int reasonableMilitiaCount = (int)(baseMilitiaCount * TownConstant.MILITIA_COUNT_COEFFICIENT);
+            if (baseMilitiaCount < 100)
             {
-                //如果男性数量小于100，就不会有民兵
+                //如果聚落民兵基数小于100，就不会有民兵
                 reasonableMilitiaCount = 0;
             }
 
-            // 计算需要增加或减少的比例
-            float ratio = 0.1f; // 假设每次变化的比例为10%
             // 计算需要增加或减少的数量
             int delta = reasonableMilitiaCount - _townData.storage.militiaNum;
             // 计算实际增加或减少的数量
-            int changeAmount = (int)(delta * ratio);
+            int changeAmount = Math.Min(delta, (int)(reasonableMilitiaCount * TownConstant.MILITIA_CHANGE_COEFFICIENT));
             _townData.storage.militiaNum += changeAmount;
             Debug.Log(_townData.storage.name + "民兵数量：" + _townData.storage.militiaNum + "  变化量： " + changeAmount);
         }
@@ -118,7 +118,7 @@ namespace Game.Town
             //粮食增加量
             int grainAdd = this.GetSystem<ITownSystem>().DailyGrainYield(_townData.storage.farmlandNum);
             //粮食消耗量
-            int grainConsume = (int)(_townData.storage.GetPopulation() * TownConstant.POPULATION_GRAIN_CONSUME);
+            int grainConsume = _townData.storage.DailyGrainConsumption();
             int grainChange = grainAdd - grainConsume;
             //更新粮食存储
             _townData.storage.grainReserves += grainChange;
