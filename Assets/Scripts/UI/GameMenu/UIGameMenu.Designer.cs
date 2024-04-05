@@ -5,19 +5,22 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:8c014a6c-24ac-4dfa-b966-3af2dccfb27b
+	// Generate Id:4bad3f0b-915d-4d40-88eb-d74f88f6c2b3
 	public partial class UIGameMenu
 	{
 		public const string Name = "UIGameMenu";
 		
 		[SerializeField]
 		private UnityEngine.UI.Button startGameButton;
+		[SerializeField]
+		private UnityEngine.UI.Button settingButton;
 		
 		private UIGameMenuData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
 			startGameButton = null;
+			settingButton = null;
 			
 			mData = null;
 		}

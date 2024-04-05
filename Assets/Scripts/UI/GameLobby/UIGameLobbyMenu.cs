@@ -53,6 +53,7 @@ namespace UI
             {
                 UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData(true, false));
             });
+            settingButton.onClick.AddListener(() => { UIKit.OpenPanel<UIGameSetting>(new UIGameSettingData()); });
             closeButton.onClick.AddListener(CloseSelf);
         }
 
