@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using System.Collections.Generic;
+using QFramework;
 
 namespace Game.GameBase
 {
@@ -19,5 +20,12 @@ namespace Game.GameBase
         /// 切换到创建游戏的场景
         /// </summary>
         public void ChangeGameCreateScene();
+
+        /// <summary>
+        /// 获取数据类型对应语言的名字
+        /// </summary>
+        /// <param name="nameList"></param>
+        /// <returns></returns>
+        public string GetDataName(List<string> nameList);
     }
 }

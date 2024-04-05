@@ -35,6 +35,14 @@ namespace Game.Family
     }
 
     /// <summary>
+    /// 所有家族的初始名字数据（部分信息所有存档共用，不会改变。剩余数据作为新存档的默认值），保存在配置json中
+    /// </summary>
+    [Serializable]
+    public class FamilyNameData : BaseNameJsonData
+    {
+    }
+
+    /// <summary>
     /// 所有角色的通用数据（部分信息所有存档共用，不会改变。剩余数据作为新存档的默认值），保存在配置json中
     /// </summary>
     [Serializable]
@@ -63,5 +71,13 @@ namespace Game.Family
         /// </summary>
         // ReSharper disable once InconsistentNaming
         public int RoleType;
+    }
+
+    /// <summary>
+    /// 所有角色的初始名字数据（部分信息所有存档共用，不会改变。剩余数据作为新存档的默认值），保存在配置json中
+    /// </summary>
+    [Serializable]
+    public class RoleNameData : BaseNameJsonData
+    {
     }
 }

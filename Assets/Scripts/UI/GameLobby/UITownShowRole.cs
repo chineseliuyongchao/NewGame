@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Game.Country;
 using Game.Dialogue;
 using Game.Family;
+using Game.GameBase;
 using QFramework;
 
 namespace UI
@@ -78,12 +79,13 @@ namespace UI
         public void InitUI(int roleId)
         {
             RoleData roleData = this.GetModel<IFamilyModel>().RoleData[roleId];
-            roleName.text = roleData.roleName;
+            roleName.text = this.GetSystem<IGameSystem>().GetDataName(roleData.name);
             if (this.GetModel<IFamilyModel>().FamilyData.ContainsKey(roleData.familyId))
             {
                 FamilyData familyData = this.GetModel<IFamilyModel>().FamilyData[roleData.familyId];
-                familyName.text = familyData.storage.familyName;
-                countryName.text = this.GetModel<ICountryModel>().CountryData[familyData.storage.countryId].name;
+                familyName.text = this.GetSystem<IGameSystem>().GetDataName(familyData.storage.name);
+                countryName.text = this.GetSystem<IGameSystem>()
+                    .GetDataName(this.GetModel<ICountryModel>().CountryData[familyData.storage.countryId].name);
             }
             else
             {

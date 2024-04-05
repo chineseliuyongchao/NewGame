@@ -10,11 +10,14 @@ namespace Game.Town
     public class TownModel : AbstractModel, ITownModel, ISaveModel
     {
         private Dictionary<int, TownCommonData> _townCommonData;
+        private Dictionary<int, TownNameData> _townNameData;
+
         private Dictionary<int, TownData> _townData;
 
         protected override void OnInit()
         {
             _townCommonData = new Dictionary<int, TownCommonData>();
+            _townNameData = new Dictionary<int, TownNameData>();
             _townData = new Dictionary<int, TownData>();
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
         }
@@ -23,6 +26,12 @@ namespace Game.Town
         {
             get => _townCommonData;
             set => _townCommonData = value;
+        }
+
+        public Dictionary<int, TownNameData> TownNameData
+        {
+            get => _townNameData;
+            set => _townNameData = value;
         }
 
         public Dictionary<int, TownData> TownData
@@ -61,7 +70,8 @@ namespace Game.Town
             List<int> key = new List<int>(_townCommonData.Keys);
             for (int i = 0; i < key.Count; i++)
             {
-                _townData.Add(key[i], new TownData(new TownDataStorage(_townCommonData[key[i]])));
+                _townData.Add(key[i],
+                    new TownData(new TownDataStorage(_townCommonData[key[i]], _townNameData[key[i]])));
             }
 
             Dictionary<int, RoleCommonData> roleCommonDataS = this.GetModel<IFamilyModel>().RoleCommonData;

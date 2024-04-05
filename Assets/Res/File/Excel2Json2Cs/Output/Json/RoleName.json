@@ -1,0 +1,79 @@
+﻿{
+    "Sheet1": [
+        {
+            "ID": 1,
+            "Chinese": "角色1",
+            "English": "role1"
+        },
+        {
+            "ID": 2,
+            "Chinese": "角色2",
+            "English": "role2"
+        },
+        {
+            "ID": 3,
+            "Chinese": "角色3",
+            "English": "role3"
+        },
+        {
+            "ID": 4,
+            "Chinese": "角色4",
+            "English": "role4"
+        },
+        {
+            "ID": 5,
+            "Chinese": "角色5",
+            "English": "role5"
+        },
+        {
+            "ID": 6,
+            "Chinese": "角色6",
+            "English": "role6"
+        },
+        {
+            "ID": 7,
+            "Chinese": "角色7",
+            "English": "role7"
+        },
+        {
+            "ID": 8,
+            "Chinese": "角色8",
+            "English": "role8"
+        },
+        {
+            "ID": 9,
+            "Chinese": "角色9",
+            "English": "role9"
+        },
+        {
+            "ID": 10,
+            "Chinese": "角色10",
+            "English": "role10"
+        },
+        {
+            "ID": 11,
+            "Chinese": "角色11",
+            "English": "role11"
+        },
+        {
+            "ID": 12,
+            "Chinese": "角色12",
+            "English": "role12"
+        },
+        {
+            "ID": 13,
+            "Chinese": "角色13",
+            "English": "role13"
+        },
+        {
+            "ID": 14,
+            "Chinese": "角色14",
+            "English": "role14"
+        },
+        {
+            "ID": 15,
+            "Chinese": "角色15",
+            "English": "role15"
+        }
+    ]
+}

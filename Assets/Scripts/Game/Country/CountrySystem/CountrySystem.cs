@@ -10,10 +10,12 @@ namespace Game.Country
         {
         }
 
-        public void InitCountryCommonData(TextAsset textAsset)
+        public void InitCountryCommonData(TextAsset textAsset, TextAsset nameTextAsset)
         {
             this.GetUtility<IGameUtility>()
                 .AnalysisJsonConfigurationTable(textAsset, this.GetModel<ICountryModel>().CountryCommonData);
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(nameTextAsset, this.GetModel<ICountryModel>().CountryNameData);
         }
     }
 }

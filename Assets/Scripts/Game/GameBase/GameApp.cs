@@ -1,5 +1,6 @@
 ﻿using Game.Country;
 using Game.Family;
+using Game.GameMenu;
 using Game.GameSave;
 using Game.GameUtils;
 using Game.Map;
@@ -31,6 +32,7 @@ namespace Game.GameBase
             RegisterModel<IFamilyModel>(new FamilyModel());
             RegisterModel<ICountryModel>(new CountryModel());
             RegisterModel<ITeamModel>(new TeamModel());
+            RegisterModel<IGameMenuModel>(new GameMenuModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
             RegisterUtility<IMathUtility>(new MathUtility());

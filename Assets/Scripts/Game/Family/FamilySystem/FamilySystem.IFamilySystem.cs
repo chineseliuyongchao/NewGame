@@ -8,7 +8,7 @@ namespace Game.Family
         /// <summary>
         /// 初始化家族通用数据
         /// </summary>
-        void InitFamilyCommonData(TextAsset textAsset);
+        void InitFamilyCommonData(TextAsset textAsset, TextAsset nameTextAsset);
 
         /// <summary>
         /// 初始化家族中不需要保存的数据
@@ -18,7 +18,7 @@ namespace Game.Family
         /// <summary>
         /// 初始化角色通用数据
         /// </summary>
-        void InitRoleCommonData(TextAsset textAsset);
+        void InitRoleCommonData(TextAsset textAsset, TextAsset nameTextAsset);
 
         /// <summary>
         /// 添加一位新的角色

@@ -1,4 +1,5 @@
 ﻿using Game.BehaviourTree;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 
@@ -65,8 +66,9 @@ namespace Game.Family
                 return false;
             }
 
-            Debug.Log(_blackBoard.familyData.storage.familyName + "家族组建队伍，将领是" +
-                      this.GetModel<IFamilyModel>().RoleData[_blackBoard.teamGeneralId].roleName);
+            Debug.Log(this.GetSystem<IGameSystem>().GetDataName(_blackBoard.familyData.storage.name) + "家族组建队伍，将领是" +
+                      this.GetSystem<IGameSystem>()
+                          .GetDataName(this.GetModel<IFamilyModel>().RoleData[_blackBoard.teamGeneralId].name));
             _blackBoard.buildTeam?.Invoke(_blackBoard.teamGeneralId);
 
             return true;

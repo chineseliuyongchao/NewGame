@@ -1,0 +1,19 @@
+﻿{
+    "Sheet1": [
+        {
+            "ID": 1,
+            "Chinese": "国家1",
+            "English": "country1"
+        },
+        {
+            "ID": 2,
+            "Chinese": "国家2",
+            "English": "country2"
+        },
+        {
+            "ID": 3,
+            "Chinese": "国家3",
+            "English": "country3"
+        }
+    ]
+}

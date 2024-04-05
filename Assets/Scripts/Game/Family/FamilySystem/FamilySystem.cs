@@ -11,10 +11,12 @@ namespace Game.Family
         {
         }
 
-        public void InitFamilyCommonData(TextAsset textAsset)
+        public void InitFamilyCommonData(TextAsset textAsset, TextAsset nameTextAsset)
         {
             this.GetUtility<IGameUtility>()
                 .AnalysisJsonConfigurationTable(textAsset, this.GetModel<IFamilyModel>().FamilyCommonData);
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(nameTextAsset, this.GetModel<IFamilyModel>().FamilyNameData);
         }
 
         public void InitFamilyNoStorageData()
@@ -29,10 +31,12 @@ namespace Game.Family
             }
         }
 
-        public void InitRoleCommonData(TextAsset textAsset)
+        public void InitRoleCommonData(TextAsset textAsset, TextAsset nameTextAsset)
         {
             this.GetUtility<IGameUtility>()
                 .AnalysisJsonConfigurationTable(textAsset, this.GetModel<IFamilyModel>().RoleCommonData);
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(nameTextAsset, this.GetModel<IFamilyModel>().RoleNameData);
         }
 
         public int AddNewRole(RoleData roleData)

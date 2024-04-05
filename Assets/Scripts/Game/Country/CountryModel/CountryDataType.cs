@@ -10,11 +10,6 @@ namespace Game.Country
     public class CountryData
     {
         /// <summary>
-        /// 国家名字
-        /// </summary>
-        public string name;
-
-        /// <summary>
         /// 财富
         /// </summary>
         public long wealth;
@@ -23,6 +18,16 @@ namespace Game.Country
         /// 国家等级
         /// </summary>
         public int countryLevel;
+
+        /// <summary>
+        /// 统治家族编号
+        /// </summary>
+        public int rulingFamilyId;
+
+        /// <summary>
+        /// 名字
+        /// </summary>
+        public List<string> name;
 
         /// <summary>
         /// 国家的所有家族
@@ -34,17 +39,12 @@ namespace Game.Country
         /// </summary>
         public List<int> countryTownS;
 
-        /// <summary>
-        /// 统治家族编号
-        /// </summary>
-        public int rulingFamilyId;
-
-        public CountryData(CountryCommonData countryCommonData)
+        public CountryData(CountryCommonData countryCommonData, CountryNameData countryNameData)
         {
-            name = countryCommonData.Name;
             wealth = countryCommonData.CountryWealth;
             countryLevel = countryCommonData.CountryLevel;
             rulingFamilyId = countryCommonData.RulingFamilyId;
+            name = new List<string> { countryNameData.Chinese, countryNameData.English };
             countryFamilyS = new List<int>();
             countryTownS = new List<int>();
         }

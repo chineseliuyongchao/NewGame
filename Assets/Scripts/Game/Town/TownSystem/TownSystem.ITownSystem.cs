@@ -8,7 +8,7 @@ namespace Game.Town
         /// <summary>
         /// 初始化聚落数据
         /// </summary>
-        void InitTownCommonData(TextAsset textAsset);
+        void InitTownCommonData(TextAsset textAsset, TextAsset nameTextAsset);
 
         /// <summary>
         /// 初始化聚落中不需要保存的数据

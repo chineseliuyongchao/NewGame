@@ -25,7 +25,7 @@ namespace Game.Town
         {
             _townId = townId;
             _townData = this.GetModel<ITownModel>().TownData[townId];
-            name = _townData.storage.name;
+            name = this.GetSystem<IGameSystem>().GetDataName(_townData.storage.name);
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
             transform.position = new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]);
         }
@@ -62,7 +62,7 @@ namespace Game.Town
         protected virtual void UpdatePopulationGrowth()
         {
             // 获取上一天的总人口数量
-            int lastPopulation = _townData.storage.GetPopulation();
+            int lastPopulation = _townData.GetPopulation();
             // 自然死亡率，假设为 0.01（1%）
             float deathRate = 0.005f;
             // 自然出生率，假设为 0.02（2%）
@@ -81,8 +81,8 @@ namespace Game.Town
             // 当天自然增长量 = 男性自然增长量 + 女性自然增长量
             int populationGrowth = -maleDeaths - femaleDeaths + maleBirths + femaleBirths;
             // 更新总人口数量
-            _townData.storage.UpdateMalePopulation(maleBirths - maleDeaths);
-            _townData.storage.UpdateFemalePopulation(femaleBirths - femaleDeaths);
+            _townData.UpdateMalePopulation(maleBirths - maleDeaths);
+            _townData.UpdateFemalePopulation(femaleBirths - femaleDeaths);
             // // 输出自然增长量
             Debug.Log(_townData.storage.name + "今天的人口自然增长量为：" + populationGrowth);
         }
@@ -118,7 +118,7 @@ namespace Game.Town
             //粮食增加量
             int grainAdd = this.GetSystem<ITownSystem>().DailyGrainYield(_townData.storage.farmlandNum);
             //粮食消耗量
-            int grainConsume = _townData.storage.DailyGrainConsumption();
+            int grainConsume = _townData.DailyGrainConsumption();
             int grainChange = grainAdd - grainConsume;
             //更新粮食存储
             _townData.storage.grainReserves += grainChange;
@@ -130,8 +130,8 @@ namespace Game.Town
                 if (famineRate > 0.4) //饥荒率大于0.4就会有人饿死
                 {
                     float mortality = 0.17f * famineRate - 0.067f; //饿死率
-                    _townData.storage.UpdateMalePopulation(-(int)(mortality * _townData.storage.malePopulation));
-                    _townData.storage.UpdateFemalePopulation(-(int)(mortality * _townData.storage.femalePopulation));
+                    _townData.UpdateMalePopulation(-(int)(mortality * _townData.storage.malePopulation));
+                    _townData.UpdateFemalePopulation(-(int)(mortality * _townData.storage.femalePopulation));
                     Debug.Log(_townData.storage.name + "饥荒率：" + famineRate + "  死亡率： " + mortality);
                 }
             }
@@ -166,7 +166,7 @@ namespace Game.Town
         /// <param name="structure"></param>
         private void RealConscription(SoldierStructure structure)
         {
-            _townData.storage.UpdateMalePopulation(-structure.num);
+            _townData.UpdateMalePopulation(-structure.num);
         }
     }
 

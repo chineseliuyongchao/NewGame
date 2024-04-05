@@ -9,6 +9,7 @@ namespace Game.Country
         /// 初始化国家通用数据
         /// </summary>
         /// <param name="textAsset"></param>
-        void InitCountryCommonData(TextAsset textAsset);
+        /// <param name="nameTextAsset"></param>
+        void InitCountryCommonData(TextAsset textAsset, TextAsset nameTextAsset);
     }
 }

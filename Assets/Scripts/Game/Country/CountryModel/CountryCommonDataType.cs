@@ -27,4 +27,12 @@ namespace Game.Country
         // ReSharper disable once InconsistentNaming
         public int RulingFamilyId;
     }
+
+    /// <summary>
+    /// 所有国家的初始名字数据（部分信息所有存档共用，不会改变。剩余数据作为新存档的默认值），保存在配置json中
+    /// </summary>
+    [Serializable]
+    public class CountryNameData : BaseNameJsonData
+    {
+    }
 }

@@ -1,5 +1,6 @@
 using Game.Country;
 using Game.Family;
+using Game.GameBase;
 using Game.GameUtils;
 using Game.Town;
 using QFramework;
@@ -72,13 +73,14 @@ namespace UI
         private void InitUI()
         {
             TownData townData = this.GetModel<ITownModel>().TownData[mData.townId];
-            townName.text = townData.storage.name;
+            townName.text = this.GetSystem<IGameSystem>().GetDataName(townData.storage.name);
             prosperityValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.noStorage.prosperity, 5);
-            populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.GetPopulation(), 5);
+            populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.GetPopulation(), 5);
             levelValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.level, 5);
             militiaValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.militiaNum, 5);
-            introduce.text = "这个聚落属于" + this.GetModel<ICountryModel>().CountryData[townData.storage.countryId].name + "的" +
-                             this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].storage.familyName + "家族统治";
+            introduce.text = "这个聚落属于" + this.GetSystem<IGameSystem>().GetDataName(this.GetModel<ICountryModel>()
+                .CountryData[townData.storage.countryId].name) + "的" + this.GetSystem<IGameSystem>()
+                .GetDataName(this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].storage.name) + "家族统治";
         }
     }
 }

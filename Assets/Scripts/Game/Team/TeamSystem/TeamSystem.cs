@@ -28,7 +28,7 @@ namespace Game.Team
             FamilyData familyData = this.GetModel<IFamilyModel>().FamilyData[familyId];
             if (familyData.storage.familyWealth >= money)
             {
-                familyData.storage.UpdateWealth(-money);
+                familyData.UpdateWealth(-money);
                 return;
             }
 

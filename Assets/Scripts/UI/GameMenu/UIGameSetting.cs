@@ -1,3 +1,4 @@
+using Game.GameMenu;
 using QFramework;
 using UnityEngine.Localization.Settings;
 
@@ -45,6 +46,7 @@ namespace UI
         {
             Dropdown.onValueChanged.AddListener(value =>
             {
+                this.GetModel<IGameMenuModel>().Language = value;
                 LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[value];
             });
             leaveButton.onClick.AddListener(CloseSelf);

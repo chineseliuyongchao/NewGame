@@ -11,12 +11,13 @@ namespace Game.Country
     public class CountryModel : AbstractModel, ICountryModel, ISaveModel
     {
         private Dictionary<int, CountryCommonData> _countryCommonData;
-
+        private Dictionary<int, CountryNameData> _countryNameData;
         private Dictionary<int, CountryData> _countryData;
 
         protected override void OnInit()
         {
             _countryCommonData = new Dictionary<int, CountryCommonData>();
+            _countryNameData = new Dictionary<int, CountryNameData>();
             _countryData = new Dictionary<int, CountryData>();
 
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
@@ -26,6 +27,12 @@ namespace Game.Country
         {
             get => _countryCommonData;
             set => _countryCommonData = value;
+        }
+
+        public Dictionary<int, CountryNameData> CountryNameData
+        {
+            get => _countryNameData;
+            set => _countryNameData = value;
         }
 
         public Dictionary<int, CountryData> CountryData
@@ -64,7 +71,8 @@ namespace Game.Country
             List<int> countryKey = new List<int>(_countryCommonData.Keys);
             for (int i = 0; i < countryKey.Count; i++)
             {
-                _countryData.Add(countryKey[i], new CountryData(_countryCommonData[countryKey[i]]));
+                _countryData.Add(countryKey[i],
+                    new CountryData(_countryCommonData[countryKey[i]], _countryNameData[countryKey[i]]));
             }
 
             Dictionary<int, FamilyCommonData> familyCommonDataS = this.GetModel<IFamilyModel>().FamilyCommonData;

@@ -11,6 +11,11 @@ namespace Game.Country
         public Dictionary<int, CountryCommonData> CountryCommonData { get; set; }
 
         /// <summary>
+        /// 所有国家的名字数据
+        /// </summary>
+        public Dictionary<int, CountryNameData> CountryNameData { get; set; }
+
+        /// <summary>
         /// 游戏当前所有国家信息
         /// </summary>
         public Dictionary<int, CountryData> CountryData { get; set; }

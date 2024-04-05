@@ -10,15 +10,18 @@ namespace Game.Family
     public class FamilyModel : AbstractModel, IFamilyModel, ISaveModel
     {
         private Dictionary<int, FamilyCommonData> _familyCommonData;
+        private Dictionary<int, FamilyNameData> _familyNameData;
         private Dictionary<int, RoleCommonData> _roleCommonData;
-
+        private Dictionary<int, RoleNameData> _roleNameData;
         private Dictionary<int, FamilyData> _familyData;
         private Dictionary<int, RoleData> _roleData;
 
         protected override void OnInit()
         {
             _familyCommonData = new Dictionary<int, FamilyCommonData>();
+            _familyNameData = new Dictionary<int, FamilyNameData>();
             _roleCommonData = new Dictionary<int, RoleCommonData>();
+            _roleNameData = new Dictionary<int, RoleNameData>();
 
             _familyData = new Dictionary<int, FamilyData>();
             _roleData = new Dictionary<int, RoleData>();
@@ -31,10 +34,22 @@ namespace Game.Family
             set => _familyCommonData = value;
         }
 
+        public Dictionary<int, FamilyNameData> FamilyNameData
+        {
+            get => _familyNameData;
+            set => _familyNameData = value;
+        }
+
         public Dictionary<int, RoleCommonData> RoleCommonData
         {
             get => _roleCommonData;
             set => _roleCommonData = value;
+        }
+
+        public Dictionary<int, RoleNameData> RoleNameData
+        {
+            get => _roleNameData;
+            set => _roleNameData = value;
         }
 
         public Dictionary<int, FamilyData> FamilyData
@@ -91,7 +106,8 @@ namespace Game.Family
             List<int> familyKey = new List<int>(_familyCommonData.Keys);
             for (int i = 0; i < familyKey.Count; i++)
             {
-                _familyData.Add(familyKey[i], new FamilyData(new FamilyDataStorage(_familyCommonData[familyKey[i]])));
+                _familyData.Add(familyKey[i], new FamilyData(
+                    new FamilyDataStorage(_familyCommonData[familyKey[i]], _familyNameData[familyKey[i]])));
             }
 
             List<int> roleKey = new List<int>(_roleCommonData.Keys);
@@ -115,7 +131,7 @@ namespace Game.Family
             _roleData.Clear();
             for (int i = 0; i < roleKey.Count; i++)
             {
-                _roleData.Add(roleKey[i], new RoleData(_roleCommonData[roleKey[i]]));
+                _roleData.Add(roleKey[i], new RoleData(_roleCommonData[roleKey[i]], _roleNameData[roleKey[i]]));
             }
         }
 

@@ -58,7 +58,7 @@ namespace Game.Family
             _familyData = this.GetModel<IFamilyModel>().FamilyData[_familyId];
             _familyBlackBoard.familyId = _familyId;
             _familyBlackBoard.familyData = _familyData;
-            name = _familyData.storage.familyName;
+            name = this.GetSystem<IGameSystem>().GetDataName(_familyData.storage.name);
             _familyAiAgent.Init(_familyBlackBoard);
             _checkBuildTeamTime = GameTime.GetRandomTime(false, false, _checkBuildTeamByMonth);
         }
@@ -99,8 +99,9 @@ namespace Game.Family
 
             //工场收入
             int workShopRevenue = 1000; //暂定工场收入
-            _familyData.storage.UpdateWealth(taxation + workShopRevenue);
-            Debug.Log("家族财富刷新：" + _familyData.storage.familyName + "  " + _familyData.storage.familyWealth);
+            _familyData.UpdateWealth(taxation + workShopRevenue);
+            Debug.Log("家族财富刷新：" + this.GetSystem<IGameSystem>().GetDataName(_familyData.storage.name) + "  " +
+                      _familyData.storage.familyWealth);
         }
 
         /// <summary>

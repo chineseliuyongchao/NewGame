@@ -80,7 +80,12 @@
         /// <summary>
         /// 聚落配置表
         /// </summary>
-        public const string SETTLEMENT_INFORMATION = "TownInformation";
+        public const string TOWN_INFORMATION = "TownInformation";
+
+        /// <summary>
+        /// 聚落名字
+        /// </summary>
+        public const string TOWN_NAME = "TownName";
 
         /// <summary>
         /// 家族配置表
@@ -88,14 +93,29 @@
         public const string FAMILY_INFORMATION = "FamilyInformation";
 
         /// <summary>
+        /// 家族名字
+        /// </summary>
+        public const string FAMILY_NAME = "FamilyName";
+
+        /// <summary>
         /// 角色配置表
         /// </summary>
         public const string ROLE_INFORMATION = "RoleInformation";
 
         /// <summary>
+        /// 角色名字
+        /// </summary>
+        public const string ROLE_NAME = "RoleName";
+
+        /// <summary>
         /// 国家配置表
         /// </summary>
         public const string COUNTRY_INFORMATION = "CountryInformation";
+
+        /// <summary>
+        /// 家族名字
+        /// </summary>
+        public const string COUNTRY_NAME = "CountryName";
     }
 
     /// <summary>

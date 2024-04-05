@@ -13,10 +13,12 @@ namespace Game.Town
         {
         }
 
-        public void InitTownCommonData(TextAsset textAsset)
+        public void InitTownCommonData(TextAsset textAsset, TextAsset nameTextAsset)
         {
             this.GetUtility<IGameUtility>()
                 .AnalysisJsonConfigurationTable(textAsset, this.GetModel<ITownModel>().TownCommonData);
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(nameTextAsset, this.GetModel<ITownModel>().TownNameData);
         }
 
         public void InitTownNoStorageData()
@@ -27,28 +29,28 @@ namespace Game.Town
             {
                 TownData townData = townDataS[key[i]];
                 TownDataNoStorage noStorage = new TownDataNoStorage();
-                ComputeProsperity(townData.storage, noStorage);
+                ComputeProsperity(townData, noStorage);
                 townData.noStorage = noStorage;
             }
         }
 
         public void UpdateTownNoStorageData(TownData townData)
         {
-            ComputeProsperity(townData.storage, townData.noStorage);
+            ComputeProsperity(townData, townData.noStorage);
         }
 
         /// <summary>
         /// 计算繁荣度
         /// </summary>
-        /// <param name="storage"></param>
+        /// <param name="townData"></param>
         /// <param name="noStorage"></param>
-        private void ComputeProsperity(TownDataStorage storage, TownDataNoStorage noStorage)
+        private void ComputeProsperity(TownData townData, TownDataNoStorage noStorage)
         {
             int workShopRevenue = 1000; //暂定工场收入
-            int revenue = workShopRevenue + DailyGrainYield(storage.farmlandNum) * TownConstant.GRAIN_PRICE;
-            noStorage.prosperity = (int)(storage.GetPopulation() * TownConstant.POPULATION_PROSPERITY_COEFFICIENT +
+            int revenue = workShopRevenue + DailyGrainYield(townData.storage.farmlandNum) * TownConstant.GRAIN_PRICE;
+            noStorage.prosperity = (int)(townData.GetPopulation() * TownConstant.POPULATION_PROSPERITY_COEFFICIENT +
                                          revenue * TownConstant.INCOME_PROSPERITY_COEFFICIENT);
-            Debug.Log("聚落繁荣度：" + storage.name + "  " + noStorage.prosperity);
+            Debug.Log("聚落繁荣度：" + townData.storage.name + "  " + noStorage.prosperity);
         }
 
         public void InitTownNode(TownNode townNode)

@@ -18,6 +18,15 @@ namespace Game.Family
         {
             this.storage = storage;
         }
+
+        /// <summary>
+        /// 所有影响家族财富的都调用该方法，方便调试
+        /// </summary>
+        /// <param name="addMoney"></param>
+        public void UpdateWealth(int addMoney)
+        {
+            storage.familyWealth += addMoney;
+        }
     }
 
     /// <summary>
@@ -26,11 +35,6 @@ namespace Game.Family
     [Serializable]
     public class FamilyDataStorage
     {
-        /// <summary>
-        /// 家族名字
-        /// </summary>
-        public string familyName;
-
         /// <summary>
         /// 家族财富
         /// </summary>
@@ -52,6 +56,11 @@ namespace Game.Family
         public int familyLeaderId;
 
         /// <summary>
+        /// 名字
+        /// </summary>
+        public List<string> name;
+
+        /// <summary>
         /// 家族所有角色
         /// </summary>
         public List<int> familyRoleS;
@@ -65,24 +74,15 @@ namespace Game.Family
         {
         }
 
-        public FamilyDataStorage(FamilyCommonData familyCommonData)
+        public FamilyDataStorage(FamilyCommonData familyCommonData, FamilyNameData familyNameData)
         {
-            familyName = familyCommonData.Name;
             familyWealth = familyCommonData.FamilyWealth;
             familyLevel = familyCommonData.FamilyLevel;
             countryId = familyCommonData.CountryId;
             familyLeaderId = familyCommonData.FamilyLeaderId;
+            name = new List<string> { familyNameData.Chinese, familyNameData.English };
             familyRoleS = new List<int>();
             familyTownS = new List<int>();
-        }
-
-        /// <summary>
-        /// 所有影响家族财富的都调用该方法，方便调试
-        /// </summary>
-        /// <param name="addMoney"></param>
-        public void UpdateWealth(int addMoney)
-        {
-            familyWealth += addMoney;
         }
     }
 
@@ -99,11 +99,6 @@ namespace Game.Family
     [Serializable]
     public class RoleData
     {
-        /// <summary>
-        /// 角色名字
-        /// </summary>
-        public string roleName;
-
         /// <summary>
         /// 角色年龄
         /// </summary>
@@ -124,17 +119,22 @@ namespace Game.Family
         /// </summary>
         public RoleType roleType;
 
+        /// <summary>
+        /// 名字
+        /// </summary>
+        public List<string> name;
+
         public RoleData()
         {
         }
 
-        public RoleData(RoleCommonData roleCommonData)
+        public RoleData(RoleCommonData roleCommonData, RoleNameData roleNameData)
         {
-            roleName = roleCommonData.Name;
             roleAge = roleCommonData.Age;
             familyId = roleCommonData.FamilyId;
             townId = roleCommonData.TownId;
             roleType = (RoleType)roleCommonData.RoleType;
+            name = new List<string> { roleNameData.Chinese, roleNameData.English };
         }
     }
 

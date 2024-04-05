@@ -18,6 +18,38 @@ namespace Game.Town
         {
             this.storage = storage;
         }
+
+        /// <summary>
+        /// 获取聚落总人口
+        /// </summary>
+        /// <returns></returns>
+        public int GetPopulation()
+        {
+            return storage.malePopulation + storage.femalePopulation;
+        }
+
+        /// <summary>
+        /// 获取聚落单日粮食消耗
+        /// </summary>
+        /// <returns></returns>
+        public int DailyGrainConsumption()
+        {
+            return (int)(GetPopulation() * TownConstant.POPULATION_GRAIN_CONSUME);
+        }
+
+        /// <summary>
+        /// 所有修改人口的操作走同一方法，便于debug
+        /// </summary>
+        /// <param name="addNum"></param>
+        public void UpdateMalePopulation(int addNum)
+        {
+            storage.malePopulation += addNum;
+        }
+
+        public void UpdateFemalePopulation(int addNum)
+        {
+            storage.femalePopulation += addNum;
+        }
     }
 
     /// <summary>
@@ -26,11 +58,6 @@ namespace Game.Town
     [Serializable]
     public class TownDataStorage
     {
-        /// <summary>
-        /// 聚落名字
-        /// </summary>
-        public string name;
-
         /// <summary>
         /// 男性人口
         /// </summary>
@@ -45,11 +72,6 @@ namespace Game.Town
         /// 等级
         /// </summary>
         public int level;
-
-        /// <summary>
-        /// 聚落中所有的角色
-        /// </summary>
-        public List<int> townRoleS;
 
         /// <summary>
         /// 所属国家编号
@@ -84,12 +106,20 @@ namespace Game.Town
         /// <summary>
         /// 粮食储量
         /// </summary>
-        // ReSharper disable once InconsistentNaming
         public int grainReserves;
 
-        public TownDataStorage(TownCommonData townCommonData)
+        /// <summary>
+        /// 名字
+        /// </summary>
+        public List<string> name;
+
+        /// <summary>
+        /// 聚落中所有的角色
+        /// </summary>
+        public List<int> townRoleS;
+
+        public TownDataStorage(TownCommonData townCommonData, TownNameData townNameData)
         {
-            name = townCommonData.Name;
             malePopulation = townCommonData.InitMalePopulation;
             femalePopulation = townCommonData.InitFemalePopulation;
             level = townCommonData.InitLevel;
@@ -100,39 +130,8 @@ namespace Game.Town
             farmlandUpperLimit = townCommonData.FarmlandUpperLimit;
             granaryLevel = townCommonData.GranaryLevel;
             grainReserves = townCommonData.GrainReserves;
+            name = new List<string> { townNameData.Chinese, townNameData.English };
             townRoleS = new List<int>();
-        }
-
-        /// <summary>
-        /// 获取聚落总人口
-        /// </summary>
-        /// <returns></returns>
-        public int GetPopulation()
-        {
-            return malePopulation + femalePopulation;
-        }
-
-        /// <summary>
-        /// 获取聚落单日粮食消耗
-        /// </summary>
-        /// <returns></returns>
-        public int DailyGrainConsumption()
-        {
-            return (int)(GetPopulation() * TownConstant.POPULATION_GRAIN_CONSUME);
-        }
-
-        /// <summary>
-        /// 所有修改人口的操作走同一方法，便于debug
-        /// </summary>
-        /// <param name="addNum"></param>
-        public void UpdateMalePopulation(int addNum)
-        {
-            malePopulation += addNum;
-        }
-
-        public void UpdateFemalePopulation(int addNum)
-        {
-            femalePopulation += addNum;
         }
     }
 

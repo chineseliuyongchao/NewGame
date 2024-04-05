@@ -11,6 +11,11 @@ namespace Game.Town
         public Dictionary<int, TownCommonData> TownCommonData { get; set; }
 
         /// <summary>
+        /// 所有国家的名字数据
+        /// </summary>
+        public Dictionary<int, TownNameData> TownNameData { get; set; }
+
+        /// <summary>
         /// 记录所有聚落的当前数据，跟随存档变化
         /// </summary>
         public Dictionary<int, TownData> TownData { get; set; }

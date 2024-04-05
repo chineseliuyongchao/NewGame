@@ -42,7 +42,7 @@ namespace Game.Team
             movePosList = new List<Vector2>();
         }
 
-        public void InitTeam(int teamId,int familyId)
+        public void InitTeam(int teamId, int familyId)
         {
             _teamId = teamId;
             _familyId = familyId;
@@ -346,14 +346,15 @@ namespace Game.Team
                         else
                         {
                             Debug.LogError("聚落：" + townModel.TownData[data.targetTownId].storage.name + "没有加入军队：" +
-                                           this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].roleName +
-                                           "的军队，但是要从聚落中移除");
+                                           this.GetSystem<IGameSystem>().GetDataName(this.GetModel<IFamilyModel>()
+                                               .RoleData[data.generalRoleId].name) + "的军队，但是要从聚落中移除");
                         }
                     }
                     else
                     {
-                        Debug.LogError("人物：" + this.GetModel<IFamilyModel>().RoleData[data.generalRoleId].roleName +
-                                       "的军队没有设置一个聚落为目标，但是要从聚落离开");
+                        Debug.LogError("人物：" + this.GetSystem<IGameSystem>()
+                            .GetDataName(this.GetModel<IFamilyModel>().RoleData[data.generalRoleId]
+                                .name) + "的军队没有设置一个聚落为目标，但是要从聚落离开");
                     }
 
                     data.townId = 0;
