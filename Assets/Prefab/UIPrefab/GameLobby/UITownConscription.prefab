@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 3405308678933831792}
   - component: {fileID: 8080956475242291359}
   - component: {fileID: 5150378702926565083}
+  - component: {fileID: 71524688175157630}
   m_Layer: 5
   m_Name: text
   m_TagString: Untagged
@@ -426,6 +427,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &71524688175157630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1444888275595021815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:e385b921154f1544e92a9a3c58cb632e
+    m_TableEntryReference:
+      m_KeyId: 312077519994894
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5150378702926565083}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1704379738732682154
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,12 +903,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9493d350b003134295a9cc2beb5e13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needCloseAnim: 0
-  needOpenAnim: 0
+  needCloseAnim: 1
+  needOpenAnim: 1
   performTime: 0.3
   animScale: {x: 1.04, y: 1.04, z: 1.04}
-  bShowMask: 0
-  stopTime: 0
+  bShowMask: 1
+  stopTime: 1
   root: {fileID: 6249112612470826865}
   title: {fileID: 7831938034420154576}
   chooseNum: {fileID: 8869574632093082561}

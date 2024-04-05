@@ -1,0 +1,37 @@
+﻿Key,Id,Chinese (Simplified)(zh-Hans),English(en)
+UIGameMenu_Title,34564784128,英雄或人民,Heroes or People
+UIGameMenu_StartGame,1.04E+12,开始游戏,Start Game
+UIGameMenu_Setting,1.04E+12,游戏设置,Game Settings
+UIFileData_Open,1.04E+12,开始游戏,Start Game
+UIFileData_Cover,1.04E+12,覆盖存档,Override Save
+UIFileData_Delete,1.04E+12,删除存档,Delete Save
+UIGameSetting_Language,1.04E+12,语言,Language
+UIGameSetting_Close,1.04E+12,关闭,Close
+UIStartGamePanel_NewGame,1.04E+12,新的游戏,New Game
+UIStartGamePanel_NewFile,1.04E+12,新的存档,New Save
+UIStartGamePanel_ChooseFile,1.04E+12,选择存档,Select Save
+UIStartGamePanel_BackToMenu,1.04E+12,返回主菜单,Return to Main Menu
+UIStartGamePanel_BackToGame,1.04E+12,返回游戏,Return to Game
+UIGameLobby_Menu,1.04E+12,菜单,Menu
+UIGameLobbyMenu_BackToMenu,1.04E+12,返回游戏,Return to Game
+UIGameLobbyMenu_Save,1.04E+12,保存游戏,Save Game
+UIGameLobbyMenu_Load,1.04E+12,读取游戏,Load Game
+UIGameLobbyMenu_Setting,1.04E+12,游戏设置,Game Settings
+UIGameLobbyMenu_Close,1.04E+12,关闭,Close
+UINewFile_Determine,1.04E+12,确定,Confirm
+UINewFile_Cancellation,1.04E+12,取消,Cancel
+UITown_ShowRole,1.04E+12,拜访人物,Visit Characters
+UITown_Conscription,1.04E+12,征兵,Recruit Soldiers
+UITown_Leave,1.04E+12,离开聚落,Leave Settlement
+UITown_Prosperity,1.04E+12,繁荣度,Prosperity
+UITown_Population,1.04E+12,人口,Population
+UITown_Level,1.04E+12,等级,Level
+UITown_Militia,1.04E+12,民兵,Militia
+UITownConscription_Leave,1.04E+12,确认选择,Confirm Selection
+UITownRole_Leave,1.04E+12,离开,Leave
+UIGameCreate_Create,1.04E+12,创建游戏,Create Game
+UIGameCreate_Leave,1.04E+12,返回主菜单,Return to Main Menu
+UIGameCreate_Title,1.04E+12,创建新游戏,Create New Game
+UIGameCreate_Name,1.04E+12,名字,Name
+UIGameCreate_Age,1.04E+12,年龄,Age
+UIGameCreate_FamilyName,1.04E+12,家族名字,Family Name

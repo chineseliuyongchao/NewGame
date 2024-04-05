@@ -26,6 +26,142 @@ MonoBehaviour:
     m_Localized: Start Game
     m_Metadata:
       m_Items: []
+  - m_Id: 217415601930240
+    m_Localized: Game Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415622901760
+    m_Localized: Override Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096064
+    m_Localized: Delete Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096065
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096066
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096067
+    m_Localized: New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096068
+    m_Localized: New Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096069
+    m_Localized: Select Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096070
+    m_Localized: Return to Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217415627096071
+    m_Localized: Return to Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 217864363098112
+    m_Localized: Start Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077503217664
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994880
+    m_Localized: Return to Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994881
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994882
+    m_Localized: Load Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994883
+    m_Localized: Game Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994884
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994885
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994886
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994887
+    m_Localized: Visit Characters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994888
+    m_Localized: Recruit Soldiers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994889
+    m_Localized: Leave Settlement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994890
+    m_Localized: Prosperity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994891
+    m_Localized: Population
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994892
+    m_Localized: Level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994893
+    m_Localized: Militia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994894
+    m_Localized: Confirm Selection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994895
+    m_Localized: Create Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994896
+    m_Localized: Return to Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994897
+    m_Localized: Create New Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994898
+    m_Localized: Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994899
+    m_Localized: Age
+    m_Metadata:
+      m_Items: []
+  - m_Id: 312077519994900
+    m_Localized: Family Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 315626660347904
+    m_Localized: Leave
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
