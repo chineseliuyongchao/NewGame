@@ -1,10 +1,16 @@
 ﻿using System.Collections.Generic;
 using QFramework;
+using UnityEngine;
 
 namespace Game.GameBase
 {
     public interface IGameSystem : ISystem
     {
+        /// <summary>
+        /// 初始化家族通用数据
+        /// </summary>
+        void InitLocalizationData(TextAsset textAsset);
+
         /// <summary>
         /// 切换到菜单场景
         /// </summary>
@@ -27,5 +33,13 @@ namespace Game.GameBase
         /// <param name="nameList"></param>
         /// <returns></returns>
         public string GetDataName(List<string> nameList);
+
+        /// <summary>
+        /// 获取展示的文本（用于支持多语种）
+        /// </summary>
+        /// <param name="textId">文本Id</param>
+        /// <param name="replace">替换内容</param>
+        /// <returns></returns>
+        string GetLocalizationText(int textId, List<string> replace = null);
     }
 }

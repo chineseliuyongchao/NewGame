@@ -1,0 +1,29 @@
+﻿{
+    "Sheet1": [
+        {
+            "ID": 1,
+            "Chinese": "这个聚落属于{0}的家族{1}统治",
+            "English": "This settlement is under the rule of the {0} family {1}"
+        },
+        {
+            "ID": 2,
+            "Chinese": "这里有{0}人愿意响应你",
+            "English": ""
+        },
+        {
+            "ID": 3,
+            "Chinese": "这里没有人愿意响应你",
+            "English": ""
+        },
+        {
+            "ID": 4,
+            "Chinese": "此人的家族籍籍无名",
+            "English": ""
+        },
+        {
+            "ID": 5,
+            "Chinese": "没有国家在乎此人的效忠",
+            "English": ""
+        }
+    ]
+}

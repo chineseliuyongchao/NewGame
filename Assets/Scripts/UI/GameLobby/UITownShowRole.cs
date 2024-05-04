@@ -89,8 +89,8 @@ namespace UI
             }
             else
             {
-                familyName.text = "此人的家族籍籍无名";
-                countryName.text = "没有国家在乎此人的效忠";
+                familyName.text = this.GetSystem<IGameSystem>().GetLocalizationText(4);
+                countryName.text = this.GetSystem<IGameSystem>().GetLocalizationText(5);
             }
         }
     }

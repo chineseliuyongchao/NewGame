@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Game.GameSave;
 using Game.Team;
 using QFramework;
@@ -13,10 +14,12 @@ namespace Game.GameBase
         private bool _timeIsPass;
         private PlayerTeam _playerTeam;
         private int _openStopTimeUITime;
+        private Dictionary<int, LocalizationData> _localizationData;
 
         protected override void OnInit()
         {
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
+            _localizationData = new Dictionary<int, LocalizationData>();
         }
 
         public GameTime NowTime
@@ -41,6 +44,12 @@ namespace Game.GameBase
         {
             get => _openStopTimeUITime;
             set => _openStopTimeUITime = value;
+        }
+
+        public Dictionary<int, LocalizationData> LocalizationData
+        {
+            get => _localizationData;
+            set => _localizationData = value;
         }
 
         public Object SaveModel()

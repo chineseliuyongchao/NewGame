@@ -78,7 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueType: 0
   guid: d8d3b04d0369c674b98e1c250a7b6731
-  position: {x: 595, y: 669}
+  position: {x: 595, y: 668}
   optionToThis: "\u7EE7\u7EED"
   content: "\u4F60\u4E0D\u670D\u6C14\u5417"
   dialogValueIndex: 

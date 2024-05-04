@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Country;
 using Game.Family;
 using Game.GameMenu;
 using Game.GameSave;
+using Game.GameUtils;
 using Game.Map;
 using Game.Player;
 using Game.Team;
@@ -22,6 +24,12 @@ namespace Game.GameBase
 
         protected override void OnInit()
         {
+        }
+
+        public void InitLocalizationData(TextAsset textAsset)
+        {
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(textAsset, this.GetModel<IGameModel>().LocalizationData);
         }
 
         public void ChangeMenuScene()
@@ -56,6 +64,28 @@ namespace Game.GameBase
             return nameList[this.GetModel<IGameMenuModel>().Language];
         }
 
+        public string GetLocalizationText(int textId, List<string> replace = null)
+        {
+            LocalizationData localizationData = this.GetModel<IGameModel>().LocalizationData[textId];
+            string text = this.GetSystem<IGameSystem>().GetDataName(new List<string>
+                { localizationData.Chinese, localizationData.English });
+            object[] value;
+            if (replace == null)
+            {
+                value = Array.Empty<object>();
+            }
+            else
+            {
+                value = new object[replace.Count];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    value[i] = replace[i];
+                }
+            }
+
+            return string.Format(text, value);
+        }
+
         /// <summary>
         /// 初始化通用数据
         /// </summary>
@@ -76,11 +106,13 @@ namespace Game.GameBase
             var countryAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.COUNTRY_INFORMATION);
             var countryNameTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.COUNTRY_NAME);
             var mapMeshAsset = resLoader.LoadSync<TextAsset>(MapConfigurationTableConstant.MAP_MESH_INFORMATION);
+            var localizationAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.LOCALIZATION_TEXT);
             this.GetSystem<ITownSystem>().InitTownCommonData(townTextAsset, townNameTextAsset);
             this.GetSystem<IFamilySystem>().InitFamilyCommonData(familyTextAsset, familyNameTextAsset);
             this.GetSystem<IFamilySystem>().InitRoleCommonData(roleTextAsset, roleNameTextAsset);
             this.GetSystem<ICountrySystem>().InitCountryCommonData(countryAsset, countryNameTextAsset);
             this.GetSystem<IMapSystem>().InitMapMeshData(mapMeshAsset);
+            this.GetSystem<IGameSystem>().InitLocalizationData(localizationAsset);
             _hasLoadCurrentData = true;
         }
 

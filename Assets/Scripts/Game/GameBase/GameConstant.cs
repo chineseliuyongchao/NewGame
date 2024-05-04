@@ -116,6 +116,11 @@
         /// 家族名字
         /// </summary>
         public const string COUNTRY_NAME = "CountryName";
+
+        /// <summary>
+        /// 多语种文本配置表
+        /// </summary>
+        public const string LOCALIZATION_TEXT = "LocalizationText";
     }
 
     /// <summary>

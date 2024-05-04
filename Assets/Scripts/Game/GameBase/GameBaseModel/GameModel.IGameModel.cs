@@ -1,4 +1,5 @@
-﻿using Game.Team;
+﻿using System.Collections.Generic;
+using Game.Team;
 using QFramework;
 
 namespace Game.GameBase
@@ -24,5 +25,10 @@ namespace Game.GameBase
         /// 可以暂停时间的弹窗打开的次数
         /// </summary>
         public int OpenStopTimeUITime { get; set; }
+
+        /// <summary>
+        /// 多语种文本
+        /// </summary>
+        public Dictionary<int, LocalizationData> LocalizationData { get; set; }
     }
 }

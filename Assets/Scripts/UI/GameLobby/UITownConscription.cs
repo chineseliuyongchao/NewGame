@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.GameBase;
 using Game.Player;
 using Game.Team;
@@ -82,11 +83,14 @@ namespace UI
         {
             if (mData.data.canConscription.num > 0)
             {
-                title.text = "这里有" + mData.data.canConscription.num + "人愿意响应你";
+                title.text = this.GetSystem<IGameSystem>().GetLocalizationText(2, new List<string>
+                {
+                    mData.data.canConscription.num.ToString()
+                });
             }
             else
             {
-                title.text = "没有人愿意响应你";
+                title.text = this.GetSystem<IGameSystem>().GetLocalizationText(3);
             }
         }
     }

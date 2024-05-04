@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Game.Country;
 using Game.Family;
 using Game.GameBase;
@@ -78,9 +79,13 @@ namespace UI
             populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.GetPopulation(), 5);
             levelValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.level, 5);
             militiaValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.militiaNum, 5);
-            introduce.text = "这个聚落属于" + this.GetSystem<IGameSystem>().GetDataName(this.GetModel<ICountryModel>()
-                .CountryData[townData.storage.countryId].name) + "的" + this.GetSystem<IGameSystem>()
-                .GetDataName(this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].storage.name) + "家族统治";
+            introduce.text = this.GetSystem<IGameSystem>().GetLocalizationText(1, new List<string>()
+            {
+                this.GetSystem<IGameSystem>()
+                    .GetDataName(this.GetModel<ICountryModel>().CountryData[townData.storage.countryId].name),
+                this.GetSystem<IGameSystem>()
+                    .GetDataName(this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].storage.name)
+            });
         }
     }
 }
