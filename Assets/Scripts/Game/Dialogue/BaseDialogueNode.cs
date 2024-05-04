@@ -12,12 +12,12 @@ namespace Game.Dialogue
         /// <summary>
         /// 跳转到这个节点的选项内容（如果此节点只有一个父节点则不需要）
         /// </summary>
-        public string optionToThis;
+        public int optionToThisIndex;
 
         /// <summary>
         /// 此节点的对话内容
         /// </summary>
-        public string content;
+        public int contentIndex;
 
         /// <summary>
         /// 节点填充变量的索引

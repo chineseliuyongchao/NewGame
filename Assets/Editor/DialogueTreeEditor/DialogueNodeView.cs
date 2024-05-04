@@ -29,13 +29,13 @@ namespace Editor.DialogueTreeEditor
             SetupClasses();
 
             Label titleLabel = this.Q<Label>("title-label");
-            titleLabel.bindingPath = "optionToThis";
+            titleLabel.bindingPath = "optionToThisIndex";
             titleLabel.Bind(new SerializedObject(dialogueNode));
 
             // 在UI中找到名为"description"的Label元素
             Label descriptionLabel = this.Q<Label>("description");
             // 将Label元素的bindingPath设置为"description"这表示Label元素将绑定到SerializedObject的"description"字段
-            descriptionLabel.bindingPath = "content";
+            descriptionLabel.bindingPath = "contentIndex";
             // 使用SerializedObject进行数据绑定，将Label元素与DialogueNode对应的SerializedObject的"content"字段关联起来
             descriptionLabel.Bind(new SerializedObject(dialogueNode));
         }

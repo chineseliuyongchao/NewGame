@@ -121,6 +121,16 @@
         /// 多语种文本配置表
         /// </summary>
         public const string LOCALIZATION_TEXT = "LocalizationText";
+
+        /// <summary>
+        /// 对话多语种文本配置表
+        /// </summary>
+        public const string DIALOGUE_LOCALIZATION_TEXT = "DialogueLocalizationText";
+
+        /// <summary>
+        /// 对话提示多语种文本配置表
+        /// </summary>
+        public const string DIALOGUE_TIP_LOCALIZATION_TEXT = "DialogueTipLocalizationText";
     }
 
     /// <summary>
@@ -184,4 +194,22 @@
     /// UI关闭结束的回调
     /// </summary>
     public delegate void UICloseBack();
+
+    public enum LocalizationType
+    {
+        /// <summary>
+        /// 普通文本
+        /// </summary>
+        NORMAL,
+
+        /// <summary>
+        /// 对话
+        /// </summary>
+        DIALOGUE,
+
+        /// <summary>
+        /// 对话提示
+        /// </summary>
+        DIALOGUE_TIP
+    }
 }

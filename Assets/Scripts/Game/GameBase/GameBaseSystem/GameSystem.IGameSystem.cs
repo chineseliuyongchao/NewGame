@@ -7,9 +7,10 @@ namespace Game.GameBase
     public interface IGameSystem : ISystem
     {
         /// <summary>
-        /// 初始化家族通用数据
+        /// 初始化多语种数据
         /// </summary>
-        void InitLocalizationData(TextAsset textAsset);
+        void InitLocalizationData(TextAsset localizationAsset, TextAsset dialogueLocalizationAsset,
+            TextAsset dialogueTipLocalizationAsset);
 
         /// <summary>
         /// 切换到菜单场景
@@ -39,7 +40,9 @@ namespace Game.GameBase
         /// </summary>
         /// <param name="textId">文本Id</param>
         /// <param name="replace">替换内容</param>
+        /// <param name="type">多语种文本种类</param>
         /// <returns></returns>
-        string GetLocalizationText(int textId, List<string> replace = null);
+        string GetLocalizationText(int textId, List<string> replace = null,
+            LocalizationType type = LocalizationType.NORMAL);
     }
 }

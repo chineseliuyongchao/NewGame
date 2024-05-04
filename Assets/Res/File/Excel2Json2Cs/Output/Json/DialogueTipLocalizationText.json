@@ -1,0 +1,24 @@
+﻿{
+    "Sheet1": [
+        {
+            "ID": 1,
+            "Chinese": "友善",
+            "English": "amicable"
+        },
+        {
+            "ID": 2,
+            "Chinese": "凶狠",
+            "English": "vicious"
+        },
+        {
+            "ID": 3,
+            "Chinese": "悔改",
+            "English": "repent"
+        },
+        {
+            "ID": 4,
+            "Chinese": "继续",
+            "English": "resume"
+        }
+    ]
+}

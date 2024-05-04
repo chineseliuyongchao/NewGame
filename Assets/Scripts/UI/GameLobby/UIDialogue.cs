@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Game.Dialogue;
+using Game.GameBase;
 using QFramework;
 using TMPro;
 using UnityEngine.UI;
@@ -111,16 +112,17 @@ namespace UI
                 return;
             }
 
-            object[] value = new object[_node.dialogValueIndex.Count];
-            for (int i = 0; i < value.Length; i++)
+            List<string> value = new List<string>();
+            for (int i = 0; i < _node.dialogValueIndex.Count; i++)
             {
                 if (mData.dialogueValue.Count > _node.dialogValueIndex[i])
                 {
-                    value[i] = mData.dialogueValue[_node.dialogValueIndex[i]];
+                    value.Add(mData.dialogueValue[_node.dialogValueIndex[i]]);
                 }
             }
 
-            string dialogueText = string.Format(_node.content, value);
+            string dialogueText = this.GetSystem<IGameSystem>()
+                .GetLocalizationText(_node.contentIndex, value, LocalizationType.DIALOGUE);
 
             if (_node.NodeType() == DialogueNodeType.NPC)
             {
@@ -147,7 +149,8 @@ namespace UI
             if (_node.children.Count == 0)
             {
                 chooseButtons[0].gameObject.SetActive(true);
-                chooseButtonTexts[0].text = "继续";
+                chooseButtonTexts[0].text = this.GetSystem<IGameSystem>()
+                    .GetLocalizationText(4, null, LocalizationType.DIALOGUE_TIP);
             }
             else
             {
@@ -156,12 +159,14 @@ namespace UI
                     if (i == 0 && _node.children.Count == 1)
                     {
                         chooseButtons[0].gameObject.SetActive(true);
-                        chooseButtonTexts[0].text = "继续";
+                        chooseButtonTexts[0].text = this.GetSystem<IGameSystem>()
+                            .GetLocalizationText(4, null, LocalizationType.DIALOGUE_TIP);
                         break;
                     }
 
                     chooseButtons[i].gameObject.SetActive(true);
-                    chooseButtonTexts[i].text = _node.children[i].optionToThis;
+                    chooseButtonTexts[i].text = this.GetSystem<IGameSystem>()
+                        .GetLocalizationText(_node.children[i].optionToThisIndex, null, LocalizationType.DIALOGUE_TIP);
                 }
             }
         }

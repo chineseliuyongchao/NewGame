@@ -1,0 +1,49 @@
+﻿{
+    "Sheet1": [
+        {
+            "ID": 1,
+            "Chinese": "你好，很高兴见到你",
+            "English": "Hello, nice to meet you."
+        },
+        {
+            "ID": 2,
+            "Chinese": "很高兴见到你",
+            "English": "Nice to meet you."
+        },
+        {
+            "ID": 3,
+            "Chinese": "你是何人",
+            "English": "Who are you?"
+        },
+        {
+            "ID": 4,
+            "Chinese": "来一起喝酒吧",
+            "English": "Let's have a drink together."
+        },
+        {
+            "ID": 5,
+            "Chinese": "你怎么如此没有礼貌",
+            "English": "How can you be so rude?"
+        },
+        {
+            "ID": 6,
+            "Chinese": "不好意思，刚刚晕了头了",
+            "English": "Sorry, I just felt dizzy."
+        },
+        {
+            "ID": 7,
+            "Chinese": "你不服气吗",
+            "English": "Are you not convinced?"
+        },
+        {
+            "ID": 8,
+            "Chinese": "这还差不多",
+            "English": "That's more like it."
+        },
+        {
+            "ID": 9,
+            "Chinese": "来比划比划吗",
+            "English": "Shall we have a little spar?"
+        }
+    ]
+}

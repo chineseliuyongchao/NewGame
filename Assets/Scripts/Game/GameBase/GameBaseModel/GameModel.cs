@@ -15,11 +15,16 @@ namespace Game.GameBase
         private PlayerTeam _playerTeam;
         private int _openStopTimeUITime;
         private Dictionary<int, LocalizationData> _localizationData;
+        private Dictionary<int, LocalizationData> _dialogueLocalizationData;
+
+        private Dictionary<int, LocalizationData> _dialogueTipLocalizationData;
 
         protected override void OnInit()
         {
             this.GetSystem<IGameSaveSystem>().AddSaveModel(this);
             _localizationData = new Dictionary<int, LocalizationData>();
+            _dialogueLocalizationData = new Dictionary<int, LocalizationData>();
+            _dialogueTipLocalizationData = new Dictionary<int, LocalizationData>();
         }
 
         public GameTime NowTime
@@ -50,6 +55,18 @@ namespace Game.GameBase
         {
             get => _localizationData;
             set => _localizationData = value;
+        }
+
+        public Dictionary<int, LocalizationData> DialogueLocalizationData
+        {
+            get => _dialogueLocalizationData;
+            set => _dialogueLocalizationData = value;
+        }
+
+        public Dictionary<int, LocalizationData> DialogueTipLocalizationData
+        {
+            get => _dialogueTipLocalizationData;
+            set => _dialogueTipLocalizationData = value;
         }
 
         public Object SaveModel()

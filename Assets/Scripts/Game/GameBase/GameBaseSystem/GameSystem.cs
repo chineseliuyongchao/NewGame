@@ -26,10 +26,15 @@ namespace Game.GameBase
         {
         }
 
-        public void InitLocalizationData(TextAsset textAsset)
+        public void InitLocalizationData(TextAsset localizationAsset, TextAsset dialogueLocalizationAsset,
+            TextAsset dialogueTipLocalizationAsset)
         {
             this.GetUtility<IGameUtility>()
-                .AnalysisJsonConfigurationTable(textAsset, this.GetModel<IGameModel>().LocalizationData);
+                .AnalysisJsonConfigurationTable(localizationAsset, this.GetModel<IGameModel>().LocalizationData);
+            this.GetUtility<IGameUtility>().AnalysisJsonConfigurationTable(dialogueLocalizationAsset,
+                this.GetModel<IGameModel>().DialogueLocalizationData);
+            this.GetUtility<IGameUtility>().AnalysisJsonConfigurationTable(dialogueTipLocalizationAsset,
+                this.GetModel<IGameModel>().DialogueTipLocalizationData);
         }
 
         public void ChangeMenuScene()
@@ -64,9 +69,26 @@ namespace Game.GameBase
             return nameList[this.GetModel<IGameMenuModel>().Language];
         }
 
-        public string GetLocalizationText(int textId, List<string> replace = null)
+        public string GetLocalizationText(int textId, List<string> replace = null,
+            LocalizationType type = LocalizationType.NORMAL)
         {
-            LocalizationData localizationData = this.GetModel<IGameModel>().LocalizationData[textId];
+            LocalizationData localizationData;
+            switch (type)
+            {
+                case LocalizationType.NORMAL:
+                    localizationData = this.GetModel<IGameModel>().LocalizationData[textId];
+                    break;
+                case LocalizationType.DIALOGUE:
+                    localizationData = this.GetModel<IGameModel>().DialogueLocalizationData[textId];
+                    break;
+                case LocalizationType.DIALOGUE_TIP:
+                    localizationData = this.GetModel<IGameModel>().DialogueTipLocalizationData[textId];
+                    break;
+                default:
+                    localizationData = this.GetModel<IGameModel>().LocalizationData[textId];
+                    break;
+            }
+
             string text = this.GetSystem<IGameSystem>().GetDataName(new List<string>
                 { localizationData.Chinese, localizationData.English });
             object[] value;
@@ -105,14 +127,24 @@ namespace Game.GameBase
             var roleNameTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.ROLE_NAME);
             var countryAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.COUNTRY_INFORMATION);
             var countryNameTextAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.COUNTRY_NAME);
+
             var mapMeshAsset = resLoader.LoadSync<TextAsset>(MapConfigurationTableConstant.MAP_MESH_INFORMATION);
+
             var localizationAsset = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.LOCALIZATION_TEXT);
+            var dialogueLocalizationText =
+                resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.DIALOGUE_LOCALIZATION_TEXT);
+            var dialogueTipLocalizationText =
+                resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.DIALOGUE_TIP_LOCALIZATION_TEXT);
+
             this.GetSystem<ITownSystem>().InitTownCommonData(townTextAsset, townNameTextAsset);
             this.GetSystem<IFamilySystem>().InitFamilyCommonData(familyTextAsset, familyNameTextAsset);
             this.GetSystem<IFamilySystem>().InitRoleCommonData(roleTextAsset, roleNameTextAsset);
             this.GetSystem<ICountrySystem>().InitCountryCommonData(countryAsset, countryNameTextAsset);
+
             this.GetSystem<IMapSystem>().InitMapMeshData(mapMeshAsset);
-            this.GetSystem<IGameSystem>().InitLocalizationData(localizationAsset);
+
+            this.GetSystem<IGameSystem>().InitLocalizationData(localizationAsset, dialogueLocalizationText,
+                dialogueTipLocalizationText);
             _hasLoadCurrentData = true;
         }
 
