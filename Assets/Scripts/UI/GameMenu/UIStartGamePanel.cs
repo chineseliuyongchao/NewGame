@@ -12,6 +12,7 @@ namespace UI
     {
         /// <summary>
         /// 本次打开存档界面是读取存档还是覆盖存档
+        /// 
         /// </summary>
         public readonly bool isLoad;
 
