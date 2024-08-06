@@ -42,7 +42,6 @@ namespace Fight.Game.Arms
 
         public void DoColor(Color color, float duration = 0.1f)
         {
-            if (_list == null) Debug.Log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
             foreach (var obj in _list.Values)
                 if (obj is SpriteRenderer sprite)
                     sprite.DOColor(color, duration);

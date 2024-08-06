@@ -16,6 +16,7 @@ namespace Fight.FsmS
         {
             //初始化玩家的兵种
             var gamePlayerModel = this.GetModel<GamePlayerModel>();
+            var fightGameModel = this.GetModel<FightGameModel>();
 
             //todo 配置测试兵种
             var heavyInfantryKnightsModel = this.GetModel<HeavyInfantryKnightsModel>();
@@ -31,7 +32,8 @@ namespace Fight.FsmS
                 heavyInfantryKnightsModel.Clone()));
             gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
                 heavyInfantryKnightsModel.Clone()));
-            gamePlayerModel.GoFightScene();
+            
+            fightGameModel.GoFightScene();
 
             var aStarModel = this.GetModel<AStarModel>();
             foreach (var armsName in gamePlayerModel.ArmsNameSet)

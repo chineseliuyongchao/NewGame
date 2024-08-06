@@ -1,101 +1,73 @@
-﻿using Fight.Game;
+﻿using DG.Tweening;
+using Fight.Enum;
+using Fight.Events;
+using Fight.Game;
+using Fight.Utils;
 using QFramework;
 using UnityAttribute;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Fight.Tools
 {
     /**
      * 根据a*的网格生成相应的地图
      */
-    public class MapController : MonoBehaviour, IController, IPointerEnterHandler, IPointerExitHandler,
-        IBeginDragHandler, IEndDragHandler
+    public class MapController : MonoBehaviour, IController
     {
-        private static readonly Color32 GrassColor = new(34, 139, 34, 255);
-        private static readonly Color32 IceColor = new(173, 216, 230, 255);
-        private static readonly Color32 MagmaColor = new(255, 69, 0, 255);
-        private static readonly Color32 LavaGroundColor = new(139, 0, 0, 255);
-        private static readonly Color32 StoneColor = new(112, 128, 144, 255);
         [Label("原始图块")] [SerializeField] private GameObject piece;
+        [Label("提示图块")] [SerializeField] private GameObject tips;
+
+        private Transform _showTransform;
+        private Transform _tipsTransform;
+
+        private Tween _alphaAction;
 
         private void Awake()
         {
+            _showTransform = transform.Find("show");
+            _tipsTransform = transform.Find("tips");
+
             var aStarModel = this.GetModel<AStarModel>();
-            var index = 0;
+            var index = 1;
             foreach (var graphNode in aStarModel.FightGridNodeInfoList.Values)
             {
-                var obj = Instantiate(piece, transform);
+                var obj = Instantiate(piece, _showTransform);
                 obj.transform.localPosition = (Vector3)graphNode.position;
-                obj.name = (++index).ToString();
-                // SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
-                // sprite.color = graphNode.Tag switch
-                // {
-                //     Constants.GrassTag => GrassColor,
-                //     Constants.IceTag => IceColor,
-                //     Constants.MagmaTag => MagmaColor,
-                //     Constants.LavaGroundTag => LavaGroundColor,
-                //     Constants.StoneTag => StoneColor,
-                //     _ => sprite.color
-                // };
+                obj.name = index.ToString();
+
+                var obj2 = Instantiate(tips, _tipsTransform);
+                obj2.transform.localPosition = (Vector3)graphNode.position;
+                obj2.name = (index++).ToString();
             }
+
+            _tipsTransform.gameObject.SetActive(false);
+
+            this.RegisterEvent<SelectArmsFocusEvent>(SelectArmsFocusEvent)
+                .UnRegisterWhenGameObjectDestroyed(this);
         }
 
-        private void Update()
+        private void SelectArmsFocusEvent(SelectArmsFocusEvent focusEvent)
         {
-            #region debug
-
-            if (_isPointerOver)
+            switch (focusEvent.BattleType)
             {
-                var mousePosition = Input.mousePosition;
-                var worldPosition =
-                    Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 0));
-                var spriteRenderer =
-                    transform.GetChild(this.GetModel<AStarModel>().GetGridNodeIndexMyRule(worldPosition))
-                        .GetComponent<SpriteRenderer>();
-                if (_spriteRenderer != spriteRenderer)
-                {
-                    spriteRenderer.color = Color.black;
-                    if (_spriteRenderer) _spriteRenderer.color = Color.white;
+                case BattleType.StartWarPreparations:
+                    if (_alphaAction is { active: true })
+                    {
+                        return;
+                    }
 
-                    _spriteRenderer = spriteRenderer;
-                }
+                    _tipsTransform.gameObject.SetActive(true);
+                    MyCanvasGroup tipsMyCanvasGroup = _tipsTransform.GetComponent<MyCanvasGroup>();
+                    _alphaAction?.Kill();
+                    tipsMyCanvasGroup.alpha = 1f;
+                    _alphaAction = tipsMyCanvasGroup.DoAlpha(0.4f, 1f).SetLoops(-1, LoopType.Yoyo);
+                    break;
             }
-
-            #endregion
         }
-
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-            _isPointerOver = true;
-        }
-
 
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;
         }
-
-        public void OnEndDrag(PointerEventData eventData)
-        {
-            _isPointerOver = false;
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            _isPointerOver = true;
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            _isPointerOver = false;
-        }
-
-        #region debug
-
-        private bool _isPointerOver;
-        private SpriteRenderer _spriteRenderer;
-
-        #endregion
     }
 }

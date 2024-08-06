@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Fight.Game.Arms;
 using Fight.Game.Arms.Human.Nova;
 using UnityEditor;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.U2D;
 
 namespace Editor.inspector
 {
-    [CustomEditor(typeof(HeavyInfantryKnightsController))]
+    [CustomEditor(typeof(IObjectArmsController))]
     public class ObjectArmsControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()

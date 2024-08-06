@@ -13,12 +13,6 @@ namespace Fight.Game
         private readonly SortedSet<int> _myArmsSet2 = new();
 
         /// <summary>
-        ///     key：兵种的专属id
-        ///     value：兵种在战斗场景中的位置
-        /// </summary>
-        public readonly Dictionary<string, int> FightScenePositionDictionary = new();
-
-        /// <summary>
         ///     key：兵种名
         /// </summary>
         public HashSet<string> ArmsNameSet { get; } = new();
@@ -31,12 +25,6 @@ namespace Fight.Game
 
         protected override void OnInit()
         {
-        }
-
-        public void GoFightScene()
-        {
-            FightScenePositionDictionary.Clear();
-            foreach (var info in ArmsInfoDictionary) FightScenePositionDictionary[info.Key] = info.Value.RanksIndex;
         }
 
         public void AddArmsInfo(ArmsInfo armsInfo)

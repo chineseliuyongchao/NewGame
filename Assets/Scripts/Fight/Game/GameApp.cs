@@ -11,6 +11,8 @@ namespace Fight.Game
             RegisterSystem(new TraitSystem());
             RegisterModel(new GamePlayerModel());
             RegisterModel(new AStarModel());
+            
+            RegisterModel(new FightGameModel());
 
             RegisterModel(new HeavyInfantryKnightsModel());
         }

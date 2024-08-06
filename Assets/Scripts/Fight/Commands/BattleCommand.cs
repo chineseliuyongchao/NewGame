@@ -1,9 +1,14 @@
 ﻿using Fight.Enum;
 using Fight.Events;
+using Fight.Scenes;
 using QFramework;
+
 
 namespace Fight.Commands
 {
+    /// <summary>
+    /// 战斗界面的状态命令，标志着战斗进行了哪个状态，处理相关逻辑并且发送相关消息
+    /// </summary>
     public class BattleCommand : AbstractCommand
     {
         private readonly BattleType _type;
@@ -15,6 +20,7 @@ namespace Fight.Commands
 
         protected override void OnExecute()
         {
+            FightScene.Ins.currentBattleType = _type;
             switch (_type)
             {
                 case BattleType.StartWarPreparations:

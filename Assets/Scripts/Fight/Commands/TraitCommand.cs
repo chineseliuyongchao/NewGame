@@ -6,6 +6,9 @@ using QFramework;
 
 namespace Fight.Commands
 {
+    /// <summary>
+    /// 特质的更新命令
+    /// </summary>
     public class TraitCommand : AbstractCommand
     {
         private readonly TraitActionType _actionType;
