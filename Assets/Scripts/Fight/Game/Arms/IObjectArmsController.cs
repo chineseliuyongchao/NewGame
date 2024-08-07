@@ -1,4 +1,6 @@
-﻿namespace Fight.Game.Arms
+﻿using Fight.Enum;
+
+namespace Fight.Game.Arms
 {
     public interface IObjectArmsController
     {
@@ -8,8 +10,12 @@
 
         ObjectArmsView GetView();
 
+        string GetName();
+
         void StartFocusAction();
 
         void EndFocusAction();
+
+        void ArmsMoveAction(int endIndex);
     }
 }

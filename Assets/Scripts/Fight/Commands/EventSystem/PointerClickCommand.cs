@@ -1,0 +1,57 @@
+﻿using Fight.Game;
+using QFramework;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+namespace Fight.Commands.EventSystem
+{
+    public class PointerClickCommand : AbstractCommand
+    {
+        private readonly PointerEventData _eventData;
+
+        public PointerClickCommand(PointerEventData eventData)
+        {
+            _eventData = eventData;
+        }
+
+        protected override void OnExecute()
+        {
+            var cam = Camera.main;
+            if (!cam) return;
+            AStarModel aStarModel = this.GetModel<AStarModel>();
+            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            int index = aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(_eventData.position));
+            if (!aStarModel.FightGridNodeInfoList.ContainsKey(index))
+            {
+                return;
+            }
+
+            //当前没有焦点兵种或者点击了其他属于自己的单位
+            if (fightGameModel.FocusController == null)
+            {
+                if (fightGameModel.FightSceneArmsNameDictionary.ContainsKey(index))
+                {
+                    this.SendCommand(new SelectArmsFocusCommand(index));
+                }
+            }
+            else
+            {
+                if (index == fightGameModel.FocusController.GetModel().CurrentIndex)
+                {
+                    //点击的是自己
+                    this.SendCommand(new CancelArmsFocusCommand());
+                }
+                else if (fightGameModel.FightSceneArmsNameDictionary.ContainsKey(index))
+                {
+                    //点击了其他的兵种
+                    this.SendCommand(new SelectArmsFocusCommand(index));
+                }
+                else if (fightGameModel.CanWalkableIndex(index))
+                {
+                    //筛选掉障碍物，表示兵种要移动到这个位置
+                    this.SendCommand(new ArmsMoveCommand(index));
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using Fight.Commands;
+using Fight.Commands.EventSystem;
 using Fight.Game;
 using QFramework;
 using UnityEngine;
@@ -19,21 +20,15 @@ namespace Fight.Tools
             _aStarModel = this.GetModel<AStarModel>();
             _fightGameModel = this.GetModel<FightGameModel>();
         }
+        
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            this.SendCommand(new PointerClickCommand(eventData));
+        }
 
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            var cam = Camera.main;
-            if (!cam) return;
-            int index = _aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(eventData.position));
-            if (_fightGameModel.FightSceneArmsNameDictionary.ContainsKey(index))
-            {
-                this.SendCommand(new SelectArmsFocusCommand(index));
-            }
         }
     }
 }

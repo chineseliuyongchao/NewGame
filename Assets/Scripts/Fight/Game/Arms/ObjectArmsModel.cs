@@ -26,6 +26,8 @@ namespace Fight.Game.Arms
         public RangedAttackAttribute RangedAttackAttribute => null;
 
         public SpiritualAttribute SpiritualAttribute => _spiritualAttribute;
+        
+        public int CurrentIndex;
 
         public virtual ObjectArmsModel Clone()
         {

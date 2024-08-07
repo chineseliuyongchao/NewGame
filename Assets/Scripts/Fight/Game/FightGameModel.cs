@@ -14,12 +14,19 @@ namespace Fight.Game
         ///     value：兵种在战斗场景中的位置
         /// </summary>
         public readonly Dictionary<string, int> FightScenePositionDictionary = new();
-        
+
         /// <summary>
         ///     key：兵种在战斗场景中的位置
         ///     value：兵种的实例
         /// </summary>
         public readonly Dictionary<int, string> FightSceneArmsNameDictionary = new();
+
+        public readonly Dictionary<int, string> FightSceneEnemyNameDictionary = new();
+
+        /// <summary>
+        /// 当前被选取为焦点的下标
+        /// </summary>
+        public int FocusIndex;
 
         /// <summary>
         /// 当前被选取为焦点的兵种，可能为空
@@ -36,6 +43,18 @@ namespace Fight.Game
                 FightScenePositionDictionary[info.Key] = info.Value.RanksIndex;
                 FightSceneArmsNameDictionary[info.Value.RanksIndex] = info.Key;
             }
+        }
+
+        /// <summary>
+        /// 给定一个index，返回这个index是否可步行，也就是说这个index是否可以到达
+        /// 不可到达的原因有：这里是障碍、这里已经被其他敌方单位占据
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public bool CanWalkableIndex(int index)
+        {
+            return !FightSceneEnemyNameDictionary.ContainsKey(index) &&
+                   this.GetModel<AStarModel>().FightGridNodeInfoList[index].WalkableErosion;
         }
 
         /**
