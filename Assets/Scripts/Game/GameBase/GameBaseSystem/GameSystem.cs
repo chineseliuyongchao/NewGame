@@ -22,8 +22,14 @@ namespace Game.GameBase
         /// </summary>
         private bool _hasLoadCurrentData;
 
+        /// <summary>
+        /// 当前场景
+        /// </summary>
+        private SceneType _sceneType;
+
         protected override void OnInit()
         {
+            _sceneType = SceneType.MENU_SCENE;
         }
 
         public void InitLocalizationData(TextAsset localizationAsset, TextAsset dialogueLocalizationAsset,
@@ -37,26 +43,61 @@ namespace Game.GameBase
                 this.GetModel<IGameModel>().DialogueTipLocalizationData);
         }
 
-        public void ChangeMenuScene()
-        {
-            this.SendEvent(new ChangeToMenuSceneEvent());
-            SceneManager.LoadScene("MenuScene");
-        }
-
         public void ChangeMainGameScene(string fileName = null)
         {
-            this.SendEvent(new ChangeToMainGameSceneEvent());
             LoadCurrentData();
             this.GetSystem<IGameSaveSystem>().LoadGame(fileName);
             LoadNoStorageData();
             InitNewGameData(fileName);
-            SceneManager.LoadScene("MainGameScene");
+            ChangeScene(SceneType.MAIN_GAME_SCENE);
         }
 
-        public void ChangeGameCreateScene()
+        public void ChangeScene(SceneType type)
         {
-            this.SendEvent(new ChangeToGameCreateSceneEvent());
-            SceneManager.LoadScene("CreateGameScene");
+            switch (_sceneType)
+            {
+                case SceneType.MENU_SCENE:
+                    this.SendEvent(new ChangeMenuSceneEvent(false));
+                    break;
+                case SceneType.CREATE_GAME_SCENE:
+                    this.SendEvent(new ChangeGameCreateSceneEvent(false));
+                    break;
+                case SceneType.MAIN_GAME_SCENE:
+                    this.SendEvent(new ChangeMainGameSceneEvent(false));
+                    break;
+                case SceneType.CREATE_FIGHT_SCENE:
+                    this.SendEvent(new ChangeFightCreateSceneEvent(false));
+                    break;
+                case SceneType.FIGHT_SCENE:
+                    this.SendEvent(new ChangeFightSceneEvent(false));
+                    break;
+            }
+
+            switch (type)
+            {
+                case SceneType.MENU_SCENE:
+                    SceneManager.LoadScene("MenuScene");
+                    this.SendEvent(new ChangeMenuSceneEvent(true));
+                    break;
+                case SceneType.CREATE_GAME_SCENE:
+                    SceneManager.LoadScene("CreateGameScene");
+                    this.SendEvent(new ChangeGameCreateSceneEvent(true));
+                    break;
+                case SceneType.MAIN_GAME_SCENE:
+                    SceneManager.LoadScene("MainGameScene");
+                    this.SendEvent(new ChangeMainGameSceneEvent(true));
+                    break;
+                case SceneType.CREATE_FIGHT_SCENE:
+                    SceneManager.LoadScene("CreateFightScene");
+                    this.SendEvent(new ChangeFightCreateSceneEvent(true));
+                    break;
+                case SceneType.FIGHT_SCENE:
+                    SceneManager.LoadScene("FightScene");
+                    this.SendEvent(new ChangeFightSceneEvent(true));
+                    break;
+            }
+
+            _sceneType = type;
         }
 
         public string GetDataName(List<string> nameList)

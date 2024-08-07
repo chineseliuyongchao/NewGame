@@ -159,6 +159,18 @@ MonoBehaviour:
     m_Key: UIGameCreate_FamilyName
     m_Metadata:
       m_Items: []
+  - m_Id: 45327544705662976
+    m_Key: UIGameMenu_FightButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45328730548649984
+    m_Key: UIFightCreate_CreateButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45328969351348224
+    m_Key: UIFightCreate_Title
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

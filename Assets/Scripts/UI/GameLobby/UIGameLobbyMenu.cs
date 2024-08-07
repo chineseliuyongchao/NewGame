@@ -44,7 +44,10 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            backToMenuButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeMenuScene(); });
+            backToMenuButton.onClick.AddListener(() =>
+            {
+                this.GetSystem<IGameSystem>().ChangeScene(SceneType.MENU_SCENE);
+            });
             saveButton.onClick.AddListener(() =>
             {
                 UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData(false, false));
@@ -59,7 +62,13 @@ namespace UI
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<ChangeToMenuSceneEvent>(_ => { CloseSelf(); })
+            this.RegisterEvent<ChangeMainGameSceneEvent>(e =>
+                {
+                    if (!e.IsChangeIn)
+                    {
+                        CloseSelf();
+                    }
+                })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 

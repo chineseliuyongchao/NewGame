@@ -46,12 +46,22 @@ namespace UI
         {
             startGameButton.onClick.AddListener(
                 () => { UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData()); });
+            fightButton.onClick.AddListener(() =>
+            {
+                this.GetSystem<IGameSystem>().ChangeScene(SceneType.CREATE_FIGHT_SCENE);
+            });
             settingButton.onClick.AddListener(() => { UIKit.OpenPanel<UIGameSetting>(new UIGameSettingData()); });
         }
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<ChangeToMainGameSceneEvent>(_ => { CloseSelf(); })
+            this.RegisterEvent<ChangeMenuSceneEvent>(e =>
+                {
+                    if (!e.IsChangeIn)
+                    {
+                        CloseSelf();
+                    }
+                })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 

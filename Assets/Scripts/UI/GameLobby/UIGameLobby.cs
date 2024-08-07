@@ -54,7 +54,13 @@ namespace UI
         protected override void OnListenEvent()
         {
             this.RegisterEvent<ChangeTimeEvent>(_ => { UpdateTime(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<ChangeToMenuSceneEvent>(_ => { CloseSelf(); })
+            this.RegisterEvent<ChangeMainGameSceneEvent>(e =>
+                {
+                    if (!e.IsChangeIn)
+                    {
+                        CloseSelf();
+                    }
+                })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<TimePassEvent>(e => { UpdateTimePass(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<ShowDialogEvent>(e => { UpdateTimePass(); })

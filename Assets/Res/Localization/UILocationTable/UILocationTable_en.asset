@@ -162,6 +162,18 @@ MonoBehaviour:
     m_Localized: Leave
     m_Metadata:
       m_Items: []
+  - m_Id: 45327544705662976
+    m_Localized: Start Fight Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45328730548649984
+    m_Localized: Create Fight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 45328969351348224
+    m_Localized: Create New Fight
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -8,24 +8,68 @@
     }
 
     /// <summary>
-    /// 切换到菜单场景
+    /// 切换菜单场景
     /// </summary>
-    public class ChangeToMenuSceneEvent
+    public class ChangeMenuSceneEvent
     {
+        public readonly bool IsChangeIn;
+
+        public ChangeMenuSceneEvent(bool isChangeIn)
+        {
+            IsChangeIn = isChangeIn;
+        }
     }
 
     /// <summary>
-    /// 切换到主游戏场景
+    /// 切换主游戏场景
     /// </summary>
-    public class ChangeToMainGameSceneEvent
+    public class ChangeMainGameSceneEvent
     {
+        public readonly bool IsChangeIn;
+
+        public ChangeMainGameSceneEvent(bool isChangeIn)
+        {
+            IsChangeIn = isChangeIn;
+        }
     }
 
     /// <summary>
-    /// 切换到游戏创建场景
+    /// 切换游戏创建场景
     /// </summary>
-    public class ChangeToGameCreateSceneEvent
+    public class ChangeGameCreateSceneEvent
     {
+        public bool IsChangeIn;
+
+        public ChangeGameCreateSceneEvent(bool isChangeIn)
+        {
+            IsChangeIn = isChangeIn;
+        }
+    }
+
+    /// <summary>
+    /// 切换战斗创建场景
+    /// </summary>
+    public class ChangeFightCreateSceneEvent
+    {
+        public bool IsChangeIn;
+
+        public ChangeFightCreateSceneEvent(bool isChangeIn)
+        {
+            IsChangeIn = isChangeIn;
+        }
+    }
+
+    /// <summary>
+    /// 切换战斗场景
+    /// </summary>
+    public class ChangeFightSceneEvent
+    {
+        public bool IsChangeIn;
+
+        public ChangeFightSceneEvent(bool isChangeIn)
+        {
+            IsChangeIn = isChangeIn;
+        }
     }
 
     /// <summary>
@@ -47,11 +91,11 @@
     /// </summary>
     public class TimePassEvent
     {
-        public readonly bool isPass;
+        public readonly bool IsPass;
 
         public TimePassEvent(bool isPass)
         {
-            this.isPass = isPass;
+            this.IsPass = isPass;
         }
     }
 
@@ -60,11 +104,11 @@
     /// </summary>
     public class ShowDialogEvent
     {
-        public bool isShow;
+        public bool IsShow;
 
         public ShowDialogEvent(bool isShow)
         {
-            this.isShow = isShow;
+            this.IsShow = isShow;
         }
     }
 }

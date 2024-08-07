@@ -1,28 +1,27 @@
 using Game.GameBase;
-using Game.Player;
 using QFramework;
 
 namespace UI
 {
-    public class UIGameCreateData : UIPanelData
+    public class UIFightCreateData : UIPanelData
     {
     }
 
     /// <summary>
-    /// 创建游戏界面
+    /// 创建战斗的界面
     /// </summary>
-    public partial class UIGameCreate : UIBase
+    public partial class UIFightCreate : UIBase
     {
         protected override void OnInit(IUIData uiData = null)
         {
-            mData = uiData as UIGameCreateData ?? new UIGameCreateData();
+            mData = uiData as UIFightCreateData ?? new UIFightCreateData();
             // please add init code here
             base.OnInit(uiData);
         }
 
         protected override void OnOpen(IUIData uiData = null)
         {
-            mData = uiData as UIGameCreateData ?? new UIGameCreateData();
+            mData = uiData as UIFightCreateData ?? new UIFightCreateData();
             // please add open code here
             base.OnOpen(uiData);
         }
@@ -46,14 +45,8 @@ namespace UI
         {
             createButton.onClick.AddListener(() =>
             {
-                this.GetModel<IMyPlayerModel>().CreateGameData = new CreateGameData
-                {
-                    playerName = inputName.text.Equals("") ? "玩家" : inputName.text,
-                    playerAge = inputAge.text.ToInt(20),
-                    familyName = inputFamilyName.text.Equals("") ? "玩家家族" : inputFamilyName.text
-                };
                 CloseSelf();
-                this.GetSystem<IGameSystem>().ChangeMainGameScene();
+                this.GetSystem<IGameSystem>().ChangeScene(SceneType.FIGHT_SCENE);
             });
             leaveButton.onClick.AddListener(() =>
             {

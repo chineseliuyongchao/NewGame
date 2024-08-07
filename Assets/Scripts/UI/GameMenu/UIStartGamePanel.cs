@@ -14,17 +14,17 @@ namespace UI
         /// 本次打开存档界面是读取存档还是覆盖存档
         /// 
         /// </summary>
-        public readonly bool isLoad;
+        public readonly bool IsLoad;
 
         /// <summary>
         /// 本次打开存档界面是在主菜单还是游戏界面
         /// </summary>
-        public readonly bool isInMenu;
+        public readonly bool IsInMenu;
 
         public UIStartGamePanelData(bool isLoad = true, bool isInMenu = true)
         {
-            this.isLoad = isLoad;
-            this.isInMenu = isInMenu;
+            this.IsLoad = isLoad;
+            this.IsInMenu = isInMenu;
         }
     }
 
@@ -67,7 +67,10 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            newGameButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeGameCreateScene(); });
+            newGameButton.onClick.AddListener(() =>
+            {
+                this.GetSystem<IGameSystem>().ChangeScene(SceneType.CREATE_GAME_SCENE);
+            });
             newFileButton.onClick.AddListener(() => { UIKit.OpenPanel<UINewFile>(new UINewFileData()); });
             backToMenuButton.onClick.AddListener(CloseSelf);
             backToGameButton.onClick.AddListener(CloseSelf);
@@ -75,7 +78,13 @@ namespace UI
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<ChangeToMainGameSceneEvent>(_ => { CloseSelf(); })
+            this.RegisterEvent<ChangeMenuSceneEvent>(e =>
+                {
+                    if (!e.IsChangeIn)
+                    {
+                        CloseSelf();
+                    }
+                })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<DeleteFileEvent>(_ => { UpdateUI(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -89,10 +98,10 @@ namespace UI
             for (int i = 0; i < list.Count; i++)
             {
                 UIFileData fileData = Instantiate(uiFileData, fileDataContent);
-                fileData.InitUI(list[i], mData.isLoad);
+                fileData.InitUI(list[i], mData.IsLoad);
             }
 
-            if (mData.isLoad)
+            if (mData.IsLoad)
             {
                 newFileButton.gameObject.SetActive(false);
             }
@@ -101,7 +110,7 @@ namespace UI
                 newGameButton.gameObject.SetActive(false);
             }
 
-            if (mData.isInMenu)
+            if (mData.IsInMenu)
             {
                 backToGameButton.gameObject.SetActive(false);
             }
