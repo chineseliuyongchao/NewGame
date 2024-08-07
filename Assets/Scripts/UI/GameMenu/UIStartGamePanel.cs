@@ -69,7 +69,7 @@ namespace UI
         {
             newGameButton.onClick.AddListener(() =>
             {
-                this.GetSystem<IGameSystem>().ChangeScene(SceneType.CREATE_GAME_SCENE);
+                this.GetSystem<IGameSystem>().ChangeScene(SceneType.CREATE_BATTLE_SCENE);
             });
             newFileButton.onClick.AddListener(() => { UIKit.OpenPanel<UINewFile>(new UINewFileData()); });
             backToMenuButton.onClick.AddListener(CloseSelf);

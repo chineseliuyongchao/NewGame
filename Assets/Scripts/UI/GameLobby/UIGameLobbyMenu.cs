@@ -62,7 +62,7 @@ namespace UI
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<ChangeMainGameSceneEvent>(e =>
+            this.RegisterEvent<ChangeBattleSceneEvent>(e =>
                 {
                     if (!e.IsChangeIn)
                     {

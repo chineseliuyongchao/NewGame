@@ -62,7 +62,7 @@ namespace UI
         {
             openButton.onClick.AddListener(() =>
             {
-                this.GetSystem<IGameSystem>().ChangeMainGameScene(_fileNameValue);
+                this.GetSystem<IGameSystem>().ChangeBattleScene(_fileNameValue);
             });
             deleteButton.onClick.AddListener(() =>
             {

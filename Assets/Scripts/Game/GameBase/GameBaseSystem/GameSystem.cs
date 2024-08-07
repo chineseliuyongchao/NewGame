@@ -43,13 +43,13 @@ namespace Game.GameBase
                 this.GetModel<IGameModel>().DialogueTipLocalizationData);
         }
 
-        public void ChangeMainGameScene(string fileName = null)
+        public void ChangeBattleScene(string fileName = null)
         {
             LoadCurrentData();
             this.GetSystem<IGameSaveSystem>().LoadGame(fileName);
             LoadNoStorageData();
             InitNewGameData(fileName);
-            ChangeScene(SceneType.MAIN_GAME_SCENE);
+            ChangeScene(SceneType.BATTLE_SCENE);
         }
 
         public void ChangeScene(SceneType type)
@@ -59,11 +59,11 @@ namespace Game.GameBase
                 case SceneType.MENU_SCENE:
                     this.SendEvent(new ChangeMenuSceneEvent(false));
                     break;
-                case SceneType.CREATE_GAME_SCENE:
-                    this.SendEvent(new ChangeGameCreateSceneEvent(false));
+                case SceneType.CREATE_BATTLE_SCENE:
+                    this.SendEvent(new ChangeBattleCreateSceneEvent(false));
                     break;
-                case SceneType.MAIN_GAME_SCENE:
-                    this.SendEvent(new ChangeMainGameSceneEvent(false));
+                case SceneType.BATTLE_SCENE:
+                    this.SendEvent(new ChangeBattleSceneEvent(false));
                     break;
                 case SceneType.CREATE_FIGHT_SCENE:
                     this.SendEvent(new ChangeFightCreateSceneEvent(false));
@@ -79,13 +79,13 @@ namespace Game.GameBase
                     SceneManager.LoadScene("MenuScene");
                     this.SendEvent(new ChangeMenuSceneEvent(true));
                     break;
-                case SceneType.CREATE_GAME_SCENE:
-                    SceneManager.LoadScene("CreateGameScene");
-                    this.SendEvent(new ChangeGameCreateSceneEvent(true));
+                case SceneType.CREATE_BATTLE_SCENE:
+                    SceneManager.LoadScene("CreateBattleScene");
+                    this.SendEvent(new ChangeBattleCreateSceneEvent(true));
                     break;
-                case SceneType.MAIN_GAME_SCENE:
-                    SceneManager.LoadScene("MainGameScene");
-                    this.SendEvent(new ChangeMainGameSceneEvent(true));
+                case SceneType.BATTLE_SCENE:
+                    SceneManager.LoadScene("BattleScene");
+                    this.SendEvent(new ChangeBattleSceneEvent(true));
                     break;
                 case SceneType.CREATE_FIGHT_SCENE:
                     SceneManager.LoadScene("CreateFightScene");

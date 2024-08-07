@@ -23,11 +23,11 @@
     /// <summary>
     /// 切换主游戏场景
     /// </summary>
-    public class ChangeMainGameSceneEvent
+    public class ChangeBattleSceneEvent
     {
         public readonly bool IsChangeIn;
 
-        public ChangeMainGameSceneEvent(bool isChangeIn)
+        public ChangeBattleSceneEvent(bool isChangeIn)
         {
             IsChangeIn = isChangeIn;
         }
@@ -36,11 +36,11 @@
     /// <summary>
     /// 切换游戏创建场景
     /// </summary>
-    public class ChangeGameCreateSceneEvent
+    public class ChangeBattleCreateSceneEvent
     {
         public bool IsChangeIn;
 
-        public ChangeGameCreateSceneEvent(bool isChangeIn)
+        public ChangeBattleCreateSceneEvent(bool isChangeIn)
         {
             IsChangeIn = isChangeIn;
         }

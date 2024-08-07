@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.GameBase
 {
-    public class GameController : BaseGameController
+    public class BattleController : BaseGameController
     {
         private GameObject _meshPrefab;
         private GameObject _familyPrefab;

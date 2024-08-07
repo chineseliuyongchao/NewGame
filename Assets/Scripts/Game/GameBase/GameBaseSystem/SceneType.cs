@@ -13,12 +13,12 @@
         /// <summary>
         /// 创建战役的场景
         /// </summary>
-        CREATE_GAME_SCENE,
+        CREATE_BATTLE_SCENE,
 
         /// <summary>
         /// 战役场景
         /// </summary>
-        MAIN_GAME_SCENE,
+        BATTLE_SCENE,
 
         /// <summary>
         /// 创建战斗的场景

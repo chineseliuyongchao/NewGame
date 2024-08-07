@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -167,8 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acc725f30a394fa49c361761500e9508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapNode: {fileID: 7722786788074946758, guid: 753107ffdbda74f4688667876050c364, type: 3}
-  townNode: {fileID: -2046828217495126488, guid: a4ba88e123f9ed24fb946eff07fdd0ed, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 909eb21dbea444f4b50be81451de2259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 8860941761130544507, guid: 9aec0d42f1991e447847f53dd5b3a14f, type: 3}
 --- !u!1 &1761946151
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +321,7 @@ GameObject:
   - component: {fileID: 1761946154}
   - component: {fileID: 1761946155}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: BattleController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -358,8 +354,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d86c0340efade47a7f243b8bbe2f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshPrefab: {fileID: 629630012268418067, guid: 679099ec6788e80468a7483f77a1b6bc, type: 3}
-  familyPrefab: {fileID: 2473224410500070160, guid: f0e0dff713c9d434fa818ffe6c543fb7, type: 3}
 --- !u!114 &1761946154
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ namespace UI
         protected override void OnListenEvent()
         {
             this.RegisterEvent<ChangeTimeEvent>(_ => { UpdateTime(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<ChangeMainGameSceneEvent>(e =>
+            this.RegisterEvent<ChangeBattleSceneEvent>(e =>
                 {
                     if (!e.IsChangeIn)
                     {

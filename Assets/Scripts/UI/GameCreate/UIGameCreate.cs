@@ -53,7 +53,7 @@ namespace UI
                     familyName = inputFamilyName.text.Equals("") ? "玩家家族" : inputFamilyName.text
                 };
                 CloseSelf();
-                this.GetSystem<IGameSystem>().ChangeMainGameScene();
+                this.GetSystem<IGameSystem>().ChangeBattleScene();
             });
             leaveButton.onClick.AddListener(() =>
             {

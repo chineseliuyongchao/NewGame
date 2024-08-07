@@ -13,10 +13,10 @@ namespace Game.GameBase
             TextAsset dialogueTipLocalizationAsset);
 
         /// <summary>
-        /// 切换到游戏场景
+        /// 切换到战役场景
         /// </summary>
         /// <param name="fileName">存档文件名</param>
-        public void ChangeMainGameScene(string fileName = null);
+        public void ChangeBattleScene(string fileName = null);
 
         /// <summary>
         /// 切换场景

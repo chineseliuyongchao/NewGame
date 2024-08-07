@@ -5,9 +5,9 @@ using UI;
 namespace Game
 {
     /// <summary>
-    /// 新建游戏场景控制
+    /// 新建战役场景控制
     /// </summary>
-    public class GameCreateController : BaseGameController
+    public class BattleCreateController : BaseGameController
     {
         protected override void OnControllerStart()
         {
