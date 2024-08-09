@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Fight.Game.Arms
 {
-    /**
-     * 一个标准拥有近战、远程、士气的兵种模型
-     */
+    /// <summary>
+    /// 一个标准拥有近战、远程、士气的兵种模型
+    /// </summary>
     public class RangedAttackArmsModel : ObjectArmsModel
     {
         [Label("远程属性")] [SerializeField] private RangedAttackAttribute _rangedAttackAttribute;

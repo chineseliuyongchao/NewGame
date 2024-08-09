@@ -7,9 +7,9 @@ using Object = UnityEngine.Object;
 
 namespace Fight.Game.Arms
 {
-    /**
-     * 这个类是为了方便兵种的可视化编辑，并且方便后续修改
-     */
+    /// <summary>
+    /// 兵种的可视化组成，便于拓展修改
+    /// </summary>
     public class ObjectArmsView : MonoBehaviour
     {
         private SortedList<int, Object> _list;

@@ -21,17 +21,16 @@ namespace Fight.Commands
             {
                 return;
             }
-
-            string name = fightGameModel.FocusController.GetName();
-            int index = fightGameModel.FightScenePositionDictionary[name];
-            fightGameModel.FightScenePositionDictionary[name] = _endIndex;
+            
+            int index = fightGameModel.FightScenePositionDictionary[fightGameModel.FocusController.id];
+            fightGameModel.FightScenePositionDictionary[fightGameModel.FocusController.id] = _endIndex;
             if (!fightGameModel.FightSceneArmsNameDictionary.Remove(index))
             {
                 fightGameModel.FightSceneArmsNameDictionary.Remove(fightGameModel.FocusController.GetModel()
                     .CurrentIndex);
             }
 
-            fightGameModel.FightSceneArmsNameDictionary[_endIndex] = name;
+            fightGameModel.FightSceneArmsNameDictionary[_endIndex] = fightGameModel.FocusController.id;
             fightGameModel.FocusController.ArmsMoveAction(_endIndex);
             fightGameModel.FocusController.GetModel().CurrentIndex = _endIndex;
             this.SendEvent(new ArmsMoveEvent

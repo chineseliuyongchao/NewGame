@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 
 namespace Editor.inspector
 {
-    [CustomEditor(typeof(IObjectArmsController))]
+    [CustomEditor(typeof(ObjectArmsController))]
     public class ObjectArmsControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
@@ -15,8 +15,8 @@ namespace Editor.inspector
             DrawDefaultInspector();
             if (GUILayout.Button("随机兵种样式", GUILayout.Height(40)))
             {
-                HeavyInfantryKnightsController script =
-                    (HeavyInfantryKnightsController)target;
+                HeavyInfantryKnightsControllerBase script =
+                    (HeavyInfantryKnightsControllerBase)target;
                 随机兵种样式(script.transform);
             }
 

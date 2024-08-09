@@ -21,7 +21,7 @@ namespace Fight.Game
         ///     key：兵种的专属id
         ///     value：兵种的信息
         /// </summary>
-        public Dictionary<string, ArmsInfo> ArmsInfoDictionary { get; } = new();
+        public Dictionary<int, ArmsInfo> ArmsInfoDictionary { get; } = new();
 
         protected override void OnInit()
         {
@@ -31,7 +31,7 @@ namespace Fight.Game
         {
             if (!CanAddArms()) return;
 
-            armsInfo.Id = armsInfo.ArmsName + ArmsUtils.GetRandomByTime();
+            armsInfo.Id = ArmsUtils.GetRandomByTime();
             for (var i = 0; i < Constants.ArmsRow * Constants.ArmsCol; i++)
                 if (!_myArmsSet2.Contains(i))
                 {
@@ -68,7 +68,7 @@ namespace Fight.Game
             /// <summary>
             ///     该兵种的专属id
             /// </summary>
-            public string Id;
+            public int Id;
 
             /// <summary>
             ///     在玩家队列中的位置，当生成战斗时会同步到战斗地图的位置

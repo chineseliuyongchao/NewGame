@@ -32,7 +32,7 @@ namespace Fight.FsmS
                 heavyInfantryKnightsModel.Clone()));
             gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
                 heavyInfantryKnightsModel.Clone()));
-            
+
             fightGameModel.GoFightScene();
 
             var aStarModel = this.GetModel<AStarModel>();
@@ -42,9 +42,11 @@ namespace Fight.FsmS
             foreach (var info in gamePlayerModel.ArmsInfoDictionary)
             {
                 var obj = Instantiate(_armsGameObjectList[info.Value.ArmsName], transform);
-                obj.name = info.Key;
                 obj.transform.position = (Vector3)aStarModel.FightGridNodeInfoList[info.Value.RanksIndex].position;
-                obj.GetComponent<IObjectArmsController>().OnInit();
+                obj.name = info.Key.ToString();
+                ObjectArmsController controller = obj.GetComponent<ObjectArmsController>();
+                controller.id = info.Key;
+                controller.OnInit();
             }
         }
 

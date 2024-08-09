@@ -16,9 +16,10 @@ namespace Fight.Game.Arms
 
         [Label("士气属性")] [SerializeField] private SpiritualAttribute _spiritualAttribute = new();
 
-        /**
-         * 特质需要根据自身的id进行排序方便先后计算
-         */
+        /// <summary>
+        /// 特质录入
+        /// 需要根据自身的id进行排序方便先后计算
+        /// </summary>
         public SortedSet<int> TraitSet = new();
 
         public ObjectAttribute ObjectAttribute => _objAttribute;
@@ -27,8 +28,15 @@ namespace Fight.Game.Arms
 
         public SpiritualAttribute SpiritualAttribute => _spiritualAttribute;
         
+        /// <summary>
+        /// 玩家自定义的兵种位置
+        /// </summary>
         public int CurrentIndex;
 
+        /// <summary>
+        /// 通用的克隆方法
+        /// </summary>
+        /// <returns></returns>
         public virtual ObjectArmsModel Clone()
         {
             var result = (ObjectArmsModel)MemberwiseClone();

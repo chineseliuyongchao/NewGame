@@ -4,8 +4,10 @@ using Fight.Enum;
 using Fight.FsmS;
 using Fight.Game;
 using Fight.Game.Arms;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
+using GameApp = Fight.Game.GameApp;
 
 namespace Fight.Scenes
 {
@@ -38,16 +40,28 @@ namespace Fight.Scenes
             return GameApp.Interface;
         }
 
-        public IObjectArmsController GetArmsControllerByIndex(int index)
+        public ObjectArmsController GetArmsControllerByIndex(int index)
         {
             FightGameModel fightGameModel = this.GetModel<FightGameModel>();
-            if (fightGameModel.FightSceneArmsNameDictionary.TryGetValue(index, out string armsName))
+            if (fightGameModel.FightSceneArmsNameDictionary.TryGetValue(index, out int id))
             {
-                return _armsFsm.transform.Find(armsName).GetComponent<IObjectArmsController>();
+                return _armsFsm.transform.Find(id.ToString()).GetComponent<ObjectArmsController>();
             }
 
             return null;
         }
-        
+
+        private void Update()
+        {
+            //debug
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (this.GetSystem<IGameSystem>() == null)
+                {
+                    Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                }
+                this.GetSystem<IGameSystem>().ChangeScene(SceneType.CREATE_FIGHT_SCENE);
+            }
+        }
     }
 }

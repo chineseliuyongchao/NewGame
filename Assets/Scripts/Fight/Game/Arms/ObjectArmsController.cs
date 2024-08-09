@@ -1,53 +1,60 @@
 ﻿using DG.Tweening;
-using Fight.Commands;
 using Fight.Enum;
-using Fight.Events;
 using Fight.Scenes;
 using QFramework;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Fight.Game.Arms
 {
-    public class ObjectArmsController<T1, T2> : MonoBehaviour, IState, IController, IObjectArmsController
-        where T1 : ObjectArmsModel, new() where T2 : ObjectArmsView
+    public abstract class ObjectArmsController : MonoBehaviour, IController
     {
-        public T1 model;
-        [HideInInspector] public T2 view;
+        /// <summary>
+        /// 兵种的专属id
+        /// </summary>
+        public int id;
+
+        /// <summary>
+        /// 战斗界面中该兵种所处位置
+        /// </summary>
+        public int fightCurrentIndex;
+
+        /// <summary>
+        /// 初始化方法，代替awake
+        /// </summary>
+        public abstract void OnInit();
+
+        /// <summary>
+        /// 返回当前兵种的具体模型，可以强转
+        /// </summary>
+        /// <returns>自定义的兵种模型</returns>
+        public abstract ObjectArmsModel GetModel();
+
+        /// <summary>
+        /// 返回当前兵种的具体视图，可以强转
+        /// </summary>
+        /// <returns>自定义的兵种视图</returns>
+        public abstract ObjectArmsView GetView();
 
         private Tween _focusAction;
 
-        public IArchitecture GetArchitecture()
+        public virtual void StartFocusAction()
         {
-            return GameApp.Interface;
+            EndFocusAction();
+            _focusAction = transform.DOMoveY(transform.position.y + 0.5f, 0.5f)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.InOutSine);
         }
 
-        public void OnInit()
+        public virtual void EndFocusAction()
         {
-            var info = this.GetModel<GamePlayerModel>().ArmsInfoDictionary[name];
-            model = (T1)info.ObjectArmsModel;
-            model.CurrentIndex = info.RanksIndex;
-
-            GameObject o;
-            view = (o = gameObject).AddComponent<T2>();
-            view.OnInit(transform);
+            _focusAction?.Kill();
+            AStarModel aStarModel = this.GetModel<AStarModel>();
+            var tmp = aStarModel.FightGridNodeInfoList[fightCurrentIndex];
+            transform.DOMove((Vector3)tmp.position, 0.2f).SetEase(Ease.OutSine);
         }
 
-        public ObjectArmsModel GetModel()
-        {
-            return model;
-        }
-
-        public ObjectArmsView GetView()
-        {
-            return view;
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public void ArmsMoveAction(int endIndex)
+        public virtual void ArmsMoveAction(int endIndex)
         {
             switch (FightScene.Ins.currentBattleType)
             {
@@ -60,55 +67,16 @@ namespace Fight.Game.Arms
 
                     break;
             }
+
+            if (_focusAction != null)
+            {
+                StartFocusAction();
+            }
         }
 
-        /**
-         * 被选取为焦点时的动画
-         */
-        public void StartFocusAction()
+        public IArchitecture GetArchitecture()
         {
-            EndFocusAction();
-            _focusAction = transform.DOBlendableMoveBy(new Vector3(0, 0.5f, 0), 0.5f).SetLoops(-1, LoopType.Yoyo)
-                .SetEase(Ease.InOutSine);
-        }
-
-        public void EndFocusAction()
-        {
-            _focusAction?.Kill();
-            AStarModel aStarModel = this.GetModel<AStarModel>();
-            var tmp = aStarModel.FightGridNodeInfoList[model.CurrentIndex];
-            transform.DOMove((Vector3)tmp.position, 0.2f).SetEase(Ease.OutSine);
-        }
-
-        public bool Condition()
-        {
-            return true;
-        }
-
-        public void Enter()
-        {
-            this.SendCommand(new TraitCommand(model, TraitActionType.StartRound));
-        }
-
-        public void Update()
-        {
-        }
-
-        public void FixedUpdate()
-        {
-        }
-
-        public void OnGUI()
-        {
-        }
-
-        public void Exit()
-        {
-            this.SendCommand(new TraitCommand(model, TraitActionType.EndRound));
-        }
-
-        protected void StartBattleEvent()
-        {
+            return GameApp.Interface;
         }
     }
 }

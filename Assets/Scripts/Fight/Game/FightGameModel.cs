@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fight.Game.Arms;
+using JetBrains.Annotations;
 using QFramework;
 
 namespace Fight.Game
@@ -13,13 +14,13 @@ namespace Fight.Game
         ///     key：兵种的专属id
         ///     value：兵种在战斗场景中的位置
         /// </summary>
-        public readonly Dictionary<string, int> FightScenePositionDictionary = new();
+        public readonly Dictionary<int, int> FightScenePositionDictionary = new();
 
         /// <summary>
         ///     key：兵种在战斗场景中的位置
-        ///     value：兵种的实例
+        ///     value：兵种的专属id
         /// </summary>
-        public readonly Dictionary<int, string> FightSceneArmsNameDictionary = new();
+        public readonly Dictionary<int, int> FightSceneArmsNameDictionary = new();
 
         public readonly Dictionary<int, string> FightSceneEnemyNameDictionary = new();
 
@@ -29,9 +30,9 @@ namespace Fight.Game
         public int FocusIndex;
 
         /// <summary>
-        /// 当前被选取为焦点的兵种，可能为空
+        /// 当前被选取为焦点的兵种
         /// </summary>
-        public IObjectArmsController FocusController;
+        [CanBeNull] public ObjectArmsController FocusController;
 
         protected override void OnInit()
         {

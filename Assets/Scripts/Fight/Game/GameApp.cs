@@ -1,5 +1,6 @@
 ﻿using Fight.Game.Arms.Human.Nova;
 using Fight.Systems;
+using Game.GameBase;
 using QFramework;
 
 namespace Fight.Game
@@ -9,6 +10,8 @@ namespace Fight.Game
         protected override void Init()
         {
             RegisterSystem(new TraitSystem());
+            RegisterSystem(new GameSystem());
+            
             RegisterModel(new GamePlayerModel());
             RegisterModel(new AStarModel());
             
