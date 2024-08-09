@@ -2,6 +2,7 @@
 using Fight.Commands;
 using Fight.Enum;
 using Fight.Game.Arms;
+using Fight.Scenes;
 using UnityEngine;
 using Random = System.Random;
 
@@ -31,6 +32,11 @@ namespace Fight.Utils
         public static int GetRandomByTime()
         {
             return Random.Next();
+        }
+
+        public static Vector3 GetArmsRelayPosition(this ObjectArmsController controller)
+        {
+            return (Vector3)FightScene.Ins.AStarModel.FightGridNodeInfoList[controller.fightCurrentIndex].position;
         }
     }
 }

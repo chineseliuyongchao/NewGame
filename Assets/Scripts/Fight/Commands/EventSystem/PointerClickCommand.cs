@@ -1,26 +1,19 @@
 ﻿using Fight.Game;
 using QFramework;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace Fight.Commands.EventSystem
 {
     public class PointerClickCommand : AbstractCommand
     {
-        private readonly PointerEventData _eventData;
-
-        public PointerClickCommand(PointerEventData eventData)
-        {
-            _eventData = eventData;
-        }
-
         protected override void OnExecute()
         {
             var cam = Camera.main;
             if (!cam) return;
             AStarModel aStarModel = this.GetModel<AStarModel>();
             FightGameModel fightGameModel = this.GetModel<FightGameModel>();
-            int index = aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(_eventData.position));
+            int index = aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
             if (!aStarModel.FightGridNodeInfoList.ContainsKey(index))
             {
                 return;

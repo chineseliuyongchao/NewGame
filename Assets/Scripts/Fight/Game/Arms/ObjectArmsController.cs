@@ -1,9 +1,9 @@
 ﻿using DG.Tweening;
 using Fight.Enum;
 using Fight.Scenes;
+using Fight.Utils;
 using QFramework;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Fight.Game.Arms
 {
@@ -40,8 +40,8 @@ namespace Fight.Game.Arms
 
         public virtual void StartFocusAction()
         {
-            EndFocusAction();
-            _focusAction = transform.DOMoveY(transform.position.y + 0.5f, 0.5f)
+            _focusAction?.Kill();
+            _focusAction = transform.DOMoveY(this.GetArmsRelayPosition().y + 0.5f, 0.5f)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
@@ -49,9 +49,7 @@ namespace Fight.Game.Arms
         public virtual void EndFocusAction()
         {
             _focusAction?.Kill();
-            AStarModel aStarModel = this.GetModel<AStarModel>();
-            var tmp = aStarModel.FightGridNodeInfoList[fightCurrentIndex];
-            transform.DOMove((Vector3)tmp.position, 0.2f).SetEase(Ease.OutSine);
+            transform.DOMove(this.GetArmsRelayPosition(), 0.2f).SetEase(Ease.OutSine);
         }
 
         public virtual void ArmsMoveAction(int endIndex)

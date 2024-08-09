@@ -15,7 +15,7 @@ namespace Fight.Game.Arms
         {
             var info = this.GetModel<GamePlayerModel>().ArmsInfoDictionary[id];
             model = (T1)info.ObjectArmsModel;
-            model.CurrentIndex = info.RanksIndex;
+            fightCurrentIndex = info.RanksIndex;
             
             view = gameObject.AddComponent<T2>();
             view.OnInit(transform);

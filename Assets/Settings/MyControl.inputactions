@@ -1,0 +1,34 @@
+{
+    "name": "MyControl",
+    "maps": [
+        {
+            "name": "Fight",
+            "id": "b19a23cb-6352-45fe-9a48-d2cf5c321d52",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "5929d4d3-bf38-463d-96e5-3ed1e45fd472",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9964908b-ca95-42e5-b9de-15c8bb46dd27",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

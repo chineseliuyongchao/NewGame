@@ -31,8 +31,8 @@ namespace Fight.Commands
             }
 
             fightGameModel.FightSceneArmsNameDictionary[_endIndex] = fightGameModel.FocusController.id;
+            fightGameModel.FocusController.fightCurrentIndex = _endIndex;
             fightGameModel.FocusController.ArmsMoveAction(_endIndex);
-            fightGameModel.FocusController.GetModel().CurrentIndex = _endIndex;
             this.SendEvent(new ArmsMoveEvent
             {
                 BattleType = FightScene.Ins.currentBattleType,

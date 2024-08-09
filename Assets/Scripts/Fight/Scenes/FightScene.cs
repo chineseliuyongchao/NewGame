@@ -6,7 +6,9 @@ using Fight.Game;
 using Fight.Game.Arms;
 using Game.GameBase;
 using QFramework;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using GameApp = Fight.Game.GameApp;
 
 namespace Fight.Scenes
@@ -24,10 +26,19 @@ namespace Fight.Scenes
         [HideInInspector]
         public BattleType currentBattleType;
 
+        //debug
+        [HideInInspector]
+        public InputActionAsset inputActionAsset;
+
+        public AStarModel AStarModel;
+        
         private void Awake()
         {
             _ins = this;
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
+            inputActionAsset =
+                AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/MyControl.inputactions");
+            AStarModel = this.GetModel<AStarModel>();
         }
 
         private void Start()
