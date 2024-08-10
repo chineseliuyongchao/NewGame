@@ -1,10 +1,12 @@
-﻿using QFramework;
+﻿using System.Collections.Generic;
+using QFramework;
 
 namespace Game.GameMenu
 {
     public class GameMenuModel : AbstractModel, IGameMenuModel
     {
         private int _language;
+        private Dictionary<int, ArmDataType> _armDataTypes;
 
         protected override void OnInit()
         {
@@ -14,6 +16,12 @@ namespace Game.GameMenu
         {
             get => _language;
             set => _language = value;
+        }
+
+        public Dictionary<int, ArmDataType> ARMDataTypes
+        {
+            get => _armDataTypes;
+            set => _armDataTypes = value;
         }
     }
 }

@@ -177,6 +177,8 @@ namespace Game.GameBase
             var dialogueTipLocalizationText =
                 resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.DIALOGUE_TIP_LOCALIZATION_TEXT);
 
+            var troopsNumber = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.TROOPS_NUMBER);
+
             this.GetSystem<ITownSystem>().InitTownCommonData(townTextAsset, townNameTextAsset);
             this.GetSystem<IFamilySystem>().InitFamilyCommonData(familyTextAsset, familyNameTextAsset);
             this.GetSystem<IFamilySystem>().InitRoleCommonData(roleTextAsset, roleNameTextAsset);
@@ -186,6 +188,8 @@ namespace Game.GameBase
 
             this.GetSystem<IGameSystem>().InitLocalizationData(localizationAsset, dialogueLocalizationText,
                 dialogueTipLocalizationText);
+
+            this.GetSystem<IGameMenuSystem>().InitArmData(troopsNumber);
             _hasLoadCurrentData = true;
         }
 
