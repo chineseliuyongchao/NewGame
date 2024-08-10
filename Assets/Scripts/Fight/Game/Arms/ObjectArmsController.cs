@@ -2,6 +2,7 @@
 using Fight.Enum;
 using Fight.Scenes;
 using Fight.Utils;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 

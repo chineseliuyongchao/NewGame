@@ -3,6 +3,7 @@ using Fight.Game;
 using Fight.Game.Arms;
 using Fight.Game.Arms.Human.Nova;
 using Fight.Utils;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 

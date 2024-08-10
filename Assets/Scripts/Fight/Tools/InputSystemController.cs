@@ -1,5 +1,6 @@
 ﻿using Fight.Commands.EventSystem;
 using Fight.Game;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;

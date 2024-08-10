@@ -1,7 +1,7 @@
 ﻿using System;
 using Fight.Enum;
 using Fight.Game.Arms;
-using Fight.Systems;
+using Fight.System;
 using QFramework;
 
 namespace Fight.Commands
