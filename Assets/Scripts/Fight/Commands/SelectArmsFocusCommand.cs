@@ -8,7 +8,7 @@ namespace Fight.Commands
 {
     public class SelectArmsFocusCommand : AbstractCommand
     {
-        private int _index;
+        private readonly int _index;
 
         public SelectArmsFocusCommand(int index)
         {

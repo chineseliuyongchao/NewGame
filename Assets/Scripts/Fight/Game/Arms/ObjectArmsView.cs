@@ -46,5 +46,16 @@ namespace Fight.Game.Arms
                 if (obj is SpriteRenderer sprite)
                     sprite.DOColor(color, duration);
         }
+
+        public void ChangeOrderLayer(int beginIndex)
+        {
+            foreach (var obj in _list.Values)
+            {
+                if (obj is SpriteRenderer spriteRenderer)
+                {
+                    spriteRenderer.sortingOrder = beginIndex++;
+                }
+            }
+        }
     }
 }

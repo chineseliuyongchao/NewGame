@@ -22,19 +22,19 @@ namespace Fight.Commands.EventSystem
             //当前没有焦点兵种或者点击了其他属于自己的单位
             if (fightGameModel.FocusController == null)
             {
-                if (fightGameModel.FightSceneArmsNameDictionary.ContainsKey(index))
+                if (fightGameModel.IndexToArmsIdDictionary.ContainsKey(index))
                 {
                     this.SendCommand(new SelectArmsFocusCommand(index));
                 }
             }
             else
             {
-                if (index == fightGameModel.FocusController.GetModel().CurrentIndex)
+                if (index == fightGameModel.FocusController.fightCurrentIndex)
                 {
                     //点击的是自己
                     this.SendCommand(new CancelArmsFocusCommand());
                 }
-                else if (fightGameModel.FightSceneArmsNameDictionary.ContainsKey(index))
+                else if (fightGameModel.IndexToArmsIdDictionary.ContainsKey(index))
                 {
                     //点击了其他的兵种
                     this.SendCommand(new SelectArmsFocusCommand(index));

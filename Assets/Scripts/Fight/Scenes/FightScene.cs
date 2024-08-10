@@ -54,7 +54,7 @@ namespace Fight.Scenes
         public ObjectArmsController GetArmsControllerByIndex(int index)
         {
             FightGameModel fightGameModel = this.GetModel<FightGameModel>();
-            if (fightGameModel.FightSceneArmsNameDictionary.TryGetValue(index, out int id))
+            if (fightGameModel.IndexToArmsIdDictionary.TryGetValue(index, out int id))
             {
                 return _armsFsm.transform.Find(id.ToString()).GetComponent<ObjectArmsController>();
             }

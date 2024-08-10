@@ -9,11 +9,6 @@ namespace Fight.Utils
 
         private Renderer[] _renderers;
 
-        void Start()
-        {
-            _renderers = GetComponentsInChildren<Renderer>();
-        }
-
         void Update()
         {
             SetAlpha(alpha);
@@ -21,6 +16,11 @@ namespace Fight.Utils
 
         private void SetAlpha(float newAlpha)
         {
+            if (_renderers == null)
+            {
+                _renderers = GetComponentsInChildren<Renderer>();
+            }
+
             alpha = Mathf.Clamp01(newAlpha);
             foreach (Renderer rend in _renderers)
             {

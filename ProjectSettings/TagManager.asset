@@ -12,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Map
+  - Arms
+  - Map2
   - 
   - 
   - 
@@ -42,12 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: MapLayer
-    uniqueID: 2784504341
+  - name: Map
+    uniqueID: 800148383
     locked: 0
-  - name: TownLayer
-    uniqueID: 2641405333
+  - name: Map2
+    uniqueID: 922128677
     locked: 0
-  - name: PlayerLayer
-    uniqueID: 1008394223
+  - name: Arms
+    uniqueID: 3447917323
     locked: 0

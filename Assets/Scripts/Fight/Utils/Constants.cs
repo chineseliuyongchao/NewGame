@@ -56,6 +56,9 @@
 
         public const int FightNodeWidthNum = 20;
         public const int FightNodeHeightNum = 16;
+        
+        public const int FightNodeVisibleWidthNum = 16;
+        public const int FightNodeVisibleHeightNum = 12;
 
         #region 特质id
 
@@ -76,7 +79,7 @@
         /// <summary>
         ///     头
         /// </summary>
-        public const int Head = 0;
+        public const int Head = 2;
 
         /// <summary>
         ///     身体
@@ -86,7 +89,7 @@
         /// <summary>
         ///     头盔
         /// </summary>
-        public const int Helmet = 2;
+        public const int Helmet = 4;
 
         /// <summary>
         ///     盔甲
@@ -96,7 +99,7 @@
         /// <summary>
         ///     武器
         /// </summary>
-        public const int Weapon = 4;
+        public const int Weapon = 6;
 
         /// <summary>
         ///     盾牌
@@ -106,7 +109,7 @@
         /// <summary>
         ///     腿
         /// </summary>
-        public const int Foot = 6;
+        public const int Foot = 0;
 
         #endregion
     }
