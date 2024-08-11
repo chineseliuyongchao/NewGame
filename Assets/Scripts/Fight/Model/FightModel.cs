@@ -5,9 +5,6 @@ namespace Fight.Model
 {
     public class FightModel : AbstractModel, IFightModel
     {
-        /// <summary>
-        /// 当前战斗的所有单位数据
-        /// </summary>
         private Dictionary<int, ArmData> _armDataTypes;
 
         protected override void OnInit()

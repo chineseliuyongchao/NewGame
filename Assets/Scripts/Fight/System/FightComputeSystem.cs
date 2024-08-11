@@ -52,7 +52,7 @@ namespace Fight.System
 
             //计算单次实际杀伤（普通杀伤和破甲杀伤）
             float realMeleeNormal =
-                Math.Max(_armDataTypes[armA.ARMId].meleeNormal - _armDataTypes[armB.ARMId].armor, 0); //实际普通杀伤
+                Math.Max(_armDataTypes[armA.ARMId].meleeNormal - _armDataTypes[armB.ARMId].armor / 2, 0); //实际普通杀伤
             int armRealMeleeArmor = this.RealMeleeArmor(armA); //兵种的破甲杀伤修正
             float realMeleeArmorFactor = Math.Max(0.1f, Math.Min(1, //实际破甲杀伤系数
                 1 - (_armDataTypes[armB.ARMId].armor - (float)armRealMeleeArmor) / armRealMeleeArmor * 0.15f));

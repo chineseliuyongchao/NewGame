@@ -7,6 +7,9 @@ namespace Game.GameMenu
     {
         public int Language { get; set; }
 
+        /// <summary>
+        /// 所有兵种通用数据
+        /// </summary>
         public Dictionary<int, ArmDataType> ARMDataTypes { get; set; }
     }
 }
