@@ -1,6 +1,6 @@
 ﻿namespace Fight.Game.Arms.Human.Nova
 {
-    public class HeavyInfantryKnightsControllerBase : ObjectArmsControllerBase<HeavyInfantryKnightsModel, ObjectArmsView>
+    public class HeavyInfantryKnightsControllerBase : ArmsControllerBase<HeavyInfantryKnightsModel, ObjectArmsView>
     {
     }
 }

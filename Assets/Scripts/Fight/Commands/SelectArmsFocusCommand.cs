@@ -18,7 +18,7 @@ namespace Fight.Commands
         protected override void OnExecute()
         {
             FightGameModel fightGameModel = this.GetModel<FightGameModel>();
-            ObjectArmsController currentFocusController = FightScene.Ins.GetArmsControllerByIndex(_index);
+            ArmsController currentFocusController = FightScene.Ins.GetArmsControllerByIndex(_index);
             currentFocusController.StartFocusAction();
             if (fightGameModel.FocusController) fightGameModel.FocusController.EndFocusAction();
             fightGameModel.FocusController = currentFocusController;

@@ -64,12 +64,12 @@ namespace Fight.Scenes
             return GameApp.Interface;
         }
 
-        public ObjectArmsController GetArmsControllerByIndex(int index)
+        public ArmsController GetArmsControllerByIndex(int index)
         {
             FightGameModel fightGameModel = this.GetModel<FightGameModel>();
             if (fightGameModel.IndexToArmsIdDictionary.TryGetValue(index, out int id))
             {
-                return _armsFsm.transform.Find(id.ToString()).GetComponent<ObjectArmsController>();
+                return _armsFsm.transform.Find(id.ToString()).GetComponent<ArmsController>();
             }
 
             return null;

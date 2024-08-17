@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Fight.Game.Arms
 {
-    public abstract class ObjectArmsController : MonoBehaviour, IController
+    public abstract class ArmsController : MonoBehaviour, IController
     {
         /// <summary>
         /// 兵种的专属id

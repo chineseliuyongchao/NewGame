@@ -1,5 +1,8 @@
 ﻿using System;
+using Fight.Model;
 using Fight.Utils;
+using Game.GameMenu;
+using QFramework;
 
 namespace Fight.Game.Arms.Human.Nova
 {
@@ -12,27 +15,10 @@ namespace Fight.Game.Arms.Human.Nova
         protected override void OnInit()
         {
             base.OnInit();
-            ObjectAttribute.totalBlood = 6000;
-            ObjectAttribute.currentBlood = 6000;
-            ObjectAttribute.totalPeople = 200;
-            ObjectAttribute.currentPeople = 200;
-            ObjectAttribute.attackPower = 50;
-            ObjectAttribute.chargePower = 50;
-            ObjectAttribute.normalDamage = 50;
-            ObjectAttribute.armorBreakDamage = 50;
-            ObjectAttribute.armorStrength = 100;
-            ObjectAttribute.movePower = 10;
-            ObjectAttribute.viewPower = 10;
-            ObjectAttribute.hiddenPower = 5;
-            ObjectAttribute.attackRange = 1;
-
-            SpiritualAttribute.totalFightWill = 80;
-            SpiritualAttribute.currentFightWill = 80;
-            SpiritualAttribute.totalFatigue = 100;
-            SpiritualAttribute.currentFatigue = 0;
-
-            TraitSet.Add(Constants.BoostMoraleTrait);
-            TraitSet.Add(Constants.PackLightTrait);
+            ArmData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[Constants.FootKnightsId],
+                Constants.FootKnightsId);
+            // TraitSet.Add(Constants.BoostMoraleTrait);
+            // TraitSet.Add(Constants.PackLightTrait);
         }
 
         public new HeavyInfantryKnightsModel Clone()

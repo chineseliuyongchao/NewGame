@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Fight.Game.Arms
 {
-    public class ObjectArmsControllerBase<T1, T2> : ObjectArmsController, IState
-        where T1 : ObjectArmsModel, new() where T2 : ObjectArmsView
+    public class ArmsControllerBase<T1, T2> : ArmsController, IState
+        where T1 : ObjectArmsModel where T2 : ObjectArmsView
     {
         public T1 model;
         [HideInInspector] public T2 view;

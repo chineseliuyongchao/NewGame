@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fight.Game.Attribute;
+using Fight.Model;
 using Fight.Utils;
 using QFramework;
 using UnityAttribute;
@@ -10,23 +10,21 @@ namespace Fight.Game.Arms
     /**
      * 一个标准拥有近战、士气的兵种模型
      */
-    public class ObjectArmsModel : AbstractModel, ICloneable<ObjectArmsModel>
+    public class ObjectArmsModel : AbstractModel, ICloneable<ObjectArmsModel>, ICanGetModel
     {
-        [Label("通用属性")] [SerializeField] private ObjectAttribute _objAttribute = new();
-
-        [Label("士气属性")] [SerializeField] private SpiritualAttribute _spiritualAttribute = new();
-
         /// <summary>
         /// 特质录入
         /// 需要根据自身的id进行排序方便先后计算
         /// </summary>
         public SortedSet<int> TraitSet = new();
+        
+        [Label("通用属性")] [SerializeField] private ArmData _armData;
 
-        public ObjectAttribute ObjectAttribute => _objAttribute;
-
-        public RangedAttackAttribute RangedAttackAttribute => null;
-
-        public SpiritualAttribute SpiritualAttribute => _spiritualAttribute;
+        public ArmData ArmData
+        {
+            protected set => _armData = value;
+            get => _armData;
+        }
         
         /// <summary>
         /// 玩家自定义的兵种位置
@@ -41,8 +39,6 @@ namespace Fight.Game.Arms
         {
             var result = (ObjectArmsModel)MemberwiseClone();
             result.TraitSet = new SortedSet<int>(TraitSet);
-            result._objAttribute = (ObjectAttribute)_objAttribute.Clone();
-            result._spiritualAttribute = (SpiritualAttribute)_spiritualAttribute.Clone();
             return result;
         }
 
@@ -51,6 +47,7 @@ namespace Fight.Game.Arms
          */
         protected override void OnInit()
         {
+            
         }
     }
 }

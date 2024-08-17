@@ -1,11 +1,14 @@
-﻿using Game.GameMenu;
+﻿using System;
+using Game.GameMenu;
+using UnityAttribute;
+using UnityEngine;
 
 namespace Fight.Model
 {
-
     /// <summary>
     /// 在攻击模拟时记录一个单位的实时属性
     /// </summary>
+    [Serializable]
     public class ArmData
     {
         /// <summary>
@@ -13,56 +16,66 @@ namespace Fight.Model
         /// </summary>
         public int ARMId;
 
+        private int _nowHp;
+
         /// <summary>
         /// 当前血量
         /// </summary>
-        private int _nowHp;
-
         public int NowHp
         {
             get => _nowHp;
-            set
-            {
-                _nowHp = value;
-                if (_nowHp < 0)
-                {
-                    _nowHp = 0;
-                }
-            }
+            set => _nowHp = Mathf.Clamp(value, 0, ArmDataType.totalHp);
         }
+
+        private int _nowTroops;
 
         /// <summary>
         /// 当前人数
         /// </summary>
-        private int _nowTroops;
-
         public int NowTroops
         {
             get => _nowTroops;
-            set
-            {
-                _nowTroops = value;
-                if (_nowTroops < 0)
-                {
-                    _nowTroops = 0;
-                }
-            }
+            set => _nowTroops = Mathf.Clamp(value, 0, ArmDataType.totalTroops);
         }
+
+        private int _nowAmmo;
 
         /// <summary>
         /// 当前弹药量
         /// </summary>
-        public int NowAmmo;
+        public int NowAmmo
+        {
+            get => _nowAmmo;
+            //todo 缺失总弹药量
+            set => _nowAmmo = Mathf.Clamp(value, 0, 100);
+        }
+
+        private int _nowMorale;
 
         /// <summary>
         /// 当前作战意志
         /// </summary>
-        public int NowMorale;
+        public int NowMorale
+        {
+            get => _nowMorale;
+            set => _nowMorale = Mathf.Clamp(value, 0, ArmDataType.maximumMorale);
+        }
+
+        private int _nowFatigue;
 
         /// <summary>
         /// 当前疲劳值
         /// </summary>
-        public int NowFatigue;
+        public int NowFatigue
+        {
+            get => _nowFatigue;
+            set => _nowFatigue = Mathf.Clamp(value, 0, ArmDataType.maximumFatigue);
+        }
+
+        /// <summary>
+        /// 存放一个引用，方便快速获取
+        /// </summary>
+        public readonly ArmDataType ArmDataType;
 
         public ArmData(ArmData armData)
         {
@@ -82,6 +95,7 @@ namespace Fight.Model
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
             NowFatigue = armDataType.maximumFatigue;
+            ArmDataType = armDataType;
         }
 
         public void Reset(ArmData data)
