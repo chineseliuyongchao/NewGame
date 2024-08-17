@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.GameMenu;
-using UnityAttribute;
 using UnityEngine;
 
 namespace Fight.Model
@@ -14,7 +13,7 @@ namespace Fight.Model
         /// <summary>
         /// 兵种id
         /// </summary>
-        public int ARMId;
+        public int armId;
 
         private int _nowHp;
 
@@ -46,8 +45,7 @@ namespace Fight.Model
         public int NowAmmo
         {
             get => _nowAmmo;
-            //todo 缺失总弹药量
-            set => _nowAmmo = Mathf.Clamp(value, 0, 100);
+            set => _nowAmmo = Mathf.Clamp(value, 0, ArmDataType.ammo);
         }
 
         private int _nowMorale;
@@ -72,6 +70,28 @@ namespace Fight.Model
             set => _nowFatigue = Mathf.Clamp(value, 0, ArmDataType.maximumFatigue);
         }
 
+        private bool _isCharge;
+
+        /// <summary>
+        /// 单位是否在冲锋
+        /// </summary>
+        public bool IsCharge
+        {
+            get => _isCharge;
+            set => _isCharge = value;
+        }
+
+        private bool _isStick;
+
+        /// <summary>
+        /// 单位是否在坚守
+        /// </summary>
+        public bool IsStick
+        {
+            get => _isStick;
+            set => _isStick = value;
+        }
+
         /// <summary>
         /// 存放一个引用，方便快速获取
         /// </summary>
@@ -79,54 +99,38 @@ namespace Fight.Model
 
         public ArmData(ArmData armData)
         {
-            ARMId = armData.ARMId;
+            ArmDataType = armData.ArmDataType;
+            armId = armData.armId;
             _nowHp = armData._nowHp;
             _nowTroops = armData._nowTroops;
             NowAmmo = armData.NowAmmo;
             NowMorale = armData.NowMorale;
             NowFatigue = armData.NowFatigue;
+            IsCharge = armData.IsCharge;
+            IsStick = armData.IsStick;
         }
 
         public ArmData(ArmDataType armDataType, int id)
         {
             ArmDataType = armDataType;
-            ARMId = id;
+            armId = id;
             _nowHp = armDataType.totalHp;
             _nowTroops = armDataType.totalTroops;
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
             NowFatigue = armDataType.maximumFatigue;
+            IsCharge = false;
+            IsStick = false;
         }
 
         public void Reset(ArmData data)
         {
-            ARMId = data.ARMId;
+            armId = data.armId;
             _nowHp = data._nowHp;
             _nowTroops = data._nowTroops;
             NowAmmo = data.NowAmmo;
             NowMorale = data.NowMorale;
             NowFatigue = data.NowFatigue;
         }
-    }
-
-    /// <summary>
-    /// 攻击形式
-    /// </summary>
-    public enum AttackFormType
-    {
-        /// <summary>
-        /// 单向攻击：只有队伍a会攻击，b不会反击
-        /// </summary>
-        ONE_WAY_ATTACK,
-
-        /// <summary>
-        /// 互相攻击：a会攻击，b也会反击
-        /// </summary>
-        MUTUAL_ATTACK,
-
-        /// <summary>
-        /// 互相进攻：a会进攻，b也会进攻，同时ab都会反击
-        /// </summary>
-        MUTUAL_OFFENSE
     }
 }

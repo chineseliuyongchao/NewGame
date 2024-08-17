@@ -75,7 +75,7 @@ namespace Game.GameMenu
         public int stealth;
 
         /// <summary>
-        /// 弹药量
+        /// 弹药量（0代表没有弹药，-1代表拥有无限弹药）
         /// </summary>
         public int ammo;
 
@@ -95,9 +95,14 @@ namespace Game.GameMenu
         public int accuracy;
 
         /// <summary>
-        /// 远程杀伤
+        /// 远程杀伤（普通）
         /// </summary>
-        public int rangeDamage;
+        public int rangeNormal;
+
+        /// <summary>
+        /// 远程杀伤（破甲）
+        /// </summary>
+        public int rangeArmor;
 
         /// <summary>
         /// 最高作战意志
