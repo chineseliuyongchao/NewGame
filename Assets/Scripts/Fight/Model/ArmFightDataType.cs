@@ -89,13 +89,13 @@ namespace Fight.Model
 
         public ArmData(ArmDataType armDataType, int id)
         {
+            ArmDataType = armDataType;
             ARMId = id;
             _nowHp = armDataType.totalHp;
             _nowTroops = armDataType.totalTroops;
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
             NowFatigue = armDataType.maximumFatigue;
-            ArmDataType = armDataType;
         }
 
         public void Reset(ArmData data)

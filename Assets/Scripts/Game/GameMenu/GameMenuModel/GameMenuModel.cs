@@ -10,6 +10,7 @@ namespace Game.GameMenu
 
         protected override void OnInit()
         {
+            _armDataTypes = new Dictionary<int, ArmDataType>();
         }
 
         public int Language

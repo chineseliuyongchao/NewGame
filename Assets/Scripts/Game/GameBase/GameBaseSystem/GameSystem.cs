@@ -30,22 +30,11 @@ namespace Game.GameBase
         protected override void OnInit()
         {
             _sceneType = SceneType.MENU_SCENE;
-        }
-
-        public void InitLocalizationData(TextAsset localizationAsset, TextAsset dialogueLocalizationAsset,
-            TextAsset dialogueTipLocalizationAsset)
-        {
-            this.GetUtility<IGameUtility>()
-                .AnalysisJsonConfigurationTable(localizationAsset, this.GetModel<IGameModel>().LocalizationData);
-            this.GetUtility<IGameUtility>().AnalysisJsonConfigurationTable(dialogueLocalizationAsset,
-                this.GetModel<IGameModel>().DialogueLocalizationData);
-            this.GetUtility<IGameUtility>().AnalysisJsonConfigurationTable(dialogueTipLocalizationAsset,
-                this.GetModel<IGameModel>().DialogueTipLocalizationData);
+            LoadCurrentData();
         }
 
         public void ChangeBattleScene(string fileName = null)
         {
-            LoadCurrentData();
             this.GetSystem<IGameSaveSystem>().LoadGame(fileName);
             LoadNoStorageData();
             InitNewGameData(fileName);
@@ -191,6 +180,17 @@ namespace Game.GameBase
 
             this.GetSystem<IGameMenuSystem>().InitArmData(troopsNumber);
             _hasLoadCurrentData = true;
+        }
+
+        public void InitLocalizationData(TextAsset localizationAsset, TextAsset dialogueLocalizationAsset,
+            TextAsset dialogueTipLocalizationAsset)
+        {
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(localizationAsset, this.GetModel<IGameModel>().LocalizationData);
+            this.GetUtility<IGameUtility>().AnalysisJsonConfigurationTable(dialogueLocalizationAsset,
+                this.GetModel<IGameModel>().DialogueLocalizationData);
+            this.GetUtility<IGameUtility>().AnalysisJsonConfigurationTable(dialogueTipLocalizationAsset,
+                this.GetModel<IGameModel>().DialogueTipLocalizationData);
         }
 
         /// <summary>

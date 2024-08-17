@@ -7,12 +7,6 @@ namespace Game.GameBase
     public interface IGameSystem : ISystem
     {
         /// <summary>
-        /// 初始化多语种数据
-        /// </summary>
-        void InitLocalizationData(TextAsset localizationAsset, TextAsset dialogueLocalizationAsset,
-            TextAsset dialogueTipLocalizationAsset);
-
-        /// <summary>
         /// 切换到战役场景
         /// </summary>
         /// <param name="fileName">存档文件名</param>
@@ -40,5 +34,11 @@ namespace Game.GameBase
         /// <returns></returns>
         string GetLocalizationText(int textId, List<string> replace = null,
             LocalizationType type = LocalizationType.NORMAL);
+
+        /// <summary>
+        /// 初始化多语种数据
+        /// </summary>
+        void InitLocalizationData(TextAsset localizationAsset, TextAsset dialogueLocalizationAsset,
+            TextAsset dialogueTipLocalizationAsset);
     }
 }
