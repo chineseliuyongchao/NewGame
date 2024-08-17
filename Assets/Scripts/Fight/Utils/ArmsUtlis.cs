@@ -34,7 +34,7 @@ namespace Fight.Utils
             return Random.Next();
         }
 
-        public static Vector3 GetArmsRelayPosition(this ObjectArmsController controller)
+        public static Vector3 GetArmsRelayPosition(this ArmsController controller)
         {
             return (Vector3)FightScene.Ins.AStarModel.FightGridNodeInfoList[controller.fightCurrentIndex].position;
         }

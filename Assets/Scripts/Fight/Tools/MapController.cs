@@ -3,6 +3,7 @@ using Fight.Enum;
 using Fight.Events;
 using Fight.Game;
 using Fight.Utils;
+using Game.GameBase;
 using QFramework;
 using UnityAttribute;
 using UnityEngine;

@@ -131,6 +131,11 @@
         /// 对话提示多语种文本配置表
         /// </summary>
         public const string DIALOGUE_TIP_LOCALIZATION_TEXT = "DialogueTipLocalizationText";
+
+        /// <summary>
+        /// 兵种数据表
+        /// </summary>
+        public const string TROOPS_NUMBER = "troopsNumber";
     }
 
     /// <summary>

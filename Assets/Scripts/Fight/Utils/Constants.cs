@@ -18,6 +18,18 @@
         public const float WorldHeight = 10f; // 世界高度
         public const float WorldWidth = WorldHeight / 0.5625f; // 世界宽度
 
+        #region 兵种id
+
+        public const int ElfRecruit = 0;
+        
+
+        public const int FootKnightsId = 100;
+        public const int SquireFootKnights = 101;
+        public const int TheKnights = 104;
+        public const int KnightsOfTheSquire = 105;
+
+        #endregion
+
         #region 兵种名
 
         public const string HeavyInfantryKnights = "HeavyInfantryKnights";
@@ -56,7 +68,7 @@
 
         public const int FightNodeWidthNum = 20;
         public const int FightNodeHeightNum = 16;
-        
+
         public const int FightNodeVisibleWidthNum = 16;
         public const int FightNodeVisibleHeightNum = 12;
 

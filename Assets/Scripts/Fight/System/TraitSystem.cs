@@ -3,7 +3,7 @@ using Fight.Game.Trait;
 using Fight.Utils;
 using QFramework;
 
-namespace Fight.Systems
+namespace Fight.System
 {
     public class TraitSystem : AbstractSystem
     {

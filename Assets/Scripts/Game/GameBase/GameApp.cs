@@ -24,6 +24,7 @@ namespace Game.GameBase
             RegisterSystem<ICountrySystem>(new CountrySystem());
             RegisterSystem<IPathfindingSystem>(new PathfindingSystem());
             RegisterSystem<ITeamSystem>(new TeamSystem());
+            RegisterSystem<IGameMenuSystem>(new GameMenuSystem());
 
             RegisterModel<IGameModel>(new GameModel());
             RegisterModel<IMapModel>(new MapModel());

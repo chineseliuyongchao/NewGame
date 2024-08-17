@@ -6,7 +6,7 @@
  * https://qframework.cn
  * https://github.com/liangxiegame/QFramework
  * https://gitee.com/liangxiegame/QFramework
- * 
+ *
  * Author:
  *  liangxie        https://github.com/liangxie
  *  soso            https://github.com/so-sos-so
@@ -15,7 +15,7 @@
  *  TastSong        https://github.com/TastSong
  *  京产肠饭         https://gitee.com/JingChanChangFan/hk_-unity-tools
  *  猫叔(一只皮皮虾)  https://space.bilibili.com/656352/
- * 
+ *
  * Community
  *  QQ Group: 623597263
  * Latest Update: 2023.3.19 16:32 support Command<TResult>
@@ -54,6 +54,10 @@ namespace QFramework
 
         IUnRegister RegisterEvent<T>(Action<T> onEvent);
         void UnRegisterEvent<T>(Action<T> onEvent);
+
+        void UnRegisterSystem<TSystem>() where TSystem : class, ISystem;
+
+        void UnRegisterModel<TModel>() where TModel : class, IModel;
     }
 
     public abstract class Architecture<T> : IArchitecture where T : Architecture<T>, new()
@@ -216,6 +220,27 @@ namespace QFramework
         public void UnRegisterEvent<TEvent>(Action<TEvent> onEvent)
         {
             mTypeEventSystem.UnRegister<TEvent>(onEvent);
+        }
+
+        public void UnRegisterSystem<TSystem>(TSystem system)
+        {
+            mContainer.UnRegister<TSystem>(system);
+        }
+
+        public void UnRegisterSystem<TSystem>() where TSystem : class, ISystem
+        {
+            mContainer.UnRegister<TSystem>(this.GetSystem<TSystem>());
+        }
+
+
+        public void UnRegisterModel<TModel>(TModel model)
+        {
+            mContainer.UnRegister<TModel>(model);
+        }
+
+        public void UnRegisterModel<TModel>() where TModel : class, IModel
+        {
+            mContainer.UnRegister<TModel>(this.GetModel<TModel>());
         }
     }
 
@@ -694,14 +719,35 @@ namespace QFramework
             }
         }
 
+        public void UnRegister<T>(T instance)
+        {
+            var key = typeof(T);
+
+            if (mInstances.ContainsKey(key))
+            {
+                mInstances[key] = null;
+            }
+            else
+            {
+            }
+        }
+
         public T Get<T>() where T : class
         {
             var key = typeof(T);
 
             if (mInstances.TryGetValue(key, out var retInstance))
             {
+                if (retInstance == null)
+                {
+                    Debug.LogError("Get Not Exist " + key.FullName);
+                    return null;
+                }
+
                 return retInstance as T;
             }
+
+            Debug.LogError("Get Not Exist " + key.FullName);
 
             return null;
         }
@@ -732,7 +778,7 @@ namespace QFramework
         {
             mValue = defaultValue;
         }
-        
+
         protected T mValue;
 
         public T Value

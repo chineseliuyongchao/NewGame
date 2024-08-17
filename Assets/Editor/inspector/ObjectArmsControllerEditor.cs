@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 
 namespace Editor.inspector
 {
-    [CustomEditor(typeof(ObjectArmsController))]
+    [CustomEditor(typeof(ArmsController))]
     public class ObjectArmsControllerEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()

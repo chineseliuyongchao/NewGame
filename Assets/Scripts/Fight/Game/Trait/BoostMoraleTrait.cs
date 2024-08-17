@@ -13,20 +13,18 @@ namespace Fight.Game.Trait
 
         public void Apply(ObjectArmsModel owner)
         {
-            var attributes = owner.SpiritualAttribute;
-            if (attributes == null) return;
+            var armData = owner.ArmData;
+            if (armData == null) return;
 
-            attributes.currentFightWill =
-                Mathf.Clamp(attributes.currentFightWill + TraitConstants.BoostMoraleTraitMoraleBonus, 0,
-                    attributes.totalFightWill);
+            armData.NowMorale += TraitConstants.BoostMoraleTraitMoraleBonus;
         }
 
         public void Remove(ObjectArmsModel owner)
         {
-            var attributes = owner.SpiritualAttribute;
-            if (attributes == null) return;
+            var armData = owner.ArmData;
+            if (armData == null) return;
 
-            attributes.currentFightWill = Mathf.Clamp(attributes.currentFightWill - 8, 0, attributes.totalFightWill);
+            armData.NowMorale -= TraitConstants.BoostMoraleTraitMoraleBonus;
         }
     }
 }

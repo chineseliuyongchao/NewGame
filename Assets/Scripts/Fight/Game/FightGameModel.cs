@@ -37,7 +37,7 @@ namespace Fight.Game
         /// <summary>
         /// 当前被选取为焦点的兵种
         /// </summary>
-        [CanBeNull] public ObjectArmsController FocusController;
+        [CanBeNull] public ArmsController FocusController;
 
         protected override void OnInit()
         {

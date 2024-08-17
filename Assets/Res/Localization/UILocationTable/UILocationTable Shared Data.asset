@@ -171,6 +171,10 @@ MonoBehaviour:
     m_Key: UIFightCreate_Title
     m_Metadata:
       m_Items: []
+  - m_Id: 46415585159462912
+    m_Key: UIGameFight_exitButton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

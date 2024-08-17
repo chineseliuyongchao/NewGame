@@ -3,6 +3,7 @@ using Fight.Game;
 using Fight.Game.Arms;
 using Fight.Game.Arms.Human.Nova;
 using Fight.Utils;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 
@@ -44,7 +45,7 @@ namespace Fight.FsmS
                 var obj = Instantiate(_armsGameObjectList[info.Value.ArmsName], transform);
                 obj.transform.position = (Vector3)aStarModel.FightGridNodeInfoList[info.Value.RanksIndex].position;
                 obj.name = info.Key.ToString();
-                ObjectArmsController controller = obj.GetComponent<ObjectArmsController>();
+                ArmsController controller = obj.GetComponent<ArmsController>();
                 controller.id = info.Key;
                 controller.OnInit();
             }
