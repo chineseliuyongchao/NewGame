@@ -11,7 +11,7 @@ namespace Game
     {
         protected override void OnControllerStart()
         {
-            UIKit.OpenPanel<UIGameCreate>();
+            UIKit.OpenPanel<UIBattleCreate>();
         }
     }
 }

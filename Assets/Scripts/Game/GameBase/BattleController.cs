@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Game.Family;
+using Battle.Family;
 using QFramework;
 using UI;
 using UnityEngine;
@@ -55,7 +55,7 @@ namespace Game.GameBase
                 _families.Add(baseFamily);
             }
 
-            UIKit.OpenPanel<UIGameLobby>();
+            UIKit.OpenPanel<UIGameBattle>();
         }
 
         private void Update()
@@ -64,7 +64,7 @@ namespace Game.GameBase
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    UIKit.OpenPanel<UIGameLobbyMenu>();
+                    UIKit.OpenPanel<UIGameBattleMenu>();
                 }
 
                 if (Input.GetKeyDown(KeyCode.Space))

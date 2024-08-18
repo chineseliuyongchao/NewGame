@@ -64,7 +64,7 @@
     /// </summary>
     public class ChangeFightSceneEvent
     {
-        public bool IsChangeIn;
+        public readonly bool IsChangeIn;
 
         public ChangeFightSceneEvent(bool isChangeIn)
         {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Game.Team;
+using Battle;
+using Battle.Team;
 using QFramework;
 
 namespace Game.GameBase
