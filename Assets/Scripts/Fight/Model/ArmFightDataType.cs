@@ -23,7 +23,7 @@ namespace Fight.Model
         public int NowHp
         {
             get => _nowHp;
-            set => _nowHp = Mathf.Clamp(value, 0, ArmDataType.totalHp);
+            set => _nowHp = Mathf.Clamp(value, 0, armDataType.totalHp);
         }
 
         private int _nowTroops;
@@ -34,7 +34,7 @@ namespace Fight.Model
         public int NowTroops
         {
             get => _nowTroops;
-            set => _nowTroops = Mathf.Clamp(value, 0, ArmDataType.totalTroops);
+            set => _nowTroops = Mathf.Clamp(value, 0, armDataType.totalTroops);
         }
 
         private int _nowAmmo;
@@ -45,7 +45,7 @@ namespace Fight.Model
         public int NowAmmo
         {
             get => _nowAmmo;
-            set => _nowAmmo = Mathf.Clamp(value, 0, ArmDataType.ammo);
+            set => _nowAmmo = Mathf.Clamp(value, 0, armDataType.ammo);
         }
 
         private int _nowMorale;
@@ -56,7 +56,7 @@ namespace Fight.Model
         public int NowMorale
         {
             get => _nowMorale;
-            set => _nowMorale = Mathf.Clamp(value, 0, ArmDataType.maximumMorale);
+            set => _nowMorale = Mathf.Clamp(value, 0, armDataType.maximumMorale);
         }
 
         private int _nowFatigue;
@@ -67,7 +67,7 @@ namespace Fight.Model
         public int NowFatigue
         {
             get => _nowFatigue;
-            set => _nowFatigue = Mathf.Clamp(value, 0, ArmDataType.maximumFatigue);
+            set => _nowFatigue = Mathf.Clamp(value, 0, armDataType.maximumFatigue);
         }
 
         private bool _isCharge;
@@ -95,14 +95,14 @@ namespace Fight.Model
         /// <summary>
         /// 存放一个引用，方便快速获取
         /// </summary>
-        public readonly ArmDataType ArmDataType;
+        public ArmDataType armDataType;
 
         public ArmData(ArmData armData)
         {
-            ArmDataType = armData.ArmDataType;
+            armDataType = armData.armDataType;
             armId = armData.armId;
-            _nowHp = armData._nowHp;
-            _nowTroops = armData._nowTroops;
+            NowHp = armData.NowHp;
+            NowTroops = armData.NowTroops;
             NowAmmo = armData.NowAmmo;
             NowMorale = armData.NowMorale;
             NowFatigue = armData.NowFatigue;
@@ -112,10 +112,10 @@ namespace Fight.Model
 
         public ArmData(ArmDataType armDataType, int id)
         {
-            ArmDataType = armDataType;
+            this.armDataType = armDataType;
             armId = id;
-            _nowHp = armDataType.totalHp;
-            _nowTroops = armDataType.totalTroops;
+            NowHp = armDataType.totalHp;
+            NowTroops = armDataType.totalTroops;
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
             NowFatigue = armDataType.maximumFatigue;
@@ -125,12 +125,15 @@ namespace Fight.Model
 
         public void Reset(ArmData data)
         {
+            armDataType = data.armDataType;
             armId = data.armId;
-            _nowHp = data._nowHp;
-            _nowTroops = data._nowTroops;
+            NowHp = data.NowHp;
+            NowTroops = data.NowTroops;
             NowAmmo = data.NowAmmo;
             NowMorale = data.NowMorale;
             NowFatigue = data.NowFatigue;
+            IsCharge = data._isCharge;
+            IsStick = data.IsStick;
         }
     }
 }

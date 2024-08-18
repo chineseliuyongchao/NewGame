@@ -2,7 +2,7 @@
 using QFramework;
 using UI;
 
-namespace Game
+namespace Game.FightCreate
 {
     /// <summary>
     /// 新建游戏场景控制

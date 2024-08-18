@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:9f4a102c-acbe-4a10-8c45-7935c9d8f78e
+	// Generate Id:512a98ed-84b2-4f65-92f9-3be31b82e148
 	public partial class UIFightCreate
 	{
 		public const string Name = "UIFightCreate";
@@ -14,6 +14,12 @@ namespace UI
 		private UnityEngine.UI.Button createButton;
 		[SerializeField]
 		private UnityEngine.UI.Button leaveButton;
+		[SerializeField]
+		private UnityEngine.RectTransform belligerentGroup;
+		[SerializeField]
+		private UnityEngine.UI.Button belligerent1Add;
+		[SerializeField]
+		private UnityEngine.UI.Button belligerent2Add;
 		
 		private UIFightCreateData mPrivateData = null;
 		
@@ -21,6 +27,9 @@ namespace UI
 		{
 			createButton = null;
 			leaveButton = null;
+			belligerentGroup = null;
+			belligerent1Add = null;
+			belligerent2Add = null;
 			
 			mData = null;
 		}

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using QFramework;
 
+// ReSharper disable once CheckNamespace
 namespace Game.GameMenu
 {
     public interface IGameMenuModel : IModel

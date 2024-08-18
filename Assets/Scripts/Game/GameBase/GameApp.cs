@@ -5,6 +5,7 @@ using Battle.Map;
 using Battle.Player;
 using Battle.Team;
 using Battle.Town;
+using Game.FightCreate;
 using Game.GameMenu;
 using Game.GameSave;
 using Game.GameUtils;
@@ -37,6 +38,7 @@ namespace Game.GameBase
             RegisterModel<ITeamModel>(new TeamModel());
             RegisterModel<IGameMenuModel>(new GameMenuModel());
             RegisterModel<IBattleBaseModel>(new BattleBaseModel());
+            RegisterModel<IFightCreateModel>(new FightCreateModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
             RegisterUtility<IMathUtility>(new MathUtility());
