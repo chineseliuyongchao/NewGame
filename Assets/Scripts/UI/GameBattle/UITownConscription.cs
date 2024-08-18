@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Battle.BattleBase;
 using Battle.Player;
 using Battle.Team;
 using Battle.Town;
@@ -70,7 +71,7 @@ namespace UI
                 this.GetSystem<ITeamSystem>()
                     .ComputeMoneyWithConscription(soldierStructure, this.GetModel<IMyPlayerModel>().FamilyId);
                 mData.data.realConscription(soldierStructure);
-                this.GetModel<IGameModel>().PlayerTeam.UpdateTeamNum(soldierStructure);
+                this.GetModel<IBattleBaseModel>().PlayerTeam.UpdateTeamNum(soldierStructure);
                 CloseSelf();
             });
         }

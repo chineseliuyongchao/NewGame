@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Battle.BattleBase;
 using Battle.Family;
 using QFramework;
 using UI;
@@ -60,7 +61,7 @@ namespace Game.GameBase
 
         private void Update()
         {
-            if (this.GetModel<IGameModel>().OpenStopTimeUITime == 0) //没有打开弹窗时才能监听按键事件
+            if (this.GetModel<IBattleBaseModel>().OpenStopTimeUITime == 0) //没有打开弹窗时才能监听按键事件
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
@@ -69,7 +70,7 @@ namespace Game.GameBase
 
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    this.SendCommand(new TimePassCommand(!this.GetModel<IGameModel>().TimeIsPass));
+                    this.SendCommand(new TimePassCommand(!this.GetModel<IBattleBaseModel>().TimeIsPass));
                 }
             }
         }

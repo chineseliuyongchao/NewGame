@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Battle.BattleBase;
 using Battle.Family;
 using Battle.Map;
 using Battle.Town;
@@ -73,7 +74,7 @@ namespace Battle.Team
 
         protected virtual void UpdateTeam()
         {
-            if (this.GetModel<IGameModel>().TimeIsPass)
+            if (this.GetModel<IBattleBaseModel>().TimeIsPass)
             {
                 if (CurrentIndex < movePosList.Count)
                 {

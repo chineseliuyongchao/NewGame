@@ -1,4 +1,5 @@
 ﻿using System;
+using Battle.BattleBase;
 using Game.GameBase;
 using Game.GameUtils;
 using QFramework;
@@ -34,22 +35,22 @@ namespace Battle.Town
         {
             this.RegisterEvent<ChangeTimeEvent>(_ =>
             {
-                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshPopulationTime))
+                if (this.GetModel<IBattleBaseModel>().NowTime.Equals(GameTime.RefreshPopulationTime))
                 {
                     UpdatePopulationGrowth();
                 }
 
-                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshMilitiaTime))
+                if (this.GetModel<IBattleBaseModel>().NowTime.Equals(GameTime.RefreshMilitiaTime))
                 {
                     UpdateMilitia();
                 }
 
-                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshGrainTime))
+                if (this.GetModel<IBattleBaseModel>().NowTime.Equals(GameTime.RefreshGrainTime))
                 {
                     UpdateGrain();
                 }
 
-                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshTownNoStorageTime))
+                if (this.GetModel<IBattleBaseModel>().NowTime.Equals(GameTime.RefreshTownNoStorageTime))
                 {
                     this.GetSystem<ITownSystem>().UpdateTownNoStorageData(_townData);
                 }

@@ -1,4 +1,4 @@
-﻿using Game.GameBase;
+﻿using Battle.BattleBase;
 using QFramework;
 
 namespace Game.Achieve
@@ -9,7 +9,7 @@ namespace Game.Achieve
 
         public override bool CheckFinish()
         {
-            return this.GetModel<IGameModel>().NowTime.Time > 2;
+            return this.GetModel<IBattleBaseModel>().NowTime.Time > 2;
         }
     }
 }

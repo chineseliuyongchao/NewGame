@@ -1,6 +1,6 @@
-﻿using Battle.Team;
+﻿using Battle.BattleBase;
+using Battle.Team;
 using Battle.Town;
-using Game;
 using Game.BehaviourTree;
 using Game.GameBase;
 using QFramework;
@@ -14,7 +14,7 @@ namespace Battle.Family
     /// </summary>
     public class BaseFamily : BaseGameController, IGetBehaviourTree
     {
-        public Game.BehaviourTree.BehaviourTree behaviourTree;
+        public BehaviourTree behaviourTree;
         private int _familyId;
         private FamilyData _familyData;
         private FamilyBlackBoard _familyBlackBoard;
@@ -68,12 +68,12 @@ namespace Battle.Family
         {
             this.RegisterEvent<ChangeTimeEvent>(_ =>
             {
-                if (this.GetModel<IGameModel>().NowTime.Equals(_checkBuildTeamTime))
+                if (this.GetModel<IBattleBaseModel>().NowTime.Equals(_checkBuildTeamTime))
                 {
                     behaviourTree.StartTree();
                 }
 
-                if (this.GetModel<IGameModel>().NowTime.Equals(GameTime.RefreshEconomyTime))
+                if (this.GetModel<IBattleBaseModel>().NowTime.Equals(GameTime.RefreshEconomyTime))
                 {
                     UpdateEconomy();
                 }
@@ -113,7 +113,7 @@ namespace Battle.Family
         {
             this.GetModel<IFamilyModel>().RoleData[roleId].roleType = RoleType.GENERAL;
             GameObject teamObject = Instantiate(_teamPrefab);
-            teamObject.Parent(this.GetModel<IGameModel>().PlayerTeam.transform.parent);
+            teamObject.Parent(this.GetModel<IBattleBaseModel>().PlayerTeam.transform.parent);
             int townId = this.GetModel<IFamilyModel>().RoleData[roleId].townId;
             TownCommonData townCommonData = this.GetModel<ITownModel>().TownCommonData[townId];
             teamObject.Position(new Vector3(townCommonData.TownPos[0], townCommonData.TownPos[1]));
@@ -128,7 +128,7 @@ namespace Battle.Family
             team.InitTeam(teamId, _familyId);
         }
 
-        public Game.BehaviourTree.BehaviourTree GetTree()
+        public BehaviourTree GetTree()
         {
             return behaviourTree;
         }

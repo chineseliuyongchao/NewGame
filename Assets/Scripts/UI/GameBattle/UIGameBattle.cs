@@ -1,3 +1,4 @@
+using Battle.BattleBase;
 using Game.GameBase;
 using QFramework;
 
@@ -47,7 +48,7 @@ namespace UI
             menuButton.onClick.AddListener(() => { UIKit.OpenPanel<UIGameBattleMenu>(); });
             timeControlButton.onClick.AddListener(() =>
             {
-                this.SendCommand(new TimePassCommand(!this.GetModel<IGameModel>().TimeIsPass));
+                this.SendCommand(new TimePassCommand(!this.GetModel<IBattleBaseModel>().TimeIsPass));
             });
         }
 
@@ -56,7 +57,7 @@ namespace UI
             this.RegisterEvent<ChangeTimeEvent>(_ => { UpdateTime(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<ChangeBattleSceneEvent>(e =>
                 {
-                    if (!e.IsChangeIn)
+                    if (!e.isChangeIn)
                     {
                         CloseSelf();
                     }
@@ -75,12 +76,12 @@ namespace UI
 
         private void UpdateTime()
         {
-            timeView.text = this.GetModel<IGameModel>().NowTime.ToString();
+            timeView.text = this.GetModel<IBattleBaseModel>().NowTime.ToString();
         }
 
         private void UpdateTimePass()
         {
-            if (this.GetModel<IGameModel>().TimeIsPass)
+            if (this.GetModel<IBattleBaseModel>().TimeIsPass)
             {
                 timePass.gameObject.SetActive(true);
                 timePause.gameObject.SetActive(false);

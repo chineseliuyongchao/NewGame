@@ -1,5 +1,5 @@
 ﻿using System;
-using Game.GameBase;
+using Battle.BattleBase;
 
 namespace Battle
 {

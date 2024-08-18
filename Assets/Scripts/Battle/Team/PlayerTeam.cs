@@ -1,6 +1,6 @@
-﻿using Battle.Map;
+﻿using Battle.BattleBase;
+using Battle.Map;
 using Battle.Player;
-using Game.GameBase;
 using QFramework;
 using UI;
 
@@ -14,7 +14,7 @@ namespace Battle.Team
         protected override void OnInit()
         {
             base.OnInit();
-            this.GetModel<IGameModel>().PlayerTeam = this;
+            this.GetModel<IBattleBaseModel>().PlayerTeam = this;
         }
 
         protected override void OnListenEvent()

@@ -12,11 +12,11 @@
     /// </summary>
     public class ChangeMenuSceneEvent
     {
-        public readonly bool IsChangeIn;
+        public readonly bool isChangeIn;
 
         public ChangeMenuSceneEvent(bool isChangeIn)
         {
-            IsChangeIn = isChangeIn;
+            this.isChangeIn = isChangeIn;
         }
     }
 
@@ -25,11 +25,11 @@
     /// </summary>
     public class ChangeBattleSceneEvent
     {
-        public readonly bool IsChangeIn;
+        public readonly bool isChangeIn;
 
         public ChangeBattleSceneEvent(bool isChangeIn)
         {
-            IsChangeIn = isChangeIn;
+            this.isChangeIn = isChangeIn;
         }
     }
 
@@ -38,11 +38,11 @@
     /// </summary>
     public class ChangeBattleCreateSceneEvent
     {
-        public bool IsChangeIn;
+        public bool isChangeIn;
 
         public ChangeBattleCreateSceneEvent(bool isChangeIn)
         {
-            IsChangeIn = isChangeIn;
+            this.isChangeIn = isChangeIn;
         }
     }
 
@@ -51,11 +51,11 @@
     /// </summary>
     public class ChangeFightCreateSceneEvent
     {
-        public bool IsChangeIn;
+        public bool isChangeIn;
 
         public ChangeFightCreateSceneEvent(bool isChangeIn)
         {
-            IsChangeIn = isChangeIn;
+            this.isChangeIn = isChangeIn;
         }
     }
 
@@ -64,11 +64,11 @@
     /// </summary>
     public class ChangeFightSceneEvent
     {
-        public readonly bool IsChangeIn;
+        public readonly bool isChangeIn;
 
         public ChangeFightSceneEvent(bool isChangeIn)
         {
-            IsChangeIn = isChangeIn;
+            this.isChangeIn = isChangeIn;
         }
     }
 
@@ -84,31 +84,5 @@
     /// </summary>
     public class SaveFileDataEvent
     {
-    }
-
-    /// <summary>
-    /// 设置时间是否可以流逝
-    /// </summary>
-    public class TimePassEvent
-    {
-        public readonly bool IsPass;
-
-        public TimePassEvent(bool isPass)
-        {
-            this.IsPass = isPass;
-        }
-    }
-
-    /// <summary>
-    /// 是否展示了弹窗
-    /// </summary>
-    public class ShowDialogEvent
-    {
-        public bool IsShow;
-
-        public ShowDialogEvent(bool isShow)
-        {
-            this.IsShow = isShow;
-        }
     }
 }

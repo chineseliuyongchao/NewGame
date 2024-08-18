@@ -47,7 +47,7 @@ namespace UI
         {
             this.RegisterEvent<ChangeFightSceneEvent>(e =>
             {
-                if (e.IsChangeIn)
+                if (e.isChangeIn)
                 {
                     CloseSelf();
                 }

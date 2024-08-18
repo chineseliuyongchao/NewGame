@@ -1,4 +1,5 @@
-﻿using Game.GameBase;
+﻿using Battle.BattleBase;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace Battle
 
         private void Update()
         {
-            if (this.GetModel<IGameModel>().TimeIsPass)
+            if (this.GetModel<IBattleBaseModel>().TimeIsPass)
             {
                 _deltaTime += Time.deltaTime;
                 bool hasChange = false;
@@ -24,7 +25,7 @@ namespace Battle
                 if (_deltaTime >= GameTimeConstant.CONVERT_TIME)
                 {
                     _deltaTime = 0;
-                    this.GetModel<IGameModel>().NowTime.UpdateTime();
+                    this.GetModel<IBattleBaseModel>().NowTime.UpdateTime();
                     hasChange = true;
                 }
 

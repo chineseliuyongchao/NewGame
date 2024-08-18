@@ -1,4 +1,5 @@
-﻿using Battle.Country;
+﻿using Battle.BattleBase;
+using Battle.Country;
 using Battle.Family;
 using Battle.Map;
 using Battle.Player;
@@ -25,6 +26,7 @@ namespace Game.GameBase
             RegisterSystem<IPathfindingSystem>(new PathfindingSystem());
             RegisterSystem<ITeamSystem>(new TeamSystem());
             RegisterSystem<IGameMenuSystem>(new GameMenuSystem());
+            RegisterSystem<IBattleBaseSystem>(new BattleBaseSystem());
 
             RegisterModel<IGameModel>(new GameModel());
             RegisterModel<IMapModel>(new MapModel());
@@ -34,6 +36,7 @@ namespace Game.GameBase
             RegisterModel<ICountryModel>(new CountryModel());
             RegisterModel<ITeamModel>(new TeamModel());
             RegisterModel<IGameMenuModel>(new GameMenuModel());
+            RegisterModel<IBattleBaseModel>(new BattleBaseModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
             RegisterUtility<IMathUtility>(new MathUtility());

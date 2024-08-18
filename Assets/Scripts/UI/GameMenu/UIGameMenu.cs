@@ -57,7 +57,7 @@ namespace UI
         {
             this.RegisterEvent<ChangeMenuSceneEvent>(e =>
                 {
-                    if (!e.IsChangeIn)
+                    if (!e.isChangeIn)
                     {
                         CloseSelf();
                     }
