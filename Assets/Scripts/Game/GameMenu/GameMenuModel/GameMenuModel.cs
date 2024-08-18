@@ -7,6 +7,7 @@ namespace Game.GameMenu
     {
         private int _language;
         private Dictionary<int, ArmDataType> _armDataTypes;
+        private int _revertMenuTime;
 
         protected override void OnInit()
         {
@@ -23,6 +24,12 @@ namespace Game.GameMenu
         {
             get => _armDataTypes;
             set => _armDataTypes = value;
+        }
+
+        public int RevertMenuTime
+        {
+            get => _revertMenuTime;
+            set => _revertMenuTime = value;
         }
     }
 }

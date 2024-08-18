@@ -30,7 +30,6 @@ namespace Game.GameBase
         protected override void OnInit()
         {
             _sceneType = SceneType.MENU_SCENE;
-            LoadCurrentData();
         }
 
         public void ChangeBattleScene(string fileName = null)
@@ -137,11 +136,7 @@ namespace Game.GameBase
 
             return string.Format(text, value);
         }
-
-        /// <summary>
-        /// 初始化通用数据
-        /// </summary>
-        private void LoadCurrentData()
+        public void LoadCurrentData()
         {
             if (_hasLoadCurrentData)
             {
