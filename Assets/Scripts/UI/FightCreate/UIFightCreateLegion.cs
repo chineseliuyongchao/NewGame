@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class UIFightCreateBelligerentData : UIPanelData
+    public class UIFightCreateLegionData : UIPanelData
     {
     }
 
@@ -20,14 +20,14 @@ namespace UI
 
         protected override void OnInit(IUIData uiData = null)
         {
-            mData = uiData as UIFightCreateBelligerentData ?? new UIFightCreateBelligerentData();
+            mData = uiData as UIFightCreateLegionData ?? new UIFightCreateLegionData();
             // please add init code here
             base.OnInit(uiData);
         }
 
         protected override void OnOpen(IUIData uiData = null)
         {
-            mData = uiData as UIFightCreateBelligerentData ?? new UIFightCreateBelligerentData();
+            mData = uiData as UIFightCreateLegionData ?? new UIFightCreateLegionData();
             // please add open code here
             base.OnOpen(uiData);
         }
@@ -67,7 +67,7 @@ namespace UI
 
                 _uiFightCreate.DeleteLegion(_legionId);
             });
-            chooseButton.onClick.AddListener(() => { _uiFightCreate.ChangeShow(_legionId); });
+            chooseButton.onClick.AddListener(() => { _uiFightCreate.ChangeShowLegion(_legionId); });
         }
 
         protected override void OnListenEvent()

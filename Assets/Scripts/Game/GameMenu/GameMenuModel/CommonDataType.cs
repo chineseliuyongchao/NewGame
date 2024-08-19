@@ -119,4 +119,16 @@ namespace Game.GameMenu
         /// </summary>
         public int cost;
     }
+
+    /// <summary>
+    /// 兵种数据类型
+    /// </summary>
+    [Serializable]
+    public class FactionDataType : BaseJsonData
+    {
+        /// <summary>
+        /// 派系名称
+        /// </summary>
+        public string FactionName;
+    }
 }

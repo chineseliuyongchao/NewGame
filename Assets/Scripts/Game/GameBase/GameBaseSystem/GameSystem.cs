@@ -136,6 +136,7 @@ namespace Game.GameBase
 
             return string.Format(text, value);
         }
+
         public void LoadCurrentData()
         {
             if (_hasLoadCurrentData)
@@ -162,6 +163,7 @@ namespace Game.GameBase
                 resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.DIALOGUE_TIP_LOCALIZATION_TEXT);
 
             var troopsNumber = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.TROOPS_NUMBER);
+            var factionInformation = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.FACTION_INFORMATION);
 
             this.GetSystem<ITownSystem>().InitTownCommonData(townTextAsset, townNameTextAsset);
             this.GetSystem<IFamilySystem>().InitFamilyCommonData(familyTextAsset, familyNameTextAsset);
@@ -174,6 +176,7 @@ namespace Game.GameBase
                 dialogueTipLocalizationText);
 
             this.GetSystem<IGameMenuSystem>().InitArmData(troopsNumber);
+            this.GetSystem<IGameMenuSystem>().InitFactionData(factionInformation);
             _hasLoadCurrentData = true;
         }
 

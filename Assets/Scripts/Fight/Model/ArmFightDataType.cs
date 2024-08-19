@@ -11,6 +11,11 @@ namespace Fight.Model
     public class ArmData
     {
         /// <summary>
+        /// 战场上的单位id
+        /// </summary>
+        public int unitId;
+
+        /// <summary>
         /// 兵种id
         /// </summary>
         public int armId;
@@ -100,6 +105,7 @@ namespace Fight.Model
         public ArmData(ArmData armData)
         {
             armDataType = armData.armDataType;
+            unitId = armData.unitId;
             armId = armData.armId;
             NowHp = armData.NowHp;
             NowTroops = armData.NowTroops;
@@ -113,7 +119,8 @@ namespace Fight.Model
         public ArmData(ArmDataType armDataType, int id)
         {
             this.armDataType = armDataType;
-            armId = id;
+            unitId = id;
+            armId = armDataType.ID;
             NowHp = armDataType.totalHp;
             NowTroops = armDataType.totalTroops;
             NowAmmo = armDataType.ammo;
@@ -126,6 +133,7 @@ namespace Fight.Model
         public void Reset(ArmData data)
         {
             armDataType = data.armDataType;
+            unitId = data.unitId;
             armId = data.armId;
             NowHp = data.NowHp;
             NowTroops = data.NowTroops;

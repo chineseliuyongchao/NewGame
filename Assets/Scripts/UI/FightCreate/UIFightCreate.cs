@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using Fight.Model;
 using Game.FightCreate;
 using Game.GameBase;
+using Game.GameMenu;
 using QFramework;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -19,18 +21,30 @@ namespace UI
         public GameObject belligerentPrefab;
         public Dictionary<int, UIFightCreateLegion> belligerents1;
         public Dictionary<int, UIFightCreateLegion> belligerents2;
+        public GameObject unitPrefab;
+        public Dictionary<int, UIFightCreateUnit> uiFightCreateUnits;
 
         /// <summary>
         /// 当前正在展示的参战军团
         /// </summary>
-        private int _nowShow = -1;
+        private int _nowLegionId = -1;
+
+        /// <summary>
+        /// 当前选中的派系
+        /// </summary>
+        private int _chooseFactionId;
+
+        /// <summary>
+        /// 当前选中的兵种
+        /// </summary>
+        private int _chooseArmId;
 
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIFightCreateData ?? new UIFightCreateData();
             // please add init code here
-            base.OnInit(uiData);
             InitUI();
+            base.OnInit(uiData);
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -54,6 +68,37 @@ namespace UI
             });
             belligerent1Add.onClick.AddListener(() => { AddLegion(0); });
             belligerent2Add.onClick.AddListener(() => { AddLegion(1); });
+            chooseFight.onValueChanged.AddListener(type =>
+            {
+                List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
+                if (_chooseFactionId != factionId[type])
+                {
+                    ClearUnit(true, true);
+                }
+
+                _chooseFactionId = factionId[type];
+                ChangeShowFight(_chooseFactionId);
+            });
+            chooseArm.onValueChanged.AddListener(type =>
+            {
+                List<int> armID = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
+                int index = 0;
+                for (int i = 0; i < armID.Count; i++)
+                {
+                    ArmDataType armDataType = this.GetModel<IGameMenuModel>().ARMDataTypes[armID[i]];
+                    if (armDataType.ID / 100 == _chooseFactionId) //属于派系的兵种
+                    {
+                        if (index == type)
+                        {
+                            _chooseArmId = armDataType.ID;
+                            break;
+                        }
+
+                        index++;
+                    }
+                }
+            });
+            belligerent3Add.onClick.AddListener(() => { AddUnit(_chooseArmId); });
         }
 
         protected override void OnListenEvent()
@@ -65,9 +110,29 @@ namespace UI
             this.GetModel<IFightCreateModel>().AllLegions.Clear();
             belligerents1 = new Dictionary<int, UIFightCreateLegion>();
             belligerents2 = new Dictionary<int, UIFightCreateLegion>();
+            uiFightCreateUnits = new Dictionary<int, UIFightCreateUnit>();
+            List<int> factionKeys = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
+            _chooseFactionId = factionKeys[0];
+            List<int> armKeys = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
+            _chooseArmId = armKeys[0];
             AddLegion(0);
-            ChangeShow(0);
+            ChangeShowLegion(0);
             AddLegion(1);
+
+            List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+            List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
+            for (int i = 0; i < factionId.Count; i++)
+            {
+                options.Add(new Dropdown.OptionData(this.GetModel<IGameMenuModel>().FactionDataTypes[factionId[i]]
+                    .FactionName));
+            }
+
+            // 将选项列表添加到Dropdown组件
+            chooseFight.options = options;
+            // 设置默认选项（可选）
+            chooseFight.value = 0;
+            _chooseFactionId = factionId[0];
+            ChangeShowFight(_chooseFactionId);
         }
 
         /// <summary>
@@ -137,13 +202,17 @@ namespace UI
             belligerents.Remove(legionId);
             uiFightCreateLegion.gameObject.DestroySelf();
             this.GetModel<IFightCreateModel>().AllLegions.Remove(legionId);
-            if (_nowShow == legionId)
+            if (_nowLegionId == legionId)
             {
-                _nowShow = -1;
+                _nowLegionId = -1;
             }
         }
 
-        public void ChangeShow(int legionId)
+        /// <summary>
+        /// 切换展示的军团
+        /// </summary>
+        /// <param name="legionId"></param>
+        public void ChangeShowLegion(int legionId)
         {
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[legionId];
             if (legionInfo == null)
@@ -164,15 +233,133 @@ namespace UI
                     return;
             }
 
-            if (_nowShow != -1)
+            if (_nowLegionId != -1)
             {
-                UIFightCreateLegion after = belligerents[_nowShow];
-                after.ChangeShow(false);
+                LegionInfo beforeLegionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
+                Dictionary<int, UIFightCreateLegion> beforeBelligerents;
+                switch (beforeLegionInfo.belligerentsId)
+                {
+                    case 0:
+                        beforeBelligerents = belligerents1;
+                        break;
+                    case 1:
+                        beforeBelligerents = belligerents2;
+                        break;
+                    default:
+                        return;
+                }
+
+                UIFightCreateLegion before = beforeBelligerents[_nowLegionId];
+                before.ChangeShow(false);
             }
 
-            _nowShow = legionId;
-            UIFightCreateLegion now = belligerents[_nowShow];
+            if (_nowLegionId != legionId)
+            {
+                ClearUnit(false, true);
+            }
+
+            _nowLegionId = legionId;
+            ShowUnit();
+            UIFightCreateLegion now = belligerents[_nowLegionId];
             now.ChangeShow(true);
+        }
+
+        /// <summary>
+        /// 切换派系
+        /// </summary>
+        /// <param name="fightId">派系id</param>
+        private void ChangeShowFight(int fightId)
+        {
+            chooseArm.ClearOptions();
+            List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
+            List<int> armID = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
+            int firstArmId = -1;
+            for (int i = 0; i < armID.Count; i++)
+            {
+                ArmDataType armDataType = this.GetModel<IGameMenuModel>().ARMDataTypes[armID[i]];
+                if (armDataType.ID / 100 == fightId) //属于派系的兵种
+                {
+                    if (firstArmId == -1)
+                    {
+                        firstArmId = armDataType.ID;
+                    }
+
+                    options.Add(new Dropdown.OptionData(armDataType.unitName));
+                }
+            }
+
+            _chooseArmId = firstArmId;
+            chooseArm.options = options;
+            this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId].factionsId = _chooseFactionId;
+        }
+
+        /// <summary>
+        /// 添加单位
+        /// </summary>
+        /// <param name="armId">单位的兵种id</param>
+        private void AddUnit(int armId)
+        {
+            LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
+            int newUnitId = legionInfo.allArm.Count;
+            ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], newUnitId);
+            legionInfo.allArm.Add(newUnitId, armData);
+
+            GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
+            UIFightCreateUnit units = unitShow.GetComponent<UIFightCreateUnit>();
+            uiFightCreateUnits.Add(newUnitId, units);
+            units.InitUI(newUnitId, armId, this);
+        }
+
+        /// <summary>
+        /// 移除单位
+        /// </summary>
+        public void DeleteUnit(int unitId)
+        {
+            LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
+            legionInfo.allArm.Remove(unitId);
+            UIFightCreateUnit units = uiFightCreateUnits[unitId];
+            uiFightCreateUnits.Remove(unitId);
+            units.gameObject.DestroySelf();
+        }
+
+        /// <summary>
+        /// 清空所有展示的军队
+        /// </summary>
+        private void ClearUnit(bool model, bool view)
+        {
+            if (model)
+            {
+                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
+                legionInfo.allArm.Clear();
+            }
+
+            if (view)
+            {
+                List<int> unitId = new List<int>(uiFightCreateUnits.Keys);
+                for (int i = 0; i < unitId.Count; i++)
+                {
+                    UIFightCreateUnit units = uiFightCreateUnits[unitId[i]];
+                    uiFightCreateUnits.Remove(unitId[i]);
+                    units.gameObject.DestroySelf();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 展示一个军团的军队
+        /// </summary>
+        private void ShowUnit()
+        {
+            LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
+            List<int> unitId = new List<int>(legionInfo.allArm.Keys);
+            for (int i = 0; i < unitId.Count; i++)
+            {
+                ArmData data = legionInfo.allArm[unitId[i]];
+                GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
+                UIFightCreateUnit units = unitShow.GetComponent<UIFightCreateUnit>();
+                uiFightCreateUnits.Add(data.unitId, units);
+                units.InitUI(data.unitId, data.armId, this);
+            }
         }
     }
 }

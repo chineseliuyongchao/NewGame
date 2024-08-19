@@ -5,30 +5,30 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:10826aec-f858-4673-85c0-3b6a2d7f21bf
+	// Generate Id:1718a8ab-2ac1-455f-8526-fbb8caaa210f
 	public partial class UIFightCreateLegion
 	{
-		public const string Name = "UIFightCreateBelligerent";
+		public const string Name = "UIFightCreateLegion";
 		
 		[SerializeField]
-		private TMPro.TextMeshProUGUI belligerentName;
+		private TMPro.TextMeshProUGUI legionName;
 		[SerializeField]
 		private UnityEngine.UI.Button chooseButton;
 		[SerializeField]
 		private UnityEngine.UI.Button delete;
 		
-		private UIFightCreateBelligerentData mPrivateData = null;
+		private UIFightCreateLegionData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
-			belligerentName = null;
+			legionName = null;
 			chooseButton = null;
 			delete = null;
 			
 			mData = null;
 		}
 		
-		public UIFightCreateBelligerentData Data
+		public UIFightCreateLegionData Data
 		{
 			get
 			{
@@ -36,11 +36,11 @@ namespace UI
 			}
 		}
 		
-		UIFightCreateBelligerentData mData
+		UIFightCreateLegionData mData
 		{
 			get
 			{
-				return mPrivateData ?? (mPrivateData = new UIFightCreateBelligerentData());
+				return mPrivateData ?? (mPrivateData = new UIFightCreateLegionData());
 			}
 			set
 			{

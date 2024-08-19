@@ -91,6 +91,11 @@
         /// 兵种数据表
         /// </summary>
         public const string TROOPS_NUMBER = "troopsNumber";
+
+        /// <summary>
+        /// 派系信息表
+        /// </summary>
+        public const string FACTION_INFORMATION = "FactionInformation";
     }
 
     /// <summary>

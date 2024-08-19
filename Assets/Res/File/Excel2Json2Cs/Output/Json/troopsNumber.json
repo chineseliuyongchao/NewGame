@@ -1,7 +1,7 @@
 ﻿{
     "Sheet1": [
         {
-            "ID": 0,
+            "ID": 1101,
             "unitName": "精灵新兵",
             "totalHp": 10000,
             "totalTroops": 200,
@@ -26,7 +26,7 @@
             "cost": 0
         },
         {
-            "ID": 1,
+            "ID": 1102,
             "unitName": "精灵参训新兵",
             "totalHp": 10000,
             "totalTroops": 200,
@@ -51,7 +51,7 @@
             "cost": 0
         },
         {
-            "ID": 2,
+            "ID": 1103,
             "unitName": "神圣裁决者",
             "totalHp": 12800,
             "totalTroops": 160,
@@ -76,7 +76,7 @@
             "cost": 0
         },
         {
-            "ID": 3,
+            "ID": 1104,
             "unitName": "聚落新兵卫士",
             "totalHp": 8000,
             "totalTroops": 160,
@@ -101,7 +101,7 @@
             "cost": 0
         },
         {
-            "ID": 4,
+            "ID": 1105,
             "unitName": "星辉弓箭手",
             "totalHp": 10400,
             "totalTroops": 160,
@@ -126,7 +126,7 @@
             "cost": 0
         },
         {
-            "ID": 5,
+            "ID": 1106,
             "unitName": "繁茂卫士",
             "totalHp": 10400,
             "totalTroops": 160,
@@ -151,7 +151,7 @@
             "cost": 0
         },
         {
-            "ID": 6,
+            "ID": 1107,
             "unitName": "繁茂之巅神圣卫士",
             "totalHp": 9600,
             "totalTroops": 120,
@@ -176,7 +176,7 @@
             "cost": 0
         },
         {
-            "ID": 7,
+            "ID": 1108,
             "unitName": "驼鹿骑士",
             "totalHp": 5200,
             "totalTroops": 80,
@@ -201,7 +201,7 @@
             "cost": 0
         },
         {
-            "ID": 100,
+            "ID": 2101,
             "unitName": "步行骑士团",
             "totalHp": 11200,
             "totalTroops": 140,
@@ -226,7 +226,7 @@
             "cost": 0
         },
         {
-            "ID": 101,
+            "ID": 2102,
             "unitName": "扈从步行骑士团",
             "totalHp": 14000,
             "totalTroops": 200,
@@ -251,7 +251,7 @@
             "cost": 0
         },
         {
-            "ID": 102,
+            "ID": 2103,
             "unitName": "高山矮人辅助勇士",
             "totalHp": 11000,
             "totalTroops": 200,
@@ -276,7 +276,7 @@
             "cost": 0
         },
         {
-            "ID": 103,
+            "ID": 2104,
             "unitName": "高等精灵辅助弓箭手",
             "totalHp": 10400,
             "totalTroops": 160,
@@ -301,7 +301,7 @@
             "cost": 0
         },
         {
-            "ID": 104,
+            "ID": 2105,
             "unitName": "骑士团",
             "totalHp": 0,
             "totalTroops": 0,
@@ -326,7 +326,7 @@
             "cost": 0
         },
         {
-            "ID": 105,
+            "ID": 2106,
             "unitName": "扈从骑士团",
             "totalHp": 0,
             "totalTroops": 0,
@@ -351,7 +351,7 @@
             "cost": 0
         },
         {
-            "ID": 106,
+            "ID": 2107,
             "unitName": "弩炮",
             "totalHp": 0,
             "totalTroops": 0,
@@ -376,7 +376,7 @@
             "cost": 0
         },
         {
-            "ID": 200,
+            "ID": 3101,
             "unitName": "矮人勇士",
             "totalHp": 11000,
             "totalTroops": 200,
@@ -401,7 +401,7 @@
             "cost": 0
         },
         {
-            "ID": 201,
+            "ID": 3102,
             "unitName": "矮人先锋勇士",
             "totalHp": 13000,
             "totalTroops": 200,
@@ -426,7 +426,7 @@
             "cost": 0
         },
         {
-            "ID": 202,
+            "ID": 3103,
             "unitName": "矮人火枪队",
             "totalHp": 8800,
             "totalTroops": 160,
@@ -451,7 +451,7 @@
             "cost": 0
         },
         {
-            "ID": 203,
+            "ID": 3104,
             "unitName": "矮人铁炮队",
             "totalHp": 7200,
             "totalTroops": 120,
@@ -476,7 +476,7 @@
             "cost": 0
         },
         {
-            "ID": 204,
+            "ID": 3105,
             "unitName": "矮人风琴炮",
             "totalHp": 0,
             "totalTroops": 0,
@@ -501,7 +501,7 @@
             "cost": 0
         },
         {
-            "ID": 205,
+            "ID": 3106,
             "unitName": "矮人战列坦克",
             "totalHp": 0,
             "totalTroops": 0,
@@ -526,7 +526,7 @@
             "cost": 0
         },
         {
-            "ID": 206,
+            "ID": 3107,
             "unitName": "矮人补给装甲车",
             "totalHp": 0,
             "totalTroops": 0,
