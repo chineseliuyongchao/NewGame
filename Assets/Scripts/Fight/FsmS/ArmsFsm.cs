@@ -3,6 +3,7 @@ using Fight.Game;
 using Fight.Game.Arms;
 using Fight.Game.Arms.Human.Nova;
 using Fight.Utils;
+using Game.FightCreate;
 using Game.GameBase;
 using QFramework;
 using UnityEngine;
@@ -13,32 +14,25 @@ namespace Fight.FsmS
     {
         private readonly SortedList<string, GameObject> _armsGameObjectList = new();
 
+        public GameObject objArmsGameObject;
+
         private void Awake()
         {
             //初始化玩家的兵种
             var gamePlayerModel = this.GetModel<GamePlayerModel>();
             var fightGameModel = this.GetModel<FightGameModel>();
 
-            //todo 配置测试兵种
-            var heavyInfantryKnightsModel = this.GetModel<HeavyInfantryKnightsModel>();
-            gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
-                heavyInfantryKnightsModel.Clone()));
-            gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
-                heavyInfantryKnightsModel.Clone()));
-            gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
-                heavyInfantryKnightsModel.Clone()));
-            gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
-                heavyInfantryKnightsModel.Clone()));
-            gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
-                heavyInfantryKnightsModel.Clone()));
-            gamePlayerModel.AddArmsInfo(new GamePlayerModel.ArmsInfo(Constants.HeavyInfantryKnights,
-                heavyInfantryKnightsModel.Clone()));
-
             fightGameModel.GoFightScene();
 
             var aStarModel = this.GetModel<AStarModel>();
-            foreach (var armsName in gamePlayerModel.ArmsNameSet)
-                _armsGameObjectList[armsName] = Resources.Load<GameObject>($"Arms/{armsName}");
+
+            //获取所有战场上的军队数据
+            IFightCreateModel fightCreateModel = this.GetModel<IFightCreateModel>();
+
+            foreach (var tmp in fightCreateModel.AllLegions.Values)
+            {
+                
+            }
 
             foreach (var info in gamePlayerModel.ArmsInfoDictionary)
             {

@@ -1,4 +1,5 @@
-﻿using Fight.Commands.EventSystem;
+﻿using System;
+using Fight.Commands.EventSystem;
 using Fight.Game;
 using Game.GameBase;
 using QFramework;
@@ -37,7 +38,16 @@ namespace Fight.Tools
         {
             this.SendCommand<PointerClickCommand>();
         }
-        
+
+        private void OnDestroy()
+        {
+            var clickAction = _playerInput.actions["Click"];
+            if (clickAction != null)
+            {
+                clickAction.performed -= OnClickPerformed;
+            }
+        }
+
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;

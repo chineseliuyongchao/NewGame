@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -656,6 +655,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -920,3 +920,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1620717e6f8481fa37e22b28523bc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objArmsGameObject: {fileID: 6588485371955350312, guid: 852d744b4752bc54bba14ea628d37bf8, type: 3}

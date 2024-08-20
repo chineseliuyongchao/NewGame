@@ -123,6 +123,11 @@
         /// </summary>
         public const int Foot = 0;
 
+        /// <summary>
+        /// 用于调试的文本展示
+        /// </summary>
+        public const int DebugText = 7;
+
         #endregion
     }
 }

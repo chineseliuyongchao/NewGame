@@ -24,7 +24,8 @@ namespace Fight.Game.Arms
                 { Constants.Armor, target.Find("armor").GetComponent<SpriteRenderer>() },
                 { Constants.Weapon, target.Find("weapon").GetComponent<SpriteRenderer>() },
                 { Constants.Shield, target.Find("shield").GetComponent<SpriteRenderer>() },
-                { Constants.Foot, target.Find("foot").GetComponent<SpriteRenderer>() }
+                { Constants.Foot, target.Find("foot").GetComponent<SpriteRenderer>() },
+                { Constants.DebugText, target.Find("debugText").GetComponent<TextMesh>() }
             };
         }
 
