@@ -16,6 +16,11 @@ namespace Fight.Model
         public int unitId;
 
         /// <summary>
+        /// 该兵种在战场上的位置信息
+        /// </summary>
+        public int currentPosition;
+
+        /// <summary>
         /// 兵种id
         /// </summary>
         public int armId;

@@ -26,11 +26,11 @@ namespace Fight.Commands
             fightGameModel.ArmsIdToIndexDictionary[fightGameModel.FocusController.armData.unitId] = _endIndex;
             if (!fightGameModel.IndexToArmsIdDictionary.Remove(index))
             {
-                fightGameModel.IndexToArmsIdDictionary.Remove(fightGameModel.FocusController.fightCurrentIndex);
+                fightGameModel.IndexToArmsIdDictionary.Remove(fightGameModel.FocusController.armData.currentPosition);
             }
 
             fightGameModel.IndexToArmsIdDictionary[_endIndex] = fightGameModel.FocusController.armData.unitId;
-            fightGameModel.FocusController.fightCurrentIndex = _endIndex;
+            fightGameModel.FocusController.armData.currentPosition = _endIndex;
             fightGameModel.FocusController.ArmsMoveAction(_endIndex);
             this.SendEvent(new ArmsMoveEvent
             {

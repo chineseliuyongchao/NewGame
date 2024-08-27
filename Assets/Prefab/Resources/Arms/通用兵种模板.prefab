@@ -615,7 +615,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6510787083796826850}
-  - component: {fileID: 5638506557280513224}
   m_Layer: 7
   m_Name: "\u901A\u7528\u5175\u79CD\u6A21\u677F"
   m_TagString: Untagged
@@ -646,50 +645,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5638506557280513224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6588485371955350312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78458f9b8a4f4c55ab5189ea134da9ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 0
-  fightCurrentIndex: 0
-  model:
-    _armData:
-      unitId: 0
-      armId: 0
-      armDataType:
-        ID: 0
-        unitName: 
-        totalHp: 0
-        totalTroops: 0
-        attack: 0
-        charge: 0
-        defenseMelee: 0
-        defenseRange: 0
-        meleeNormal: 0
-        meleeArmor: 0
-        armor: 0
-        mobility: 0
-        sight: 0
-        stealth: 0
-        ammo: 0
-        range: 0
-        reload: 0
-        accuracy: 0
-        rangeNormal: 0
-        rangeArmor: 0
-        maximumMorale: 0
-        maximumFatigue: 0
-        cost: 0
-    CurrentIndex: 0
-  view: {fileID: 0}
 --- !u!1 &9208924678363483885
 GameObject:
   m_ObjectHideFlags: 0

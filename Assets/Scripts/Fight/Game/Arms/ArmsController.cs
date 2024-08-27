@@ -9,25 +9,22 @@ using UnityEngine;
 
 namespace Fight.Game.Arms
 {
-    public abstract class ArmsController : MonoBehaviour, IController
+    public class ArmsController : MonoBehaviour, IController
     {
         /// <summary>
         /// 兵种的相关数据信息
         /// </summary>
         public ArmData armData;
 
-        /// <summary>
-        /// 战斗界面中该兵种所处位置
-        /// </summary>
-        public int fightCurrentIndex;
-
-        /// <summary>
-        /// 返回当前兵种的具体视图，可以强转
-        /// </summary>
-        /// <returns>自定义的兵种视图</returns>
-        public abstract ObjectArmsView GetView();
+        public ObjectArmsView view;
 
         private Tween _focusAction;
+        
+        public void OnInit()
+        {
+            //todo
+            view.Find<TextMesh>(Constants.DebugText).text = armData.armDataType.unitName;
+        }
 
         /// <summary>
         /// 被选取为焦点兵种时的动作
@@ -81,9 +78,9 @@ namespace Fight.Game.Arms
         private void ChangeOrderLayer()
         {
             int beginIndex =
-                Mathf.Max(Constants.FightNodeVisibleHeightNum - fightCurrentIndex / Constants.FightNodeVisibleWidthNum,
+                Mathf.Max(Constants.FightNodeVisibleHeightNum - armData.currentPosition / Constants.FightNodeVisibleWidthNum,
                     1) * 1000;
-            GetView().ChangeOrderLayer(beginIndex);
+            view.ChangeOrderLayer(beginIndex);
         }
 
         public IArchitecture GetArchitecture()

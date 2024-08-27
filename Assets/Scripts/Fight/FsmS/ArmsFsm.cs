@@ -16,11 +16,6 @@ namespace Fight.FsmS
 
         private void Awake()
         {
-            //初始化玩家的兵种
-            var fightGameModel = this.GetModel<FightGameModel>();
-
-            fightGameModel.GoFightScene();
-
             var aStarModel = this.GetModel<AStarModel>();
 
             //获取所有战场上的军队数据
@@ -28,7 +23,17 @@ namespace Fight.FsmS
 
             foreach (var tmp in fightCreateModel.AllLegions.Values)
             {
-                
+                foreach (var tmp2 in tmp.allArm)
+                {
+                    GameObject obj = Instantiate(objArmsGameObject, transform);
+                    obj.name = tmp2.Value.unitId.ToString();
+                    ArmsController controller = obj.AddComponent<ArmsController>();
+                    controller.armData = tmp2.Value;
+                    controller.view = obj.AddComponent<ObjectArmsView>();
+                    controller.view.OnInit(obj.transform);
+                    controller.OnInit();
+                    obj.transform.position = (Vector3)aStarModel.FightGridNodeInfoList[controller.armData.currentPosition].position;
+                }
             }
 
             // foreach (var info in gamePlayerModel.ArmsInfoDictionary)

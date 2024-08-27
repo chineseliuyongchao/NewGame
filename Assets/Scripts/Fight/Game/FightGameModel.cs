@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fight.Game.Arms;
+using Game.FightCreate;
 using JetBrains.Annotations;
 using QFramework;
 
@@ -45,6 +46,23 @@ namespace Fight.Game
             IndexToArmsIdDictionary.Clear();
             EnemyIdToIndexDictionary.Clear();
             IndexToEnemyIdDictionary.Clear();
+            //获取所有战场上的军队数据
+            IFightCreateModel fightCreateModel = this.GetModel<IFightCreateModel>();
+            
+            foreach (var tmp in fightCreateModel.AllLegions.Values)
+            {
+                foreach (var tmp2 in tmp.allArm)
+                {
+                    ArmsIdToIndexDictionary[tmp2.Value.unitId] = tmp2.Value.currentPosition;
+                    IndexToArmsIdDictionary[tmp2.Value.currentPosition] = tmp2.Value.unitId;
+                }
+            }
+            
+            // foreach (var info in gamePlayerModel.ArmsInfoDictionary)
+            // {
+            //     ArmsIdToIndexDictionary[info.Key] = info.Value.RanksIndex;
+            //     IndexToArmsIdDictionary[info.Value.RanksIndex] = info.Key;
+            // }
         }
 
         /// <summary>
@@ -58,14 +76,6 @@ namespace Fight.Game
             return !IndexToEnemyIdDictionary.ContainsKey(index) &&
                    this.GetModel<AStarModel>().FightGridNodeInfoList[index].WalkableErosion;
         }
-
-        /**
-         * debug
-         * 暂时先这么写，这个方法要删除
-         */
-        public void GoFightScene()
-        {
-            OnInit();
-        }
+        
     }
 }

@@ -29,7 +29,7 @@ namespace Fight.Commands.EventSystem
             }
             else
             {
-                if (index == fightGameModel.FocusController.fightCurrentIndex)
+                if (index == fightGameModel.FocusController.armData.currentPosition)
                 {
                     //点击的是自己
                     this.SendCommand(new CancelArmsFocusCommand());

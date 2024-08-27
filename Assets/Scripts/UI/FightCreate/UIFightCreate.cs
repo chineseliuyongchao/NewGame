@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Fight.Model;
+using Fight.Utils;
 using Game.FightCreate;
 using Game.GameBase;
 using Game.GameMenu;
@@ -302,6 +303,11 @@ namespace UI
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
             int newUnitId = legionInfo.allArm.Count;
             ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], newUnitId);
+            
+            //todo
+            armData.currentPosition =
+                Constants.MyArmsPositionArray1[Random.Range(0, Constants.MyArmsPositionArray1.Length)];
+            
             legionInfo.allArm.Add(newUnitId, armData);
 
             GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
