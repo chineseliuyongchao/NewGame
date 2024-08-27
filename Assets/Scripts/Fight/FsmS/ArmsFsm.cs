@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fight.Game;
 using Fight.Game.Arms;
-using Fight.Game.Arms.Human.Nova;
-using Fight.Utils;
 using Game.FightCreate;
 using Game.GameBase;
 using QFramework;
@@ -19,7 +17,6 @@ namespace Fight.FsmS
         private void Awake()
         {
             //初始化玩家的兵种
-            var gamePlayerModel = this.GetModel<GamePlayerModel>();
             var fightGameModel = this.GetModel<FightGameModel>();
 
             fightGameModel.GoFightScene();
@@ -34,15 +31,13 @@ namespace Fight.FsmS
                 
             }
 
-            foreach (var info in gamePlayerModel.ArmsInfoDictionary)
-            {
-                var obj = Instantiate(_armsGameObjectList[info.Value.ArmsName], transform);
-                obj.transform.position = (Vector3)aStarModel.FightGridNodeInfoList[info.Value.RanksIndex].position;
-                obj.name = info.Key.ToString();
-                ArmsController controller = obj.GetComponent<ArmsController>();
-                controller.id = info.Key;
-                controller.OnInit();
-            }
+            // foreach (var info in gamePlayerModel.ArmsInfoDictionary)
+            // {
+            //     var obj = Instantiate(_armsGameObjectList[info.Value.ArmsName], transform);
+            //     obj.transform.position = (Vector3)aStarModel.FightGridNodeInfoList[info.Value.RanksIndex].position;
+            //     obj.name = info.Key.ToString();
+            //     ArmsController controller = obj.GetComponent<ArmsController>();
+            // }
         }
 
         public IArchitecture GetArchitecture()

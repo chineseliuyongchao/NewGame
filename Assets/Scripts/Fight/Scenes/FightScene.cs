@@ -3,7 +3,6 @@ using Fight.Enum;
 using Fight.FsmS;
 using Fight.Game;
 using Fight.Game.Arms;
-using Fight.Game.Arms.Human.Nova;
 using Fight.Model;
 using Fight.System;
 using Game.GameBase;
@@ -35,15 +34,12 @@ namespace Fight.Scenes
         private void Awake()
         {
             _ins = this;
-
-            GameApp.Interface.RegisterSystem(new TraitSystem());
+            
             GameApp.Interface.RegisterSystem(new GameSystem());
             GameApp.Interface.RegisterSystem<IFightComputeSystem>(new FightComputeSystem());
-
-            GameApp.Interface.RegisterModel(new GamePlayerModel());
+            
             GameApp.Interface.RegisterModel(new AStarModel());
             GameApp.Interface.RegisterModel(new FightGameModel());
-            GameApp.Interface.RegisterModel(new HeavyInfantryKnightsModel());
             GameApp.Interface.RegisterModel<IFightModel>(new FightModel());
 
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
@@ -75,30 +71,13 @@ namespace Fight.Scenes
             return null;
         }
 
-        private void Update()
-        {
-            //debug
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (this.GetSystem<IGameSystem>() == null)
-                {
-                    Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-                }
-
-                this.GetSystem<IGameSystem>().ChangeScene(SceneType.CREATE_FIGHT_SCENE);
-            }
-        }
-
         private void OnDestroy()
         {
-            GameApp.Interface.UnRegisterSystem<TraitSystem>();
             GameApp.Interface.UnRegisterSystem<GameSystem>();
             GameApp.Interface.UnRegisterSystem<IFightComputeSystem>();
-
-            GameApp.Interface.UnRegisterModel<GamePlayerModel>();
+            
             GameApp.Interface.UnRegisterModel<AStarModel>();
             GameApp.Interface.UnRegisterModel<FightGameModel>();
-            GameApp.Interface.UnRegisterModel<HeavyInfantryKnightsModel>();
             GameApp.Interface.UnRegisterModel<IFightModel>();
         }
     }

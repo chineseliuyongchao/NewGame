@@ -1,29 +1,26 @@
-﻿using Fight.Commands;
-using Fight.Enum;
+﻿using Fight.Model;
 using QFramework;
 using UnityEngine;
 
 namespace Fight.Game.Arms
 {
-    public class ArmsControllerBase<T1, T2> : ArmsController, IState
-        where T1 : ObjectArmsModel where T2 : ObjectArmsView
+    public class ArmsControllerBase<T> : ArmsController, IState
+        where T : ObjectArmsView
     {
-        public T1 model;
-        [HideInInspector] public T2 view;
+        [HideInInspector] public T view;
 
-        public override void OnInit()
+        public ArmsControllerBase(ArmData armData)
         {
-            var info = this.GetModel<GamePlayerModel>().ArmsInfoDictionary[id];
-            model = (T1)info.ObjectArmsModel;
-            fightCurrentIndex = info.RanksIndex;
-            
-            view = gameObject.AddComponent<T2>();
-            view.OnInit(transform);
+            this.armData = armData;
         }
 
-        public override ObjectArmsModel GetModel()
+        private void Awake()
         {
-            return model;
+            //todo
+            fightCurrentIndex = Random.Range(0, this.GetModel<AStarModel>().FightGridNodeInfoList.Count);
+            
+            view = gameObject.AddComponent<T>();
+            view.OnInit(transform);
         }
 
         public override ObjectArmsView GetView()
@@ -38,7 +35,7 @@ namespace Fight.Game.Arms
 
         public void Enter()
         {
-            this.SendCommand(new TraitCommand(model, TraitActionType.StartRound));
+            // this.SendCommand(new TraitCommand(model, TraitActionType.StartRound));
         }
 
         public void Update()
@@ -55,7 +52,7 @@ namespace Fight.Game.Arms
 
         public void Exit()
         {
-            this.SendCommand(new TraitCommand(model, TraitActionType.EndRound));
+            // this.SendCommand(new TraitCommand(model, TraitActionType.EndRound));
         }
     }
 }

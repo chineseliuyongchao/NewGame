@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Fight.Enum;
+using Fight.Model;
 using Fight.Scenes;
 using Fight.Utils;
 using Game.GameBase;
@@ -11,25 +12,14 @@ namespace Fight.Game.Arms
     public abstract class ArmsController : MonoBehaviour, IController
     {
         /// <summary>
-        /// 兵种的专属id
+        /// 兵种的相关数据信息
         /// </summary>
-        public int id;
+        public ArmData armData;
 
         /// <summary>
         /// 战斗界面中该兵种所处位置
         /// </summary>
         public int fightCurrentIndex;
-
-        /// <summary>
-        /// 初始化方法，代替awake
-        /// </summary>
-        public abstract void OnInit();
-
-        /// <summary>
-        /// 返回当前兵种的具体模型，可以强转
-        /// </summary>
-        /// <returns>自定义的兵种模型</returns>
-        public abstract ObjectArmsModel GetModel();
 
         /// <summary>
         /// 返回当前兵种的具体视图，可以强转
@@ -85,7 +75,7 @@ namespace Fight.Game.Arms
         }
 
         /// <summary>
-        /// 兵种每次移动位置都会更新器精灵的排序
+        /// 兵种每次移动位置都会更新精灵的排序
         /// 排序规则如下：从上到下layer以此增加，将其乘上一个常数，然后依次递加赋值给sprite render
         /// </summary>
         private void ChangeOrderLayer()

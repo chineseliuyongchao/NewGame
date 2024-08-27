@@ -45,12 +45,6 @@ namespace Fight.Game
             IndexToArmsIdDictionary.Clear();
             EnemyIdToIndexDictionary.Clear();
             IndexToEnemyIdDictionary.Clear();
-            GamePlayerModel gamePlayerModel = this.GetModel<GamePlayerModel>();
-            foreach (var info in gamePlayerModel.ArmsInfoDictionary)
-            {
-                ArmsIdToIndexDictionary[info.Key] = info.Value.RanksIndex;
-                IndexToArmsIdDictionary[info.Value.RanksIndex] = info.Key;
-            }
         }
 
         /// <summary>

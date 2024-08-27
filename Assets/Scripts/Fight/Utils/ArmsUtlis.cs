@@ -18,17 +18,6 @@ namespace Fight.Utils
             Random = new Random(seed);
         }
 
-        public static ObjectArmsModel[] GetArmsArrayByRow(this ObjectArmsModel owner, int row = 1)
-        {
-            return null;
-        }
-
-        public static TraitCommand GetTraitCommandByArms(this ObjectArmsModel owner,
-            TraitActionType actionType, int traitId)
-        {
-            return new TraitCommand(owner, actionType, traitId);
-        }
-
         public static int GetRandomByTime()
         {
             return Random.Next();
