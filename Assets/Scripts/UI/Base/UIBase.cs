@@ -1,9 +1,8 @@
-﻿using DG.Tweening;
+﻿using Battle.BattleBase;
+using DG.Tweening;
 using Game.GameBase;
 using QFramework;
 using UnityEngine;
-using DOTween = DG.Tweening.DOTween;
-using Sequence = DG.Tweening.Sequence;
 
 namespace UI
 {

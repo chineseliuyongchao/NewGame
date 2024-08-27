@@ -30,7 +30,7 @@ namespace Fight.Scenes
         //debug
         [HideInInspector] public InputActionAsset inputActionAsset;
 
-        public AStarModel AStarModel;
+        public AStarModel aStarModel;
 
         private void Awake()
         {
@@ -49,7 +49,7 @@ namespace Fight.Scenes
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
             inputActionAsset =
                 AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/MyControl.inputactions");
-            AStarModel = this.GetModel<AStarModel>();
+            aStarModel = this.GetModel<AStarModel>();
 
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
         }

@@ -16,5 +16,11 @@ namespace Game.GameMenu
             this.GetUtility<IGameUtility>()
                 .AnalysisJsonConfigurationTable(textAsset, this.GetModel<IGameMenuModel>().ARMDataTypes);
         }
+
+        public void InitFactionData(TextAsset textAsset)
+        {
+            this.GetUtility<IGameUtility>()
+                .AnalysisJsonConfigurationTable(textAsset, this.GetModel<IGameMenuModel>().FactionDataTypes);
+        }
     }
 }

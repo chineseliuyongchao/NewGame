@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Country;
-using Game.Family;
+using Battle.Country;
+using Battle.Family;
+using Battle.Map;
+using Battle.Player;
+using Battle.Team;
+using Battle.Town;
 using Game.GameMenu;
 using Game.GameSave;
 using Game.GameUtils;
-using Game.Map;
-using Game.Player;
-using Game.Team;
-using Game.Town;
 using QFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,7 +30,6 @@ namespace Game.GameBase
         protected override void OnInit()
         {
             _sceneType = SceneType.MENU_SCENE;
-            LoadCurrentData();
         }
 
         public void ChangeBattleScene(string fileName = null)
@@ -138,10 +137,7 @@ namespace Game.GameBase
             return string.Format(text, value);
         }
 
-        /// <summary>
-        /// 初始化通用数据
-        /// </summary>
-        private void LoadCurrentData()
+        public void LoadCurrentData()
         {
             if (_hasLoadCurrentData)
             {
@@ -167,6 +163,7 @@ namespace Game.GameBase
                 resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.DIALOGUE_TIP_LOCALIZATION_TEXT);
 
             var troopsNumber = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.TROOPS_NUMBER);
+            var factionInformation = resLoader.LoadSync<TextAsset>(ConfigurationTableConstant.FACTION_INFORMATION);
 
             this.GetSystem<ITownSystem>().InitTownCommonData(townTextAsset, townNameTextAsset);
             this.GetSystem<IFamilySystem>().InitFamilyCommonData(familyTextAsset, familyNameTextAsset);
@@ -179,6 +176,7 @@ namespace Game.GameBase
                 dialogueTipLocalizationText);
 
             this.GetSystem<IGameMenuSystem>().InitArmData(troopsNumber);
+            this.GetSystem<IGameMenuSystem>().InitFactionData(factionInformation);
             _hasLoadCurrentData = true;
         }
 

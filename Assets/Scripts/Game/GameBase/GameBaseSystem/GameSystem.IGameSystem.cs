@@ -35,6 +35,12 @@ namespace Game.GameBase
         string GetLocalizationText(int textId, List<string> replace = null,
             LocalizationType type = LocalizationType.NORMAL);
 
+
+        /// <summary>
+        /// 初始化通用数据
+        /// </summary>
+        public void LoadCurrentData();
+
         /// <summary>
         /// 初始化多语种数据
         /// </summary>

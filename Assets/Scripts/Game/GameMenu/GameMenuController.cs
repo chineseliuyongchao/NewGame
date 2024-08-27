@@ -1,4 +1,5 @@
 ﻿using Game.GameBase;
+using Game.GameMenu;
 using QFramework;
 using UI;
 
@@ -12,7 +13,12 @@ namespace Game
         protected override void OnInit()
         {
             base.OnInit();
-            ResKit.Init(); //ResKit初始化以后才能使用ResKit和UIKit相关内容
+            this.GetModel<IGameMenuModel>().RevertMenuTime++;
+            if (this.GetModel<IGameMenuModel>().RevertMenuTime <= 1)
+            {
+                ResKit.Init(); //ResKit初始化以后才能使用ResKit和UIKit相关内容
+                this.GetSystem<IGameSystem>().LoadCurrentData();
+            }
         }
 
         protected override void OnControllerStart()

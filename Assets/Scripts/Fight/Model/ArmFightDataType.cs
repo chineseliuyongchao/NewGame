@@ -1,6 +1,5 @@
 ﻿using System;
 using Game.GameMenu;
-using UnityAttribute;
 using UnityEngine;
 
 namespace Fight.Model
@@ -12,9 +11,14 @@ namespace Fight.Model
     public class ArmData
     {
         /// <summary>
+        /// 战场上的单位id
+        /// </summary>
+        public int unitId;
+
+        /// <summary>
         /// 兵种id
         /// </summary>
-        public int ARMId;
+        public int armId;
 
         private int _nowHp;
 
@@ -24,7 +28,7 @@ namespace Fight.Model
         public int NowHp
         {
             get => _nowHp;
-            set => _nowHp = Mathf.Clamp(value, 0, ArmDataType.totalHp);
+            set => _nowHp = Mathf.Clamp(value, 0, armDataType.totalHp);
         }
 
         private int _nowTroops;
@@ -35,7 +39,7 @@ namespace Fight.Model
         public int NowTroops
         {
             get => _nowTroops;
-            set => _nowTroops = Mathf.Clamp(value, 0, ArmDataType.totalTroops);
+            set => _nowTroops = Mathf.Clamp(value, 0, armDataType.totalTroops);
         }
 
         private int _nowAmmo;
@@ -46,8 +50,7 @@ namespace Fight.Model
         public int NowAmmo
         {
             get => _nowAmmo;
-            //todo 缺失总弹药量
-            set => _nowAmmo = Mathf.Clamp(value, 0, 100);
+            set => _nowAmmo = Mathf.Clamp(value, 0, armDataType.ammo);
         }
 
         private int _nowMorale;
@@ -58,7 +61,7 @@ namespace Fight.Model
         public int NowMorale
         {
             get => _nowMorale;
-            set => _nowMorale = Mathf.Clamp(value, 0, ArmDataType.maximumMorale);
+            set => _nowMorale = Mathf.Clamp(value, 0, armDataType.maximumMorale);
         }
 
         private int _nowFatigue;
@@ -69,64 +72,76 @@ namespace Fight.Model
         public int NowFatigue
         {
             get => _nowFatigue;
-            set => _nowFatigue = Mathf.Clamp(value, 0, ArmDataType.maximumFatigue);
+            set => _nowFatigue = Mathf.Clamp(value, 0, armDataType.maximumFatigue);
+        }
+
+        private bool _isCharge;
+
+        /// <summary>
+        /// 单位是否在冲锋
+        /// </summary>
+        public bool IsCharge
+        {
+            get => _isCharge;
+            set => _isCharge = value;
+        }
+
+        private bool _isStick;
+
+        /// <summary>
+        /// 单位是否在坚守
+        /// </summary>
+        public bool IsStick
+        {
+            get => _isStick;
+            set => _isStick = value;
         }
 
         /// <summary>
         /// 存放一个引用，方便快速获取
         /// </summary>
-        public readonly ArmDataType ArmDataType;
+        public ArmDataType armDataType;
 
         public ArmData(ArmData armData)
         {
-            ARMId = armData.ARMId;
-            _nowHp = armData._nowHp;
-            _nowTroops = armData._nowTroops;
+            armDataType = armData.armDataType;
+            unitId = armData.unitId;
+            armId = armData.armId;
+            NowHp = armData.NowHp;
+            NowTroops = armData.NowTroops;
             NowAmmo = armData.NowAmmo;
             NowMorale = armData.NowMorale;
             NowFatigue = armData.NowFatigue;
+            IsCharge = armData.IsCharge;
+            IsStick = armData.IsStick;
         }
 
         public ArmData(ArmDataType armDataType, int id)
         {
-            ArmDataType = armDataType;
-            ARMId = id;
-            _nowHp = armDataType.totalHp;
-            _nowTroops = armDataType.totalTroops;
+            this.armDataType = armDataType;
+            unitId = id;
+            armId = armDataType.ID;
+            NowHp = armDataType.totalHp;
+            NowTroops = armDataType.totalTroops;
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
             NowFatigue = armDataType.maximumFatigue;
+            IsCharge = false;
+            IsStick = false;
         }
 
         public void Reset(ArmData data)
         {
-            ARMId = data.ARMId;
-            _nowHp = data._nowHp;
-            _nowTroops = data._nowTroops;
+            armDataType = data.armDataType;
+            unitId = data.unitId;
+            armId = data.armId;
+            NowHp = data.NowHp;
+            NowTroops = data.NowTroops;
             NowAmmo = data.NowAmmo;
             NowMorale = data.NowMorale;
             NowFatigue = data.NowFatigue;
+            IsCharge = data._isCharge;
+            IsStick = data.IsStick;
         }
-    }
-
-    /// <summary>
-    /// 攻击形式
-    /// </summary>
-    public enum AttackFormType
-    {
-        /// <summary>
-        /// 单向攻击：只有队伍a会攻击，b不会反击
-        /// </summary>
-        ONE_WAY_ATTACK,
-
-        /// <summary>
-        /// 互相攻击：a会攻击，b也会反击
-        /// </summary>
-        MUTUAL_ATTACK,
-
-        /// <summary>
-        /// 互相进攻：a会进攻，b也会进攻，同时ab都会反击
-        /// </summary>
-        MUTUAL_OFFENSE
     }
 }

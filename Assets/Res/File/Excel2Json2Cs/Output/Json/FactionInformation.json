@@ -1,0 +1,16 @@
+﻿{
+    "Sheet1": [
+        {
+            "ID": 11,
+            "FactionName": "高等精灵"
+        },
+        {
+            "ID": 21,
+            "FactionName": "诺瓦帝国"
+        },
+        {
+            "ID": 31,
+            "FactionName": "高山矮人"
+        }
+    ]
+}

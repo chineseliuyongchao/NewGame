@@ -1,12 +1,14 @@
-﻿using Game.Country;
-using Game.Family;
+﻿using Battle.BattleBase;
+using Battle.Country;
+using Battle.Family;
+using Battle.Map;
+using Battle.Player;
+using Battle.Team;
+using Battle.Town;
+using Game.FightCreate;
 using Game.GameMenu;
 using Game.GameSave;
 using Game.GameUtils;
-using Game.Map;
-using Game.Player;
-using Game.Team;
-using Game.Town;
 using QFramework;
 
 namespace Game.GameBase
@@ -25,6 +27,7 @@ namespace Game.GameBase
             RegisterSystem<IPathfindingSystem>(new PathfindingSystem());
             RegisterSystem<ITeamSystem>(new TeamSystem());
             RegisterSystem<IGameMenuSystem>(new GameMenuSystem());
+            RegisterSystem<IBattleBaseSystem>(new BattleBaseSystem());
 
             RegisterModel<IGameModel>(new GameModel());
             RegisterModel<IMapModel>(new MapModel());
@@ -34,6 +37,8 @@ namespace Game.GameBase
             RegisterModel<ICountryModel>(new CountryModel());
             RegisterModel<ITeamModel>(new TeamModel());
             RegisterModel<IGameMenuModel>(new GameMenuModel());
+            RegisterModel<IBattleBaseModel>(new BattleBaseModel());
+            RegisterModel<IFightCreateModel>(new FightCreateModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
             RegisterUtility<IMathUtility>(new MathUtility());

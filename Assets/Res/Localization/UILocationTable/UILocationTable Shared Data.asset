@@ -68,27 +68,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 312077503217664
-    m_Key: UIGameLobby_Menu
+    m_Key: UIGameBattle_Menu
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994880
-    m_Key: UIGameLobbyMenu_BackToMenu
+    m_Key: UIGameBattleMenu_BackToMenu
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994881
-    m_Key: UIGameLobbyMenu_Save
+    m_Key: UIGameBattleMenu_Save
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994882
-    m_Key: UIGameLobbyMenu_Load
+    m_Key: UIGameBattleMenu_Load
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994883
-    m_Key: UIGameLobbyMenu_Setting
+    m_Key: UIGameBattleMenu_Setting
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994884
-    m_Key: UIGameLobbyMenu_Close
+    m_Key: UIGameBattleMenu_Close
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994885
@@ -136,27 +136,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994895
-    m_Key: UIGameCreate_Create
+    m_Key: UIBattleCreate_Create
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994896
-    m_Key: UIGameCreate_Leave
+    m_Key: UIBattleCreate_Leave
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994897
-    m_Key: UIGameCreate_Title
+    m_Key: UIBattleCreate_Title
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994898
-    m_Key: UIGameCreate_Name
+    m_Key: UIBattleCreate_Name
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994899
-    m_Key: UIGameCreate_Age
+    m_Key: UIBattleCreate_Age
     m_Metadata:
       m_Items: []
   - m_Id: 312077519994900
-    m_Key: UIGameCreate_FamilyName
+    m_Key: UIBattleCreate_FamilyName
     m_Metadata:
       m_Items: []
   - m_Id: 45327544705662976

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Game.GameBase;
+using Game.GameMenu;
+using QFramework;
 using UnityEngine;
 
 namespace Game.Achieve
@@ -20,6 +22,15 @@ namespace Game.Achieve
 
         private void Start()
         {
+            if (this.GetModel<IGameMenuModel>().RevertMenuTime <= 1)
+            {
+                DontDestroyOnLoad(this);
+            }
+            else
+            {
+                Destroy(this);
+            }
+
             _achieves = new List<BaseAchieve>();
             _achieves.Add(new StayTwoTimeAchieve());
             _achieves.Add(new AccessThreeTownAchieve());

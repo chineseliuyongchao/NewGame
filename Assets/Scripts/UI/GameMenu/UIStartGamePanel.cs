@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Battle.BattleBase;
 using DG.Tweening;
 using Game.GameBase;
 using Game.GameMenu;
@@ -80,7 +81,7 @@ namespace UI
         {
             this.RegisterEvent<ChangeMenuSceneEvent>(e =>
                 {
-                    if (!e.IsChangeIn)
+                    if (!e.isChangeIn)
                     {
                         CloseSelf();
                     }
