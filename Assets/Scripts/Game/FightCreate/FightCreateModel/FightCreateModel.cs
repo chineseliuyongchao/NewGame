@@ -21,17 +21,17 @@ namespace Game.FightCreate
     }
 
     /// <summary>
-    /// 记录每一个参战军团的信息
+    /// 记录每一个参战军队的信息
     /// </summary>
     public class LegionInfo
     {
         /// <summary>
-        /// 军团id，一个参战方可能有多个军团，每个军团有多个单位（军团编号0的是玩家）
+        /// 军队id，一个阵营可能有多个军队，每个军队有多个单位（军队编号0的是玩家）
         /// </summary>
         public int legionId;
 
         /// <summary>
-        /// 参战方的id，目前参考全战只有两个参战方
+        /// 阵营的id，目前参考全战只有两个阵营
         /// </summary>
         public int belligerentsId;
 

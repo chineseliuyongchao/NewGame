@@ -26,7 +26,7 @@ namespace UI
         public Dictionary<int, UIFightCreateUnit> uiFightCreateUnits;
 
         /// <summary>
-        /// 当前正在展示的参战军团
+        /// 当前正在展示的参战军队
         /// </summary>
         private int _nowLegionId = -1;
 
@@ -117,7 +117,7 @@ namespace UI
             List<int> armKeys = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
             _chooseArmId = armKeys[0];
             AddLegion(0);
-            ChangeShowLegion(0);
+            ChangeShowLegion(1);
             AddLegion(1);
 
             List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
@@ -137,9 +137,14 @@ namespace UI
         }
 
         /// <summary>
-        /// 添加一个参战军团
+        /// 直接记录上一个军队的id，方便后续军队的id扩充
         /// </summary>
-        /// <param name="belligerentsId">参战方id</param>
+        private int _lastLegionId;
+
+        /// <summary>
+        /// 添加一个参战军队
+        /// </summary>
+        /// <param name="belligerentsId">阵营id</param>
         private void AddLegion(int belligerentsId)
         {
             Dictionary<int, UIFightCreateLegion> belligerents;
@@ -158,8 +163,10 @@ namespace UI
                     return;
             }
 
-            int num = belligerents.Count;
-            int newLegionId = belligerentsId * 100 + num;
+            int legionIdMul = 1000;
+            //新的军队id的个位根据上一个军队的id个位加1得到，确保每个军队的id都不一样
+            int newLegionId = belligerentsId * legionIdMul + _lastLegionId % legionIdMul + 1;
+            _lastLegionId = newLegionId;
             LegionInfo legionInfo = new LegionInfo
             {
                 legionId = newLegionId,
@@ -176,7 +183,7 @@ namespace UI
         }
 
         /// <summary>
-        /// 删除一个参战军团
+        /// 删除一个参战军队
         /// </summary>
         public void DeleteLegion(int legionId)
         {
@@ -210,7 +217,7 @@ namespace UI
         }
 
         /// <summary>
-        /// 切换展示的军团
+        /// 切换展示的军队
         /// </summary>
         /// <param name="legionId"></param>
         public void ChangeShowLegion(int legionId)
@@ -303,11 +310,11 @@ namespace UI
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
             int newUnitId = legionInfo.allArm.Count;
             ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], newUnitId);
-            
+
             //todo
             armData.currentPosition =
                 Constants.MyArmsPositionArray1[Random.Range(0, Constants.MyArmsPositionArray1.Length)];
-            
+
             legionInfo.allArm.Add(newUnitId, armData);
 
             GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
@@ -352,7 +359,7 @@ namespace UI
         }
 
         /// <summary>
-        /// 展示一个军团的军队
+        /// 展示一个军队的军队
         /// </summary>
         private void ShowUnit()
         {
