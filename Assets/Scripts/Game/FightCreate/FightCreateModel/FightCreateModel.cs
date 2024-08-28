@@ -36,12 +36,17 @@ namespace Game.FightCreate
         public int belligerentsId;
 
         /// <summary>
-        /// 记录参展方的派系id
+        /// 记录阵营的派系id
         /// </summary>
         public int factionsId;
 
         /// <summary>
-        /// 记录参展方所有的单位信息
+        /// 记录上一个单位的id，用于自动生成单位id
+        /// </summary>
+        public int lastUnitId;
+
+        /// <summary>
+        /// 记录阵营所有的单位信息
         /// </summary>
         public Dictionary<int, ArmData> allArm;
     }

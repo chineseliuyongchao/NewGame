@@ -308,8 +308,9 @@ namespace UI
         private void AddUnit(int armId)
         {
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
-            int newUnitId = legionInfo.allArm.Count;
+            int newUnitId = legionInfo.lastUnitId + 1;
             ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], newUnitId);
+            legionInfo.lastUnitId = newUnitId;
 
             //todo
             armData.currentPosition =

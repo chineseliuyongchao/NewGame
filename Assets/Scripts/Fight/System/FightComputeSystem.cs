@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Fight.Model;
+using Fight.Utils;
+using Game.FightCreate;
 using Game.GameMenu;
 using QFramework;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 namespace Fight.System
 {
@@ -17,6 +19,23 @@ namespace Fight.System
         protected override void OnInit()
         {
             _armDataTypes = this.GetModel<IGameMenuModel>().ARMDataTypes;
+        }
+
+        public void ComputeUnitPos()
+        {
+            Dictionary<int, LegionInfo> allLegions = this.GetModel<IFightCreateModel>().AllLegions;
+            List<int> legionId = new List<int>(allLegions.Keys);
+            for (int i = 0; i < legionId.Count; i++)
+            {
+                LegionInfo legionInfo = allLegions[legionId[i]];
+                List<int> armId = new List<int>(legionInfo.allArm.Keys);
+                for (int j = 0; j < armId.Count; j++)
+                {
+                    ArmData armData = legionInfo.allArm[armId[j]];
+                    armData.currentPosition =
+                        Constants.MyArmsPositionArray1[Random.Range(0, Constants.MyArmsPositionArray1.Length)];
+                }
+            }
         }
 
         public void AssaultWithRetaliation(int armAId, int armBId)
@@ -243,11 +262,10 @@ namespace Fight.System
         private int CompleteSuccessAttackNum(float hitProbability, int nowTroops)
         {
             int successAttackNum = 0;
-            Random random = new Random();
             for (int i = 0; i < nowTroops; i++)
             {
                 // 生成0到1之间的随机数
-                float randomValue = (float)random.NextDouble();
+                float randomValue = Random.Range(0f, 1f);
 
                 // 如果随机数小于命中概率，则计为命中
                 if (randomValue < hitProbability)
