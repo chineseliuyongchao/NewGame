@@ -8,6 +8,7 @@ using QFramework;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ReSharper disable once CheckNamespace
 namespace UI
 {
     public class UIFightCreateData : UIPanelData
@@ -134,6 +135,8 @@ namespace UI
             chooseFight.value = 0;
             _chooseFactionId = factionId[0];
             ChangeShowFight(_chooseFactionId);
+
+            createButton.interactable = false;
         }
 
         /// <summary>
@@ -180,6 +183,7 @@ namespace UI
             UIFightCreateLegion uiFightCreateLegion = newLegion.GetComponent<UIFightCreateLegion>();
             uiFightCreateLegion.InitUI(newLegionId, this);
             belligerents.Add(newLegionId, uiFightCreateLegion);
+            CheckCanCreate();
         }
 
         /// <summary>
@@ -214,6 +218,8 @@ namespace UI
             {
                 _nowLegionId = -1;
             }
+
+            CheckCanCreate();
         }
 
         /// <summary>
@@ -315,6 +321,7 @@ namespace UI
             //todo
             armData.currentPosition =
                 Constants.MyArmsPositionArray1[Random.Range(0, Constants.MyArmsPositionArray1.Length)];
+            Debug.LogError("asd001  " + armData.currentPosition);
 
             legionInfo.allArm.Add(newUnitId, armData);
 
@@ -322,6 +329,7 @@ namespace UI
             UIFightCreateUnit units = unitShow.GetComponent<UIFightCreateUnit>();
             uiFightCreateUnits.Add(newUnitId, units);
             units.InitUI(newUnitId, armId, this);
+            CheckCanCreate();
         }
 
         /// <summary>
@@ -334,6 +342,7 @@ namespace UI
             UIFightCreateUnit units = uiFightCreateUnits[unitId];
             uiFightCreateUnits.Remove(unitId);
             units.gameObject.DestroySelf();
+            CheckCanCreate();
         }
 
         /// <summary>
@@ -357,10 +366,12 @@ namespace UI
                     units.gameObject.DestroySelf();
                 }
             }
+
+            CheckCanCreate();
         }
 
         /// <summary>
-        /// 展示一个军队的军队
+        /// 展示一个军队
         /// </summary>
         private void ShowUnit()
         {
@@ -374,6 +385,25 @@ namespace UI
                 uiFightCreateUnits.Add(data.unitId, units);
                 units.InitUI(data.unitId, data.armId, this);
             }
+        }
+
+        /// <summary>
+        /// 检测是否可以开始战斗，防止在一些不合理的情况下进入战斗（比如兵种没有配全）
+        /// </summary>
+        private void CheckCanCreate()
+        {
+            List<int> legionId = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);
+            bool allLegionHasArm = true;
+            for (int i = 0; i < legionId.Count; i++)
+            {
+                LegionInfo info = this.GetModel<IFightCreateModel>().AllLegions[legionId[i]];
+                if (info.allArm.Count <= 0)
+                {
+                    allLegionHasArm = false;
+                }
+            }
+
+            createButton.interactable = allLegionHasArm;
         }
     }
 }
