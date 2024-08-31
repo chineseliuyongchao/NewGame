@@ -24,15 +24,19 @@ namespace Fight
         {
             Dictionary<int, LegionInfo> allLegions = this.GetModel<IFightCreateModel>().AllLegions;
             List<int> legionId = new List<int>(allLegions.Keys);
+            List<int> pos1 = new List<int>(Constants.MyArmsPositionArray1);
+            List<int> pos2 = new List<int>(Constants.MyArmsPositionArray2);
             for (int i = 0; i < legionId.Count; i++)
             {
                 LegionInfo legionInfo = allLegions[legionId[i]];
                 List<int> armId = new List<int>(legionInfo.allArm.Keys);
+                var pos = legionInfo.factionsId == Constants.BELLIGERENT1 ? pos1 : pos2;
                 for (int j = 0; j < armId.Count; j++)
                 {
                     ArmData armData = legionInfo.allArm[armId[j]];
-                    armData.currentPosition =
-                        Constants.MyArmsPositionArray1[Random.Range(0, Constants.MyArmsPositionArray1.Length)];
+                    int randomIndex = Random.Range(0, pos.Count);
+                    armData.currentPosition = pos[randomIndex];
+                    pos.RemoveAt(randomIndex);//防止多个单位随机到一个位置
                 }
             }
         }

@@ -10,7 +10,7 @@ namespace Fight.Tools
     /**
      * 根据a*的网格生成相应的地图
      */
-    public class MapController : MonoBehaviour, IController
+    public class MapController : BaseGameController
     {
         [Label("原始图块")] [SerializeField] private GameObject piece;
         [Label("提示图块")] [SerializeField] private GameObject tips;
@@ -20,7 +20,7 @@ namespace Fight.Tools
 
         private Tween _alphaAction;
 
-        private void Awake()
+        protected override void OnInit()
         {
             _showTransform = transform.Find("show");
             _tipsTransform = transform.Find("tips");
@@ -39,7 +39,11 @@ namespace Fight.Tools
             }
 
             _tipsTransform.gameObject.SetActive(false);
+            base.OnInit();
+        }
 
+        protected override void OnListenEvent()
+        {
             this.RegisterEvent<SelectArmsFocusEvent>(SelectArmsFocusEvent)
                 .UnRegisterWhenGameObjectDestroyed(this);
         }
@@ -61,11 +65,6 @@ namespace Fight.Tools
                     _alphaAction = tipsMyCanvasGroup.DoAlpha(0.4f, 1f).SetLoops(-1, LoopType.Yoyo);
                     break;
             }
-        }
-
-        public IArchitecture GetArchitecture()
-        {
-            return GameApp.Interface;
         }
     }
 }

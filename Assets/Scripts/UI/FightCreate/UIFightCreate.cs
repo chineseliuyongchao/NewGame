@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Fight;
+using Fight.Utils;
 using Game.FightCreate;
 using Game.GameBase;
 using Game.GameMenu;
@@ -40,9 +41,6 @@ namespace UI
         /// </summary>
         private int _chooseArmId;
 
-        private const int BELLIGERENT1 = 1; //派系1的id
-        private const int BELLIGERENT2 = 2; //派系2的id
-
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIFightCreateData ?? new UIFightCreateData();
@@ -80,8 +78,8 @@ namespace UI
                 CloseSelf();
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.MENU_SCENE);
             });
-            belligerent1Add.onClick.AddListener(() => { AddLegion(BELLIGERENT1); });
-            belligerent2Add.onClick.AddListener(() => { AddLegion(BELLIGERENT2); });
+            belligerent1Add.onClick.AddListener(() => { AddLegion(Constants.BELLIGERENT1); });
+            belligerent2Add.onClick.AddListener(() => { AddLegion(Constants.BELLIGERENT2); });
             chooseFight.onValueChanged.AddListener(type =>
             {
                 List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
@@ -129,9 +127,9 @@ namespace UI
             _chooseFactionId = factionKeys[0];
             List<int> armKeys = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
             _chooseArmId = armKeys[0];
-            AddLegion(BELLIGERENT1);
+            AddLegion(Constants.BELLIGERENT1);
             ChangeShowLegion(1001); //系统默认为玩家添加的军队就会是这个id
-            AddLegion(BELLIGERENT2);
+            AddLegion(Constants.BELLIGERENT2);
 
             List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
             List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
@@ -166,11 +164,11 @@ namespace UI
             Transform buttonTransform;
             switch (belligerentsId)
             {
-                case BELLIGERENT1:
+                case Constants.BELLIGERENT1:
                     belligerents = belligerents1;
                     buttonTransform = belligerent1Add.transform;
                     break;
-                case BELLIGERENT2:
+                case Constants.BELLIGERENT2:
                     belligerents = belligerents2;
                     buttonTransform = belligerent2Add.transform;
                     break;
@@ -212,10 +210,10 @@ namespace UI
             Dictionary<int, UIFightCreateLegion> belligerents;
             switch (legionInfo.belligerentsId)
             {
-                case BELLIGERENT1:
+                case Constants.BELLIGERENT1:
                     belligerents = belligerents1;
                     break;
-                case BELLIGERENT2:
+                case Constants.BELLIGERENT2:
                     belligerents = belligerents2;
                     break;
                 default:
@@ -249,10 +247,10 @@ namespace UI
             Dictionary<int, UIFightCreateLegion> belligerents;
             switch (legionInfo.belligerentsId)
             {
-                case BELLIGERENT1:
+                case Constants.BELLIGERENT1:
                     belligerents = belligerents1;
                     break;
-                case BELLIGERENT2:
+                case Constants.BELLIGERENT2:
                     belligerents = belligerents2;
                     break;
                 default:
@@ -265,10 +263,10 @@ namespace UI
                 Dictionary<int, UIFightCreateLegion> beforeBelligerents;
                 switch (beforeLegionInfo.belligerentsId)
                 {
-                    case BELLIGERENT1:
+                    case Constants.BELLIGERENT1:
                         beforeBelligerents = belligerents1;
                         break;
-                    case BELLIGERENT2:
+                    case Constants.BELLIGERENT2:
                         beforeBelligerents = belligerents2;
                         break;
                     default:
