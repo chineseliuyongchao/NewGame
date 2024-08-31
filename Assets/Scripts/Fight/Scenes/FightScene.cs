@@ -24,16 +24,16 @@ namespace Fight.Scenes
         //debug
         [HideInInspector] public InputActionAsset inputActionAsset;
 
-        public AStarModel aStarModel;
+        public IAStarModel aStarModel;
 
         private void Awake()
         {
             _ins = this;
-            this.GetModel<AStarModel>().InitStarData();
+            this.GetModel<IAStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
             inputActionAsset =
                 AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/MyControl.inputactions");
-            aStarModel = this.GetModel<AStarModel>();
+            aStarModel = this.GetModel<IAStarModel>();
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
         }
 
@@ -49,7 +49,7 @@ namespace Fight.Scenes
 
         public ArmsController GetArmsControllerByIndex(int index)
         {
-            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
             if (fightGameModel.IndexToArmsIdDictionary.TryGetValue(index, out int id))
             {
                 return _armsFsm.transform.Find(id.ToString()).GetComponent<ArmsController>();
@@ -61,9 +61,10 @@ namespace Fight.Scenes
         private void OnDestroy()
         {
             GameApp.Interface.UnRegisterSystem<IFightComputeSystem>();
+            GameApp.Interface.UnRegisterSystem<IFightSystem>();
 
-            GameApp.Interface.UnRegisterModel<AStarModel>();
-            GameApp.Interface.UnRegisterModel<FightGameModel>();
+            GameApp.Interface.UnRegisterModel<IAStarModel>();
+            GameApp.Interface.UnRegisterModel<IFightGameModel>();
             GameApp.Interface.UnRegisterModel<IFightModel>();
         }
     }

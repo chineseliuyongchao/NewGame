@@ -66,11 +66,13 @@ namespace UI
 
                 //这些应该放到加载界面处理，现在没有加载界面，所以先放这里
                 GameApp.Interface.RegisterSystem<IFightComputeSystem>(new FightComputeSystem());
+                GameApp.Interface.RegisterSystem<IFightSystem>(new FightSystem());
                 this.GetSystem<IFightComputeSystem>().ComputeUnitPos();
 
-                GameApp.Interface.RegisterModel(new AStarModel());
-                GameApp.Interface.RegisterModel(new FightGameModel());
+                GameApp.Interface.RegisterModel<IAStarModel>(new AStarModel());
+                GameApp.Interface.RegisterModel<IFightGameModel>(new FightGameModel());
                 GameApp.Interface.RegisterModel<IFightModel>(new FightModel());
+                this.GetSystem<IFightSystem>().InitFightData();
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.FIGHT_SCENE);
             });
             leaveButton.onClick.AddListener(() =>

@@ -14,7 +14,7 @@ namespace Fight.FsmS
 
         private void Awake()
         {
-            var aStarModel = this.GetModel<AStarModel>();
+            var aStarModel = this.GetModel<IAStarModel>();
 
             //获取所有战场上的军队数据
             IFightCreateModel fightCreateModel = this.GetModel<IFightCreateModel>();
@@ -30,7 +30,7 @@ namespace Fight.FsmS
                     controller.view.OnInit(obj.transform);
                     controller.OnInit();
                     obj.transform.position =
-                        (Vector3)aStarModel.fightGridNodeInfoList[controller.armData.currentPosition].position;
+                        (Vector3)aStarModel.FightGridNodeInfoList[controller.armData.currentPosition].position;
                 }
             }
 

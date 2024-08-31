@@ -25,9 +25,9 @@ namespace Fight.Tools
             _showTransform = transform.Find("show");
             _tipsTransform = transform.Find("tips");
 
-            var aStarModel = this.GetModel<AStarModel>();
+            var aStarModel = this.GetModel<IAStarModel>();
             var index = 1;
-            foreach (var graphNode in aStarModel.fightGridNodeInfoList.Values)
+            foreach (var graphNode in aStarModel.FightGridNodeInfoList.Values)
             {
                 var obj = Instantiate(piece, _showTransform);
                 obj.transform.localPosition = (Vector3)graphNode.position;

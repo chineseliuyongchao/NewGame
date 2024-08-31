@@ -13,10 +13,10 @@ namespace Fight
         {
             var cam = Camera.main;
             if (!cam) return;
-            AStarModel aStarModel = this.GetModel<AStarModel>();
-            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            IAStarModel aStarModel = this.GetModel<IAStarModel>();
+            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
             int index = aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
-            if (!aStarModel.fightGridNodeInfoList.ContainsKey(index))
+            if (!aStarModel.FightGridNodeInfoList.ContainsKey(index))
             {
                 return;
             }
@@ -41,7 +41,7 @@ namespace Fight
                     //点击了其他的兵种
                     this.SendCommand(new SelectArmsFocusCommand(index));
                 }
-                else if (fightGameModel.CanWalkableIndex(index))
+                else if (this.GetSystem<IFightSystem>().CanWalkableIndex(index))
                 {
                     //筛选掉障碍物，表示兵种要移动到这个位置
                     this.SendCommand(new ArmsMoveCommand(index));

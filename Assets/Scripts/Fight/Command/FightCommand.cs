@@ -18,7 +18,7 @@ namespace Fight
 
         protected override void OnExecute()
         {
-            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
             if (fightGameModel.FocusController == null)
             {
                 return;
@@ -94,7 +94,7 @@ namespace Fight
 
         protected override void OnExecute()
         {
-            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
             ArmsController currentFocusController = FightScene.Ins.GetArmsControllerByIndex(_index);
             currentFocusController.StartFocusAction();
             if (fightGameModel.FocusController) fightGameModel.FocusController.EndFocusAction();
@@ -110,7 +110,7 @@ namespace Fight
     {
         protected override void OnExecute()
         {
-            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
             if (!fightGameModel.FocusController)
             {
                 return;

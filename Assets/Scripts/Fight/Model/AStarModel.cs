@@ -9,14 +9,16 @@ namespace Fight
     /**
      * 存放a*的相关表格信息
      */
-    public class AStarModel : AbstractModel
+    public class AStarModel : AbstractModel, IAStarModel
     {
         /// <summary>
         ///     A*中节点的index对应世界的节点的index
         /// </summary>
-        public readonly SortedList<uint, int> aStarNodeToWorldNode = new();
+        private readonly SortedList<uint, int> _aStarNodeToWorldNode = new();
 
-        public readonly SortedList<int, GridNodeBase> fightGridNodeInfoList = new();
+        private readonly SortedList<int, GridNodeBase> _fightGridNodeInfoList = new();
+
+        public SortedList<int, GridNodeBase> FightGridNodeInfoList => _fightGridNodeInfoList;
 
         protected override void OnInit()
         {
@@ -40,9 +42,9 @@ namespace Fight
                         Constants.FightNodeHeightOffset)
                         continue;
 
-                    fightGridNodeInfoList[index] = nodeBase;
+                    _fightGridNodeInfoList[index] = nodeBase;
                     // nodeBase.NodeInGridIndex = index;
-                    aStarNodeToWorldNode[nodeBase.NodeIndex] = index;
+                    _aStarNodeToWorldNode[nodeBase.NodeIndex] = index;
                     index += Constants.FightNodeHeightNum;
                 }
             }
@@ -55,7 +57,7 @@ namespace Fight
         public GridNodeBase GetGridNode(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
-            return fightGridNodeInfoList[aStarNodeToWorldNode[info.node.NodeIndex]];
+            return _fightGridNodeInfoList[_aStarNodeToWorldNode[info.node.NodeIndex]];
         }
 
         /// <summary>
@@ -75,7 +77,7 @@ namespace Fight
         public int GetGridNodeIndexMyRule(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
-            return aStarNodeToWorldNode[info.node.NodeIndex];
+            return _aStarNodeToWorldNode[info.node.NodeIndex];
         }
     }
 }

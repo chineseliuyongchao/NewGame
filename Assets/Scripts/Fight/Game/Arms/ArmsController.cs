@@ -53,7 +53,7 @@ namespace Fight.Game.Arms
             switch (FightScene.Ins.currentBattleType)
             {
                 case BattleType.StartWarPreparations:
-                    Vector3 endPosition = (Vector3)this.GetModel<AStarModel>().fightGridNodeInfoList[endIndex].position;
+                    Vector3 endPosition = (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
                     transform.position = endPosition;
                     ChangeOrderLayer();
                     break;
