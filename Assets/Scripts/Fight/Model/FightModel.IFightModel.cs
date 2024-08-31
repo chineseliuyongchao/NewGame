@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using QFramework;
 
-namespace Fight.Model
+namespace Fight
 {
     public interface IFightModel : IModel
     {

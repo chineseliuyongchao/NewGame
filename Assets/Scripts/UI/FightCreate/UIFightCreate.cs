@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using Fight.Model;
-using Fight.Utils;
+using Fight;
 using Game.FightCreate;
 using Game.GameBase;
 using Game.GameMenu;
@@ -41,6 +40,9 @@ namespace UI
         /// </summary>
         private int _chooseArmId;
 
+        private const int BELLIGERENT1 = 1; //派系1的id
+        private const int BELLIGERENT2 = 2; //派系2的id
+
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIFightCreateData ?? new UIFightCreateData();
@@ -61,6 +63,14 @@ namespace UI
             createButton.onClick.AddListener(() =>
             {
                 CloseSelf();
+
+                //这些应该放到加载界面处理，现在没有加载界面，所以先放这里
+                GameApp.Interface.RegisterSystem<IFightComputeSystem>(new FightComputeSystem());
+                this.GetSystem<IFightComputeSystem>().ComputeUnitPos();
+
+                GameApp.Interface.RegisterModel(new AStarModel());
+                GameApp.Interface.RegisterModel(new FightGameModel());
+                GameApp.Interface.RegisterModel<IFightModel>(new FightModel());
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.FIGHT_SCENE);
             });
             leaveButton.onClick.AddListener(() =>
@@ -68,8 +78,8 @@ namespace UI
                 CloseSelf();
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.MENU_SCENE);
             });
-            belligerent1Add.onClick.AddListener(() => { AddLegion(0); });
-            belligerent2Add.onClick.AddListener(() => { AddLegion(1); });
+            belligerent1Add.onClick.AddListener(() => { AddLegion(BELLIGERENT1); });
+            belligerent2Add.onClick.AddListener(() => { AddLegion(BELLIGERENT2); });
             chooseFight.onValueChanged.AddListener(type =>
             {
                 List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
@@ -117,9 +127,9 @@ namespace UI
             _chooseFactionId = factionKeys[0];
             List<int> armKeys = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
             _chooseArmId = armKeys[0];
-            AddLegion(0);
-            ChangeShowLegion(1);
-            AddLegion(1);
+            AddLegion(BELLIGERENT1);
+            ChangeShowLegion(1001); //系统默认为玩家添加的军队就会是这个id
+            AddLegion(BELLIGERENT2);
 
             List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
             List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
@@ -154,11 +164,11 @@ namespace UI
             Transform buttonTransform;
             switch (belligerentsId)
             {
-                case 0:
+                case BELLIGERENT1:
                     belligerents = belligerents1;
                     buttonTransform = belligerent1Add.transform;
                     break;
-                case 1:
+                case BELLIGERENT2:
                     belligerents = belligerents2;
                     buttonTransform = belligerent2Add.transform;
                     break;
@@ -200,10 +210,10 @@ namespace UI
             Dictionary<int, UIFightCreateLegion> belligerents;
             switch (legionInfo.belligerentsId)
             {
-                case 0:
+                case BELLIGERENT1:
                     belligerents = belligerents1;
                     break;
-                case 1:
+                case BELLIGERENT2:
                     belligerents = belligerents2;
                     break;
                 default:
@@ -237,10 +247,10 @@ namespace UI
             Dictionary<int, UIFightCreateLegion> belligerents;
             switch (legionInfo.belligerentsId)
             {
-                case 0:
+                case BELLIGERENT1:
                     belligerents = belligerents1;
                     break;
-                case 1:
+                case BELLIGERENT2:
                     belligerents = belligerents2;
                     break;
                 default:
@@ -253,10 +263,10 @@ namespace UI
                 Dictionary<int, UIFightCreateLegion> beforeBelligerents;
                 switch (beforeLegionInfo.belligerentsId)
                 {
-                    case 0:
+                    case BELLIGERENT1:
                         beforeBelligerents = belligerents1;
                         break;
-                    case 1:
+                    case BELLIGERENT2:
                         beforeBelligerents = belligerents2;
                         break;
                     default:
@@ -315,16 +325,10 @@ namespace UI
         {
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
             int newUnitId = legionInfo.lastUnitId + 1;
-            ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], newUnitId);
+            int realUnitId = legionInfo.legionId * 1000 + newUnitId; //确保战场每个单位的id都不一样
+            ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], realUnitId);
             legionInfo.lastUnitId = newUnitId;
-
-            //todo
-            armData.currentPosition =
-                Constants.MyArmsPositionArray1[Random.Range(0, Constants.MyArmsPositionArray1.Length)];
-            Debug.LogError("asd001  " + armData.currentPosition);
-
             legionInfo.allArm.Add(newUnitId, armData);
-
             GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
             UIFightCreateUnit units = unitShow.GetComponent<UIFightCreateUnit>();
             uiFightCreateUnits.Add(newUnitId, units);

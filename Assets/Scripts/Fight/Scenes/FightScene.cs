@@ -1,10 +1,5 @@
-﻿using Fight.Commands;
-using Fight.Enum;
-using Fight.FsmS;
-using Fight.Game;
+﻿using Fight.FsmS;
 using Fight.Game.Arms;
-using Fight.Model;
-using Fight.System;
 using Game.GameBase;
 using QFramework;
 using UI;
@@ -34,19 +29,11 @@ namespace Fight.Scenes
         private void Awake()
         {
             _ins = this;
-            
-            GameApp.Interface.RegisterSystem(new GameSystem());
-            GameApp.Interface.RegisterSystem<IFightComputeSystem>(new FightComputeSystem());
-            
-            GameApp.Interface.RegisterModel(new AStarModel());
-            GameApp.Interface.RegisterModel(new FightGameModel());
-            GameApp.Interface.RegisterModel<IFightModel>(new FightModel());
-
+            this.GetModel<AStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
             inputActionAsset =
                 AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/MyControl.inputactions");
             aStarModel = this.GetModel<AStarModel>();
-
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
         }
 
@@ -73,9 +60,8 @@ namespace Fight.Scenes
 
         private void OnDestroy()
         {
-            GameApp.Interface.UnRegisterSystem<GameSystem>();
             GameApp.Interface.UnRegisterSystem<IFightComputeSystem>();
-            
+
             GameApp.Interface.UnRegisterModel<AStarModel>();
             GameApp.Interface.UnRegisterModel<FightGameModel>();
             GameApp.Interface.UnRegisterModel<IFightModel>();

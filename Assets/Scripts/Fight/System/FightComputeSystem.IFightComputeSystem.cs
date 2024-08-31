@@ -1,6 +1,6 @@
 ﻿using QFramework;
 
-namespace Fight.System
+namespace Fight
 {
     public interface IFightComputeSystem : ISystem
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Fight.Game;
 using Fight.Game.Arms;
 using Game.FightCreate;
 using Game.GameBase;
@@ -11,7 +10,6 @@ namespace Fight.FsmS
     public class ArmsFsm : MonoBehaviour, IController
     {
         private readonly SortedList<string, GameObject> _armsGameObjectList = new();
-
         public GameObject objArmsGameObject;
 
         private void Awake()
@@ -20,7 +18,6 @@ namespace Fight.FsmS
 
             //获取所有战场上的军队数据
             IFightCreateModel fightCreateModel = this.GetModel<IFightCreateModel>();
-
             foreach (var tmp in fightCreateModel.AllLegions.Values)
             {
                 foreach (var tmp2 in tmp.allArm)
@@ -32,7 +29,8 @@ namespace Fight.FsmS
                     controller.view = obj.AddComponent<ObjectArmsView>();
                     controller.view.OnInit(obj.transform);
                     controller.OnInit();
-                    obj.transform.position = (Vector3)aStarModel.FightGridNodeInfoList[controller.armData.currentPosition].position;
+                    obj.transform.position =
+                        (Vector3)aStarModel.fightGridNodeInfoList[controller.armData.currentPosition].position;
                 }
             }
 

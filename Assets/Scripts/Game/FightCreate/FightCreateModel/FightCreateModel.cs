@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fight.Model;
+using Fight;
 using QFramework;
 
 namespace Game.FightCreate

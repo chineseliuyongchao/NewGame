@@ -1,7 +1,4 @@
 ﻿using DG.Tweening;
-using Fight.Enum;
-using Fight.Events;
-using Fight.Game;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
@@ -30,7 +27,7 @@ namespace Fight.Tools
 
             var aStarModel = this.GetModel<AStarModel>();
             var index = 1;
-            foreach (var graphNode in aStarModel.FightGridNodeInfoList.Values)
+            foreach (var graphNode in aStarModel.fightGridNodeInfoList.Values)
             {
                 var obj = Instantiate(piece, _showTransform);
                 obj.transform.localPosition = (Vector3)graphNode.position;
@@ -49,7 +46,7 @@ namespace Fight.Tools
 
         private void SelectArmsFocusEvent(SelectArmsFocusEvent focusEvent)
         {
-            switch (focusEvent.BattleType)
+            switch (focusEvent.battleType)
             {
                 case BattleType.StartWarPreparations:
                     if (_alphaAction is { active: true })

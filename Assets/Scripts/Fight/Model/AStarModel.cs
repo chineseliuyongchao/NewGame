@@ -4,7 +4,7 @@ using Pathfinding;
 using QFramework;
 using UnityEngine;
 
-namespace Fight.Game
+namespace Fight
 {
     /**
      * 存放a*的相关表格信息
@@ -14,11 +14,15 @@ namespace Fight.Game
         /// <summary>
         ///     A*中节点的index对应世界的节点的index
         /// </summary>
-        public SortedList<uint, int> AStarNodeToWorldNode = new();
+        public readonly SortedList<uint, int> aStarNodeToWorldNode = new();
 
-        public SortedList<int, GridNodeBase> FightGridNodeInfoList = new();
+        public readonly SortedList<int, GridNodeBase> fightGridNodeInfoList = new();
 
         protected override void OnInit()
+        {
+        }
+
+        public void InitStarData()
         {
             for (var i = Constants.FightNodeHeightNum - 1; i >= 0; i--)
             {
@@ -36,9 +40,9 @@ namespace Fight.Game
                         Constants.FightNodeHeightOffset)
                         continue;
 
-                    FightGridNodeInfoList[index] = nodeBase;
+                    fightGridNodeInfoList[index] = nodeBase;
                     // nodeBase.NodeInGridIndex = index;
-                    AStarNodeToWorldNode[nodeBase.NodeIndex] = index;
+                    aStarNodeToWorldNode[nodeBase.NodeIndex] = index;
                     index += Constants.FightNodeHeightNum;
                 }
             }
@@ -51,7 +55,7 @@ namespace Fight.Game
         public GridNodeBase GetGridNode(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
-            return FightGridNodeInfoList[AStarNodeToWorldNode[info.node.NodeIndex]];
+            return fightGridNodeInfoList[aStarNodeToWorldNode[info.node.NodeIndex]];
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace Fight.Game
         public int GetGridNodeIndexMyRule(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
-            return AStarNodeToWorldNode[info.node.NodeIndex];
+            return aStarNodeToWorldNode[info.node.NodeIndex];
         }
     }
 }

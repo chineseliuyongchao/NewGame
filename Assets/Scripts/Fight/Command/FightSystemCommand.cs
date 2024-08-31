@@ -1,10 +1,12 @@
-﻿using Fight.Game;
-using QFramework;
+﻿using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Fight.Commands.EventSystem
+namespace Fight
 {
+    /// <summary>
+    /// 鼠标点击
+    /// </summary>
     public class PointerClickCommand : AbstractCommand
     {
         protected override void OnExecute()
@@ -14,7 +16,7 @@ namespace Fight.Commands.EventSystem
             AStarModel aStarModel = this.GetModel<AStarModel>();
             FightGameModel fightGameModel = this.GetModel<FightGameModel>();
             int index = aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
-            if (!aStarModel.FightGridNodeInfoList.ContainsKey(index))
+            if (!aStarModel.fightGridNodeInfoList.ContainsKey(index))
             {
                 return;
             }
