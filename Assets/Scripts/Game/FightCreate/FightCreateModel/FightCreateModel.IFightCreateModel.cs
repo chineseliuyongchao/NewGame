@@ -9,7 +9,7 @@ namespace Game.FightCreate
     public interface IFightCreateModel : IModel
     {
         /// <summary>
-        /// 记录战场中所有参战军团的信息(军团id，军团信息)
+        /// 记录战场中所有参战军队的信息(军队id，军队信息)
         /// </summary>
         public Dictionary<int, LegionInfo> AllLegions { get; set; }
     }

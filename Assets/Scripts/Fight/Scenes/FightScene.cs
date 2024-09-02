@@ -1,10 +1,5 @@
-﻿using Fight.Commands;
-using Fight.Enum;
-using Fight.FsmS;
-using Fight.Game;
+﻿using Fight.FsmS;
 using Fight.Game.Arms;
-using Fight.Model;
-using Fight.System;
 using Game.GameBase;
 using QFramework;
 using UI;
@@ -29,24 +24,16 @@ namespace Fight.Scenes
         //debug
         [HideInInspector] public InputActionAsset inputActionAsset;
 
-        public AStarModel aStarModel;
+        public IAStarModel aStarModel;
 
         private void Awake()
         {
             _ins = this;
-            
-            GameApp.Interface.RegisterSystem(new GameSystem());
-            GameApp.Interface.RegisterSystem<IFightComputeSystem>(new FightComputeSystem());
-            
-            GameApp.Interface.RegisterModel(new AStarModel());
-            GameApp.Interface.RegisterModel(new FightGameModel());
-            GameApp.Interface.RegisterModel<IFightModel>(new FightModel());
-
+            this.GetModel<IAStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
             inputActionAsset =
                 AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/MyControl.inputactions");
-            aStarModel = this.GetModel<AStarModel>();
-
+            aStarModel = this.GetModel<IAStarModel>();
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
         }
 
@@ -62,7 +49,7 @@ namespace Fight.Scenes
 
         public ArmsController GetArmsControllerByIndex(int index)
         {
-            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
             if (fightGameModel.IndexToArmsIdDictionary.TryGetValue(index, out int id))
             {
                 return _armsFsm.transform.Find(id.ToString()).GetComponent<ArmsController>();
@@ -73,11 +60,11 @@ namespace Fight.Scenes
 
         private void OnDestroy()
         {
-            GameApp.Interface.UnRegisterSystem<GameSystem>();
             GameApp.Interface.UnRegisterSystem<IFightComputeSystem>();
-            
-            GameApp.Interface.UnRegisterModel<AStarModel>();
-            GameApp.Interface.UnRegisterModel<FightGameModel>();
+            GameApp.Interface.UnRegisterSystem<IFightSystem>();
+
+            GameApp.Interface.UnRegisterModel<IAStarModel>();
+            GameApp.Interface.UnRegisterModel<IFightGameModel>();
             GameApp.Interface.UnRegisterModel<IFightModel>();
         }
     }

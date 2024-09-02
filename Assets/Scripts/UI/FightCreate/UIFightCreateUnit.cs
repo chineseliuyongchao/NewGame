@@ -10,7 +10,7 @@ namespace UI
     public partial class UIFightCreateUnit : UIBase
     {
         /// <summary>
-        /// 参战方id
+        /// 阵营id
         /// </summary>
         private int _unitId;
 

@@ -1,4 +1,4 @@
-﻿namespace Fight.Enum
+﻿namespace Fight
 {
     /// <summary>
     /// 战斗界面的各个状态

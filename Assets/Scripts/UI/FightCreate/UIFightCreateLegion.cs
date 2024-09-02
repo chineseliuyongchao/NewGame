@@ -12,7 +12,7 @@ namespace UI
     public partial class UIFightCreateLegion : UIBase
     {
         /// <summary>
-        /// 参战方id
+        /// 阵营id
         /// </summary>
         private int _legionId;
 
@@ -38,7 +38,7 @@ namespace UI
             {
                 if (_legionId == 0)
                 {
-                    return; //玩家军团不能删除
+                    return; //玩家军队不能删除
                 }
 
                 LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_legionId];
@@ -62,7 +62,7 @@ namespace UI
 
                 if (belligerents.Count <= 1)
                 {
-                    return; //如果参战方只剩一个军团也不能删除
+                    return; //如果阵营只剩一个军队也不能删除
                 }
 
                 _uiFightCreate.DeleteLegion(_legionId);
@@ -79,6 +79,7 @@ namespace UI
             _legionId = id;
             _uiFightCreate = uiFightCreate;
             Init();
+            legionName.text = "军队：" + _legionId;
         }
 
         public void ChangeShow(bool isShow)

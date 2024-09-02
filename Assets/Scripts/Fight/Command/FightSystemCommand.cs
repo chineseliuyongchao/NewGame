@@ -1,18 +1,20 @@
-﻿using Fight.Game;
-using QFramework;
+﻿using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Fight.Commands.EventSystem
+namespace Fight
 {
+    /// <summary>
+    /// 鼠标点击
+    /// </summary>
     public class PointerClickCommand : AbstractCommand
     {
         protected override void OnExecute()
         {
             var cam = Camera.main;
             if (!cam) return;
-            AStarModel aStarModel = this.GetModel<AStarModel>();
-            FightGameModel fightGameModel = this.GetModel<FightGameModel>();
+            IAStarModel aStarModel = this.GetModel<IAStarModel>();
+            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
             int index = aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
             if (!aStarModel.FightGridNodeInfoList.ContainsKey(index))
             {
@@ -39,7 +41,7 @@ namespace Fight.Commands.EventSystem
                     //点击了其他的兵种
                     this.SendCommand(new SelectArmsFocusCommand(index));
                 }
-                else if (fightGameModel.CanWalkableIndex(index))
+                else if (this.GetSystem<IFightSystem>().CanWalkableIndex(index))
                 {
                     //筛选掉障碍物，表示兵种要移动到这个位置
                     this.SendCommand(new ArmsMoveCommand(index));

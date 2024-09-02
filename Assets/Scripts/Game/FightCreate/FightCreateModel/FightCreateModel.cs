@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fight.Model;
+using Fight;
 using QFramework;
 
 namespace Game.FightCreate
@@ -21,27 +21,32 @@ namespace Game.FightCreate
     }
 
     /// <summary>
-    /// 记录每一个参战军团的信息
+    /// 记录每一个参战军队的信息
     /// </summary>
     public class LegionInfo
     {
         /// <summary>
-        /// 军团id，一个参战方可能有多个军团，每个军团有多个单位（军团编号0的是玩家）
+        /// 军队id，一个阵营可能有多个军队，每个军队有多个单位（军队编号0的是玩家）
         /// </summary>
         public int legionId;
 
         /// <summary>
-        /// 参战方的id，目前参考全战只有两个参战方
+        /// 阵营的id，目前参考全战只有两个阵营
         /// </summary>
         public int belligerentsId;
 
         /// <summary>
-        /// 记录参展方的派系id
+        /// 记录阵营的派系id
         /// </summary>
         public int factionsId;
 
         /// <summary>
-        /// 记录参展方所有的单位信息
+        /// 记录上一个单位的id，用于自动生成单位id
+        /// </summary>
+        public int lastUnitId;
+
+        /// <summary>
+        /// 记录阵营所有的单位信息
         /// </summary>
         public Dictionary<int, ArmData> allArm;
     }

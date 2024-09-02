@@ -2,7 +2,7 @@
 using Game.GameMenu;
 using UnityEngine;
 
-namespace Fight.Model
+namespace Fight
 {
     /// <summary>
     /// 在攻击模拟时记录一个单位的实时属性

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Fight.Model;
+using Fight;
 using Fight.Utils;
 using Game.FightCreate;
 using Game.GameBase;
@@ -8,6 +8,7 @@ using QFramework;
 using UnityEngine;
 using UnityEngine.UI;
 
+// ReSharper disable once CheckNamespace
 namespace UI
 {
     public class UIFightCreateData : UIPanelData
@@ -26,7 +27,7 @@ namespace UI
         public Dictionary<int, UIFightCreateUnit> uiFightCreateUnits;
 
         /// <summary>
-        /// 当前正在展示的参战军团
+        /// 当前正在展示的参战军队
         /// </summary>
         private int _nowLegionId = -1;
 
@@ -60,6 +61,16 @@ namespace UI
             createButton.onClick.AddListener(() =>
             {
                 CloseSelf();
+
+                //这些应该放到加载界面处理，现在没有加载界面，所以先放这里
+                GameApp.Interface.RegisterSystem<IFightComputeSystem>(new FightComputeSystem());
+                GameApp.Interface.RegisterSystem<IFightSystem>(new FightSystem());
+                this.GetSystem<IFightComputeSystem>().ComputeUnitPos();
+
+                GameApp.Interface.RegisterModel<IAStarModel>(new AStarModel());
+                GameApp.Interface.RegisterModel<IFightGameModel>(new FightGameModel());
+                GameApp.Interface.RegisterModel<IFightModel>(new FightModel());
+                this.GetSystem<IFightSystem>().InitFightData();
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.FIGHT_SCENE);
             });
             leaveButton.onClick.AddListener(() =>
@@ -67,8 +78,8 @@ namespace UI
                 CloseSelf();
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.MENU_SCENE);
             });
-            belligerent1Add.onClick.AddListener(() => { AddLegion(0); });
-            belligerent2Add.onClick.AddListener(() => { AddLegion(1); });
+            belligerent1Add.onClick.AddListener(() => { AddLegion(Constants.BELLIGERENT1); });
+            belligerent2Add.onClick.AddListener(() => { AddLegion(Constants.BELLIGERENT2); });
             chooseFight.onValueChanged.AddListener(type =>
             {
                 List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
@@ -116,9 +127,9 @@ namespace UI
             _chooseFactionId = factionKeys[0];
             List<int> armKeys = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
             _chooseArmId = armKeys[0];
-            AddLegion(0);
-            ChangeShowLegion(0);
-            AddLegion(1);
+            AddLegion(Constants.BELLIGERENT1);
+            ChangeShowLegion(1001); //系统默认为玩家添加的军队就会是这个id
+            AddLegion(Constants.BELLIGERENT2);
 
             List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();
             List<int> factionId = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
@@ -134,23 +145,30 @@ namespace UI
             chooseFight.value = 0;
             _chooseFactionId = factionId[0];
             ChangeShowFight(_chooseFactionId);
+
+            createButton.interactable = false;
         }
 
         /// <summary>
-        /// 添加一个参战军团
+        /// 直接记录上一个军队的id，方便后续军队的id扩充
         /// </summary>
-        /// <param name="belligerentsId">参战方id</param>
+        private int _lastLegionId;
+
+        /// <summary>
+        /// 添加一个参战军队
+        /// </summary>
+        /// <param name="belligerentsId">阵营id</param>
         private void AddLegion(int belligerentsId)
         {
             Dictionary<int, UIFightCreateLegion> belligerents;
             Transform buttonTransform;
             switch (belligerentsId)
             {
-                case 0:
+                case Constants.BELLIGERENT1:
                     belligerents = belligerents1;
                     buttonTransform = belligerent1Add.transform;
                     break;
-                case 1:
+                case Constants.BELLIGERENT2:
                     belligerents = belligerents2;
                     buttonTransform = belligerent2Add.transform;
                     break;
@@ -158,8 +176,10 @@ namespace UI
                     return;
             }
 
-            int num = belligerents.Count;
-            int newLegionId = belligerentsId * 100 + num;
+            int legionIdMul = 1000;
+            //新的军队id的个位根据上一个军队的id个位加1得到，确保每个军队的id都不一样
+            int newLegionId = belligerentsId * legionIdMul + _lastLegionId % legionIdMul + 1;
+            _lastLegionId = newLegionId;
             LegionInfo legionInfo = new LegionInfo
             {
                 legionId = newLegionId,
@@ -173,10 +193,11 @@ namespace UI
             UIFightCreateLegion uiFightCreateLegion = newLegion.GetComponent<UIFightCreateLegion>();
             uiFightCreateLegion.InitUI(newLegionId, this);
             belligerents.Add(newLegionId, uiFightCreateLegion);
+            CheckCanCreate();
         }
 
         /// <summary>
-        /// 删除一个参战军团
+        /// 删除一个参战军队
         /// </summary>
         public void DeleteLegion(int legionId)
         {
@@ -189,10 +210,10 @@ namespace UI
             Dictionary<int, UIFightCreateLegion> belligerents;
             switch (legionInfo.belligerentsId)
             {
-                case 0:
+                case Constants.BELLIGERENT1:
                     belligerents = belligerents1;
                     break;
-                case 1:
+                case Constants.BELLIGERENT2:
                     belligerents = belligerents2;
                     break;
                 default:
@@ -207,10 +228,12 @@ namespace UI
             {
                 _nowLegionId = -1;
             }
+
+            CheckCanCreate();
         }
 
         /// <summary>
-        /// 切换展示的军团
+        /// 切换展示的军队
         /// </summary>
         /// <param name="legionId"></param>
         public void ChangeShowLegion(int legionId)
@@ -224,10 +247,10 @@ namespace UI
             Dictionary<int, UIFightCreateLegion> belligerents;
             switch (legionInfo.belligerentsId)
             {
-                case 0:
+                case Constants.BELLIGERENT1:
                     belligerents = belligerents1;
                     break;
-                case 1:
+                case Constants.BELLIGERENT2:
                     belligerents = belligerents2;
                     break;
                 default:
@@ -240,10 +263,10 @@ namespace UI
                 Dictionary<int, UIFightCreateLegion> beforeBelligerents;
                 switch (beforeLegionInfo.belligerentsId)
                 {
-                    case 0:
+                    case Constants.BELLIGERENT1:
                         beforeBelligerents = belligerents1;
                         break;
-                    case 1:
+                    case Constants.BELLIGERENT2:
                         beforeBelligerents = belligerents2;
                         break;
                     default:
@@ -301,19 +324,16 @@ namespace UI
         private void AddUnit(int armId)
         {
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
-            int newUnitId = legionInfo.allArm.Count;
-            ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], newUnitId);
-            
-            //todo
-            armData.currentPosition =
-                Constants.MyArmsPositionArray1[Random.Range(0, Constants.MyArmsPositionArray1.Length)];
-            
+            int newUnitId = legionInfo.lastUnitId + 1;
+            int realUnitId = legionInfo.legionId * 1000 + newUnitId; //确保战场每个单位的id都不一样
+            ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], realUnitId);
+            legionInfo.lastUnitId = newUnitId;
             legionInfo.allArm.Add(newUnitId, armData);
-
             GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
             UIFightCreateUnit units = unitShow.GetComponent<UIFightCreateUnit>();
             uiFightCreateUnits.Add(newUnitId, units);
             units.InitUI(newUnitId, armId, this);
+            CheckCanCreate();
         }
 
         /// <summary>
@@ -326,6 +346,7 @@ namespace UI
             UIFightCreateUnit units = uiFightCreateUnits[unitId];
             uiFightCreateUnits.Remove(unitId);
             units.gameObject.DestroySelf();
+            CheckCanCreate();
         }
 
         /// <summary>
@@ -349,10 +370,12 @@ namespace UI
                     units.gameObject.DestroySelf();
                 }
             }
+
+            CheckCanCreate();
         }
 
         /// <summary>
-        /// 展示一个军团的军队
+        /// 展示一个军队
         /// </summary>
         private void ShowUnit()
         {
@@ -366,6 +389,25 @@ namespace UI
                 uiFightCreateUnits.Add(data.unitId, units);
                 units.InitUI(data.unitId, data.armId, this);
             }
+        }
+
+        /// <summary>
+        /// 检测是否可以开始战斗，防止在一些不合理的情况下进入战斗（比如兵种没有配全）
+        /// </summary>
+        private void CheckCanCreate()
+        {
+            List<int> legionId = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);
+            bool allLegionHasArm = true;
+            for (int i = 0; i < legionId.Count; i++)
+            {
+                LegionInfo info = this.GetModel<IFightCreateModel>().AllLegions[legionId[i]];
+                if (info.allArm.Count <= 0)
+                {
+                    allLegionHasArm = false;
+                }
+            }
+
+            createButton.interactable = allLegionHasArm;
         }
     }
 }

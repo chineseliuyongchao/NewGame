@@ -1,6 +1,4 @@
 ﻿using System;
-using Fight.Commands;
-using Fight.Enum;
 using Fight.Game.Arms;
 using Fight.Scenes;
 using UnityEngine;

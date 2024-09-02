@@ -4,21 +4,27 @@ using Pathfinding;
 using QFramework;
 using UnityEngine;
 
-namespace Fight.Game
+namespace Fight
 {
     /**
      * 存放a*的相关表格信息
      */
-    public class AStarModel : AbstractModel
+    public class AStarModel : AbstractModel, IAStarModel
     {
         /// <summary>
         ///     A*中节点的index对应世界的节点的index
         /// </summary>
-        public SortedList<uint, int> AStarNodeToWorldNode = new();
+        private readonly SortedList<uint, int> _aStarNodeToWorldNode = new();
 
-        public SortedList<int, GridNodeBase> FightGridNodeInfoList = new();
+        private readonly SortedList<int, GridNodeBase> _fightGridNodeInfoList = new();
+
+        public SortedList<int, GridNodeBase> FightGridNodeInfoList => _fightGridNodeInfoList;
 
         protected override void OnInit()
+        {
+        }
+
+        public void InitStarData()
         {
             for (var i = Constants.FightNodeHeightNum - 1; i >= 0; i--)
             {
@@ -36,9 +42,9 @@ namespace Fight.Game
                         Constants.FightNodeHeightOffset)
                         continue;
 
-                    FightGridNodeInfoList[index] = nodeBase;
+                    _fightGridNodeInfoList[index] = nodeBase;
                     // nodeBase.NodeInGridIndex = index;
-                    AStarNodeToWorldNode[nodeBase.NodeIndex] = index;
+                    _aStarNodeToWorldNode[nodeBase.NodeIndex] = index;
                     index += Constants.FightNodeHeightNum;
                 }
             }
@@ -51,7 +57,7 @@ namespace Fight.Game
         public GridNodeBase GetGridNode(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
-            return FightGridNodeInfoList[AStarNodeToWorldNode[info.node.NodeIndex]];
+            return _fightGridNodeInfoList[_aStarNodeToWorldNode[info.node.NodeIndex]];
         }
 
         /// <summary>
@@ -71,7 +77,7 @@ namespace Fight.Game
         public int GetGridNodeIndexMyRule(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
-            return AStarNodeToWorldNode[info.node.NodeIndex];
+            return _aStarNodeToWorldNode[info.node.NodeIndex];
         }
     }
 }
