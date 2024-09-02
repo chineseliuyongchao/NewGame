@@ -46,7 +46,7 @@
         /**
          * 战斗界面的世界宽高
          */
-        public const float FightSceneWorldHeight = 10;
+        public const float FightSceneWorldHeight = 20;
 
         public const float FightSceneWorldWidth = FightSceneWorldHeight / 0.5625f;
 
@@ -66,11 +66,11 @@
         public const float FightNodeWidthOffset = 0.1f;
         public const float FightNodeHeightOffset = 0.1f;
 
-        public const int FightNodeWidthNum = 20;
-        public const int FightNodeHeightNum = 16;
+        public const int FightNodeWidthNum = 39;
+        public const int FightNodeHeightNum = 31;
 
-        public const int FightNodeVisibleWidthNum = 16;
-        public const int FightNodeVisibleHeightNum = 12;
+        public const int FightNodeVisibleWidthNum = 31;
+        public const int FightNodeVisibleHeightNum = 24;
 
         #region 特质id
 
