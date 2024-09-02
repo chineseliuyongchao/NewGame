@@ -30,7 +30,7 @@ namespace Fight
             {
                 LegionInfo legionInfo = allLegions[legionId[i]];
                 List<int> armId = new List<int>(legionInfo.allArm.Keys);
-                var pos = legionInfo.factionsId == Constants.BELLIGERENT1 ? pos1 : pos2;
+                var pos = legionInfo.belligerentsId == Constants.BELLIGERENT1 ? pos1 : pos2;
                 for (int j = 0; j < armId.Count; j++)
                 {
                     ArmData armData = legionInfo.allArm[armId[j]];
