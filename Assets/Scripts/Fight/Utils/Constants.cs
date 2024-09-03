@@ -153,7 +153,14 @@
             166 + 5, 150 + 5, 134 + 5, 118 + 5, 102 + 5, 86 + 5, 70 + 5, 54 + 5, 38 + 5
         };
 
-        public const int BELLIGERENT1 = 1; //派系1的id
-        public const int BELLIGERENT2 = 2; //派系2的id
+        /// <summary>
+        /// 阵营1的id，通常是玩家所在阵营
+        /// </summary>
+        public const int BELLIGERENT1 = 1;
+
+        /// <summary>
+        /// 阵营2的id，通常是敌人所在的阵营
+        /// </summary>
+        public const int BELLIGERENT2 = 2;
     }
 }

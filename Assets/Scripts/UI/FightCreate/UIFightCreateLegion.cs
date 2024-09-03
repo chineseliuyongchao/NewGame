@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Fight.Utils;
 using Game.FightCreate;
 using QFramework;
 using UnityEngine;
@@ -50,10 +51,10 @@ namespace UI
                 Dictionary<int, UIFightCreateLegion> belligerents;
                 switch (legionInfo.belligerentsId)
                 {
-                    case 0:
+                    case Constants.BELLIGERENT1:
                         belligerents = _uiFightCreate.belligerents1;
                         break;
-                    case 1:
+                    case Constants.BELLIGERENT2:
                         belligerents = _uiFightCreate.belligerents2;
                         break;
                     default:
