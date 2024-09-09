@@ -14,7 +14,7 @@ namespace Fight
             var cam = Camera.main;
             if (!cam) return;
             IAStarModel aStarModel = this.GetModel<IAStarModel>();
-            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
             int index = aStarModel.GetGridNodeIndexMyRule(cam.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
             if (!aStarModel.FightGridNodeInfoList.ContainsKey(index))
             {
@@ -22,21 +22,21 @@ namespace Fight
             }
 
             //当前没有焦点兵种或者点击了其他属于自己的单位
-            if (fightGameModel.FocusController == null)
+            if (fightVisualModel.FocusController == null)
             {
-                if (fightGameModel.IndexToArmsIdDictionary.ContainsKey(index))
+                if (fightVisualModel.IndexToArmsIdDictionary.ContainsKey(index))
                 {
                     this.SendCommand(new SelectArmsFocusCommand(index));
                 }
             }
             else
             {
-                if (index == fightGameModel.FocusController.armData.currentPosition)
+                if (index == fightVisualModel.FocusController.armData.currentPosition)
                 {
                     //点击的是自己
                     this.SendCommand(new CancelArmsFocusCommand());
                 }
-                else if (fightGameModel.IndexToArmsIdDictionary.ContainsKey(index))
+                else if (fightVisualModel.IndexToArmsIdDictionary.ContainsKey(index))
                 {
                     //点击了其他的兵种
                     this.SendCommand(new SelectArmsFocusCommand(index));

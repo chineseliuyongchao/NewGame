@@ -12,14 +12,14 @@ namespace Fight.Tools
     public class InputSystemController : MonoBehaviour, IController
     {
         private IAStarModel _aStarModel;
-        private IFightGameModel _fightGameModel;
+        private IFightVisualModel _fightVisualModel;
 
         private PlayerInput _playerInput;
 
         private void Awake()
         {
             _aStarModel = this.GetModel<IAStarModel>();
-            _fightGameModel = this.GetModel<IFightGameModel>();
+            _fightVisualModel = this.GetModel<IFightVisualModel>();
             _playerInput = gameObject.GetComponent<PlayerInput>();
             // _playerInput.actions = FightScene.Ins.inputActionAsset;
             // _playerInput.defaultActionMap = "Fight";

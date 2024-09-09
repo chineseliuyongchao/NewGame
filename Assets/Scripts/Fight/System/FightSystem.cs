@@ -11,11 +11,11 @@ namespace Fight
 
         public void InitFightData()
         {
-            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
-            fightGameModel.ArmsIdToIndexDictionary.Clear();
-            fightGameModel.IndexToArmsIdDictionary.Clear();
-            fightGameModel.EnemyIdToIndexDictionary.Clear();
-            fightGameModel.IndexToEnemyIdDictionary.Clear();
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
+            fightVisualModel.ArmsIdToIndexDictionary.Clear();
+            fightVisualModel.IndexToArmsIdDictionary.Clear();
+            fightVisualModel.EnemyIdToIndexDictionary.Clear();
+            fightVisualModel.IndexToEnemyIdDictionary.Clear();
             //获取所有战场上的军队数据
             IFightCreateModel fightCreateModel = this.GetModel<IFightCreateModel>();
 
@@ -23,16 +23,16 @@ namespace Fight
             {
                 foreach (var tmp2 in tmp.allArm)
                 {
-                    fightGameModel.ArmsIdToIndexDictionary[tmp2.Value.unitId] = tmp2.Value.currentPosition;
-                    fightGameModel.IndexToArmsIdDictionary[tmp2.Value.currentPosition] = tmp2.Value.unitId;
+                    fightVisualModel.ArmsIdToIndexDictionary[tmp2.Value.unitId] = tmp2.Value.currentPosition;
+                    fightVisualModel.IndexToArmsIdDictionary[tmp2.Value.currentPosition] = tmp2.Value.unitId;
                 }
             }
         }
 
         public bool CanWalkableIndex(int index)
         {
-            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
-            return !fightGameModel.IndexToEnemyIdDictionary.ContainsKey(index) &&
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
+            return !fightVisualModel.IndexToEnemyIdDictionary.ContainsKey(index) &&
                    this.GetModel<IAStarModel>().FightGridNodeInfoList[index].WalkableErosion;
         }
     }

@@ -18,63 +18,53 @@ namespace Fight
 
         protected override void OnExecute()
         {
-            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
-            if (fightGameModel.FocusController == null)
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
+            if (fightVisualModel.FocusController == null)
             {
                 return;
             }
 
-            int index = fightGameModel.ArmsIdToIndexDictionary[fightGameModel.FocusController.armData.unitId];
-            fightGameModel.ArmsIdToIndexDictionary[fightGameModel.FocusController.armData.unitId] = _endIndex;
-            if (!fightGameModel.IndexToArmsIdDictionary.Remove(index))
+            int index = fightVisualModel.ArmsIdToIndexDictionary[fightVisualModel.FocusController.armData.unitId];
+            fightVisualModel.ArmsIdToIndexDictionary[fightVisualModel.FocusController.armData.unitId] = _endIndex;
+            if (!fightVisualModel.IndexToArmsIdDictionary.Remove(index))
             {
-                fightGameModel.IndexToArmsIdDictionary.Remove(fightGameModel.FocusController.armData.currentPosition);
+                fightVisualModel.IndexToArmsIdDictionary.Remove(fightVisualModel.FocusController.armData.currentPosition);
             }
 
-            fightGameModel.IndexToArmsIdDictionary[_endIndex] = fightGameModel.FocusController.armData.unitId;
-            fightGameModel.FocusController.armData.currentPosition = _endIndex;
-            fightGameModel.FocusController.ArmsMoveAction(_endIndex);
-            this.SendEvent(new ArmsMoveEvent(FightScene.Ins.currentBattleType, _endIndex));
+            fightVisualModel.IndexToArmsIdDictionary[_endIndex] = fightVisualModel.FocusController.armData.unitId;
+            fightVisualModel.FocusController.armData.currentPosition = _endIndex;
+            fightVisualModel.FocusController.ArmsMoveAction(_endIndex);
         }
     }
 
     /// <summary>
     /// 战斗界面的状态命令，标志着战斗进行了哪个状态，处理相关逻辑并且发送相关消息
     /// </summary>
-    public class BattleCommand : AbstractCommand
+    public class FightCommand : AbstractCommand
     {
-        private readonly BattleType _type;
+        private readonly FightType _type;
 
-        public BattleCommand(BattleType type)
+        public FightCommand(FightType type)
         {
             _type = type;
         }
 
         protected override void OnExecute()
         {
-            FightScene.Ins.currentBattleType = _type;
+            this.GetModel<IFightCoreModel>().FightType = _type;
             switch (_type)
             {
-                case BattleType.StartWarPreparations:
-                    this.SendEvent<StartWarPreparationsEvent>();
+                case FightType.WAR_PREPARATIONS:
+                    this.SendEvent<WarPreparationsEvent>();
                     break;
-                case BattleType.EndWarPreparations:
-                    this.SendEvent<EndWarPreparationsEvent>();
+                case FightType.IN_FIGHT:
+                    this.SendEvent<InFightEvent>();
                     break;
-                case BattleType.StartBattle:
-                    this.SendEvent<StartBattleEvent>();
+                case FightType.SETTLEMENT:
+                    this.SendEvent<SettlementEvent>();
                     break;
-                case BattleType.EndBattle:
-                    this.SendEvent<EndBattleEvent>();
-                    break;
-                case BattleType.StartPursuit:
-                    this.SendEvent<StartPursuitEvent>();
-                    break;
-                case BattleType.EndPursuit:
-                    this.SendEvent<EndPursuitEvent>();
-                    break;
-                case BattleType.BattleOver:
-                    this.SendEvent<BattleOverEvent>();
+                case FightType.FIGHT_OVER:
+                    this.SendEvent<FightOverEvent>();
                     break;
             }
         }
@@ -94,12 +84,12 @@ namespace Fight
 
         protected override void OnExecute()
         {
-            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
             ArmsController currentFocusController = FightScene.Ins.GetArmsControllerByIndex(_index);
             currentFocusController.StartFocusAction();
-            if (fightGameModel.FocusController) fightGameModel.FocusController.EndFocusAction();
-            fightGameModel.FocusController = currentFocusController;
-            this.SendEvent(new SelectArmsFocusEvent(FightScene.Ins.currentBattleType, _index));
+            if (fightVisualModel.FocusController) fightVisualModel.FocusController.EndFocusAction();
+            fightVisualModel.FocusController = currentFocusController;
+            this.SendEvent(new SelectArmsFocusEvent(_index));
         }
     }
 
@@ -110,15 +100,15 @@ namespace Fight
     {
         protected override void OnExecute()
         {
-            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
-            if (!fightGameModel.FocusController)
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
+            if (!fightVisualModel.FocusController)
             {
                 return;
             }
 
-            fightGameModel.FocusController.EndFocusAction();
+            fightVisualModel.FocusController.EndFocusAction();
             this.SendEvent<CancelArmsFocusEvent>();
-            fightGameModel.FocusController = null;
+            fightVisualModel.FocusController = null;
         }
     }
 }

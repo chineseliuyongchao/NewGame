@@ -68,8 +68,8 @@ namespace UI
                 this.GetSystem<IFightComputeSystem>().ComputeUnitPos();
 
                 GameApp.Interface.RegisterModel<IAStarModel>(new AStarModel());
-                GameApp.Interface.RegisterModel<IFightGameModel>(new FightGameModel());
-                GameApp.Interface.RegisterModel<IFightModel>(new FightModel());
+                GameApp.Interface.RegisterModel<IFightVisualModel>(new FightVisualModel());
+                GameApp.Interface.RegisterModel<IFightCoreModel>(new FightCoreModel());
                 this.GetSystem<IFightSystem>().InitFightData();
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.FIGHT_SCENE);
             });

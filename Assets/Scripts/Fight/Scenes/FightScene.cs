@@ -19,8 +19,6 @@ namespace Fight.Scenes
 
         private ArmsFsm _armsFsm;
 
-        [HideInInspector] public BattleType currentBattleType;
-
         //debug
         [HideInInspector] public InputActionAsset inputActionAsset;
 
@@ -39,7 +37,7 @@ namespace Fight.Scenes
 
         private void Start()
         {
-            this.SendCommand(new BattleCommand(BattleType.StartWarPreparations));
+            this.SendCommand(new FightCommand(FightType.WAR_PREPARATIONS));
         }
 
         public IArchitecture GetArchitecture()
@@ -49,8 +47,8 @@ namespace Fight.Scenes
 
         public ArmsController GetArmsControllerByIndex(int index)
         {
-            IFightGameModel fightGameModel = this.GetModel<IFightGameModel>();
-            if (fightGameModel.IndexToArmsIdDictionary.TryGetValue(index, out int id))
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
+            if (fightVisualModel.IndexToArmsIdDictionary.TryGetValue(index, out int id))
             {
                 return _armsFsm.transform.Find(id.ToString()).GetComponent<ArmsController>();
             }
@@ -64,8 +62,8 @@ namespace Fight.Scenes
             GameApp.Interface.UnRegisterSystem<IFightSystem>();
 
             GameApp.Interface.UnRegisterModel<IAStarModel>();
-            GameApp.Interface.UnRegisterModel<IFightGameModel>();
-            GameApp.Interface.UnRegisterModel<IFightModel>();
+            GameApp.Interface.UnRegisterModel<IFightVisualModel>();
+            GameApp.Interface.UnRegisterModel<IFightCoreModel>();
         }
     }
 }

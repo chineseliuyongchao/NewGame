@@ -50,9 +50,9 @@ namespace Fight.Tools
 
         private void SelectArmsFocusEvent(SelectArmsFocusEvent focusEvent)
         {
-            switch (focusEvent.battleType)
+            switch (this.GetModel<IFightCoreModel>().FightType)
             {
-                case BattleType.StartWarPreparations:
+                case FightType.WAR_PREPARATIONS:
                     if (_alphaAction is { active: true })
                     {
                         return;

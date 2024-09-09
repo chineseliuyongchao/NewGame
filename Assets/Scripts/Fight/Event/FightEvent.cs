@@ -5,12 +5,10 @@
     /// </summary>
     public struct ArmsMoveEvent
     {
-        public BattleType battleType;
         public int endIndex;
 
-        public ArmsMoveEvent(BattleType battleType, int endIndex)
+        public ArmsMoveEvent(int endIndex)
         {
-            this.battleType = battleType;
             this.endIndex = endIndex;
         }
     }
@@ -20,12 +18,10 @@
     /// </summary>
     public struct SelectArmsFocusEvent
     {
-        public readonly BattleType battleType;
         public int selectIndex;
 
-        public SelectArmsFocusEvent(BattleType battleType, int selectIndex)
+        public SelectArmsFocusEvent(int selectIndex)
         {
-            this.battleType = battleType;
             this.selectIndex = selectIndex;
         }
     }
@@ -37,31 +33,31 @@
     {
     }
 
-    public struct StartWarPreparationsEvent
+    /// <summary>
+    /// 开始战斗准备阶段
+    /// </summary>
+    public struct WarPreparationsEvent
     {
     }
 
-    public struct EndWarPreparationsEvent
+    /// <summary>
+    /// 开始战斗
+    /// </summary>
+    public struct InFightEvent
     {
     }
 
-    public struct StartBattleEvent
+    /// <summary>
+    /// 开始结算
+    /// </summary>
+    public struct SettlementEvent
     {
     }
 
-    public struct EndBattleEvent
-    {
-    }
-
-    public struct StartPursuitEvent
-    {
-    }
-
-    public struct EndPursuitEvent
-    {
-    }
-
-    public struct BattleOverEvent
+    /// <summary>
+    /// 战斗结束
+    /// </summary>
+    public struct FightOverEvent
     {
     }
 }

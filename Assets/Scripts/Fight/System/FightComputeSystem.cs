@@ -43,8 +43,8 @@ namespace Fight
 
         public void AssaultWithRetaliation(int armAId, int armBId)
         {
-            ArmData armA = this.GetModel<IFightModel>().ARMDataTypes[armAId];
-            ArmData armB = this.GetModel<IFightModel>().ARMDataTypes[armBId];
+            ArmData armA = this.GetModel<IFightCoreModel>().ARMDataTypes[armAId];
+            ArmData armB = this.GetModel<IFightCoreModel>().ARMDataTypes[armBId];
             //单位1进攻单位2，单位2反击
             ArmData arm2Before = new ArmData(armB);
             AssaultNoRetaliation(armA, armB);
@@ -53,15 +53,15 @@ namespace Fight
 
         public void AssaultNoRetaliation(int armAId, int armBId)
         {
-            ArmData armA = this.GetModel<IFightModel>().ARMDataTypes[armAId];
-            ArmData armB = this.GetModel<IFightModel>().ARMDataTypes[armBId];
+            ArmData armA = this.GetModel<IFightCoreModel>().ARMDataTypes[armAId];
+            ArmData armB = this.GetModel<IFightCoreModel>().ARMDataTypes[armBId];
             AssaultNoRetaliation(armA, armB);
         }
 
         public void Shoot(int armAId, int armBId)
         {
-            ArmData armA = this.GetModel<IFightModel>().ARMDataTypes[armAId];
-            ArmData armB = this.GetModel<IFightModel>().ARMDataTypes[armBId];
+            ArmData armA = this.GetModel<IFightCoreModel>().ARMDataTypes[armAId];
+            ArmData armB = this.GetModel<IFightCoreModel>().ARMDataTypes[armBId];
             OneShoot(armA, armB);
         }
 

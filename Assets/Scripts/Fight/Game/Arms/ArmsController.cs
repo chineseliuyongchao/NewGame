@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using Fight.Scenes;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
@@ -17,7 +16,7 @@ namespace Fight.Game.Arms
         public ObjectArmsView view;
 
         private Tween _focusAction;
-        
+
         public void OnInit()
         {
             //todo
@@ -50,15 +49,16 @@ namespace Fight.Game.Arms
         /// <param name="endIndex"></param>
         public virtual void ArmsMoveAction(int endIndex)
         {
-            switch (FightScene.Ins.currentBattleType)
+            switch (this.GetModel<IFightCoreModel>().FightType)
             {
-                case BattleType.StartWarPreparations:
-                    Vector3 endPosition = (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
+                case FightType.WAR_PREPARATIONS:
+                    Vector3 endPosition =
+                        (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
                     transform.position = endPosition;
                     ChangeOrderLayer();
                     break;
-                case BattleType.StartBattle:
-                case BattleType.StartPursuit:
+                case FightType.IN_FIGHT:
+                case FightType.SETTLEMENT:
 
                     break;
             }
@@ -76,7 +76,8 @@ namespace Fight.Game.Arms
         private void ChangeOrderLayer()
         {
             int beginIndex =
-                Mathf.Max(Constants.FightNodeVisibleHeightNum - armData.currentPosition / Constants.FightNodeVisibleWidthNum,
+                Mathf.Max(
+                    Constants.FightNodeVisibleHeightNum - armData.currentPosition / Constants.FightNodeVisibleWidthNum,
                     1) * 1000;
             view.ChangeOrderLayer(beginIndex);
         }

@@ -8,7 +8,7 @@ namespace Fight
     /**
      * 存放战斗场景中通用属性以及数据
      */
-    public class FightGameModel : AbstractModel, IFightGameModel
+    public class FightVisualModel : AbstractModel, IFightVisualModel
     {
         private readonly Dictionary<int, int> _armsIdToIndexDictionary = new();
         public Dictionary<int, int> ArmsIdToIndexDictionary => _armsIdToIndexDictionary;
