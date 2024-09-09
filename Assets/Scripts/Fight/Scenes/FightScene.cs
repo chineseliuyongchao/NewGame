@@ -3,9 +3,7 @@ using Fight.Game.Arms;
 using Game.GameBase;
 using QFramework;
 using UI;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Fight.Scenes
 {
@@ -19,9 +17,6 @@ namespace Fight.Scenes
 
         private ArmsFsm _armsFsm;
 
-        //debug
-        [HideInInspector] public InputActionAsset inputActionAsset;
-
         public IAStarModel aStarModel;
 
         private void Awake()
@@ -29,8 +24,6 @@ namespace Fight.Scenes
             _ins = this;
             this.GetModel<IAStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
-            inputActionAsset =
-                AssetDatabase.LoadAssetAtPath<InputActionAsset>("Assets/Settings/MyControl.inputactions");
             aStarModel = this.GetModel<IAStarModel>();
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
         }
