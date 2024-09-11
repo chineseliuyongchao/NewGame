@@ -70,6 +70,11 @@ namespace Fight
             return (Vector3)nodeBase.position;
         }
 
+        public Vector3 GetArmsRelayPosition(ArmData armData)
+        {
+            return (Vector3)FightGridNodeInfoList[armData.currentPosition].position;
+        }
+
         /// <summary>
         ///     给定任意一个坐标，查找坐标最接近的地图节点，返回这个节点在我们的规范中的index
         /// </summary>

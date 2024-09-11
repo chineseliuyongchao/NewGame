@@ -39,5 +39,10 @@ namespace Fight
         /// </summary>
         [CanBeNull]
         ArmsController FocusController { get; set; }
+
+        /// <summary>
+        /// 存放战场上所有的单位（key：单位id，value：单位对象）
+        /// </summary>
+        public Dictionary<int, ArmsController> AllArm { get; set; }
     }
 }

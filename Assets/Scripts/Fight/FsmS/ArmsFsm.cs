@@ -31,6 +31,7 @@ namespace Fight.FsmS
                     controller.OnInit();
                     obj.transform.position =
                         (Vector3)aStarModel.FightGridNodeInfoList[controller.armData.currentPosition].position;
+                    this.GetModel<IFightVisualModel>().AllArm.Add(tmp2.Value.unitId, controller);
                 }
             }
 

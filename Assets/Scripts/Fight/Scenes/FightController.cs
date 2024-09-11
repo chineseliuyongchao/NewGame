@@ -1,5 +1,4 @@
 ﻿using Fight.FsmS;
-using Fight.Game.Arms;
 using Game.GameBase;
 using QFramework;
 using UI;
@@ -8,23 +7,16 @@ using UnityEngine;
 namespace Fight.Scenes
 {
     /**
-     * 管理整个场景的状态：战前准备-战斗中-追击中-战斗结束
+     * 管理整个场景的状态：战前准备-战斗中-战斗结束
      */
-    public class FightScene : MonoBehaviour, IController
+    public class FightController : MonoBehaviour, IController
     {
-        public static FightScene Ins => _ins;
-        private static FightScene _ins;
-
         private ArmsFsm _armsFsm;
-
-        public IAStarModel aStarModel;
 
         private void Awake()
         {
-            _ins = this;
             this.GetModel<IAStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
-            aStarModel = this.GetModel<IAStarModel>();
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
         }
 
@@ -36,17 +28,6 @@ namespace Fight.Scenes
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;
-        }
-
-        public ArmsController GetArmsControllerByIndex(int index)
-        {
-            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
-            if (fightVisualModel.IndexToArmsIdDictionary.TryGetValue(index, out int id))
-            {
-                return _armsFsm.transform.Find(id.ToString()).GetComponent<ArmsController>();
-            }
-
-            return null;
         }
 
         private void OnDestroy()

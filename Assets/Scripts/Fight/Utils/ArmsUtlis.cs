@@ -1,6 +1,4 @@
 ﻿using System;
-using Fight.Game.Arms;
-using Fight.Scenes;
 using UnityEngine;
 using Random = System.Random;
 
@@ -19,11 +17,6 @@ namespace Fight.Utils
         public static int GetRandomByTime()
         {
             return Random.Next();
-        }
-
-        public static Vector3 GetArmsRelayPosition(this ArmsController controller)
-        {
-            return (Vector3)FightScene.Ins.aStarModel.FightGridNodeInfoList[controller.armData.currentPosition].position;
         }
     }
 }

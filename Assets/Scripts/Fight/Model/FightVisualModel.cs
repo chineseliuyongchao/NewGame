@@ -10,16 +10,26 @@ namespace Fight
      */
     public class FightVisualModel : AbstractModel, IFightVisualModel
     {
-        private readonly Dictionary<int, int> _armsIdToIndexDictionary = new();
-        public Dictionary<int, int> ArmsIdToIndexDictionary => _armsIdToIndexDictionary;
-        private readonly Dictionary<int, int> _indexToArmsIdDictionary = new();
-        public Dictionary<int, int> IndexToArmsIdDictionary => _indexToArmsIdDictionary;
-        private readonly Dictionary<int, int> _enemyIdToIndexDictionary = new();
-        public Dictionary<int, int> EnemyIdToIndexDictionary => _enemyIdToIndexDictionary;
-        private readonly Dictionary<int, int> _indexToEnemyIdDictionary = new();
-        public Dictionary<int, int> IndexToEnemyIdDictionary => _indexToEnemyIdDictionary;
-
+        private Dictionary<int, int> _armsIdToIndexDictionary;
+        private Dictionary<int, int> _indexToArmsIdDictionary;
+        private Dictionary<int, int> _enemyIdToIndexDictionary;
+        private Dictionary<int, int> _indexToEnemyIdDictionary;
         [CanBeNull] private ArmsController _focusController;
+        private Dictionary<int, ArmsController> _allArm;
+
+        protected override void OnInit()
+        {
+            _armsIdToIndexDictionary = new Dictionary<int, int>();
+            _indexToArmsIdDictionary = new Dictionary<int, int>();
+            _enemyIdToIndexDictionary = new Dictionary<int, int>();
+            _indexToEnemyIdDictionary = new Dictionary<int, int>();
+            _allArm = new Dictionary<int, ArmsController>();
+        }
+
+        public Dictionary<int, int> ArmsIdToIndexDictionary => _armsIdToIndexDictionary;
+        public Dictionary<int, int> IndexToArmsIdDictionary => _indexToArmsIdDictionary;
+        public Dictionary<int, int> EnemyIdToIndexDictionary => _enemyIdToIndexDictionary;
+        public Dictionary<int, int> IndexToEnemyIdDictionary => _indexToEnemyIdDictionary;
 
         public ArmsController FocusController
         {
@@ -27,8 +37,10 @@ namespace Fight
             set => _focusController = value;
         }
 
-        protected override void OnInit()
+        public Dictionary<int, ArmsController> AllArm
         {
+            get => _allArm;
+            set => _allArm = value;
         }
     }
 }

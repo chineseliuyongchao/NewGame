@@ -452,7 +452,7 @@ GameObject:
   - component: {fileID: 1459492571}
   - component: {fileID: 1459492570}
   m_Layer: 0
-  m_Name: FightScene
+  m_Name: FightController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,8 +487,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a81581b0d904a1b9fb7f794f0cb313f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentBattleType: 0
-  inputActionAsset: {fileID: 0}
 --- !u!114 &1459492570
 MonoBehaviour:
   m_ObjectHideFlags: 0

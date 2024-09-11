@@ -1,6 +1,6 @@
 ﻿using Fight.Game.Arms;
-using Fight.Scenes;
 using QFramework;
+using UnityEngine;
 
 namespace Fight
 {
@@ -28,7 +28,8 @@ namespace Fight
             fightVisualModel.ArmsIdToIndexDictionary[fightVisualModel.FocusController.armData.unitId] = _endIndex;
             if (!fightVisualModel.IndexToArmsIdDictionary.Remove(index))
             {
-                fightVisualModel.IndexToArmsIdDictionary.Remove(fightVisualModel.FocusController.armData.currentPosition);
+                fightVisualModel.IndexToArmsIdDictionary.Remove(
+                    fightVisualModel.FocusController.armData.currentPosition);
             }
 
             fightVisualModel.IndexToArmsIdDictionary[_endIndex] = fightVisualModel.FocusController.armData.unitId;
@@ -85,11 +86,23 @@ namespace Fight
         protected override void OnExecute()
         {
             IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
-            ArmsController currentFocusController = FightScene.Ins.GetArmsControllerByIndex(_index);
-            currentFocusController.StartFocusAction();
-            if (fightVisualModel.FocusController) fightVisualModel.FocusController.EndFocusAction();
-            fightVisualModel.FocusController = currentFocusController;
-            this.SendEvent(new SelectArmsFocusEvent(_index));
+            ArmsController currentFocusController = null;
+            if (fightVisualModel.IndexToArmsIdDictionary.TryGetValue(_index, out int id))
+            {
+                currentFocusController = this.GetModel<IFightVisualModel>().AllArm[id];
+            }
+
+            if (currentFocusController != null)
+            {
+                currentFocusController.StartFocusAction();
+                if (fightVisualModel.FocusController) fightVisualModel.FocusController.EndFocusAction();
+                fightVisualModel.FocusController = currentFocusController;
+                this.SendEvent(new SelectArmsFocusEvent(_index));
+            }
+            else
+            {
+                Debug.LogError("找不到兵种，位置是：" + _index);
+            }
         }
     }
 

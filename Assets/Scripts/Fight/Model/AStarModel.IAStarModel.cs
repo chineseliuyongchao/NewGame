@@ -29,6 +29,8 @@ namespace Fight
         /// <returns>离坐标最接近的地图节点坐标</returns>
         Vector3 GetGridNodePosition(Vector3 position);
 
+        public Vector3 GetArmsRelayPosition(ArmData armData);
+
         /// <summary>
         ///     给定任意一个坐标，查找坐标最接近的地图节点，返回这个节点在我们的规范中的index
         /// </summary>

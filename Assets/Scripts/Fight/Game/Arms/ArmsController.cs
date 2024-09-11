@@ -29,7 +29,7 @@ namespace Fight.Game.Arms
         public virtual void StartFocusAction()
         {
             _focusAction?.Kill();
-            _focusAction = transform.DOMoveY(this.GetArmsRelayPosition().y + 0.5f, 0.5f)
+            _focusAction = transform.DOMoveY(this.GetModel<IAStarModel>().GetArmsRelayPosition(armData).y + 0.5f, 0.5f)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
@@ -40,7 +40,7 @@ namespace Fight.Game.Arms
         public virtual void EndFocusAction()
         {
             _focusAction?.Kill();
-            transform.DOMove(this.GetArmsRelayPosition(), 0.2f).SetEase(Ease.OutSine);
+            transform.DOMove(this.GetModel<IAStarModel>().GetArmsRelayPosition(armData), 0.2f).SetEase(Ease.OutSine);
         }
 
         /// <summary>
