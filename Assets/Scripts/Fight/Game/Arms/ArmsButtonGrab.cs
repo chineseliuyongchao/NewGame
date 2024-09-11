@@ -1,10 +1,8 @@
 ﻿using Fight.Tools;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
-namespace Fight.Game.Arms
+namespace Fight.Game
 {
     public sealed class ArmsButtonGrab : ButtonGrab
     {

@@ -1,4 +1,4 @@
-﻿using Fight.Game.Arms;
+﻿using Fight.Game;
 using QFramework;
 using UnityEngine;
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fight.Game.Arms;
+using Fight.Game;
 using JetBrains.Annotations;
 using QFramework;
 

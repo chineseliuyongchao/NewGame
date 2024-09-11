@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Fight.Game.Arms;
+﻿using Fight.Game;
 using Game.FightCreate;
 using Game.GameBase;
 using QFramework;
@@ -9,7 +8,6 @@ namespace Fight.FsmS
 {
     public class ArmsFsm : MonoBehaviour, IController
     {
-        private readonly SortedList<string, GameObject> _armsGameObjectList = new();
         public GameObject objArmsGameObject;
 
         private void Awake()

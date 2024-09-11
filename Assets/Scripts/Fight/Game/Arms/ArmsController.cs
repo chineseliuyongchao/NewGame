@@ -4,7 +4,7 @@ using Game.GameBase;
 using QFramework;
 using UnityEngine;
 
-namespace Fight.Game.Arms
+namespace Fight.Game
 {
     public class ArmsController : MonoBehaviour, IController
     {

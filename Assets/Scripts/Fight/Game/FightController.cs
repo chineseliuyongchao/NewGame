@@ -4,7 +4,7 @@ using QFramework;
 using UI;
 using UnityEngine;
 
-namespace Fight.Scenes
+namespace Fight.Game
 {
     /**
      * 管理整个场景的状态：战前准备-战斗中-战斗结束
