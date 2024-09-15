@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Fight.Game.Legion;
 using QFramework;
 
 namespace Fight
@@ -7,10 +8,12 @@ namespace Fight
     {
         private FightType _fightType;
         private Dictionary<int, ArmData> _armDataTypes;
+        private Dictionary<int, BaseLegion> _allLegion;
 
         protected override void OnInit()
         {
             _armDataTypes = new Dictionary<int, ArmData>();
+            _allLegion = new Dictionary<int, BaseLegion>();
         }
 
         public FightType FightType
@@ -23,6 +26,12 @@ namespace Fight
         {
             get => _armDataTypes;
             set => _armDataTypes = value;
+        }
+
+        public Dictionary<int, BaseLegion> AllLegion
+        {
+            get => _allLegion;
+            set => _allLegion = value;
         }
     }
 }

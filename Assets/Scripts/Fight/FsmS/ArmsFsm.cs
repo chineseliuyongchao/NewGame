@@ -6,12 +6,13 @@ using UnityEngine;
 
 namespace Fight.FsmS
 {
-    public class ArmsFsm : MonoBehaviour, IController
+    public class ArmsFsm : BaseGameController
     {
         public GameObject objArmsGameObject;
 
-        private void Awake()
+        protected override void OnInit()
         {
+            base.OnInit();
             var aStarModel = this.GetModel<IAStarModel>();
 
             //获取所有战场上的军队数据
@@ -32,19 +33,6 @@ namespace Fight.FsmS
                     this.GetModel<IFightVisualModel>().AllArm.Add(tmp2.Value.unitId, controller);
                 }
             }
-
-            // foreach (var info in gamePlayerModel.ArmsInfoDictionary)
-            // {
-            //     var obj = Instantiate(_armsGameObjectList[info.Value.ArmsName], transform);
-            //     obj.transform.position = (Vector3)aStarModel.FightGridNodeInfoList[info.Value.RanksIndex].position;
-            //     obj.name = info.Key.ToString();
-            //     ArmsController controller = obj.GetComponent<ArmsController>();
-            // }
-        }
-
-        public IArchitecture GetArchitecture()
-        {
-            return GameApp.Interface;
         }
     }
 }

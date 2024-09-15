@@ -1,3 +1,4 @@
+using Fight;
 using Game.GameBase;
 using QFramework;
 
@@ -23,35 +24,35 @@ namespace UI
             base.OnOpen(uiData);
         }
 
-        protected override void OnShow()
-        {
-            base.OnShow();
-        }
-
-        protected override void OnHide()
-        {
-            base.OnHide();
-        }
-
-        protected override void OnClose()
-        {
-            base.OnClose();
-        }
-
         protected override void OnListenButton()
         {
             exitButton.onClick.AddListener(() => { this.GetSystem<IGameSystem>().ChangeScene(SceneType.MENU_SCENE); });
+            startButton.onClick.AddListener(() =>
+            {
+                this.SendCommand(new FightCommand(FightType.IN_FIGHT));
+                StartFight();
+            });
         }
 
         protected override void OnListenEvent()
         {
             this.RegisterEvent<ChangeFightSceneEvent>(e =>
             {
-                if (e.isChangeIn)
+                if (!e.isChangeIn)
                 {
                     CloseSelf();
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<SettlementEvent>(_ => { UIKit.OpenPanel<UIFightEnd>(); })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+
+        /// <summary>
+        /// 开始战斗后的UI变化逻辑
+        /// </summary>
+        private void StartFight()
+        {
+            startButton.gameObject.SetActive(false);
         }
     }
 }

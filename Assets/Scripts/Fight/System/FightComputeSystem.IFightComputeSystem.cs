@@ -1,4 +1,5 @@
-﻿using QFramework;
+﻿using System.Collections.Generic;
+using QFramework;
 
 namespace Fight
 {
@@ -8,7 +9,7 @@ namespace Fight
         /// 进入战斗场景后自动计算所有军队的单位位置
         /// </summary>
         void ComputeUnitPos();
-        
+
         /// <summary>
         /// 一次有反击的进攻，相当于a对b攻击，b也有反击，默认a是攻击方，b是被攻击方
         /// </summary>
@@ -29,5 +30,11 @@ namespace Fight
         /// <param name="armAId"></param>
         /// <param name="armBId"></param>
         void Shoot(int armAId, int armBId);
+
+        /// <summary>
+        /// 获取各个军队在同一回合的行动顺序
+        /// </summary>
+        /// <returns></returns>
+        List<int> LegionOrder();
     }
 }

@@ -65,6 +65,14 @@ namespace Fight
             OneShoot(armA, armB);
         }
 
+        public List<int> LegionOrder()
+        {
+            List<int> legionKeys = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);
+            //目前没有顺序逻辑，先根据id顺序处理
+            var order = legionKeys;
+            return order;
+        }
+
         /// <summary>
         /// 单次攻击计算
         /// </summary>

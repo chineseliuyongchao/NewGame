@@ -178,6 +178,10 @@ MonoBehaviour:
     m_Localized: Exit
     m_Metadata:
       m_Items: []
+  - m_Id: 58011295868829696
+    m_Localized: Start Fight
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

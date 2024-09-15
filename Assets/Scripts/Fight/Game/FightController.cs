@@ -1,33 +1,101 @@
-﻿using Fight.FsmS;
+﻿using System.Collections.Generic;
+using Fight.FsmS;
+using Fight.Game.Legion;
+using Fight.Utils;
+using Game.FightCreate;
 using Game.GameBase;
 using QFramework;
 using UI;
-using UnityEngine;
 
 namespace Fight.Game
 {
     /**
      * 管理整个场景的状态：战前准备-战斗中-战斗结束
      */
-    public class FightController : MonoBehaviour, IController
+    public class FightController : BaseGameController
     {
         private ArmsFsm _armsFsm;
 
-        private void Awake()
+        /// <summary>
+        /// 军队行动顺序
+        /// </summary>
+        private List<int> _legionOrder;
+
+        /// <summary>
+        /// 正在行动的军队在行动顺序中的位置
+        /// </summary>
+        private int _actionLegionIndex;
+
+        public int ActionLegionIndex
         {
+            get => _actionLegionIndex;
+            set => _actionLegionIndex = value;
+        }
+
+        protected override void OnInit()
+        {
+            base.OnInit();
             this.GetModel<IAStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
+
+            List<int> legionKeys = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);
+            for (int i = 0; i < legionKeys.Count; i++)
+            {
+                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[legionKeys[i]];
+                BaseLegion legion = legionInfo.legionId == Constants.PlayLegionId
+                    ? new PlayerLegion()
+                    : new ComputerLegion();
+                legion.Init(legionInfo.legionId);
+                this.GetModel<IFightCoreModel>().AllLegion.Add(legionInfo.legionId, legion);
+            }
+
+            _legionOrder = this.GetSystem<IFightComputeSystem>().LegionOrder();
+            _actionLegionIndex = 0;
         }
 
-        private void Start()
+        protected override void OnControllerStart()
         {
             this.SendCommand(new FightCommand(FightType.WAR_PREPARATIONS));
         }
 
-        public IArchitecture GetArchitecture()
+        protected override void OnListenEvent()
         {
-            return GameApp.Interface;
+            this.RegisterEvent<InFightEvent>(_ => { StartFight(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+
+        /// <summary>
+        /// 战斗开始
+        /// </summary>
+        private void StartFight()
+        {
+            LegionStartAction(_legionOrder[ActionLegionIndex]);
+        }
+
+        /// <summary>
+        /// 某个军队开始行动
+        /// </summary>
+        private void LegionStartAction(int legionId)
+        {
+            this.GetModel<IFightCoreModel>().AllLegion[legionId].StartAction(LegionEndAction);
+        }
+
+        /// <summary>
+        /// 某个军队行动结束
+        /// </summary>
+        private void LegionEndAction(int legionId)
+        {
+            int index = _legionOrder.IndexOf(legionId);
+            //暂时行动完一轮后结束战斗
+            if (index + 1 >= _legionOrder.Count)
+            {
+                this.SendCommand(new FightCommand(FightType.SETTLEMENT));
+            }
+            else
+            {
+                ActionLegionIndex = index + 1;
+                LegionStartAction(_legionOrder[ActionLegionIndex]);
+            }
         }
 
         private void OnDestroy()

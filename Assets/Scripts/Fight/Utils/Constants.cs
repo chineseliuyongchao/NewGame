@@ -162,5 +162,10 @@
         /// 阵营2的id，通常是敌人所在的阵营
         /// </summary>
         public const int BELLIGERENT2 = 2;
+
+        /// <summary>
+        /// 临时变量，系统为玩家生成的军队id就是这个值
+        /// </summary>
+        public const int PlayLegionId = 1001;
     }
 }

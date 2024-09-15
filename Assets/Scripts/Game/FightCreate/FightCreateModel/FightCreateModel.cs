@@ -26,7 +26,7 @@ namespace Game.FightCreate
     public class LegionInfo
     {
         /// <summary>
-        /// 军队id，一个阵营可能有多个军队，每个军队有多个单位（军队编号0的是玩家）
+        /// 军队id，一个阵营可能有多个军队，每个军队有多个单位（军队编号1001的是玩家，使用Constants.PlayLegionId变量，方便后续可能得修改）
         /// </summary>
         public int legionId;
 
@@ -36,7 +36,7 @@ namespace Game.FightCreate
         public int belligerentsId;
 
         /// <summary>
-        /// 记录阵营的派系id
+        /// 记录军队的派系id
         /// </summary>
         public int factionsId;
 

@@ -5,27 +5,24 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:3efe52ab-64f5-4de0-be70-5b0ffc69413b
-	public partial class UIGameFight
+	// Generate Id:a60c2624-2897-4237-8336-d8501cbef7d5
+	public partial class UIFightEnd
 	{
-		public const string Name = "UIGameFight";
+		public const string Name = "UIFightEnd";
 		
 		[SerializeField]
 		private UnityEngine.UI.Button exitButton;
-		[SerializeField]
-		private UnityEngine.UI.Button startButton;
 		
-		private UIGameFightData mPrivateData = null;
+		private UIFightEndData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
 			exitButton = null;
-			startButton = null;
 			
 			mData = null;
 		}
 		
-		public UIGameFightData Data
+		public UIFightEndData Data
 		{
 			get
 			{
@@ -33,11 +30,11 @@ namespace UI
 			}
 		}
 		
-		UIGameFightData mData
+		UIFightEndData mData
 		{
 			get
 			{
-				return mPrivateData ?? (mPrivateData = new UIGameFightData());
+				return mPrivateData ?? (mPrivateData = new UIFightEndData());
 			}
 			set
 			{
