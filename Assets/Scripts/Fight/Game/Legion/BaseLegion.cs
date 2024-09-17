@@ -10,7 +10,7 @@ namespace Fight.Game.Legion
     public abstract class BaseLegion : IController
     {
         public int legionId;
-        private Action<int> _actionEnd;
+        protected Action<int> actionEnd;
 
         public IArchitecture GetArchitecture()
         {
@@ -30,9 +30,9 @@ namespace Fight.Game.Legion
         /// <summary>
         /// 开始行动
         /// </summary>
-        public virtual void StartAction(Action<int> actionEnd)
+        public virtual void StartAction(Action<int> action)
         {
-            _actionEnd = actionEnd;
+            actionEnd = action;
             //暂时没有行动相关逻辑，直接调用结束
             EndAction();
         }
@@ -42,10 +42,10 @@ namespace Fight.Game.Legion
         /// </summary>
         protected virtual void EndAction()
         {
-            if (_actionEnd != null)
+            if (actionEnd != null)
             {
-                _actionEnd(legionId);
-                _actionEnd = null;
+                actionEnd(legionId);
+                actionEnd = null;
             }
         }
     }

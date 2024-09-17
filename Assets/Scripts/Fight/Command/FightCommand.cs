@@ -7,11 +7,11 @@ namespace Fight
     /// <summary>
     /// 单位移动
     /// </summary>
-    public class ArmsMoveCommand : AbstractCommand
+    public class UnitMoveCommand : AbstractCommand
     {
         private readonly int _endIndex;
 
-        public ArmsMoveCommand(int endIndex)
+        public UnitMoveCommand(int endIndex)
         {
             _endIndex = endIndex;
         }
@@ -24,17 +24,17 @@ namespace Fight
                 return;
             }
 
-            int index = fightVisualModel.ArmsIdToIndexDictionary[fightVisualModel.FocusController.armData.unitId];
-            fightVisualModel.ArmsIdToIndexDictionary[fightVisualModel.FocusController.armData.unitId] = _endIndex;
-            if (!fightVisualModel.IndexToArmsIdDictionary.Remove(index))
+            int index = fightVisualModel.UnitIdToIndexDictionary[fightVisualModel.FocusController.unitData.unitId];
+            fightVisualModel.UnitIdToIndexDictionary[fightVisualModel.FocusController.unitData.unitId] = _endIndex;
+            if (!fightVisualModel.IndexToUnitIdDictionary.Remove(index))
             {
-                fightVisualModel.IndexToArmsIdDictionary.Remove(
-                    fightVisualModel.FocusController.armData.currentPosition);
+                fightVisualModel.IndexToUnitIdDictionary.Remove(
+                    fightVisualModel.FocusController.unitData.currentPosition);
             }
 
-            fightVisualModel.IndexToArmsIdDictionary[_endIndex] = fightVisualModel.FocusController.armData.unitId;
-            fightVisualModel.FocusController.armData.currentPosition = _endIndex;
-            fightVisualModel.FocusController.ArmsMoveAction(_endIndex);
+            fightVisualModel.IndexToUnitIdDictionary[_endIndex] = fightVisualModel.FocusController.unitData.unitId;
+            fightVisualModel.FocusController.unitData.currentPosition = _endIndex;
+            fightVisualModel.FocusController.UnitMoveAction(_endIndex);
         }
     }
 
@@ -72,13 +72,13 @@ namespace Fight
     }
 
     /// <summary>
-    /// 兵种聚焦
+    /// 单位聚焦
     /// </summary>
-    public class SelectArmsFocusCommand : AbstractCommand
+    public class SelectUnitFocusCommand : AbstractCommand
     {
         private readonly int _index;
 
-        public SelectArmsFocusCommand(int index)
+        public SelectUnitFocusCommand(int index)
         {
             _index = index;
         }
@@ -86,10 +86,10 @@ namespace Fight
         protected override void OnExecute()
         {
             IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
-            ArmsController currentFocusController = null;
-            if (fightVisualModel.IndexToArmsIdDictionary.TryGetValue(_index, out int id))
+            UnitController currentFocusController = null;
+            if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(_index, out int id))
             {
-                currentFocusController = this.GetModel<IFightVisualModel>().AllArm[id];
+                currentFocusController = this.GetModel<IFightVisualModel>().AllUnit[id];
             }
 
             if (currentFocusController != null)
@@ -97,7 +97,7 @@ namespace Fight
                 currentFocusController.StartFocusAction();
                 if (fightVisualModel.FocusController) fightVisualModel.FocusController.EndFocusAction();
                 fightVisualModel.FocusController = currentFocusController;
-                this.SendEvent(new SelectArmsFocusEvent(_index));
+                this.SendEvent(new SelectUnitFocusEvent(_index));
             }
             else
             {
@@ -109,7 +109,7 @@ namespace Fight
     /// <summary>
     /// 取消兵种聚焦
     /// </summary>
-    public class CancelArmsFocusCommand : AbstractCommand
+    public class CancelUnitFocusCommand : AbstractCommand
     {
         protected override void OnExecute()
         {
@@ -120,7 +120,7 @@ namespace Fight
             }
 
             fightVisualModel.FocusController.EndFocusAction();
-            this.SendEvent<CancelArmsFocusEvent>();
+            this.SendEvent<CancelUnitFocusEvent>();
             fightVisualModel.FocusController = null;
         }
     }

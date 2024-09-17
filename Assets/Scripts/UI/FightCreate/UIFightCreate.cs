@@ -185,7 +185,7 @@ namespace UI
                 legionId = newLegionId,
                 belligerentsId = belligerentsId,
                 factionsId = 0,
-                allArm = new Dictionary<int, ArmData>()
+                allUnit = new Dictionary<int, UnitData>()
             };
             this.GetModel<IFightCreateModel>().AllLegions.Add(newLegionId, legionInfo);
             GameObject newLegion = Instantiate(belligerentPrefab, belligerentGroup);
@@ -326,13 +326,14 @@ namespace UI
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
             int newUnitId = legionInfo.lastUnitId + 1;
             int realUnitId = legionInfo.legionId * 1000 + newUnitId; //确保战场每个单位的id都不一样
-            ArmData armData = new ArmData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], realUnitId);
+            UnitData unitData = new UnitData(this.GetModel<IGameMenuModel>().ARMDataTypes[armId], realUnitId,
+                legionInfo.legionId);
             legionInfo.lastUnitId = newUnitId;
-            legionInfo.allArm.Add(newUnitId, armData);
+            legionInfo.allUnit.Add(realUnitId, unitData);
             GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
             UIFightCreateUnit units = unitShow.GetComponent<UIFightCreateUnit>();
-            uiFightCreateUnits.Add(newUnitId, units);
-            units.InitUI(newUnitId, armId, this);
+            uiFightCreateUnits.Add(realUnitId, units);
+            units.InitUI(realUnitId, armId, this);
             CheckCanCreate();
         }
 
@@ -342,7 +343,7 @@ namespace UI
         public void DeleteUnit(int unitId)
         {
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
-            legionInfo.allArm.Remove(unitId);
+            legionInfo.allUnit.Remove(unitId);
             UIFightCreateUnit units = uiFightCreateUnits[unitId];
             uiFightCreateUnits.Remove(unitId);
             units.gameObject.DestroySelf();
@@ -357,7 +358,7 @@ namespace UI
             if (model)
             {
                 LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
-                legionInfo.allArm.Clear();
+                legionInfo.allUnit.Clear();
             }
 
             if (view)
@@ -380,10 +381,10 @@ namespace UI
         private void ShowUnit()
         {
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
-            List<int> unitId = new List<int>(legionInfo.allArm.Keys);
+            List<int> unitId = new List<int>(legionInfo.allUnit.Keys);
             for (int i = 0; i < unitId.Count; i++)
             {
-                ArmData data = legionInfo.allArm[unitId[i]];
+                UnitData data = legionInfo.allUnit[unitId[i]];
                 GameObject unitShow = Instantiate(unitPrefab, showAllUnit);
                 UIFightCreateUnit units = unitShow.GetComponent<UIFightCreateUnit>();
                 uiFightCreateUnits.Add(data.unitId, units);
@@ -401,7 +402,7 @@ namespace UI
             for (int i = 0; i < legionId.Count; i++)
             {
                 LegionInfo info = this.GetModel<IFightCreateModel>().AllLegions[legionId[i]];
-                if (info.allArm.Count <= 0)
+                if (info.allUnit.Count <= 0)
                 {
                     allLegionHasArm = false;
                 }

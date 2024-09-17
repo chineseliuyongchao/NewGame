@@ -70,9 +70,9 @@ namespace Fight
             return (Vector3)nodeBase.position;
         }
 
-        public Vector3 GetArmsRelayPosition(ArmData armData)
+        public Vector3 GetUnitRelayPosition(UnitData unitData)
         {
-            return (Vector3)FightGridNodeInfoList[armData.currentPosition].position;
+            return (Vector3)FightGridNodeInfoList[unitData.currentPosition].position;
         }
 
         /// <summary>

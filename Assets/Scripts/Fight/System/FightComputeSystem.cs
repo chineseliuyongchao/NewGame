@@ -24,18 +24,18 @@ namespace Fight
         {
             Dictionary<int, LegionInfo> allLegions = this.GetModel<IFightCreateModel>().AllLegions;
             List<int> legionId = new List<int>(allLegions.Keys);
-            List<int> pos1 = new List<int>(Constants.MyArmsPositionArray1);
-            List<int> pos2 = new List<int>(Constants.MyArmsPositionArray2);
+            List<int> pos1 = new List<int>(Constants.MyUnitPositionArray1);
+            List<int> pos2 = new List<int>(Constants.MyUnitPositionArray2);
             for (int i = 0; i < legionId.Count; i++)
             {
                 LegionInfo legionInfo = allLegions[legionId[i]];
-                List<int> armId = new List<int>(legionInfo.allArm.Keys);
+                List<int> armId = new List<int>(legionInfo.allUnit.Keys);
                 var pos = legionInfo.belligerentsId == Constants.BELLIGERENT1 ? pos1 : pos2;
                 for (int j = 0; j < armId.Count; j++)
                 {
-                    ArmData armData = legionInfo.allArm[armId[j]];
+                    UnitData unitData = legionInfo.allUnit[armId[j]];
                     int randomIndex = Random.Range(0, pos.Count);
-                    armData.currentPosition = pos[randomIndex];
+                    unitData.currentPosition = pos[randomIndex];
                     pos.RemoveAt(randomIndex);//防止多个单位随机到一个位置
                 }
             }
@@ -43,26 +43,26 @@ namespace Fight
 
         public void AssaultWithRetaliation(int armAId, int armBId)
         {
-            ArmData armA = this.GetModel<IFightCoreModel>().ARMDataTypes[armAId];
-            ArmData armB = this.GetModel<IFightCoreModel>().ARMDataTypes[armBId];
+            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(armAId);
+            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(armBId);
             //单位1进攻单位2，单位2反击
-            ArmData arm2Before = new ArmData(armB);
-            AssaultNoRetaliation(armA, armB);
-            AssaultNoRetaliation(arm2Before, armA);
+            UnitData arm2Before = new UnitData(unitB);
+            AssaultNoRetaliation(unitA, unitB);
+            AssaultNoRetaliation(arm2Before, unitA);
         }
 
         public void AssaultNoRetaliation(int armAId, int armBId)
         {
-            ArmData armA = this.GetModel<IFightCoreModel>().ARMDataTypes[armAId];
-            ArmData armB = this.GetModel<IFightCoreModel>().ARMDataTypes[armBId];
-            AssaultNoRetaliation(armA, armB);
+            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(armAId);
+            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(armBId);
+            AssaultNoRetaliation(unitA, unitB);
         }
 
         public void Shoot(int armAId, int armBId)
         {
-            ArmData armA = this.GetModel<IFightCoreModel>().ARMDataTypes[armAId];
-            ArmData armB = this.GetModel<IFightCoreModel>().ARMDataTypes[armBId];
-            OneShoot(armA, armB);
+            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(armAId);
+            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(armBId);
+            OneShoot(unitA, unitB);
         }
 
         public List<int> LegionOrder()
@@ -76,96 +76,96 @@ namespace Fight
         /// <summary>
         /// 单次攻击计算
         /// </summary>
-        /// <param name="armA"></param>
-        /// <param name="armB"></param>
-        private void AssaultNoRetaliation(ArmData armA, ArmData armB)
+        /// <param name="unitA"></param>
+        /// <param name="unitB"></param>
+        private void AssaultNoRetaliation(UnitData unitA, UnitData unitB)
         {
             //计算命中次数
-            int realAttack = RealAttack(armA);
-            int realDefenseMelee = RealDefenseMelee(armB);
+            int realAttack = RealAttack(unitA);
+            int realDefenseMelee = RealDefenseMelee(unitB);
             float hitProbability = Math.Max(0.05f, Math.Min(1, realAttack / (realDefenseMelee * 3f))); //命中概率
-            int successAttackNum = CompleteSuccessAttackNum(hitProbability, armA.NowTroops); //成功命中次数
+            int successAttackNum = CompleteSuccessAttackNum(hitProbability, unitA.NowTroops); //成功命中次数
             // Debug.Log("命中概率：" + hitProbability + "  成功命中次数：" + successAttackNum);
 
             //计算单次实际杀伤（普通杀伤和破甲杀伤）
             float realMeleeNormal =
-                Math.Max(_armDataTypes[armA.armId].meleeNormal - _armDataTypes[armB.armId].armor / 2, 0); //实际普通杀伤
-            int armRealMeleeArmor = this.RealMeleeArmor(armA); //兵种的破甲杀伤修正
+                Math.Max(_armDataTypes[unitA.armId].meleeNormal - _armDataTypes[unitB.armId].armor / 2, 0); //实际普通杀伤
+            int armRealMeleeArmor = this.RealMeleeArmor(unitA); //兵种的破甲杀伤修正
             float realMeleeArmorFactor = Math.Max(0.1f, Math.Min(1, //实际破甲杀伤系数
-                1 - (_armDataTypes[armB.armId].armor - (float)armRealMeleeArmor) / armRealMeleeArmor * 0.15f));
+                1 - (_armDataTypes[unitB.armId].armor - (float)armRealMeleeArmor) / armRealMeleeArmor * 0.15f));
             float realMeleeArmor = armRealMeleeArmor * realMeleeArmorFactor; //实际破甲杀伤
             // Debug.Log("实际普通杀伤：" + realMeleeNormal + "  实际破甲杀伤：" + realMeleeArmor + "  实际破甲杀伤系数：" + realMeleeArmorFactor);
 
             //计算实际攻击伤害
             int totalDamage = (int)(successAttackNum * (realMeleeNormal + realMeleeArmor)); //攻击产生的总伤害
-            armB.NowHp -= totalDamage; //计算剩余血量
-            int theoryMaxNum = _armDataTypes[armB.armId].totalTroops; //理论最大人数
+            unitB.NowHp -= totalDamage; //计算剩余血量
+            int theoryMaxNum = _armDataTypes[unitB.armId].totalTroops; //理论最大人数
             int theoryMinNum =
-                (int)Math.Ceiling(theoryMaxNum * ((float)armB.NowHp / _armDataTypes[armB.armId].totalHp)); //理论最小人数
+                (int)Math.Ceiling(theoryMaxNum * ((float)unitB.NowHp / _armDataTypes[unitB.armId].totalHp)); //理论最小人数
             float computeTroopsFactor = 0.7f; //剩余人数计算系数
-            int theoryNowTroops = theoryMinNum + (int)((theoryMaxNum - theoryMinNum) * Math.Pow(armB.NowHp /
-                (float)_armDataTypes[armB.armId].totalHp, computeTroopsFactor)); //剩余理论人数
-            armB.NowTroops = Math.Max(theoryMinNum, Math.Min(theoryMaxNum, theoryNowTroops)); //剩余实际人数
+            int theoryNowTroops = theoryMinNum + (int)((theoryMaxNum - theoryMinNum) * Math.Pow(unitB.NowHp /
+                (float)_armDataTypes[unitB.armId].totalHp, computeTroopsFactor)); //剩余理论人数
+            unitB.NowTroops = Math.Max(theoryMinNum, Math.Min(theoryMaxNum, theoryNowTroops)); //剩余实际人数
             // Debug.Log("攻击产生的总伤害：" + totalDamage + "  理论最大人数：" + theoryMaxNum + "  理论最小人数：" + theoryMinNum + "  剩余理论人数：" + theoryNowTroops);
         }
 
         /// <summary>
         /// 一次射击，默认a是攻击方，b是被攻击方
         /// </summary>
-        /// <param name="armA">单位a</param>
-        /// <param name="armB">单位b</param>
-        private void OneShoot(ArmData armA, ArmData armB)
+        /// <param name="unitA">单位a</param>
+        /// <param name="unitB">单位b</param>
+        private void OneShoot(UnitData unitA, UnitData unitB)
         {
             //计算命中次数
-            int realAccuracy = RealAccuracy(armA);
-            int realDefenseRange = RealDefenseRange(armB);
+            int realAccuracy = RealAccuracy(unitA);
+            int realDefenseRange = RealDefenseRange(unitB);
             float hitProbability = Math.Max(0.05f, Math.Min(1, realAccuracy / (realDefenseRange * 3f))); //命中概率
-            int successAttackNum = CompleteSuccessAttackNum(hitProbability, armA.NowTroops); //成功命中次数
+            int successAttackNum = CompleteSuccessAttackNum(hitProbability, unitA.NowTroops); //成功命中次数
             // Debug.Log("命中概率：" + hitProbability + "  成功命中次数：" + successAttackNum);
 
             //计算单次实际杀伤（普通杀伤和破甲杀伤）
             float realRangeNormal =
-                Math.Max(_armDataTypes[armA.armId].rangeNormal - _armDataTypes[armB.armId].armor / 2, 0); //实际普通杀伤
-            int armRealRangeArmor = this.RealRangeArmor(armA); //兵种的破甲杀伤修正
+                Math.Max(_armDataTypes[unitA.armId].rangeNormal - _armDataTypes[unitB.armId].armor / 2, 0); //实际普通杀伤
+            int armRealRangeArmor = this.RealRangeArmor(unitA); //兵种的破甲杀伤修正
             float realRangeArmorFactor = Math.Max(0.1f, Math.Min(1, //实际破甲杀伤系数
-                1 - (_armDataTypes[armB.armId].armor - (float)armRealRangeArmor) / armRealRangeArmor * 0.15f));
+                1 - (_armDataTypes[unitB.armId].armor - (float)armRealRangeArmor) / armRealRangeArmor * 0.15f));
             float realRangeArmor = armRealRangeArmor * realRangeArmorFactor; //实际破甲杀伤
             // Debug.Log("实际普通杀伤：" + realRangeNormal + "  实际破甲杀伤：" + realRangeArmor + "  实际破甲杀伤系数：" + realRangeArmorFactor);
 
             //计算实际攻击伤害
             int totalDamage = (int)(successAttackNum * (realRangeNormal + realRangeArmor)); //攻击产生的总伤害
-            armB.NowHp -= totalDamage; //计算剩余血量
-            int theoryMaxNum = _armDataTypes[armB.armId].totalTroops; //理论最大人数
+            unitB.NowHp -= totalDamage; //计算剩余血量
+            int theoryMaxNum = _armDataTypes[unitB.armId].totalTroops; //理论最大人数
             int theoryMinNum =
-                (int)Math.Ceiling(theoryMaxNum * ((float)armB.NowHp / _armDataTypes[armB.armId].totalHp)); //理论最小人数
+                (int)Math.Ceiling(theoryMaxNum * ((float)unitB.NowHp / _armDataTypes[unitB.armId].totalHp)); //理论最小人数
             float computeTroopsFactor = 0.7f; //剩余人数计算系数
-            int theoryNowTroops = theoryMinNum + (int)((theoryMaxNum - theoryMinNum) * Math.Pow(armB.NowHp /
-                (float)_armDataTypes[armB.armId].totalHp, computeTroopsFactor)); //剩余理论人数
-            armB.NowTroops = Math.Max(theoryMinNum, Math.Min(theoryMaxNum, theoryNowTroops)); //剩余实际人数
+            int theoryNowTroops = theoryMinNum + (int)((theoryMaxNum - theoryMinNum) * Math.Pow(unitB.NowHp /
+                (float)_armDataTypes[unitB.armId].totalHp, computeTroopsFactor)); //剩余理论人数
+            unitB.NowTroops = Math.Max(theoryMinNum, Math.Min(theoryMaxNum, theoryNowTroops)); //剩余实际人数
             // Debug.Log("攻击产生的总伤害：" + totalDamage + "  理论最大人数：" + theoryMaxNum + "  理论最小人数：" + theoryMinNum + "  剩余理论人数：" + theoryNowTroops);
         }
 
         /// <summary>
         /// 计算实际攻击能力，计算规则原则上先加后乘
         /// </summary>
-        /// <param name="armData"></param>
+        /// <param name="unitData"></param>
         /// <returns></returns>
-        private int RealAttack(ArmData armData)
+        private int RealAttack(UnitData unitData)
         {
-            int correctAttack = _armDataTypes[armData.armId].attack;
-            if (armData.IsCharge)
+            int correctAttack = _armDataTypes[unitData.armId].attack;
+            if (unitData.IsCharge)
             {
-                correctAttack += _armDataTypes[armData.armId].charge;
+                correctAttack += _armDataTypes[unitData.armId].charge;
             }
 
-            if (armData.IsStick)
+            if (unitData.IsStick)
             {
                 correctAttack = (int)(correctAttack * 0.75f);
             }
 
             int realAttack = correctAttack; //修正后攻击能力
-            realAttack = ComputeCorrectMorale(realAttack, armData);
-            realAttack = ComputeCorrectFatigue(realAttack, armData);
+            realAttack = ComputeCorrectMorale(realAttack, unitData);
+            realAttack = ComputeCorrectFatigue(realAttack, unitData);
 
             return realAttack;
         }
@@ -173,33 +173,33 @@ namespace Fight
         /// <summary>
         /// 计算实际近战防御能力，计算规则原则上先加后乘
         /// </summary>
-        /// <param name="armData"></param>
+        /// <param name="unitData"></param>
         /// <returns></returns>
-        private int RealDefenseMelee(ArmData armData)
+        private int RealDefenseMelee(UnitData unitData)
         {
-            int correctDefenseMelee = _armDataTypes[armData.armId].defenseMelee;
-            if (armData.IsStick)
+            int correctDefenseMelee = _armDataTypes[unitData.armId].defenseMelee;
+            if (unitData.IsStick)
             {
                 correctDefenseMelee = (int)(correctDefenseMelee * 1.4f);
             }
 
             int realDefenseMelee = correctDefenseMelee; //修正后防御能力
-            realDefenseMelee = ComputeCorrectMorale(realDefenseMelee, armData);
-            realDefenseMelee = ComputeCorrectFatigue(realDefenseMelee, armData);
+            realDefenseMelee = ComputeCorrectMorale(realDefenseMelee, unitData);
+            realDefenseMelee = ComputeCorrectFatigue(realDefenseMelee, unitData);
             return realDefenseMelee;
         }
 
         /// <summary>
         /// 计算实际破甲杀伤，计算规则原则上先加后乘
         /// </summary>
-        /// <param name="armData"></param>
+        /// <param name="unitData"></param>
         /// <returns></returns>
-        private int RealMeleeArmor(ArmData armData)
+        private int RealMeleeArmor(UnitData unitData)
         {
-            int correctMeleeArmor = _armDataTypes[armData.armId].meleeArmor;
-            if (armData.IsCharge)
+            int correctMeleeArmor = _armDataTypes[unitData.armId].meleeArmor;
+            if (unitData.IsCharge)
             {
-                correctMeleeArmor += (int)(_armDataTypes[armData.armId].charge * 0.1f);
+                correctMeleeArmor += (int)(_armDataTypes[unitData.armId].charge * 0.1f);
             }
 
             int realMeleeArmor = correctMeleeArmor;
@@ -209,57 +209,57 @@ namespace Fight
         /// <summary>
         /// 计算实际射击精度，计算规则原则上先加后乘
         /// </summary>
-        /// <param name="armData"></param>
+        /// <param name="unitData"></param>
         /// <returns></returns>
-        private int RealAccuracy(ArmData armData)
+        private int RealAccuracy(UnitData unitData)
         {
-            int correctAccuracy = _armDataTypes[armData.armId].accuracy;
+            int correctAccuracy = _armDataTypes[unitData.armId].accuracy;
             int realAccuracy = correctAccuracy;
-            realAccuracy = ComputeCorrectMorale(realAccuracy, armData);
-            realAccuracy = ComputeCorrectFatigue(realAccuracy, armData);
+            realAccuracy = ComputeCorrectMorale(realAccuracy, unitData);
+            realAccuracy = ComputeCorrectFatigue(realAccuracy, unitData);
             return realAccuracy;
         }
 
         /// <summary>
         /// 计算实际远程防御能力
         /// </summary>
-        /// <param name="armData"></param>
+        /// <param name="unitData"></param>
         /// <returns></returns>
-        private int RealDefenseRange(ArmData armData)
+        private int RealDefenseRange(UnitData unitData)
         {
-            int correctDefenseRange = _armDataTypes[armData.armId].defenseRange;
+            int correctDefenseRange = _armDataTypes[unitData.armId].defenseRange;
             int realDefenseRange = correctDefenseRange;
-            realDefenseRange = ComputeCorrectMorale(realDefenseRange, armData);
-            realDefenseRange = ComputeCorrectFatigue(realDefenseRange, armData);
+            realDefenseRange = ComputeCorrectMorale(realDefenseRange, unitData);
+            realDefenseRange = ComputeCorrectFatigue(realDefenseRange, unitData);
             return realDefenseRange;
         }
 
         /// <summary>
         /// 计算作战意志修正
         /// </summary>
-        private int ComputeCorrectMorale(int value, ArmData armData)
+        private int ComputeCorrectMorale(int value, UnitData unitData)
         {
-            return (int)(value * (1 - (_armDataTypes[armData.armId].maximumMorale - armData.NowMorale) /
-                (float)_armDataTypes[armData.armId].maximumMorale * 0.2f));
+            return (int)(value * (1 - (_armDataTypes[unitData.armId].maximumMorale - unitData.NowMorale) /
+                (float)_armDataTypes[unitData.armId].maximumMorale * 0.2f));
         }
 
         /// <summary>
         /// 计算疲劳值修正
         /// </summary>
-        private int ComputeCorrectFatigue(int value, ArmData armData)
+        private int ComputeCorrectFatigue(int value, UnitData unitData)
         {
-            return (int)(value * (1 - armData.NowFatigue /
-                (float)_armDataTypes[armData.armId].maximumFatigue * 0.5f));
+            return (int)(value * (1 - unitData.NowFatigue /
+                (float)_armDataTypes[unitData.armId].maximumFatigue * 0.5f));
         }
 
         /// <summary>
         /// 计算实际远程破甲杀伤
         /// </summary>
-        /// <param name="armData"></param>
+        /// <param name="unitData"></param>
         /// <returns></returns>
-        private int RealRangeArmor(ArmData armData)
+        private int RealRangeArmor(UnitData unitData)
         {
-            int correctRangeArmor = _armDataTypes[armData.armId].rangeArmor;
+            int correctRangeArmor = _armDataTypes[unitData.armId].rangeArmor;
             int realRangeArmor = correctRangeArmor;
             return realRangeArmor;
         }

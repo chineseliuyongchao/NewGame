@@ -14,35 +14,23 @@ namespace Fight
         ///     key：单位id
         ///     value：单位在战斗场景中的位置
         /// </summary>
-        Dictionary<int, int> ArmsIdToIndexDictionary { get; }
+        Dictionary<int, int> UnitIdToIndexDictionary { get; }
 
         /// <summary>
         ///     key：单位在战斗场景中的位置
         ///     value：单位id
         /// </summary>
-        Dictionary<int, int> IndexToArmsIdDictionary { get; }
-
-        /// <summary>
-        ///     key：敌军的专属id
-        ///     value：敌军在战斗场景中的位置
-        /// </summary>
-        Dictionary<int, int> EnemyIdToIndexDictionary { get; }
-
-        /// <summary>
-        ///     key：敌军在战斗场景中的位置
-        ///     value：敌军的专属id
-        /// </summary>
-        Dictionary<int, int> IndexToEnemyIdDictionary { get; }
+        Dictionary<int, int> IndexToUnitIdDictionary { get; }
 
         /// <summary>
         /// 当前被选取为焦点的兵种
         /// </summary>
         [CanBeNull]
-        ArmsController FocusController { get; set; }
+        UnitController FocusController { get; set; }
 
         /// <summary>
         /// 存放战场上所有的单位（key：单位id，value：单位对象）
         /// </summary>
-        public Dictionary<int, ArmsController> AllArm { get; set; }
+        public Dictionary<int, UnitController> AllUnit { get; set; }
     }
 }

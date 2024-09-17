@@ -3,11 +3,11 @@
     /// <summary>
     /// 单位移动
     /// </summary>
-    public struct ArmsMoveEvent
+    public struct UnitMoveEvent
     {
         public int endIndex;
 
-        public ArmsMoveEvent(int endIndex)
+        public UnitMoveEvent(int endIndex)
         {
             this.endIndex = endIndex;
         }
@@ -16,11 +16,11 @@
     /// <summary>
     /// 兵种聚焦
     /// </summary>
-    public struct SelectArmsFocusEvent
+    public struct SelectUnitFocusEvent
     {
         public int selectIndex;
 
-        public SelectArmsFocusEvent(int selectIndex)
+        public SelectUnitFocusEvent(int selectIndex)
         {
             this.selectIndex = selectIndex;
         }
@@ -29,7 +29,7 @@
     /// <summary>
     /// 取消兵种聚焦
     /// </summary>
-    public struct CancelArmsFocusEvent
+    public struct CancelUnitFocusEvent
     {
     }
 

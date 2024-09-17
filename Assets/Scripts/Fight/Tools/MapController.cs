@@ -44,11 +44,11 @@ namespace Fight.Tools
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<SelectArmsFocusEvent>(SelectArmsFocusEvent)
+            this.RegisterEvent<SelectUnitFocusEvent>(SelectUnitFocusEvent)
                 .UnRegisterWhenGameObjectDestroyed(this);
         }
 
-        private void SelectArmsFocusEvent(SelectArmsFocusEvent focusEvent)
+        private void SelectUnitFocusEvent(SelectUnitFocusEvent focusEvent)
         {
             switch (this.GetModel<IFightCoreModel>().FightType)
             {

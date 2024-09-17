@@ -5,42 +5,33 @@ using QFramework;
 
 namespace Fight
 {
-    /**
-     * 存放战斗场景中通用属性以及数据
-     */
     public class FightVisualModel : AbstractModel, IFightVisualModel
     {
-        private Dictionary<int, int> _armsIdToIndexDictionary;
-        private Dictionary<int, int> _indexToArmsIdDictionary;
-        private Dictionary<int, int> _enemyIdToIndexDictionary;
-        private Dictionary<int, int> _indexToEnemyIdDictionary;
-        [CanBeNull] private ArmsController _focusController;
-        private Dictionary<int, ArmsController> _allArm;
+        private Dictionary<int, int> _unitIdToIndexDictionary;
+        private Dictionary<int, int> _indexToUnitIdDictionary;
+        [CanBeNull] private UnitController _focusController;
+        private Dictionary<int, UnitController> _allUnit;
 
         protected override void OnInit()
         {
-            _armsIdToIndexDictionary = new Dictionary<int, int>();
-            _indexToArmsIdDictionary = new Dictionary<int, int>();
-            _enemyIdToIndexDictionary = new Dictionary<int, int>();
-            _indexToEnemyIdDictionary = new Dictionary<int, int>();
-            _allArm = new Dictionary<int, ArmsController>();
+            _unitIdToIndexDictionary = new Dictionary<int, int>();
+            _indexToUnitIdDictionary = new Dictionary<int, int>();
+            _allUnit = new Dictionary<int, UnitController>();
         }
 
-        public Dictionary<int, int> ArmsIdToIndexDictionary => _armsIdToIndexDictionary;
-        public Dictionary<int, int> IndexToArmsIdDictionary => _indexToArmsIdDictionary;
-        public Dictionary<int, int> EnemyIdToIndexDictionary => _enemyIdToIndexDictionary;
-        public Dictionary<int, int> IndexToEnemyIdDictionary => _indexToEnemyIdDictionary;
+        public Dictionary<int, int> UnitIdToIndexDictionary => _unitIdToIndexDictionary;
+        public Dictionary<int, int> IndexToUnitIdDictionary => _indexToUnitIdDictionary;
 
-        public ArmsController FocusController
+        public UnitController FocusController
         {
             get => _focusController;
             set => _focusController = value;
         }
 
-        public Dictionary<int, ArmsController> AllArm
+        public Dictionary<int, UnitController> AllUnit
         {
-            get => _allArm;
-            set => _allArm = value;
+            get => _allUnit;
+            set => _allUnit = value;
         }
     }
 }

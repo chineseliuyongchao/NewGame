@@ -38,9 +38,9 @@
         /**
          * 玩家自定义兵种的布阵所用的行列最大值
          */
-        public const int ArmsRow = 3;
+        public const int UnitRow = 3;
 
-        public const int ArmsCol = 6;
+        public const int UnitCol = 6;
 
         /**
          * 战斗界面的世界宽高
@@ -133,7 +133,7 @@
         /// todo
         /// 我军的战场布局信息（随机）
         /// </summary>
-        public static readonly int[] MyArmsPositionArray1 =
+        public static readonly int[] MyUnitPositionArray1 =
         {
             147, 131, 115, 99, 83, 67, 35,
             164, 148, 132, 116, 100, 84, 68, 52, 36,
@@ -145,7 +145,7 @@
         /// todo
         /// 敌军的布局信息（随机）
         /// </summary>
-        public static readonly int[] MyArmsPositionArray2 =
+        public static readonly int[] MyUnitPositionArray2 =
         {
             147 + 5, 131 + 5, 115 + 5, 99 + 5, 83 + 5, 67 + 5, 35 + 5,
             164 + 5, 148 + 5, 132 + 5, 116 + 5, 100 + 5, 84 + 5, 68 + 5, 52 + 5, 36 + 5,

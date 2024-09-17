@@ -2,25 +2,42 @@
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Fight.Game
 {
-    public class ArmsController : MonoBehaviour, IController
+    /// <summary>
+    /// 单个兵种
+    /// </summary>
+    public class UnitController : BaseGameController
     {
         /// <summary>
         /// 兵种的相关数据信息
         /// </summary>
-        public ArmData armData;
+        [FormerlySerializedAs("armData")] public UnitData unitData;
 
-        public ObjectArmsView view;
-
+        public ObjectUnitView view;
         private Tween _focusAction;
 
-        public void OnInit()
+        public void Init()
         {
+            view = this.AddComponent<ObjectUnitView>();
+            view.OnInit(this.transform);
+            if (unitData.legionId == Constants.PlayLegionId)
+            {
+            }
+            else
+            {
+                var transform1 = transform;
+                var transformRotation = transform1.rotation;
+                transformRotation.eulerAngles = new Vector3(0, 180, 0);
+                transform1.rotation = transformRotation;
+            }
+
             //todo
-            view.Find<TextMesh>(Constants.DebugText).text = armData.armDataType.unitName;
+            view.Find<TextMesh>(Constants.DebugText).text = unitData.armDataType.unitName;
         }
 
         /// <summary>
@@ -29,7 +46,7 @@ namespace Fight.Game
         public virtual void StartFocusAction()
         {
             _focusAction?.Kill();
-            _focusAction = transform.DOMoveY(this.GetModel<IAStarModel>().GetArmsRelayPosition(armData).y + 0.5f, 0.5f)
+            _focusAction = transform.DOMoveY(this.GetModel<IAStarModel>().GetUnitRelayPosition(unitData).y + 0.5f, 0.5f)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine);
         }
@@ -40,14 +57,14 @@ namespace Fight.Game
         public virtual void EndFocusAction()
         {
             _focusAction?.Kill();
-            transform.DOMove(this.GetModel<IAStarModel>().GetArmsRelayPosition(armData), 0.2f).SetEase(Ease.OutSine);
+            transform.DOMove(this.GetModel<IAStarModel>().GetUnitRelayPosition(unitData), 0.2f).SetEase(Ease.OutSine);
         }
 
         /// <summary>
         /// 兵种移动的动作，需要根据当前战斗的状态变更方式
         /// </summary>
         /// <param name="endIndex"></param>
-        public virtual void ArmsMoveAction(int endIndex)
+        public virtual void UnitMoveAction(int endIndex)
         {
             switch (this.GetModel<IFightCoreModel>().FightType)
             {
@@ -77,14 +94,9 @@ namespace Fight.Game
         {
             int beginIndex =
                 Mathf.Max(
-                    Constants.FightNodeVisibleHeightNum - armData.currentPosition / Constants.FightNodeVisibleWidthNum,
+                    Constants.FightNodeVisibleHeightNum - unitData.currentPosition / Constants.FightNodeVisibleWidthNum,
                     1) * 1000;
             view.ChangeOrderLayer(beginIndex);
-        }
-
-        public IArchitecture GetArchitecture()
-        {
-            return GameApp.Interface;
         }
     }
 }

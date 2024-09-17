@@ -5,11 +5,16 @@ using UnityEngine;
 namespace Fight
 {
     /// <summary>
-    /// 在攻击模拟时记录一个单位的实时属性
+    /// 记录一个单位的实时属性
     /// </summary>
     [Serializable]
-    public class ArmData
+    public class UnitData
     {
+        /// <summary>
+        /// 所属军队的id
+        /// </summary>
+        public int legionId;
+
         /// <summary>
         /// 战场上的单位id
         /// </summary>
@@ -107,23 +112,25 @@ namespace Fight
         /// </summary>
         public ArmDataType armDataType;
 
-        public ArmData(ArmData armData)
+        public UnitData(UnitData unitData)
         {
-            armDataType = armData.armDataType;
-            unitId = armData.unitId;
-            armId = armData.armId;
-            NowHp = armData.NowHp;
-            NowTroops = armData.NowTroops;
-            NowAmmo = armData.NowAmmo;
-            NowMorale = armData.NowMorale;
-            NowFatigue = armData.NowFatigue;
-            IsCharge = armData.IsCharge;
-            IsStick = armData.IsStick;
+            armDataType = unitData.armDataType;
+            legionId = unitData.legionId;
+            unitId = unitData.unitId;
+            armId = unitData.armId;
+            NowHp = unitData.NowHp;
+            NowTroops = unitData.NowTroops;
+            NowAmmo = unitData.NowAmmo;
+            NowMorale = unitData.NowMorale;
+            NowFatigue = unitData.NowFatigue;
+            IsCharge = unitData.IsCharge;
+            IsStick = unitData.IsStick;
         }
 
-        public ArmData(ArmDataType armDataType, int id)
+        public UnitData(ArmDataType armDataType, int id, int legionId)
         {
             this.armDataType = armDataType;
+            this.legionId = legionId;
             unitId = id;
             armId = armDataType.ID;
             NowHp = armDataType.totalHp;
@@ -135,9 +142,10 @@ namespace Fight
             IsStick = false;
         }
 
-        public void Reset(ArmData data)
+        public void Reset(UnitData data)
         {
             armDataType = data.armDataType;
+            legionId = data.legionId;
             unitId = data.unitId;
             armId = data.armId;
             NowHp = data.NowHp;

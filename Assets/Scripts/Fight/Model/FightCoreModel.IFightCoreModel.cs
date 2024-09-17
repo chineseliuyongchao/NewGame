@@ -15,11 +15,6 @@ namespace Fight
         public FightType FightType { get; set; }
 
         /// <summary>
-        /// 当前战斗的所有单位数据
-        /// </summary>
-        public Dictionary<int, ArmData> ARMDataTypes { get; set; }
-
-        /// <summary>
         /// 当前战场上所有的军队
         /// </summary>
         public Dictionary<int, BaseLegion> AllLegion { get; set; }

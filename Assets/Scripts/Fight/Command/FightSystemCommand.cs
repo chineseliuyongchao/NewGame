@@ -24,27 +24,47 @@ namespace Fight
             //当前没有焦点兵种或者点击了其他属于自己的单位
             if (fightVisualModel.FocusController == null)
             {
-                if (fightVisualModel.IndexToArmsIdDictionary.ContainsKey(index))
+                if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(index, out var unitId))
                 {
-                    this.SendCommand(new SelectArmsFocusCommand(index));
+                    if (this.GetSystem<IFightSystem>().IsPlayerUnit(unitId))
+                    {
+                        //点击位置是玩家的单位
+                        this.SendCommand(new SelectUnitFocusCommand(index));
+                    }
+                    else
+                    {
+                        //点击位置不是玩家的单位
+                    }
+                }
+                else
+                {
+                    //点击位置没有单位
                 }
             }
             else
             {
-                if (index == fightVisualModel.FocusController.armData.currentPosition)
+                if (index == fightVisualModel.FocusController.unitData.currentPosition)
                 {
-                    //点击的是自己
-                    this.SendCommand(new CancelArmsFocusCommand());
+                    //点击的是当前选中的单位
+                    this.SendCommand(new CancelUnitFocusCommand());
                 }
-                else if (fightVisualModel.IndexToArmsIdDictionary.ContainsKey(index))
+                else if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(index, out var unitId))
                 {
-                    //点击了其他的兵种
-                    this.SendCommand(new SelectArmsFocusCommand(index));
+                    //点击到了其他单位
+                    if (this.GetSystem<IFightSystem>().IsPlayerUnit(unitId))
+                    {
+                        //点击位置是玩家的单位
+                        this.SendCommand(new SelectUnitFocusCommand(index));
+                    }
+                    else
+                    {
+                        //点击位置不是玩家的单位
+                    }
                 }
                 else if (this.GetSystem<IFightSystem>().CanWalkableIndex(index))
                 {
                     //筛选掉障碍物，表示兵种要移动到这个位置
-                    this.SendCommand(new ArmsMoveCommand(index));
+                    this.SendCommand(new UnitMoveCommand(index));
                 }
             }
         }

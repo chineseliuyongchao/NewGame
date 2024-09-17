@@ -19,18 +19,16 @@ namespace Fight.FsmS
             IFightCreateModel fightCreateModel = this.GetModel<IFightCreateModel>();
             foreach (var tmp in fightCreateModel.AllLegions.Values)
             {
-                foreach (var tmp2 in tmp.allArm)
+                foreach (var tmp2 in tmp.allUnit)
                 {
                     GameObject obj = Instantiate(objArmsGameObject, transform);
                     obj.name = tmp2.Value.unitId.ToString();
-                    ArmsController controller = obj.AddComponent<ArmsController>();
-                    controller.armData = tmp2.Value;
-                    controller.view = obj.AddComponent<ObjectArmsView>();
-                    controller.view.OnInit(obj.transform);
-                    controller.OnInit();
+                    UnitController controller = obj.AddComponent<UnitController>();
+                    controller.unitData = tmp2.Value;
+                    controller.Init();
                     obj.transform.position =
-                        (Vector3)aStarModel.FightGridNodeInfoList[controller.armData.currentPosition].position;
-                    this.GetModel<IFightVisualModel>().AllArm.Add(tmp2.Value.unitId, controller);
+                        (Vector3)aStarModel.FightGridNodeInfoList[controller.unitData.currentPosition].position;
+                    this.GetModel<IFightVisualModel>().AllUnit.Add(tmp2.Value.unitId, controller);
                 }
             }
         }

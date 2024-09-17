@@ -10,7 +10,7 @@ namespace Fight.Game
     /// <summary>
     /// 兵种的可视化组成，便于拓展修改
     /// </summary>
-    public class ObjectArmsView : MonoBehaviour
+    public class ObjectUnitView : MonoBehaviour
     {
         private SortedList<int, Object> _list;
 

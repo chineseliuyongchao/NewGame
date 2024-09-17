@@ -48,6 +48,6 @@ namespace Game.FightCreate
         /// <summary>
         /// 记录阵营所有的单位信息
         /// </summary>
-        public Dictionary<int, ArmData> allArm;
+        public Dictionary<int, UnitData> allUnit;
     }
 }

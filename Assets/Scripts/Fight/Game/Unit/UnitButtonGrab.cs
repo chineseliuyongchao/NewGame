@@ -1,12 +1,13 @@
 ﻿using Fight.Tools;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 namespace Fight.Game
 {
-    public sealed class ArmsButtonGrab : ButtonGrab
+    public sealed class UnitButtonGrab : ButtonGrab
     {
-        public ObjectArmsView armsView;
+        [FormerlySerializedAs("armsView")] public ObjectUnitView unitView;
 
         // [FormerlySerializedAs("BeginDrag")] [SerializeField]
         // private ButtonGrabEvent beginDrag;
@@ -51,19 +52,19 @@ namespace Fight.Game
         public override void OnPointerDown(PointerEventData eventData)
         {
             base.OnPointerDown(eventData);
-            if (armsView != null) armsView.DoColor(pointerDownColor);
+            if (unitView != null) unitView.DoColor(pointerDownColor);
         }
 
         public override void OnPointerExit(PointerEventData eventData)
         {
             base.OnPointerExit(eventData);
-            if (armsView != null) armsView.DoColor(Color.white);
+            if (unitView != null) unitView.DoColor(Color.white);
         }
 
         public override void OnPointerUp(PointerEventData eventData)
         {
             base.OnPointerUp(eventData);
-            if (armsView != null) armsView.DoColor(Color.white);
+            if (unitView != null) unitView.DoColor(Color.white);
         }
 
         // public void AddBeginDragCallBack(UnityAction<PointerEventData> callBack)
