@@ -1,4 +1,5 @@
-﻿using Game.GameBase;
+﻿using Fight.Command;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,12 +29,33 @@ namespace Fight.Tools
             {
                 clickAction.performed += OnClickPerformed;
             }
+
+            var mouseDragAction = _playerInput.actions["RightClickDrag"];
+            if (mouseDragAction != null)
+            {
+                mouseDragAction.performed += OnRightClickDragPerformed;
+            }
             
+            var mouseScrollAction = _playerInput.actions["MouseScroll"];
+            if (mouseScrollAction != null)
+            {
+                mouseScrollAction.performed += MouseScrollPerformed;
+            }
         }
         
         private void OnClickPerformed(InputAction.CallbackContext context)
         {
             this.SendCommand<PointerClickCommand>();
+        }
+
+        private void OnRightClickDragPerformed(InputAction.CallbackContext context)
+        {
+            this.SendCommand(new MouseDragCommand(context.ReadValue<Vector2>()));
+        }
+        
+        private void MouseScrollPerformed(InputAction.CallbackContext context)
+        {
+            this.SendCommand(new MouseScrollCommand(context.ReadValue<Vector2>()));
         }
 
         private void OnDestroy()
@@ -42,6 +64,17 @@ namespace Fight.Tools
             if (clickAction != null)
             {
                 clickAction.performed -= OnClickPerformed;
+            }
+            var mouseDragAction = _playerInput.actions["RightClickDrag"];
+            if (mouseDragAction != null)
+            {
+                mouseDragAction.performed -= OnRightClickDragPerformed;
+            }
+            
+            var mouseScrollAction = _playerInput.actions["MouseScroll"];
+            if (mouseScrollAction != null)
+            {
+                mouseScrollAction.performed -= MouseScrollPerformed;
             }
         }
 

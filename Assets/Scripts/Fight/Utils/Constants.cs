@@ -2,22 +2,6 @@
 {
     public class Constants
     {
-        /**
-         * 鼠标的相关设置
-         */
-        public const float ZoomSpeed = 1.5f; // 缩放速度
-
-        public const float MinZoom = 1f; // 最小缩放值
-        public const float MaxZoom = 5f; // 最大缩放值
-
-        /**
-         * 拖动的相关设置
-         */
-        public const float DragSpeed = 1.5f; // 拖动速度
-
-        public const float WorldHeight = 10f; // 世界高度
-        public const float WorldWidth = WorldHeight / 0.5625f; // 世界宽度
-
         #region 兵种id
 
         public const int ElfRecruit = 0;

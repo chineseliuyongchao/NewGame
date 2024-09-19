@@ -6,6 +6,7 @@ using Game.FightCreate;
 using Game.GameBase;
 using QFramework;
 using UI;
+using UnityEngine;
 
 namespace Fight.Game
 {
@@ -14,6 +15,9 @@ namespace Fight.Game
      */
     public class FightController : BaseGameController
     {
+        public static float WorldWidth; //世界宽
+        public static float WorldHeight; //世界高
+
         private ArmsFsm _armsFsm;
 
         /// <summary>
@@ -35,6 +39,16 @@ namespace Fight.Game
         protected override void OnInit()
         {
             base.OnInit();
+            if (Camera.main != null)
+            {
+                WorldHeight = Camera.main.orthographicSize * 2f;
+            }
+            else
+            {
+                WorldHeight = 20f;
+            }
+
+            WorldWidth = WorldHeight / 0.5625f;
             this.GetModel<IAStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
