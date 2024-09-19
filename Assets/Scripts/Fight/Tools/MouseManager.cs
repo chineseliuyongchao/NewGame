@@ -40,8 +40,8 @@ namespace Fight.Tools
 
                     var localPosition = main.transform.localPosition;
 
-                    var a = Mathf.Abs(localPosition.x) + camWidthHalf - FightController.WorldWidth / 2;
-                    var b = Mathf.Abs(localPosition.y) + main.orthographicSize - FightController.WorldHeight / 2;
+                    var a = Mathf.Abs(localPosition.x) + camWidthHalf - FightController.worldWidth / 2;
+                    var b = Mathf.Abs(localPosition.y) + main.orthographicSize - FightController.worldHeight / 2;
                     if (a > 0)
                     {
                         localPosition.x += localPosition.x < 0 ? a : -a;
@@ -78,10 +78,10 @@ namespace Fight.Tools
                 var camHeightHalf = cam.orthographicSize;
                 var camWidthHalf = camHeightHalf * cam.aspect;
 
-                var minX = -FightController.WorldWidth / 2 + camWidthHalf;
-                var maxX = FightController.WorldWidth / 2 - camWidthHalf;
-                var minY = -FightController.WorldHeight / 2 + camHeightHalf;
-                var maxY = FightController.WorldHeight / 2 - camHeightHalf;
+                var minX = -FightController.worldWidth / 2 + camWidthHalf;
+                var maxX = FightController.worldWidth / 2 - camWidthHalf;
+                var minY = -FightController.worldHeight / 2 + camHeightHalf;
+                var maxY = FightController.worldHeight / 2 - camHeightHalf;
 
                 targetPosition.x = Mathf.Clamp(targetPosition.x, minX, maxX);
                 targetPosition.y = Mathf.Clamp(targetPosition.y, minY, maxY);

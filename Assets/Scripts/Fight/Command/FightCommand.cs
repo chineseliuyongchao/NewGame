@@ -126,4 +126,46 @@ namespace Fight.Command
             fightVisualModel.FocusController = null;
         }
     }
+
+    /// <summary>
+    /// 开始回合
+    /// </summary>
+    public class StartActionCommand : AbstractCommand
+    {
+        /// <summary>
+        /// 是不是玩家
+        /// </summary>
+        private readonly bool _isPlayer;
+
+        public StartActionCommand(bool isPlayer)
+        {
+            _isPlayer = isPlayer;
+        }
+
+        protected override void OnExecute()
+        {
+            this.SendEvent(new StartActionEvent(_isPlayer));
+        }
+    }
+
+    /// <summary>
+    /// 结束回合
+    /// </summary>
+    public class EndActionCommand : AbstractCommand
+    {
+        /// <summary>
+        /// 是不是玩家
+        /// </summary>
+        private readonly bool _isPlayer;
+
+        public EndActionCommand(bool isPlayer)
+        {
+            _isPlayer = isPlayer;
+        }
+
+        protected override void OnExecute()
+        {
+            this.SendEvent(new EndActionEvent(_isPlayer));
+        }
+    }
 }

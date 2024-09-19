@@ -19,8 +19,8 @@ namespace Fight.Controller
      */
     public class FightController : BaseGameController
     {
-        public static float WorldWidth; //世界宽
-        public static float WorldHeight; //世界高
+        public static float worldWidth; //世界宽
+        public static float worldHeight; //世界高
 
         private ArmsFsm _armsFsm;
 
@@ -34,6 +34,8 @@ namespace Fight.Controller
         /// </summary>
         private int _actionLegionIndex;
 
+        public Transform legionNode;
+
         public int ActionLegionIndex
         {
             get => _actionLegionIndex;
@@ -46,17 +48,17 @@ namespace Fight.Controller
 
             if (Camera.main != null)
             {
-                WorldHeight = Camera.main.orthographicSize * 2f;
+                worldHeight = Camera.main.orthographicSize * 2f;
                 //需要将uiCamera的大小与战斗场景相机大小统一
                 Camera cam = GameObject.Find("UICamera").GetComponent<Camera>();
                 cam.orthographicSize = Camera.main.orthographicSize;
             }
             else
             {
-                WorldHeight = 20f;
+                worldHeight = 20f;
             }
 
-            WorldWidth = WorldHeight / 0.5625f;
+            worldWidth = worldHeight / 0.5625f;
             this.GetModel<IAStarModel>().InitStarData();
             _armsFsm = transform.Find("ArmsFsm").GetComponent<ArmsFsm>();
             UIKit.OpenPanel<UIGameFight>(new UIGameFightData());
@@ -65,9 +67,18 @@ namespace Fight.Controller
             for (int i = 0; i < legionKeys.Count; i++)
             {
                 LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[legionKeys[i]];
-                BaseLegion legion = legionInfo.legionId == Constants.PlayLegionId
-                    ? new PlayerLegion()
-                    : new ComputerLegion();
+                GameObject legionObject = new GameObject("legion" + legionInfo.legionId);
+                legionObject.Parent(legionNode);
+                BaseLegion legion;
+                if (legionInfo.legionId == Constants.PlayLegionId)
+                {
+                    legion = legionObject.AddComponent<PlayerLegion>();
+                }
+                else
+                {
+                    legion = legionObject.AddComponent<ComputerLegion>();
+                }
+
                 legion.Init(legionInfo.legionId);
                 this.GetModel<IFightCoreModel>().AllLegion.Add(legionInfo.legionId, legion);
             }

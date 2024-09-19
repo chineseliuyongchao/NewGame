@@ -1,4 +1,7 @@
 ﻿using System;
+using Fight.Command;
+using Fight.Event;
+using QFramework;
 
 namespace Fight.Game.Legion
 {
@@ -9,7 +12,20 @@ namespace Fight.Game.Legion
     {
         public override void StartAction(Action<int> action)
         {
+            this.SendCommand(new StartActionCommand(true));
             actionEnd = action;
+        }
+
+        protected override void OnListenEvent()
+        {
+            this.RegisterEvent<EndActionEvent>(e =>
+            {
+                if (e.isPlayer)
+                {
+                    this.SendCommand(new CancelUnitFocusCommand());
+                    EndAction();
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
     }
 }
