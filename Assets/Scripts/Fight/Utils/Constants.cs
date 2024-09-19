@@ -151,5 +151,10 @@
         /// 临时变量，系统为玩家生成的军队id就是这个值
         /// </summary>
         public const int PlayLegionId = 1001;
+        
+        /// <summary>
+        /// 兵种悬停展示气泡的时间
+        /// </summary>
+        public const float HoverThreshold = 1.5f;
     }
 }

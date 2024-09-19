@@ -82,7 +82,13 @@ namespace Fight.Model
         public int GetGridNodeIndexMyRule(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
-            return _aStarNodeToWorldNode[info.node.NodeIndex];
+            if (_aStarNodeToWorldNode.TryGetValue(info.node.NodeIndex, out int result))
+            {
+                return result;
+            }
+
+            return 0;
+            // return _aStarNodeToWorldNode[info.node.NodeIndex];
         }
 
         /// <summary>

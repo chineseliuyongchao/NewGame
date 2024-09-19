@@ -43,9 +43,13 @@ namespace Fight.Controller
         protected override void OnInit()
         {
             base.OnInit();
+
             if (Camera.main != null)
             {
                 WorldHeight = Camera.main.orthographicSize * 2f;
+                //需要将uiCamera的大小与战斗场景相机大小统一
+                Camera cam = GameObject.Find("UICamera").GetComponent<Camera>();
+                cam.orthographicSize = Camera.main.orthographicSize;
             }
             else
             {

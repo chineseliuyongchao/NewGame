@@ -17,7 +17,7 @@ namespace Fight.Game.Unit
         /// <summary>
         /// 兵种的相关数据信息
         /// </summary>
-        [FormerlySerializedAs("armData")] public UnitData unitData;
+        public UnitData unitData;
 
         public ObjectUnitView view;
         private Tween _focusAction;

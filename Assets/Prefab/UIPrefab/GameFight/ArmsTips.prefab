@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4918358012420945718}
   - component: {fileID: 4918358012420945712}
+  - component: {fileID: 5803612652750261118}
+  - component: {fileID: 4657314733230900827}
   m_Layer: 5
   m_Name: ArmsTips
   m_TagString: Untagged
@@ -48,6 +50,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4918358012420945717}
   m_CullTransparentMesh: 1
+--- !u!225 &5803612652750261118
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918358012420945717}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &4657314733230900827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918358012420945717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8db11b296c482cb2a455385b488518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5718907613006080302
 GameObject:
   m_ObjectHideFlags: 0
