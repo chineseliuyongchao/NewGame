@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-namespace Fight.Game
+namespace Fight.Game.Unit
 {
     public sealed class UnitButtonGrab : ButtonGrab
     {

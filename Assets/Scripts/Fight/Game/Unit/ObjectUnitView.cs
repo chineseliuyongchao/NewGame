@@ -5,7 +5,7 @@ using Fight.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Fight.Game
+namespace Fight.Game.Unit
 {
     /// <summary>
     /// 兵种的可视化组成，便于拓展修改

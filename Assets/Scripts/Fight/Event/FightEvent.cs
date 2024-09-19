@@ -1,4 +1,4 @@
-﻿namespace Fight
+﻿namespace Fight.Event
 {
     /// <summary>
     /// 单位移动

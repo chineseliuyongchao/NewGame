@@ -1,4 +1,5 @@
-﻿using Fight.Game;
+﻿using Fight.Controller;
+using Fight.Game;
 using UnityAttribute;
 using UnityEngine;
 

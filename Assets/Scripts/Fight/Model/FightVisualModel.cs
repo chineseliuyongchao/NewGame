@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Fight.Game;
+using Fight.Game.Unit;
 using JetBrains.Annotations;
 using QFramework;
 
-namespace Fight
+namespace Fight.Model
 {
     public class FightVisualModel : AbstractModel, IFightVisualModel
     {

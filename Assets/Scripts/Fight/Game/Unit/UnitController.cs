@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Fight.Model;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
@@ -6,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Fight.Game
+namespace Fight.Game.Unit
 {
     /// <summary>
     /// 单个兵种

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Fight.Game;
+using Fight.Game.Unit;
 using JetBrains.Annotations;
 using QFramework;
 
-namespace Fight
+namespace Fight.Model
 {
     /**
      * 存放战斗中和表现有直接关系的数据

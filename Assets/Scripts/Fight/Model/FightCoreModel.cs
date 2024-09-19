@@ -2,7 +2,7 @@
 using Fight.Game.Legion;
 using QFramework;
 
-namespace Fight
+namespace Fight.Model
 {
     public class FightCoreModel : AbstractModel, IFightCoreModel
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Game.GameUtils;
+using UnityAttribute;
 
 namespace Game.GameMenu
 {
@@ -12,112 +13,112 @@ namespace Game.GameMenu
         /// <summary>
         /// 兵种名称
         /// </summary>
-        public string unitName;
+        [Label("兵种名称")] public string unitName;
 
         /// <summary>
         /// 总血量
         /// </summary>
-        public int totalHp;
+        [Label("总血量")] public int totalHp;
 
         /// <summary>
         /// 总人数
         /// </summary>
-        public int totalTroops;
+        [Label("总人数")] public int totalTroops;
 
         /// <summary>
         /// 攻击能力
         /// </summary>
-        public int attack;
+        [Label("攻击能力")] public int attack;
 
         /// <summary>
         /// 冲锋加成
         /// </summary>
-        public int charge;
+        [Label("冲锋加成")] public int charge;
 
         /// <summary>
         /// 防御能力（近战）
         /// </summary>
-        public int defenseMelee;
+        [Label("防御能力（近战）")] public int defenseMelee;
 
         /// <summary>
         /// 防御能力（远程）
         /// </summary>
-        public int defenseRange;
+        [Label("防御能力（远程）")] public int defenseRange;
 
         /// <summary>
         /// 近战杀伤（普通）
         /// </summary>
-        public int meleeNormal;
+        [Label("近战杀伤（普通）")] public int meleeNormal;
 
         /// <summary>
         /// 近战杀伤（破甲）
         /// </summary>
-        public int meleeArmor;
+        [Label("近战杀伤（破甲）")] public int meleeArmor;
 
         /// <summary>
         /// 护甲强度
         /// </summary>
-        public int armor;
+        [Label("护甲强度")] public int armor;
 
         /// <summary>
         /// 移动能力
         /// </summary>
-        public int mobility;
+        [Label("移动能力")] public int mobility;
 
         /// <summary>
         /// 视野
         /// </summary>
-        public int sight;
+        [Label("视野")] public int sight;
 
         /// <summary>
         /// 隐蔽
         /// </summary>
-        public int stealth;
+        [Label("隐蔽")] public int stealth;
 
         /// <summary>
         /// 弹药量（0代表没有弹药，-1代表拥有无限弹药）
         /// </summary>
-        public int ammo;
+        [Label("弹药量")] public int ammo;
 
         /// <summary>
         /// 射程
         /// </summary>
-        public int range;
+        [Label("射程")] public int range;
 
         /// <summary>
         /// 装填速度
         /// </summary>
-        public int reload;
+        [Label("装填速度")] public int reload;
 
         /// <summary>
         /// 精度
         /// </summary>
-        public int accuracy;
+        [Label("精度")] public int accuracy;
 
         /// <summary>
         /// 远程杀伤（普通）
         /// </summary>
-        public int rangeNormal;
+        [Label("远程杀伤（普通）")] public int rangeNormal;
 
         /// <summary>
         /// 远程杀伤（破甲）
         /// </summary>
-        public int rangeArmor;
+        [Label("远程杀伤（破甲）")] public int rangeArmor;
 
         /// <summary>
         /// 最高作战意志
         /// </summary>
-        public int maximumMorale;
+        [Label("最高作战意志")] public int maximumMorale;
 
         /// <summary>
         /// 疲劳值上限
         /// </summary>
-        public int maximumFatigue;
+        [Label("疲劳值上限")] public int maximumFatigue;
 
         /// <summary>
         /// 价格
         /// </summary>
-        public int cost;
+        [Label("价格")] public int cost;
     }
 
     /// <summary>

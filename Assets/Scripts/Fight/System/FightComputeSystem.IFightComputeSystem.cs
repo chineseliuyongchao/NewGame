@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using QFramework;
 
-namespace Fight
+namespace Fight.System
 {
     public interface IFightComputeSystem : ISystem
     {

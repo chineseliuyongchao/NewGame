@@ -1,10 +1,11 @@
 ﻿using Fight.Command;
+using Fight.Model;
 using Game.GameBase;
 using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Fight.Tools
+namespace Fight.Controller
 {
     /**
      * 管理战斗场景中的所有输入（ui除外）

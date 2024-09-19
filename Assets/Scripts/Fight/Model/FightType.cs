@@ -1,4 +1,4 @@
-﻿namespace Fight
+﻿namespace Fight.Model
 {
     /// <summary>
     /// 战斗的各个状态

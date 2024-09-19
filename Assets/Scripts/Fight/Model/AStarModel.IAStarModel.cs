@@ -3,7 +3,7 @@ using Pathfinding;
 using QFramework;
 using UnityEngine;
 
-namespace Fight
+namespace Fight.Model
 {
     /**
      * 存放a*的相关表格信息

@@ -1,8 +1,9 @@
-﻿using Fight.Utils;
+﻿using Fight.Model;
+using Fight.Utils;
 using Game.FightCreate;
 using QFramework;
 
-namespace Fight
+namespace Fight.System
 {
     public class FightSystem : AbstractSystem, IFightSystem
     {

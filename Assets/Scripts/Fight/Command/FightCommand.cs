@@ -1,8 +1,10 @@
-﻿using Fight.Game;
+﻿using Fight.Event;
+using Fight.Game.Unit;
+using Fight.Model;
 using QFramework;
 using UnityEngine;
 
-namespace Fight
+namespace Fight.Command
 {
     /// <summary>
     /// 单位移动

@@ -1,4 +1,4 @@
-﻿namespace Fight
+﻿namespace Fight.Model
 {
     /// <summary>
     /// 更新特质的方法类型

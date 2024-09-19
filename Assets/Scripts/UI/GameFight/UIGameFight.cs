@@ -1,4 +1,7 @@
 using Fight;
+using Fight.Command;
+using Fight.Event;
+using Fight.Model;
 using Game.GameBase;
 using QFramework;
 

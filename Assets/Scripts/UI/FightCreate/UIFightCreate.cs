@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Fight;
+using Fight.Model;
+using Fight.System;
 using Fight.Utils;
 using Game.FightCreate;
 using Game.GameBase;

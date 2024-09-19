@@ -1,11 +1,13 @@
 ﻿using DG.Tweening;
+using Fight.Event;
+using Fight.Model;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
 using UnityAttribute;
 using UnityEngine;
 
-namespace Fight.Tools
+namespace Fight.Controller
 {
     /**
      * 根据a*的网格生成相应的地图

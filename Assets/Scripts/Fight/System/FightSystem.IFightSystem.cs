@@ -1,6 +1,7 @@
-﻿using QFramework;
+﻿using Fight.Model;
+using QFramework;
 
-namespace Fight
+namespace Fight.System
 {
     public interface IFightSystem : ISystem
     {

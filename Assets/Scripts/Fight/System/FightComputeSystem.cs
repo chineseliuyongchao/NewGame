@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
 using Game.GameMenu;
 using QFramework;
 using Random = UnityEngine.Random;
 
-namespace Fight
+namespace Fight.System
 {
     public class FightComputeSystem : AbstractSystem, IFightComputeSystem
     {

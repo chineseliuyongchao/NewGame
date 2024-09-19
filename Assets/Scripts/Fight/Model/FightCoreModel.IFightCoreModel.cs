@@ -2,7 +2,7 @@
 using Fight.Game.Legion;
 using QFramework;
 
-namespace Fight
+namespace Fight.Model
 {
     /// <summary>
     /// 存放战斗中的战斗数据

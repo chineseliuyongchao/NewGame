@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
+using Fight.Command;
+using Fight.Event;
 using Fight.FsmS;
 using Fight.Game.Legion;
+using Fight.Model;
+using Fight.System;
 using Fight.Utils;
 using Game.FightCreate;
 using Game.GameBase;
@@ -8,7 +12,7 @@ using QFramework;
 using UI;
 using UnityEngine;
 
-namespace Fight.Game
+namespace Fight.Controller
 {
     /**
      * 管理整个场景的状态：战前准备-战斗中-战斗结束
