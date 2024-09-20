@@ -92,7 +92,7 @@ namespace Fight.Controller
                         _hoverTime += Time.deltaTime;
                         if (_hoverTime >= Constants.HoverThreshold)
                         {
-                            this.SendCommand(new FightTipsCommand(worldPosition, _currentHoverObject));
+                            this.SendCommand(new TipsCommand(worldPosition, _currentHoverObject));
                             _currentHoverObject = null;
                             _hoverTime = 0f;
                         }

@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Fight.Command
 {
-    public class FightTipsCommand : AbstractCommand
+    public class TipsCommand : AbstractCommand
     {
         private readonly Vector2 _worldPosition;
         private readonly TipsMark _tipsMark;
 
-        public FightTipsCommand(Vector2 worldPosition, TipsMark tipsMark)
+        public TipsCommand(Vector2 worldPosition, TipsMark tipsMark)
         {
             _worldPosition = worldPosition;
             _tipsMark = tipsMark;

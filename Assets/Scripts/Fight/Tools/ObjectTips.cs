@@ -8,7 +8,7 @@ namespace Fight.Tools
 {
     public abstract class ObjectTips : MonoBehaviour, IPointerExitHandler
     {
-        [FormerlySerializedAs("tipsManager")] [HideInInspector]
+        [HideInInspector]
         public TipsMark tipsMark;
 
         public UnityAction showCallback;
