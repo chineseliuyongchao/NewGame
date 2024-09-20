@@ -46,15 +46,18 @@ namespace Fight.Controller
 
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<SelectUnitFocusEvent>(SelectUnitFocusEvent)
+            this.RegisterEvent<SelectUnitFocusEvent>(_ => { SelectUnitFocus(); })
                 .UnRegisterWhenGameObjectDestroyed(this);
+            this.RegisterEvent<CancelUnitFocusEvent>(_ => { CancelUnitFocus(); })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
-        private void SelectUnitFocusEvent(SelectUnitFocusEvent focusEvent)
+        private void SelectUnitFocus()
         {
             switch (this.GetModel<IFightCoreModel>().FightType)
             {
                 case FightType.WAR_PREPARATIONS:
+                case FightType.IN_FIGHT:
                     if (_alphaAction is { active: true })
                     {
                         return;
@@ -65,6 +68,18 @@ namespace Fight.Controller
                     _alphaAction?.Kill();
                     tipsMyCanvasGroup.alpha = 1f;
                     _alphaAction = tipsMyCanvasGroup.DoAlpha(0.4f, 1f).SetLoops(-1, LoopType.Yoyo);
+                    break;
+            }
+        }
+
+        private void CancelUnitFocus()
+        {
+            switch (this.GetModel<IFightCoreModel>().FightType)
+            {
+                case FightType.WAR_PREPARATIONS:
+                case FightType.IN_FIGHT:
+                    _alphaAction?.Kill();
+                    _tipsTransform.gameObject.SetActive(false);
                     break;
             }
         }

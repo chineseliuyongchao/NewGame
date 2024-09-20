@@ -14,7 +14,7 @@
     }
 
     /// <summary>
-    /// 兵种聚焦
+    /// 单位聚焦
     /// </summary>
     public struct SelectUnitFocusEvent
     {
@@ -59,5 +59,37 @@
     /// </summary>
     public struct FightOverEvent
     {
+    }
+    
+    /// <summary>
+    /// 开始回合
+    /// </summary>
+    public class StartActionEvent
+    {
+        /// <summary>
+        /// 是不是玩家
+        /// </summary>
+        public readonly bool isPlayer;
+
+        public StartActionEvent(bool isPlayer)
+        {
+            this.isPlayer = isPlayer;
+        }
+    }
+
+    /// <summary>
+    /// 结束回合
+    /// </summary>
+    public class EndActionEvent
+    {
+        /// <summary>
+        /// 是不是玩家
+        /// </summary>
+        public readonly bool isPlayer;
+
+        public EndActionEvent(bool isPlayer)
+        {
+            this.isPlayer = isPlayer;
+        }
     }
 }

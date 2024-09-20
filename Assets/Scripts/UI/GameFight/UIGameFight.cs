@@ -1,10 +1,10 @@
-using Fight;
 using Fight.Command;
 using Fight.Event;
 using Fight.Model;
 using Game.GameBase;
 using QFramework;
 
+// ReSharper disable once CheckNamespace
 namespace UI
 {
     public class UIGameFightData : UIPanelData
@@ -18,6 +18,7 @@ namespace UI
             mData = uiData as UIGameFightData ?? new UIGameFightData();
             // please add init code here
             base.OnInit(uiData);
+            endRoundButton.gameObject.SetActive(false);
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -35,6 +36,11 @@ namespace UI
                 this.SendCommand(new FightCommand(FightType.IN_FIGHT));
                 StartFight();
             });
+            endRoundButton.onClick.AddListener(() =>
+            {
+                this.SendCommand(new EndActionCommand(true));
+                endRoundButton.gameObject.SetActive(false);
+            });
         }
 
         protected override void OnListenEvent()
@@ -48,6 +54,13 @@ namespace UI
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<SettlementEvent>(_ => { UIKit.OpenPanel<UIFightEnd>(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<StartActionEvent>(e =>
+            {
+                if (e.isPlayer)
+                {
+                    endRoundButton.gameObject.SetActive(true);
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
         /// <summary>

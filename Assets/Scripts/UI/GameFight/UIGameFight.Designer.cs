@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:3efe52ab-64f5-4de0-be70-5b0ffc69413b
+	// Generate Id:4732da4f-3309-4908-9a7d-fc37e50d4adf
 	public partial class UIGameFight
 	{
 		public const string Name = "UIGameFight";
@@ -14,6 +14,8 @@ namespace UI
 		private UnityEngine.UI.Button exitButton;
 		[SerializeField]
 		private UnityEngine.UI.Button startButton;
+		[SerializeField]
+		private UnityEngine.UI.Button endRoundButton;
 		
 		private UIGameFightData mPrivateData = null;
 		
@@ -21,6 +23,7 @@ namespace UI
 		{
 			exitButton = null;
 			startButton = null;
+			endRoundButton = null;
 			
 			mData = null;
 		}

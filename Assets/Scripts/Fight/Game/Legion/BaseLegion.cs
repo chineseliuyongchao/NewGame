@@ -1,30 +1,20 @@
 ﻿using System;
 using Game.GameBase;
-using QFramework;
 
 namespace Fight.Game.Legion
 {
     /// <summary>
     /// 军队基类，不需要加载到游戏物体
     /// </summary>
-    public abstract class BaseLegion : IController
+    public abstract class BaseLegion : BaseGameController
     {
         public int legionId;
         protected Action<int> actionEnd;
-
-        public IArchitecture GetArchitecture()
-        {
-            return GameApp.Interface;
-        }
 
         public virtual void Init(int id)
         {
             legionId = id;
             OnListenEvent();
-        }
-
-        protected virtual void OnListenEvent()
-        {
         }
 
         /// <summary>
