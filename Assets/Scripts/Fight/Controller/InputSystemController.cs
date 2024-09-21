@@ -51,16 +51,19 @@ namespace Fight.Controller
 
         private void OnClickPerformed(InputAction.CallbackContext context)
         {
+            _hoverTime = 0f;
             this.SendCommand<PointerClickCommand>();
         }
 
         private void OnRightClickDragPerformed(InputAction.CallbackContext context)
         {
+            _hoverTime = 0f;
             this.SendCommand(new MouseDragCommand(context.ReadValue<Vector2>()));
         }
 
         private void MouseScrollPerformed(InputAction.CallbackContext context)
         {
+            _hoverTime = 0f;
             this.SendCommand(new MouseScrollCommand(context.ReadValue<Vector2>()));
         }
 
@@ -68,7 +71,7 @@ namespace Fight.Controller
         {
             if (Camera.main)
             {
-                Vector2 mousePosition = _playerInput.actions["MousePosition"].ReadValue<Vector2>();
+                Vector2 mousePosition = Mouse.current.position.ReadValue();
                 Vector2 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
                 // 发射2D射线检测是否击中物体
                 RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);

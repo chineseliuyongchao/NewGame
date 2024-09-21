@@ -79,26 +79,30 @@ namespace Fight.Command
     public class SelectUnitFocusCommand : AbstractCommand
     {
         private readonly int _index;
+        private UnitController _controller;
 
         public SelectUnitFocusCommand(int index)
         {
             _index = index;
         }
 
+        public SelectUnitFocusCommand(UnitController controller)
+        {
+            _controller = controller;
+        }
+
         protected override void OnExecute()
         {
             IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
-            UnitController currentFocusController = null;
-            if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(_index, out int id))
+            if (!_controller && fightVisualModel.IndexToUnitIdDictionary.TryGetValue(_index, out int id))
             {
-                currentFocusController = this.GetModel<IFightVisualModel>().AllUnit[id];
+                _controller = this.GetModel<IFightVisualModel>().AllUnit[id];
             }
-
-            if (currentFocusController != null)
+            if (_controller)
             {
-                currentFocusController.StartFocusAction();
+                _controller.StartFocusAction();
                 if (fightVisualModel.FocusController) fightVisualModel.FocusController.EndFocusAction();
-                fightVisualModel.FocusController = currentFocusController;
+                fightVisualModel.FocusController = _controller;
                 this.SendEvent(new SelectUnitFocusEvent(_index));
             }
             else

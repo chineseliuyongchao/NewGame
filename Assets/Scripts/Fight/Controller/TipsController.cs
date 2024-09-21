@@ -1,13 +1,10 @@
-﻿using System;
-using DG.Tweening;
-using Fight.Model;
+﻿using Fight.Model;
 using Fight.Tools;
 using Fight.Tools.Pool;
 using Game.GameBase;
 using QFramework;
 using UnityAttribute;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Fight.Controller
 {
@@ -32,16 +29,11 @@ namespace Fight.Controller
         public void ShowUnitInfo(Vector2 worldPosition, TipsMark tipsMark, UnitData unitData)
         {
             GameObject obj = _armsTipsPool.Get();
-            //todo
-            Vector2 newLocalPosition = transform.InverseTransformPoint(worldPosition);
-            obj.transform.localPosition = newLocalPosition;
             ArmsTips armsTips = obj.GetComponent<ArmsTips>();
             armsTips.tipsMark = tipsMark;
             armsTips.OnInit(unitData);
-            armsTips.hideCallback = () =>
-            {
-                _armsTipsPool.Release(obj);
-            };
+            armsTips.hideCallback = () => { _armsTipsPool.Release(obj); };
+            armsTips.Layout(transform.InverseTransformPoint(worldPosition));
             armsTips.Show();
         }
 

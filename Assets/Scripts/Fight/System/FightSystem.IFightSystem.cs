@@ -25,7 +25,7 @@ namespace Fight.System
         public bool IsPlayerUnit(int unitId);
 
         /// <summary>
-        /// 感觉单位id查找单位
+        /// 根据单位id查找单位
         /// </summary>
         /// <param name="unitId"></param>
         /// <returns></returns>

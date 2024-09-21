@@ -2,19 +2,37 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 namespace Fight.Tools
 {
-    public abstract class ObjectTips : MonoBehaviour, IPointerExitHandler
+    public abstract class ObjectTips : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     {
-        [HideInInspector]
-        public TipsMark tipsMark;
+        [HideInInspector] public TipsMark tipsMark;
 
         public UnityAction showCallback;
         public UnityAction hideCallback;
 
         public abstract void OnInit<T>(T value);
+
+        /// <summary>
+        /// 通用的气泡布局方案
+        /// </summary>
+        /// <param name="localPosition">气泡应该位于的位置</param>
+        public virtual void Layout(Vector3 localPosition)
+        {
+            //位置在左上角，气泡在右下角
+            //位置在左下角，气泡在右上角
+            //位置在右上角，气泡在左下角
+            //位置在右下角，气泡在左上角
+            RectTransform rectTransform = GetComponent<RectTransform>();
+            var rect = rectTransform.rect;
+            Vector3 tmp = -new Vector3(Mathf.Sign(localPosition.x), Mathf.Sign(localPosition.y));
+            float widthHalf = rect.width / 2f - 20;
+            float heightHalf = rect.height / 2f - 20;
+
+            rectTransform.anchoredPosition =
+                localPosition + new Vector3(widthHalf * tmp.x, heightHalf * tmp.y);
+        }
 
         public virtual void Show()
         {
@@ -23,6 +41,7 @@ namespace Fight.Tools
                 return;
             }
 
+            tipsMark.objectTips = this;
             tipsMark.showTips = true;
             transform.gameObject.SetActive(true);
             CanvasGroup canvasGroup = transform.GetComponent<CanvasGroup>();
@@ -49,6 +68,7 @@ namespace Fight.Tools
                 return;
             }
 
+            tipsMark.objectTips = null;
             tipsMark.showTips = false;
             CanvasGroup canvasGroup = transform.GetComponent<CanvasGroup>();
             if (!canvasGroup)
@@ -67,7 +87,12 @@ namespace Fight.Tools
                 hideCallback = null;
             });
         }
-
+        
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Hide();
+        }
+        
         public virtual void OnPointerExit(PointerEventData eventData)
         {
             Hide();

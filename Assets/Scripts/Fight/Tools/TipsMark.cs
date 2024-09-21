@@ -13,6 +13,8 @@ namespace Fight.Tools
 
         [Label("正在展示气泡")] public bool showTips;
 
+        [Label("气泡的实例")]public ObjectTips objectTips;
+
         public static TipsController TipsController;
 
         private void Awake()
