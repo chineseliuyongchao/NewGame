@@ -2,10 +2,10 @@ Shader "Unlit/RoundRectDyn"
 {
     Properties
     {
-         _Color("Color", Color) = (1,1,1,1)
-         _MainTex ("Texture", 2D) = "white" {}
+         _Color("_Color", Color) = (1,1,1,1)
+         _MainTex ("_MainTex", 2D) = "white" {}
          _Radius ("_Radius", Range(0, 0.5)) = 0.25
-         _scale ("scale", vector) = (1,1,0,1)
+         _Scale ("_Scale", vector) = (1,1,0,1)
 
 	    [MaterialToggle] _TR ("_TopRightCorner", Float) = 1
 	    [MaterialToggle] _BR ("_BottomRightCorner", Float) = 1
@@ -71,7 +71,7 @@ Shader "Unlit/RoundRectDyn"
             fixed4 _TextureSampleAdd;
             float _Radius;
             float _TR, _BR, _BL, _TL, _DrawCircle;
-            float4 _scale;
+            float4 _Scale;
             float4 _Color;
 
             //====================正圆绘制========================
@@ -140,21 +140,21 @@ Shader "Unlit/RoundRectDyn"
 
 
                 // 当矩形的width > height 时计算圆心、UV修正系数
-                if (_scale.x > _scale.y)
+                if (_Scale.x > _Scale.y)
                 {
-                    _scale.x = _scale.x/_scale.y;
-                    _scale.y = 1;
+                    _Scale.x = _Scale.x/_Scale.y;
+                    _Scale.y = 1;
                 	// 计算UV坐标空间下，圆心X坐标对应缩放系数
-                    sfx0  = _scale.y/_scale.x;
-                    sfx1  = (_scale.y/ pow(_scale.x,2));
+                    sfx0  = _Scale.y/_Scale.x;
+                    sfx1  = (_Scale.y/ pow(_Scale.x,2));
                 }
                 else
                 {
-                    _scale.y = _scale.y/_scale.x;
-                    _scale.x = 1;
+                    _Scale.y = _Scale.y/_Scale.x;
+                    _Scale.x = 1;
                 	// 计算UV坐标空间下，圆心Y坐标对应缩放系数
-                    sfy0  = _scale.x/_scale.y;
-                    sfy1  = (_scale.x/ pow(_scale.y,2));
+                    sfy0  = _Scale.x/_Scale.y;
+                    sfy1  = (_Scale.x/ pow(_Scale.y,2));
                 }
 
                 half2 center = half2(TRC.x - _Radius*sfx0,TRC.y - _Radius*sfy0);

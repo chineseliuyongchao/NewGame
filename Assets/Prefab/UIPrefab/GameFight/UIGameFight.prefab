@@ -69,8 +69,7 @@ MonoBehaviour:
   m_text: "\u7ED3\u675F\u56DE\u5408"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
-  m_sharedMaterial: {fileID: -4955988612771916369, guid: a707f5d43f5e1b746a6eb8958b5132f9,
-    type: 2}
+  m_sharedMaterial: {fileID: -4955988612771916369, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -205,8 +204,7 @@ MonoBehaviour:
   m_text: "\u5F00\u59CB\u6218\u6597"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
-  m_sharedMaterial: {fileID: -4955988612771916369, guid: a707f5d43f5e1b746a6eb8958b5132f9,
-    type: 2}
+  m_sharedMaterial: {fileID: -4955988612771916369, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -356,7 +354,7 @@ RectTransform:
   m_Children:
   - {fileID: 3992528432549775460}
   m_Father: {fileID: 7298652326347595912}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -730,8 +728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bfac7a6f7646e5afef88e0e96aaecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armsTipsPrefab: {fileID: 4918358012420945717, guid: 5f5211707ce88fe43848e98272715de7,
-    type: 3}
+  defaultTipsPrefab: {fileID: 4918358012420945717, guid: 0480838b6f30d674394e2e4ff98dbed9, type: 3}
+  armsTipsPrefab: {fileID: 4918358012420945717, guid: 5f5211707ce88fe43848e98272715de7, type: 3}
 --- !u!1 &5382402505025172659
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,8 +800,7 @@ MonoBehaviour:
   m_text: "\u9000\u51FA"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
-  m_sharedMaterial: {fileID: -4955988612771916369, guid: a707f5d43f5e1b746a6eb8958b5132f9,
-    type: 2}
+  m_sharedMaterial: {fileID: -4955988612771916369, guid: a707f5d43f5e1b746a6eb8958b5132f9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -1,6 +1,8 @@
 ﻿using Fight.Controller;
 using Fight.Game.Unit;
+using Fight.Model;
 using Fight.Tools;
+using Fight.Tools.Tips;
 using QFramework;
 using UnityEngine;
 
@@ -19,11 +21,20 @@ namespace Fight.Command
 
         protected override void OnExecute()
         {
-            UnitController unitController = _tipsMark.GetComponent<UnitController>();
-            //展示兵种信息
-            if (unitController)
+            switch (_tipsMark.tipsType)
             {
-                TipsMark.TipsController.ShowUnitInfo(_worldPosition, _tipsMark, unitController.unitData);
+                case TipsType.DefaultTips:
+                    TipsMark.TipsController.ShowDefaultInfo(_worldPosition, _tipsMark);
+                    break;
+                case TipsType.ArmsTips:
+                    UnitController unitController = _tipsMark.GetComponent<UnitController>();
+                    //展示兵种信息
+                    if (unitController)
+                    {
+                        TipsMark.TipsController.ShowUnitInfo(_worldPosition, _tipsMark, unitController.unitData);
+                    }
+
+                    break;
             }
         }
     }

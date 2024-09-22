@@ -1,9 +1,11 @@
 ﻿using DG.Tweening;
+using Fight.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-namespace Fight.Tools
+namespace Fight.Tools.Tips
 {
     public abstract class ObjectTips : MonoBehaviour, IPointerClickHandler, IPointerExitHandler
     {
@@ -43,7 +45,13 @@ namespace Fight.Tools
 
             tipsMark.objectTips = this;
             tipsMark.showTips = true;
+            if (tipsMark.parent)
+            {
+                tipsMark.parent.locking = true;
+            }
+
             transform.gameObject.SetActive(true);
+            transform.SetAsLastSibling();
             CanvasGroup canvasGroup = transform.GetComponent<CanvasGroup>();
             if (!canvasGroup)
             {
@@ -63,13 +71,18 @@ namespace Fight.Tools
 
         public virtual void Hide()
         {
-            if (!tipsMark.showTips)
+            if (!tipsMark.showTips || tipsMark.locking)
             {
                 return;
             }
 
             tipsMark.objectTips = null;
             tipsMark.showTips = false;
+            if (tipsMark.parent)
+            {
+                tipsMark.parent.locking = false;
+            }
+
             CanvasGroup canvasGroup = transform.GetComponent<CanvasGroup>();
             if (!canvasGroup)
             {
@@ -87,15 +100,36 @@ namespace Fight.Tools
                 hideCallback = null;
             });
         }
-        
+
         public void OnPointerClick(PointerEventData eventData)
         {
             Hide();
         }
-        
+
         public virtual void OnPointerExit(PointerEventData eventData)
         {
             Hide();
+        }
+
+        protected float TextHorizontalLayout(params Text[] texts)
+        {
+            float maxWidth = 0f;
+            foreach (Text text in texts)
+            {
+                maxWidth += text.preferredWidth;
+            }
+
+            maxWidth += (texts.Length - 1) * 10;
+            float beginX = -maxWidth / 2f;
+            foreach (Text text in texts)
+            {
+                float width = text.preferredWidth;
+                text.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, width);
+                text.rectTransform.SetAnchorPositionX(beginX + width / 2f);
+                beginX += width + 10;
+            }
+
+            return maxWidth;
         }
     }
 }

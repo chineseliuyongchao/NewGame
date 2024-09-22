@@ -155,6 +155,6 @@
         /// <summary>
         /// 兵种悬停展示气泡的时间
         /// </summary>
-        public const float HoverThreshold = 1.5f;
+        public const float HoverThreshold = 1f;
     }
 }

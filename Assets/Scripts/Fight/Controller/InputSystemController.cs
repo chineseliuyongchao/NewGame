@@ -1,6 +1,6 @@
 ﻿using Fight.Command;
 using Fight.Model;
-using Fight.Tools;
+using Fight.Tools.Tips;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
@@ -95,7 +95,9 @@ namespace Fight.Controller
                         _hoverTime += Time.deltaTime;
                         if (_hoverTime >= Constants.HoverThreshold)
                         {
-                            this.SendCommand(new TipsCommand(worldPosition, _currentHoverObject));
+                            Camera uiCam = GameObject.Find("UICamera").GetComponent<Camera>();
+                            this.SendCommand(new TipsCommand(uiCam.ScreenToWorldPoint(mousePosition),
+                                _currentHoverObject));
                             _currentHoverObject = null;
                             _hoverTime = 0f;
                         }
