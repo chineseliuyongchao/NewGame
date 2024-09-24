@@ -1,5 +1,4 @@
 ﻿using Fight.Model;
-using Fight.Utils;
 using UnityAttribute;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,6 +34,8 @@ namespace Fight.Tools.Tips
         [Label("装填速度")] public Text reload;
         [Label("精度")] public Text accuracy;
         private static readonly int Scale = Shader.PropertyToID("_Scale");
+
+        private bool _initBgMaterial;
 
 
         public override void OnInit<T>(T value)
@@ -111,7 +112,12 @@ namespace Fight.Tools.Tips
             }
 
             rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, maxWidth + 20f);
-            bg.material = Instantiate(bg.material);
+            if (!_initBgMaterial)
+            {
+                _initBgMaterial = true;
+                bg.material = Instantiate(bg.material);
+            }
+
             bg.material.SetVector(Scale, new Vector4(1f, maxHeight / maxWidth));
             base.Layout(localPosition);
         }

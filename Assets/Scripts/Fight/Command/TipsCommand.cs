@@ -1,7 +1,5 @@
-﻿using Fight.Controller;
-using Fight.Game.Unit;
+﻿using Fight.Game.Unit;
 using Fight.Model;
-using Fight.Tools;
 using Fight.Tools.Tips;
 using QFramework;
 using UnityEngine;
@@ -33,7 +31,6 @@ namespace Fight.Command
                     {
                         TipsMark.TipsController.ShowUnitInfo(_worldPosition, _tipsMark, unitController.unitData);
                     }
-
                     break;
             }
         }

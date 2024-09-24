@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using Fight.Utils;
 using UnityEngine;
 using UnityEngine.Events;
@@ -61,9 +62,11 @@ namespace Fight.Tools.Tips
             }
 
             canvasGroup.alpha = 0f;
-            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+            // canvasGroup.interactable = false;
             canvasGroup.DOFade(1f, 0.3f).SetEase(Ease.InOutSine).OnComplete(() =>
             {
+                canvasGroup.blocksRaycasts = true;
                 showCallback?.Invoke();
                 showCallback = null;
             });
@@ -89,16 +92,51 @@ namespace Fight.Tools.Tips
                 transform.gameObject.SetActive(false);
                 hideCallback?.Invoke();
                 hideCallback = null;
+                CheckParentHide();
                 return;
             }
 
-            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+            // canvasGroup.interactable = false;
             canvasGroup.DOFade(0f, 0.3f).SetEase(Ease.InOutSine).OnComplete(() =>
             {
                 canvasGroup.gameObject.SetActive(false);
                 hideCallback?.Invoke();
                 hideCallback = null;
             });
+            CheckParentHide();
+        }
+
+        private void CheckParentHide()
+        {
+            if (tipsMark.parent == null || tipsMark.parent.objectTips == null)
+            {
+                return;
+            }
+
+            //todo 后续应该将ui重要的组件暴露出来
+            GraphicRaycaster graphicRaycaster = GameObject.Find("UIRoot").GetComponent<GraphicRaycaster>();
+            EventSystem eventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+            PointerEventData pointerData = new PointerEventData(eventSystem)
+            {
+                position = Input.mousePosition
+            };
+            List<RaycastResult> results = new List<RaycastResult>();
+            graphicRaycaster.Raycast(pointerData, results);
+            bool flag = false;
+            foreach (RaycastResult result in results)
+            {
+                if (result.gameObject == tipsMark.parent.objectTips.gameObject)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+
+            if (!flag)
+            {
+                tipsMark.parent.objectTips.Hide();
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)

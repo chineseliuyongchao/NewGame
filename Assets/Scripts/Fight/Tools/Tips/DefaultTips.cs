@@ -10,6 +10,7 @@ namespace Fight.Tools.Tips
         public Text text1;
         public Text text2;
         private static readonly int Scale = Shader.PropertyToID("_Scale");
+        private bool _initBgMaterial;
 
         public override void OnInit<T>(T value)
         {
@@ -22,8 +23,12 @@ namespace Fight.Tools.Tips
             RectTransform rectTransform = GetComponent<RectTransform>();
             rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
                 TextHorizontalLayout(text1, text2) + 20f);
-            bg.material = Instantiate(bg.material);
             var rect = rectTransform.rect;
+            if (!_initBgMaterial)
+            {
+                _initBgMaterial = true;
+                bg.material = Instantiate(bg.material);
+            }
             bg.material.SetVector(Scale, new Vector4(1f, rect.height / rect.width));
             base.Layout(localPosition);
         }
