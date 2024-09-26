@@ -63,5 +63,12 @@ namespace Fight.Utils
             position.z += x;
             transform.position = position;
         }
+        
+        public static void SetColorA(this Graphic graphic, float a)
+        {
+            Color color = graphic.color;
+            color.a = a;
+            graphic.color = color;
+        }
     }
 }

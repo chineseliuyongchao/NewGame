@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using Fight.Utils;
 using UnityEngine;
@@ -14,6 +15,13 @@ namespace Fight.Tools.Tips
 
         public UnityAction showCallback;
         public UnityAction hideCallback;
+
+        protected CanvasGroup canvasGroup;
+
+        private void Awake()
+        {
+            canvasGroup = transform.GetComponent<CanvasGroup>();
+        }
 
         public abstract void OnInit<T>(T value);
 
@@ -53,7 +61,6 @@ namespace Fight.Tools.Tips
 
             transform.gameObject.SetActive(true);
             transform.SetAsLastSibling();
-            CanvasGroup canvasGroup = transform.GetComponent<CanvasGroup>();
             if (!canvasGroup)
             {
                 showCallback?.Invoke();
@@ -85,8 +92,6 @@ namespace Fight.Tools.Tips
             {
                 tipsMark.parent.locking = false;
             }
-
-            CanvasGroup canvasGroup = transform.GetComponent<CanvasGroup>();
             if (!canvasGroup)
             {
                 transform.gameObject.SetActive(false);

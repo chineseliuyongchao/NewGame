@@ -33,9 +33,16 @@ namespace Fight.Tools.Tips
         [Label("弹药量")] public Text ammo;
         [Label("装填速度")] public Text reload;
         [Label("精度")] public Text accuracy;
-        private static readonly int Scale = Shader.PropertyToID("_Scale");
 
         private bool _initBgMaterial;
+        private static readonly int ImageColor = Shader.PropertyToID("_ImageColor");
+        private static readonly int ContourNum = Shader.PropertyToID("_ContourNum");
+
+        private static readonly Color Color1 = new(0.6f, 0.5f, 0.2f, 1f);
+        private static readonly Color Color2 = new(0f, 0f, 0f, 1f);
+        private static readonly int Speed = Shader.PropertyToID("_Speed");
+        private static readonly int MoveColor1 = Shader.PropertyToID("_MoveColor1");
+        private static readonly int MoveColor2 = Shader.PropertyToID("_MoveColor2");
 
 
         public override void OnInit<T>(T value)
@@ -116,10 +123,21 @@ namespace Fight.Tools.Tips
             {
                 _initBgMaterial = true;
                 bg.material = Instantiate(bg.material);
+                bg.material.SetFloat(ContourNum, 0.015f);
+                bg.material.SetFloat(Speed, 0.5f);
+                bg.material.SetColor(MoveColor1, Color1);
+                bg.material.SetColor(MoveColor2, Color2);
             }
 
-            bg.material.SetVector(Scale, new Vector4(1f, maxHeight / maxWidth));
+            bg.material.SetColor(ImageColor, bg.color);
             base.Layout(localPosition);
+        }
+
+        private void Update()
+        {
+            Color color = bg.color;
+            color.a = canvasGroup.alpha;
+            bg.material.SetColor(ImageColor, color);
         }
     }
 }
