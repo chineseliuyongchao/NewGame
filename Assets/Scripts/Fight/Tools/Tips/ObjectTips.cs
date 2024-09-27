@@ -68,6 +68,7 @@ namespace Fight.Tools.Tips
                 return;
             }
 
+            canvasGroup.DOKill();
             canvasGroup.alpha = 0f;
             canvasGroup.blocksRaycasts = false;
             // canvasGroup.interactable = false;
@@ -101,6 +102,7 @@ namespace Fight.Tools.Tips
                 return;
             }
 
+            canvasGroup.DOKill();
             canvasGroup.blocksRaycasts = false;
             // canvasGroup.interactable = false;
             canvasGroup.DOFade(0f, 0.3f).SetEase(Ease.InOutSine).OnComplete(() =>

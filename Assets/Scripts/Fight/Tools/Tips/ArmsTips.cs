@@ -1,10 +1,12 @@
-﻿using Fight.Model;
+﻿using System;
+using Fight.Model;
 using UnityAttribute;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Fight.Tools.Tips
 {
+    [ExecuteInEditMode]
     public class ArmsTips : ObjectTips
     {
         public Image bg;
@@ -118,7 +120,7 @@ namespace Fight.Tools.Tips
                 maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(reload, accuracy));
             }
 
-            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, maxWidth + 20f);
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, maxWidth + 40f);
             if (!_initBgMaterial)
             {
                 _initBgMaterial = true;
@@ -137,6 +139,13 @@ namespace Fight.Tools.Tips
         {
             Color color = bg.color;
             color.a = canvasGroup.alpha;
+#if UNITY_EDITOR
+            if (!_initBgMaterial)
+            {
+                _initBgMaterial = true;
+                bg.material = Instantiate(bg.material);
+            }
+#endif
             bg.material.SetColor(ImageColor, color);
         }
     }

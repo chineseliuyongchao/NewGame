@@ -4,12 +4,16 @@ using UnityEngine.UI;
 namespace Fight.Tools.Tips
 {
     //todo 后面需要重写
+    [ExecuteInEditMode]
     public class DefaultTips : ObjectTips
     {
         public Image bg;
         public Text text1;
         public Text text2;
-        private static readonly int Scale = Shader.PropertyToID("_Scale");
+        private static readonly int ImageColor = Shader.PropertyToID("_ImageColor");
+        private static readonly int ContourNum = Shader.PropertyToID("_ContourNum");
+        
+        private static readonly int Speed = Shader.PropertyToID("_Speed");
         private bool _initBgMaterial;
 
         public override void OnInit<T>(T value)
@@ -22,15 +26,30 @@ namespace Fight.Tools.Tips
         {
             RectTransform rectTransform = GetComponent<RectTransform>();
             rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,
-                TextHorizontalLayout(text1, text2) + 20f);
+                TextHorizontalLayout(text1, text2) + 40f);
             var rect = rectTransform.rect;
             if (!_initBgMaterial)
             {
                 _initBgMaterial = true;
                 bg.material = Instantiate(bg.material);
+                bg.material.SetFloat(ContourNum, 0.015f);
+                bg.material.SetFloat(Speed, 0.5f);
             }
-            bg.material.SetVector(Scale, new Vector4(1f, rect.height / rect.width));
             base.Layout(localPosition);
+        }
+        
+        private void Update()
+        {
+            Color color = bg.color;
+            color.a = canvasGroup.alpha;
+#if UNITY_EDITOR
+            if (!_initBgMaterial)
+            {
+                _initBgMaterial = true;
+                bg.material = Instantiate(bg.material);
+            }
+#endif
+            bg.material.SetColor(ImageColor, color);
         }
     }
 }
