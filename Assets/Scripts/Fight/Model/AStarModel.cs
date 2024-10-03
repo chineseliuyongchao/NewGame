@@ -50,20 +50,12 @@ namespace Fight.Model
             }
         }
 
-        /// <summary>
-        ///     给定任意一个坐标，查找坐标最接近的地图节点，返回其节点
-        /// </summary>
-        /// <returns>离坐标最接近的地图节点</returns>
         public GridNodeBase GetGridNode(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
             return _fightGridNodeInfoList[_aStarNodeToWorldNode[info.node.NodeIndex]];
         }
 
-        /// <summary>
-        ///     给定任意一个坐标，查找坐标最接近的地图节点，返回其坐标
-        /// </summary>
-        /// <returns>离坐标最接近的地图节点坐标</returns>
         public Vector3 GetGridNodePosition(Vector3 position)
         {
             var nodeBase = GetGridNode(position);
@@ -75,10 +67,6 @@ namespace Fight.Model
             return (Vector3)FightGridNodeInfoList[unitData.currentPosition].position;
         }
 
-        /// <summary>
-        ///     给定任意一个坐标，查找坐标最接近的地图节点，返回这个节点在我们的规范中的index
-        /// </summary>
-        /// <returns>我们的规范中的index</returns>
         public int GetGridNodeIndexMyRule(Vector3 position)
         {
             var info = AstarPath.active.data.gridGraph.GetNearest(position);
@@ -91,13 +79,6 @@ namespace Fight.Model
             // return _aStarNodeToWorldNode[info.node.NodeIndex];
         }
 
-        /// <summary>
-        ///     给定当前所在index和给定任意一个坐标，查找当前位置到达该坐标的所有关键节点，找到后调用相应回调
-        /// </summary>
-        /// <param name="index">当前index</param>
-        /// <param name="position">任意坐标</param>
-        /// <param name="callBack">找到路径后的回调</param>
-        /// <returns></returns>
         public void FindNodePath(int index, Vector3 position, OnPathDelegate callBack)
         {
             if (FightGridNodeInfoList.TryGetValue(index, out var nodeBase))

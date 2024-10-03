@@ -5,7 +5,6 @@ using Game.GameBase;
 using QFramework;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Fight.Game.Unit
 {
@@ -36,6 +35,8 @@ namespace Fight.Game.Unit
                 transformRotation.eulerAngles = new Vector3(0, 180, 0);
                 transform1.rotation = transformRotation;
             }
+
+            ChangeOrderLayer();//初始化的时候也应该排序
 
             //todo
             view.Find<TextMesh>(Constants.DebugText).text = unitData.armDataType.unitName;
