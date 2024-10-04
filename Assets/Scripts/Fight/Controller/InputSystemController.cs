@@ -1,11 +1,13 @@
 ﻿using Fight.Command;
 using Fight.Model;
+using Fight.System;
 using Fight.Tools.Tips;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace Fight.Controller
 {
@@ -51,8 +53,24 @@ namespace Fight.Controller
 
         private void OnClickPerformed(InputAction.CallbackContext context)
         {
+            // 检查是哪个按键触发的事件
+            if (context.control is ButtonControl button)
+            {
+                if (button.name == "leftButton")
+                {
+                    this.GetSystem<IFightInputSystem>().MouseButtonLeft();
+                }
+                else if (button.name == "middleButton")
+                {
+                    this.GetSystem<IFightInputSystem>().MouseButtonMiddle();
+                }
+                else if (button.name == "rightButton")
+                {
+                    this.GetSystem<IFightInputSystem>().MouseButtonRight();
+                }
+            }
+
             _hoverTime = 0f;
-            this.SendCommand<PointerClickCommand>();
         }
 
         private void OnRightClickDragPerformed(InputAction.CallbackContext context)
@@ -136,5 +154,15 @@ namespace Fight.Controller
         {
             return GameApp.Interface;
         }
+    }
+
+    /// <summary>
+    /// 点击类型
+    /// </summary>
+    public enum MouseClickType
+    {
+        LEFT_BUTTON,
+        MIDDLE_BUTTON,
+        RIGHT_BUTTON
     }
 }

@@ -11,6 +11,8 @@ namespace Fight.Model
         private Dictionary<int, int> _indexToUnitIdDictionary;
         [CanBeNull] private UnitController _focusController;
         private Dictionary<int, UnitController> _allUnit;
+        private FightType _fightType;
+        private bool _inPlayerAction;
 
         protected override void OnInit()
         {
@@ -32,6 +34,18 @@ namespace Fight.Model
         {
             get => _allUnit;
             set => _allUnit = value;
+        }
+
+        public FightType FightType
+        {
+            get => _fightType;
+            set => _fightType = value;
+        }
+
+        public bool InPlayerAction
+        {
+            get => _inPlayerAction;
+            set => _inPlayerAction = value;
         }
     }
 }

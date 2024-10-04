@@ -11,14 +11,12 @@ namespace Fight.Model
     public interface IFightVisualModel : IModel
     {
         /// <summary>
-        ///     key：单位id
-        ///     value：单位在战斗场景中的位置
+        /// 通过单位id获取战场位置id
         /// </summary>
         Dictionary<int, int> UnitIdToIndexDictionary { get; }
 
         /// <summary>
-        ///     key：单位在战斗场景中的位置
-        ///     value：单位id
+        /// 通过战场位置id获取单位id
         /// </summary>
         Dictionary<int, int> IndexToUnitIdDictionary { get; }
 
@@ -32,5 +30,15 @@ namespace Fight.Model
         /// 存放战场上所有的单位（key：单位id，value：单位对象）
         /// </summary>
         public Dictionary<int, UnitController> AllUnit { get; set; }
+
+        /// <summary>
+        /// 战斗阶段状态
+        /// </summary>
+        public FightType FightType { get; set; }
+
+        /// <summary>
+        /// 是否在玩家的回合内
+        /// </summary>
+        public bool InPlayerAction { get; set; }
     }
 }

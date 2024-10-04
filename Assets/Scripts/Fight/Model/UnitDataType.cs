@@ -6,33 +6,33 @@ using UnityEngine;
 namespace Fight.Model
 {
     /// <summary>
-    ///     记录一个单位的实时属性
+    /// 记录一个单位的实时属性
     /// </summary>
     [Serializable]
     public class UnitData
     {
         /// <summary>
-        ///     兵种id
+        /// 兵种id
         /// </summary>
         [Label("兵种id")] public int armId;
 
         /// <summary>
-        ///     所属军队的id
+        /// 所属军队的id
         /// </summary>
         [Label("所属军队的id")] public int legionId;
 
         /// <summary>
-        ///     战场上的单位id
+        /// 战场上的单位id
         /// </summary>
         [Label("单位id")] public int unitId;
 
         /// <summary>
-        ///     该兵种在战场上的位置信息
+        /// 该兵种在战场上的位置信息
         /// </summary>
         [Label("位置信息")] public int currentPosition;
 
         /// <summary>
-        ///     存放一个引用，方便快速获取
+        /// 存放一个引用，方便快速获取
         /// </summary>
         [Label("兵种属性")] public ArmDataType armDataType;
 

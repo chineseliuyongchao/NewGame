@@ -9,10 +9,6 @@ namespace Fight.Model
     /// </summary>
     public interface IFightCoreModel : IModel
     {
-        /// <summary>
-        /// 战斗阶段状态
-        /// </summary>
-        public FightType FightType { get; set; }
 
         /// <summary>
         /// 当前战场上所有的军队

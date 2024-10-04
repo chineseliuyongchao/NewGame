@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Fight.Model;
+using Fight.System;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
@@ -36,7 +37,7 @@ namespace Fight.Game.Unit
                 transform1.rotation = transformRotation;
             }
 
-            ChangeOrderLayer();//初始化的时候也应该排序
+            ChangeOrderLayer(); //初始化的时候也应该排序
 
             //todo
             view.Find<TextMesh>(Constants.DebugText).text = unitData.armDataType.unitName;
@@ -68,17 +69,27 @@ namespace Fight.Game.Unit
         /// <param name="endIndex"></param>
         public virtual void UnitMoveAction(int endIndex)
         {
-            switch (this.GetModel<IFightCoreModel>().FightType)
+            switch (this.GetModel<IFightVisualModel>().FightType)
             {
                 case FightType.WAR_PREPARATIONS:
+                {
+                    this.GetSystem<IFightSystem>().UnitChangePos(this, endIndex);
                     Vector3 endPosition =
                         (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
                     transform.position = endPosition;
                     ChangeOrderLayer();
+                }
                     break;
                 case FightType.IN_FIGHT:
+                {
+                    this.GetSystem<IFightSystem>().UnitChangePos(this, endIndex);
+                    Vector3 endPosition =
+                        (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
+                    transform.position = endPosition;
+                    ChangeOrderLayer();
+                }
+                    break;
                 case FightType.SETTLEMENT:
-
                     break;
             }
 

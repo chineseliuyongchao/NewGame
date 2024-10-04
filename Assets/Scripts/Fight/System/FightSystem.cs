@@ -1,4 +1,5 @@
-﻿using Fight.Model;
+﻿using Fight.Game.Unit;
+using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
 using QFramework;
@@ -54,6 +55,20 @@ namespace Fight.System
             }
 
             return null;
+        }
+
+        public void UnitChangePos(UnitController controller, int endIndex)
+        {
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
+            int index = fightVisualModel.UnitIdToIndexDictionary[controller.unitData.unitId];
+            fightVisualModel.UnitIdToIndexDictionary[controller.unitData.unitId] = endIndex;
+            if (!fightVisualModel.IndexToUnitIdDictionary.Remove(index))
+            {
+                fightVisualModel.IndexToUnitIdDictionary.Remove(controller.unitData.currentPosition);
+            }
+
+            fightVisualModel.IndexToUnitIdDictionary[endIndex] = controller.unitData.unitId;
+            controller.unitData.currentPosition = endIndex;
         }
     }
 }

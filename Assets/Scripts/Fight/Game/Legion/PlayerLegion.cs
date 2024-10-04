@@ -1,6 +1,7 @@
 ﻿using System;
 using Fight.Command;
 using Fight.Event;
+using Fight.Model;
 using QFramework;
 
 namespace Fight.Game.Legion
@@ -12,6 +13,7 @@ namespace Fight.Game.Legion
     {
         public override void StartAction(Action<int> action)
         {
+            this.GetModel<IFightVisualModel>().InPlayerAction = true;
             this.SendCommand(new StartActionCommand(true));
             actionEnd = action;
         }
@@ -22,6 +24,7 @@ namespace Fight.Game.Legion
             {
                 if (e.isPlayer)
                 {
+                    this.GetModel<IFightVisualModel>().InPlayerAction = false;
                     this.SendCommand(new CancelUnitFocusCommand());
                     EndAction();
                 }

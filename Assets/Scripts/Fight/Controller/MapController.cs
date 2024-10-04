@@ -54,7 +54,7 @@ namespace Fight.Controller
 
         private void SelectUnitFocus()
         {
-            switch (this.GetModel<IFightCoreModel>().FightType)
+            switch (this.GetModel<IFightVisualModel>().FightType)
             {
                 case FightType.WAR_PREPARATIONS:
                 case FightType.IN_FIGHT:
@@ -74,7 +74,7 @@ namespace Fight.Controller
 
         private void CancelUnitFocus()
         {
-            switch (this.GetModel<IFightCoreModel>().FightType)
+            switch (this.GetModel<IFightVisualModel>().FightType)
             {
                 case FightType.WAR_PREPARATIONS:
                 case FightType.IN_FIGHT:

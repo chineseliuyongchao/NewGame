@@ -82,7 +82,9 @@ namespace Fight.Model
         public void FindNodePath(int index, Vector3 position, OnPathDelegate callBack)
         {
             if (FightGridNodeInfoList.TryGetValue(index, out var nodeBase))
+            {
                 AstarPath.StartPath(ABPath.Construct((Vector3)nodeBase.position, position, callBack));
+            }
         }
     }
 }

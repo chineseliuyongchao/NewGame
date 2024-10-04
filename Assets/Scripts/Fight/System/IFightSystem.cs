@@ -1,4 +1,5 @@
-﻿using Fight.Model;
+﻿using Fight.Game.Unit;
+using Fight.Model;
 using QFramework;
 
 namespace Fight.System
@@ -15,20 +16,27 @@ namespace Fight.System
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public bool CanWalkableIndex(int index);
+        bool CanWalkableIndex(int index);
 
         /// <summary>
         /// 判断单位是不是玩家的
         /// </summary>
         /// <param name="unitId"></param>
         /// <returns></returns>
-        public bool IsPlayerUnit(int unitId);
+        bool IsPlayerUnit(int unitId);
 
         /// <summary>
         /// 根据单位id查找单位
         /// </summary>
         /// <param name="unitId"></param>
         /// <returns></returns>
-        public UnitData FindUnit(int unitId);
+        UnitData FindUnit(int unitId);
+
+        /// <summary>
+        /// 修改一个单位的位置记录
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <param name="endIndex"></param>
+        void UnitChangePos(UnitController controller, int endIndex);
     }
 }

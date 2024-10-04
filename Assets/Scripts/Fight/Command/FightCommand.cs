@@ -1,45 +1,13 @@
 ﻿using Fight.Event;
 using Fight.Game.Unit;
 using Fight.Model;
+using Fight.System;
+using Game.GameBase;
 using QFramework;
 using UnityEngine;
 
 namespace Fight.Command
 {
-    /// <summary>
-    /// 单位移动
-    /// </summary>
-    public class UnitMoveCommand : AbstractCommand
-    {
-        private readonly int _endIndex;
-
-        public UnitMoveCommand(int endIndex)
-        {
-            _endIndex = endIndex;
-        }
-
-        protected override void OnExecute()
-        {
-            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
-            if (fightVisualModel.FocusController == null)
-            {
-                return;
-            }
-
-            int index = fightVisualModel.UnitIdToIndexDictionary[fightVisualModel.FocusController.unitData.unitId];
-            fightVisualModel.UnitIdToIndexDictionary[fightVisualModel.FocusController.unitData.unitId] = _endIndex;
-            if (!fightVisualModel.IndexToUnitIdDictionary.Remove(index))
-            {
-                fightVisualModel.IndexToUnitIdDictionary.Remove(
-                    fightVisualModel.FocusController.unitData.currentPosition);
-            }
-
-            fightVisualModel.IndexToUnitIdDictionary[_endIndex] = fightVisualModel.FocusController.unitData.unitId;
-            fightVisualModel.FocusController.unitData.currentPosition = _endIndex;
-            fightVisualModel.FocusController.UnitMoveAction(_endIndex);
-        }
-    }
-
     /// <summary>
     /// 战斗界面的状态命令，标志着战斗进行了哪个状态，处理相关逻辑并且发送相关消息
     /// </summary>
@@ -54,16 +22,20 @@ namespace Fight.Command
 
         protected override void OnExecute()
         {
-            this.GetModel<IFightCoreModel>().FightType = _type;
+            this.GetModel<IFightVisualModel>().FightType = _type;
+            GameApp.Interface.UnRegisterSystem<IFightInputSystem>();
             switch (_type)
             {
                 case FightType.WAR_PREPARATIONS:
+                    GameApp.Interface.RegisterSystem<IFightInputSystem>(new FightInputWarPreparationsSystem());
                     this.SendEvent<WarPreparationsEvent>();
                     break;
                 case FightType.IN_FIGHT:
+                    GameApp.Interface.RegisterSystem<IFightInputSystem>(new FightInputInFightSystem());
                     this.SendEvent<InFightEvent>();
                     break;
                 case FightType.SETTLEMENT:
+                    GameApp.Interface.RegisterSystem<IFightInputSystem>(new FightInputSettlementSystem());
                     this.SendEvent<SettlementEvent>();
                     break;
                 case FightType.FIGHT_OVER:
@@ -98,6 +70,7 @@ namespace Fight.Command
             {
                 _controller = this.GetModel<IFightVisualModel>().AllUnit[id];
             }
+
             if (_controller)
             {
                 _controller.StartFocusAction();
