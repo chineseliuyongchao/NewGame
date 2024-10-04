@@ -37,14 +37,15 @@ namespace Fight.Model
         /// <returns>我们的规范中的index</returns>
         int GetGridNodeIndexMyRule(Vector3 position);
 
-
         /// <summary>
         /// 给定当前所在index和给定任意一个坐标，查找当前位置到达该坐标的所有关键节点，找到后调用相应回调
         /// </summary>
-        /// <param name="index">当前index</param>
+        /// <param name="startIndex">当前index</param>
         /// <param name="position">任意坐标</param>
         /// <param name="callBack">找到路径后的回调</param>
         /// <returns></returns>
-        void FindNodePath(int index, Vector3 position, OnPathDelegate callBack);
+        void FindNodePath(int startIndex, Vector3 position, OnPathDelegate callBack);
+
+        void FindNodePath(int startIndex, int endIndex, OnPathDelegate callBack);
     }
 }

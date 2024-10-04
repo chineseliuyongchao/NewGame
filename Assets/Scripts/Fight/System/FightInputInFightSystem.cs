@@ -143,7 +143,7 @@ namespace Fight.System
         /// </summary>
         private void SelectPlayerUnit(IFightVisualModel fightVisualModel, int index)
         {
-            if (!fightVisualModel.FocusController || index != fightVisualModel.FocusController.unitData.currentPosition)
+            if (!fightVisualModel.FocusController || index != fightVisualModel.FocusController.unitData.currentPosIndex)
             {
                 //当前没有焦点兵种或者点击了其他属于自己的单位
                 this.SendCommand(new SelectUnitFocusCommand(index));

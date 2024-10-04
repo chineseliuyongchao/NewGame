@@ -36,7 +36,7 @@ namespace Fight.System
                 {
                     UnitData unitData = legionInfo.allUnit[armId[j]];
                     int randomIndex = Random.Range(0, pos.Count);
-                    unitData.currentPosition = pos[randomIndex];
+                    unitData.currentPosIndex = pos[randomIndex];
                     pos.RemoveAt(randomIndex);//防止多个单位随机到一个位置
                 }
             }

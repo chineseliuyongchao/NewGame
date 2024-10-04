@@ -6,6 +6,7 @@ using Game.GameBase;
 using QFramework;
 using Unity.VisualScripting;
 using UnityEngine;
+using Sequence = DG.Tweening.Sequence;
 
 namespace Fight.Game.Unit
 {
@@ -82,11 +83,31 @@ namespace Fight.Game.Unit
                     break;
                 case FightType.IN_FIGHT:
                 {
-                    this.GetSystem<IFightSystem>().UnitChangePos(this, endIndex);
-                    Vector3 endPosition =
-                        (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
-                    transform.position = endPosition;
-                    ChangeOrderLayer();
+                    this.GetModel<IAStarModel>().FindNodePath(unitData.currentPosIndex, endIndex, path =>
+                    {
+                        if (path.error)
+                        {
+                            Debug.LogError("Pathfinding error: " + path.errorLog);
+                            return;
+                        }
+
+                        Sequence sequence = DOTween.Sequence();
+                        EndFocusAction();
+                        sequence.AppendInterval(0.3f);
+                        for (int i = 1; i < path.vectorPath.Count; i++)
+                        {
+                            sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
+                            var i1 = i;
+                            sequence.AppendCallback(() =>
+                            {
+                                int index = this.GetModel<IAStarModel>().GetGridNodeIndexMyRule(path.vectorPath[i1]);
+                                this.GetSystem<IFightSystem>().UnitChangePos(this, index);
+                                ChangeOrderLayer();
+                            });
+                        }
+
+                        sequence.AppendCallback(StartFocusAction);
+                    });
                 }
                     break;
                 case FightType.SETTLEMENT:
@@ -107,7 +128,7 @@ namespace Fight.Game.Unit
         {
             int beginIndex =
                 Mathf.Max(
-                    Constants.FightNodeVisibleHeightNum - unitData.currentPosition / Constants.FightNodeVisibleWidthNum,
+                    Constants.FightNodeVisibleHeightNum - unitData.currentPosIndex / Constants.FightNodeVisibleWidthNum,
                     1) * 1000;
             view.ChangeOrderLayer(beginIndex);
         }

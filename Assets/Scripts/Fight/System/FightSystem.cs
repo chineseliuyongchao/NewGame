@@ -24,8 +24,8 @@ namespace Fight.System
             {
                 foreach (var tmp2 in tmp.allUnit)
                 {
-                    fightVisualModel.UnitIdToIndexDictionary[tmp2.Value.unitId] = tmp2.Value.currentPosition;
-                    fightVisualModel.IndexToUnitIdDictionary[tmp2.Value.currentPosition] = tmp2.Value.unitId;
+                    fightVisualModel.UnitIdToIndexDictionary[tmp2.Value.unitId] = tmp2.Value.currentPosIndex;
+                    fightVisualModel.IndexToUnitIdDictionary[tmp2.Value.currentPosIndex] = tmp2.Value.unitId;
                 }
             }
         }
@@ -60,15 +60,15 @@ namespace Fight.System
         public void UnitChangePos(UnitController controller, int endIndex)
         {
             IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
-            int index = fightVisualModel.UnitIdToIndexDictionary[controller.unitData.unitId];
+            int index = controller.unitData.currentPosIndex;
             fightVisualModel.UnitIdToIndexDictionary[controller.unitData.unitId] = endIndex;
             if (!fightVisualModel.IndexToUnitIdDictionary.Remove(index))
             {
-                fightVisualModel.IndexToUnitIdDictionary.Remove(controller.unitData.currentPosition);
+                fightVisualModel.IndexToUnitIdDictionary.Remove(controller.unitData.currentPosIndex);
             }
 
             fightVisualModel.IndexToUnitIdDictionary[endIndex] = controller.unitData.unitId;
-            controller.unitData.currentPosition = endIndex;
+            controller.unitData.currentPosIndex = endIndex;
         }
     }
 }

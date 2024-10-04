@@ -29,7 +29,7 @@ namespace Fight.Model
         /// <summary>
         /// 该兵种在战场上的位置信息
         /// </summary>
-        [Label("位置信息")] public int currentPosition;
+        [Label("位置信息")] public int currentPosIndex;
 
         /// <summary>
         /// 存放一个引用，方便快速获取

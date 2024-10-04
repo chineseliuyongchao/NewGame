@@ -64,7 +64,7 @@ namespace Fight.Model
 
         public Vector3 GetUnitRelayPosition(UnitData unitData)
         {
-            return (Vector3)FightGridNodeInfoList[unitData.currentPosition].position;
+            return (Vector3)FightGridNodeInfoList[unitData.currentPosIndex].position;
         }
 
         public int GetGridNodeIndexMyRule(Vector3 position)
@@ -79,11 +79,20 @@ namespace Fight.Model
             // return _aStarNodeToWorldNode[info.node.NodeIndex];
         }
 
-        public void FindNodePath(int index, Vector3 position, OnPathDelegate callBack)
+        public void FindNodePath(int startIndex, Vector3 position, OnPathDelegate callBack)
         {
-            if (FightGridNodeInfoList.TryGetValue(index, out var nodeBase))
+            if (FightGridNodeInfoList.TryGetValue(startIndex, out var nodeBase))
             {
                 AstarPath.StartPath(ABPath.Construct((Vector3)nodeBase.position, position, callBack));
+            }
+        }
+
+        public void FindNodePath(int startIndex, int endIndex, OnPathDelegate callBack)
+        {
+            if (FightGridNodeInfoList.TryGetValue(startIndex, out var startNode) &&
+                FightGridNodeInfoList.TryGetValue(endIndex, out var endNode))
+            {
+                AstarPath.StartPath(ABPath.Construct((Vector3)startNode.position, (Vector3)endNode.position, callBack));
             }
         }
     }

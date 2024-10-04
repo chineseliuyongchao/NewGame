@@ -1,5 +1,4 @@
-﻿using Fight.Game;
-using Fight.Game.Unit;
+﻿using Fight.Game.Unit;
 using Fight.Model;
 using Game.FightCreate;
 using Game.GameBase;
@@ -29,7 +28,7 @@ namespace Fight.FsmS
                     controller.unitData = tmp2.Value;
                     controller.Init();
                     obj.transform.position =
-                        (Vector3)aStarModel.FightGridNodeInfoList[controller.unitData.currentPosition].position;
+                        (Vector3)aStarModel.FightGridNodeInfoList[controller.unitData.currentPosIndex].position;
                     this.GetModel<IFightVisualModel>().AllUnit.Add(tmp2.Value.unitId, controller);
                 }
             }
