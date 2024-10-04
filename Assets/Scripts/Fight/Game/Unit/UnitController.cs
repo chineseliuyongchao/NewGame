@@ -23,6 +23,11 @@ namespace Fight.Game.Unit
         public ObjectUnitView view;
         private Tween _focusAction;
 
+        /// <summary>
+        /// 正在移动
+        /// </summary>
+        private bool _isMoving;
+
         public void Init()
         {
             view = this.AddComponent<ObjectUnitView>();
@@ -83,6 +88,11 @@ namespace Fight.Game.Unit
                     break;
                 case FightType.IN_FIGHT:
                 {
+                    if (_isMoving)
+                    {
+                        return;
+                    }
+
                     this.GetModel<IAStarModel>().FindNodePath(unitData.currentPosIndex, endIndex, path =>
                     {
                         if (path.error)
@@ -94,8 +104,17 @@ namespace Fight.Game.Unit
                         Sequence sequence = DOTween.Sequence();
                         EndFocusAction();
                         sequence.AppendInterval(0.3f);
+                        _isMoving = true;
                         for (int i = 1; i < path.vectorPath.Count; i++)
                         {
+                            sequence.AppendCallback(() =>
+                            {
+                                if (!this.GetSystem<IFightComputeSystem>().MoveOnce(unitData.unitId))
+                                {
+                                    sequence.Kill();
+                                    _isMoving = false;
+                                }
+                            });
                             sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
                             var i1 = i;
                             sequence.AppendCallback(() =>
@@ -106,7 +125,11 @@ namespace Fight.Game.Unit
                             });
                         }
 
-                        sequence.AppendCallback(StartFocusAction);
+                        sequence.AppendCallback(() =>
+                        {
+                            StartFocusAction();
+                            _isMoving = false;
+                        });
                     });
                 }
                     break;

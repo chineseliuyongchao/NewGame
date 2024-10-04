@@ -6,7 +6,6 @@ namespace Game.GameMenu
 {
     public class GameMenuModel : AbstractModel, IGameMenuModel
     {
-        private int _language;
         private Dictionary<int, ArmDataType> _armDataTypes;
         private Dictionary<int, FactionDataType> _factionDataTypes;
 
@@ -16,12 +15,6 @@ namespace Game.GameMenu
         {
             _armDataTypes = new Dictionary<int, ArmDataType>();
             _factionDataTypes = new Dictionary<int, FactionDataType>();
-        }
-
-        public int Language
-        {
-            get => _language;
-            set => _language = value;
         }
 
         public Dictionary<int, ArmDataType> ARMDataTypes

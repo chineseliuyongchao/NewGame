@@ -1,4 +1,5 @@
 ﻿using System;
+using Fight.Utils;
 using Game.GameMenu;
 using UnityAttribute;
 using UnityEngine;
@@ -50,6 +51,8 @@ namespace Fight.Model
 
         private int _nowTroops;
 
+        private int _nowMovementPoints;
+
         public UnitData(UnitData unitData)
         {
             armDataType = unitData.armDataType;
@@ -61,6 +64,7 @@ namespace Fight.Model
             NowAmmo = unitData.NowAmmo;
             NowMorale = unitData.NowMorale;
             NowFatigue = unitData.NowFatigue;
+            NowMovementPoints = unitData.NowMovementPoints;
             IsCharge = unitData.IsCharge;
             IsStick = unitData.IsStick;
         }
@@ -76,6 +80,7 @@ namespace Fight.Model
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
             NowFatigue = armDataType.maximumFatigue;
+            NowMovementPoints = Constants.InitMovementPoints;
             IsCharge = false;
             IsStick = false;
         }
@@ -126,6 +131,15 @@ namespace Fight.Model
         }
 
         /// <summary>
+        /// 当前的移动点数
+        /// </summary>
+        public int NowMovementPoints
+        {
+            get => _nowMovementPoints;
+            set => _nowMovementPoints = Mathf.Clamp(value, 0, Constants.InitMovementPoints);
+        }
+
+        /// <summary>
         ///     单位是否在冲锋
         /// </summary>
         public bool IsCharge
@@ -154,6 +168,7 @@ namespace Fight.Model
             NowAmmo = data.NowAmmo;
             NowMorale = data.NowMorale;
             NowFatigue = data.NowFatigue;
+            NowMovementPoints = data.NowMovementPoints;
             IsCharge = data._isCharge;
             IsStick = data.IsStick;
         }

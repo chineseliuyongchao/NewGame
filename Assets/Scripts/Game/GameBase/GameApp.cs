@@ -37,6 +37,7 @@ namespace Game.GameBase
             RegisterModel<ICountryModel>(new CountryModel());
             RegisterModel<ITeamModel>(new TeamModel());
             RegisterModel<IGameMenuModel>(new GameMenuModel());
+            RegisterModel<IGameSettingModel>(new GameSettingModel());
             RegisterModel<IBattleBaseModel>(new BattleBaseModel());
             RegisterModel<IFightCreateModel>(new FightCreateModel());
 

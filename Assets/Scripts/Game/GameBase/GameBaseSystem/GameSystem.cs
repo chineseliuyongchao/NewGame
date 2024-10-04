@@ -90,12 +90,12 @@ namespace Game.GameBase
 
         public string GetDataName(List<string> nameList)
         {
-            if (nameList.Count <= this.GetModel<IGameMenuModel>().Language)
+            if (nameList.Count <= this.GetModel<IGameSettingModel>().Language)
             {
                 return nameList[0];
             }
 
-            return nameList[this.GetModel<IGameMenuModel>().Language];
+            return nameList[this.GetModel<IGameSettingModel>().Language];
         }
 
         public string GetLocalizationText(int textId, List<string> replace = null,

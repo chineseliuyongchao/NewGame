@@ -151,10 +151,20 @@
         /// 临时变量，系统为玩家生成的军队id就是这个值
         /// </summary>
         public const int PlayLegionId = 1001;
-        
+
         /// <summary>
         /// 兵种悬停展示气泡的时间
         /// </summary>
         public const float HoverThreshold = 1f;
+
+        /// <summary>
+        /// 初始移动点数
+        /// </summary>
+        public const int InitMovementPoints = 50;
+
+        /// <summary>
+        /// 用于计算移动点数消耗的参数
+        /// </summary>
+        public const int MovementParameter = 20;
     }
 }

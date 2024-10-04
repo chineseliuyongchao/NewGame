@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:688dea7d-52fa-492a-af3b-829f882faa99
+	// Generate Id:21b8323b-32f6-4969-b92e-18605204ae6f
 	public partial class UIGameSetting
 	{
 		public const string Name = "UIGameSetting";
@@ -14,6 +14,16 @@ namespace UI
 		private TMPro.TMP_Dropdown Dropdown;
 		[SerializeField]
 		private UnityEngine.UI.Button leaveButton;
+		[SerializeField]
+		private UnityEngine.UI.Toggle showUnitHp;
+		[SerializeField]
+		private UnityEngine.UI.Toggle showUnitTroops;
+		[SerializeField]
+		private UnityEngine.UI.Toggle showUnitMorale;
+		[SerializeField]
+		private UnityEngine.UI.Toggle showUnitFatigue;
+		[SerializeField]
+		private UnityEngine.UI.Toggle showMovementPoints;
 		
 		private UIGameSettingData mPrivateData = null;
 		
@@ -21,6 +31,11 @@ namespace UI
 		{
 			Dropdown = null;
 			leaveButton = null;
+			showUnitHp = null;
+			showUnitTroops = null;
+			showUnitMorale = null;
+			showUnitFatigue = null;
+			showMovementPoints = null;
 			
 			mData = null;
 		}

@@ -13,23 +13,29 @@ namespace Fight.System
         /// <summary>
         /// 一次有反击的进攻，相当于a对b攻击，b也有反击，默认a是攻击方，b是被攻击方
         /// </summary>
-        /// <param name="armAId">单位a的id</param>
-        /// <param name="armBId">单位b的id</param>
-        void AssaultWithRetaliation(int armAId, int armBId);
+        /// <param name="unitAId">单位a的id</param>
+        /// <param name="unitBId">单位b的id</param>
+        void AssaultWithRetaliation(int unitAId, int unitBId);
 
         /// <summary>
         /// 一次没有反击的进攻，相当于a对b攻击，b没有反击，默认a是攻击方，b是被攻击方
         /// </summary>
-        /// <param name="armAId">单位a的id</param>
-        /// <param name="armBId">单位b的id</param>
-        void AssaultNoRetaliation(int armAId, int armBId);
+        /// <param name="unitAId">单位a的id</param>
+        /// <param name="unitBId">单位b的id</param>
+        void AssaultNoRetaliation(int unitAId, int unitBId);
 
         /// <summary>
         /// 一次射击
         /// </summary>
-        /// <param name="armAId"></param>
-        /// <param name="armBId"></param>
-        void Shoot(int armAId, int armBId);
+        /// <param name="unitAId"></param>
+        /// <param name="unitBId"></param>
+        void Shoot(int unitAId, int unitBId);
+
+        /// <summary>
+        /// 单位移动
+        /// </summary>
+        /// <param name="unitId"></param>
+        bool MoveOnce(int unitId);
 
         /// <summary>
         /// 获取各个军队在同一回合的行动顺序

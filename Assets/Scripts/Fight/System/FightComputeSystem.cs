@@ -37,33 +37,46 @@ namespace Fight.System
                     UnitData unitData = legionInfo.allUnit[armId[j]];
                     int randomIndex = Random.Range(0, pos.Count);
                     unitData.currentPosIndex = pos[randomIndex];
-                    pos.RemoveAt(randomIndex);//防止多个单位随机到一个位置
+                    pos.RemoveAt(randomIndex); //防止多个单位随机到一个位置
                 }
             }
         }
 
-        public void AssaultWithRetaliation(int armAId, int armBId)
+        public void AssaultWithRetaliation(int unitAId, int unitBId)
         {
-            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(armAId);
-            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(armBId);
+            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(unitAId);
+            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(unitBId);
             //单位1进攻单位2，单位2反击
             UnitData arm2Before = new UnitData(unitB);
             AssaultNoRetaliation(unitA, unitB);
             AssaultNoRetaliation(arm2Before, unitA);
         }
 
-        public void AssaultNoRetaliation(int armAId, int armBId)
+        public void AssaultNoRetaliation(int unitAId, int unitBId)
         {
-            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(armAId);
-            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(armBId);
+            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(unitAId);
+            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(unitBId);
             AssaultNoRetaliation(unitA, unitB);
         }
 
-        public void Shoot(int armAId, int armBId)
+        public void Shoot(int unitAId, int unitBId)
         {
-            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(armAId);
-            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(armBId);
+            UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(unitAId);
+            UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(unitBId);
             OneShoot(unitA, unitB);
+        }
+
+        public bool MoveOnce(int unitId)
+        {
+            UnitData unit = this.GetSystem<IFightSystem>().FindUnit(unitId);
+            int decreaseMovePoint = Constants.MovementParameter - unit.armDataType.mobility;
+            if (unit.NowMovementPoints >= decreaseMovePoint)
+            {
+                unit.NowMovementPoints -= decreaseMovePoint;
+                return true;
+            }
+
+            return false;
         }
 
         public List<int> LegionOrder()
