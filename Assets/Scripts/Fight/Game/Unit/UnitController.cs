@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Fight.Controller;
 using Fight.Model;
 using Fight.System;
 using Fight.Utils;
@@ -21,12 +22,18 @@ namespace Fight.Game.Unit
         public UnitData unitData;
 
         public ObjectUnitView view;
+
+        public UnitProgressBarController unitProgressBar;
+        
         private Tween _focusAction;
 
         public void Init()
         {
             view = this.AddComponent<ObjectUnitView>();
             view.OnInit(this.transform);
+
+            unitProgressBar = transform.Find("unitProgressBar").GetComponent<UnitProgressBarController>();
+            unitProgressBar.OnInit(unitData);
             if (unitData.legionId == Constants.PlayLegionId)
             {
             }
@@ -39,9 +46,6 @@ namespace Fight.Game.Unit
             }
 
             ChangeOrderLayer(); //初始化的时候也应该排序
-
-            //todo
-            view.Find<TextMesh>(Constants.DebugText).text = unitData.armDataType.unitName;
         }
 
         /// <summary>

@@ -1,0 +1,127 @@
+﻿using System;
+using DG.Tweening;
+using Fight.Model;
+using Fight.Utils;
+using Game.FightCreate;
+using Game.GameBase;
+using QFramework;
+using TMPro;
+using UnityEngine;
+
+namespace Fight.Controller
+{
+    public class UnitProgressBarController : MonoBehaviour, IController
+    {
+        [SerializeField] private TextMeshPro peopleCurrentNum;
+        [SerializeField] private TextMeshPro peopleTotalNum;
+        [SerializeField] private SpriteRenderer hpProgress;
+        [SerializeField] private SpriteRenderer moraleProgress;
+        [SerializeField] private SpriteRenderer fatigueProgress;
+        [SerializeField] private SpriteRenderer actionProgress;
+
+        private static readonly Color HpBaseColor = new Color32(139, 0, 0, 255);
+        private static readonly Color HpCoreColor = new Color32(255, 0, 0, 255);
+
+        private static readonly Color MoraleBaseColor = new Color32(105, 105, 105, 255);
+        private static readonly Color MoraleCoreColor = new Color32(0, 255, 0, 255);
+        
+        private static readonly Color FatigueBaseColor = new Color32(0, 0, 139, 255);
+        private static readonly Color FatigueCoreColor = new Color32(255, 255, 0, 255);
+        
+        private static readonly Color ActionBaseColor = new Color32(64, 64, 64, 255);
+        private static readonly Color ActionCoreColor = new Color32(30, 144, 255, 255);
+
+        private MaterialPropertyBlock _hpPropertyBlock;
+        private MaterialPropertyBlock _moralePropertyBlock;
+        private MaterialPropertyBlock _fatiguePropertyBlock;
+        private MaterialPropertyBlock _actionPropertyBlock;
+        
+        private UnitData _currentUnitData;
+        private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
+        private static readonly int CoreColor = Shader.PropertyToID("_CoreColor");
+        private static readonly int Progress = Shader.PropertyToID("_Progress");
+
+        private float HpProgressValue => _currentUnitData == null ? 1 : (float)_currentUnitData.NowHp / _currentUnitData.armDataType.totalHp;
+        private float MoraleProgressValue => _currentUnitData == null ? 1 : (float)_currentUnitData.NowMorale / _currentUnitData.armDataType.maximumMorale;
+        private float FatigueProgressValue => _currentUnitData == null ? 1 : (float)_currentUnitData.NowFatigue / _currentUnitData.armDataType.maximumFatigue;
+        
+        //todo
+        private float ActionProgressValue => 1;
+
+        private void ProgressInit()
+        {
+            _hpPropertyBlock = new MaterialPropertyBlock();
+            _hpPropertyBlock.SetColor(BaseColor, HpBaseColor);
+            _hpPropertyBlock.SetColor(CoreColor, HpCoreColor);
+            
+            _moralePropertyBlock = new MaterialPropertyBlock();
+            _moralePropertyBlock.SetColor(BaseColor, MoraleBaseColor);
+            _moralePropertyBlock.SetColor(CoreColor, MoraleCoreColor);
+            
+            _fatiguePropertyBlock = new MaterialPropertyBlock();
+            _fatiguePropertyBlock.SetColor(BaseColor, FatigueBaseColor);
+            _fatiguePropertyBlock.SetColor(CoreColor, FatigueCoreColor);
+            
+            _actionPropertyBlock = new MaterialPropertyBlock();
+            _actionPropertyBlock.SetColor(BaseColor, ActionBaseColor);
+            _actionPropertyBlock.SetColor(CoreColor, ActionCoreColor);
+            
+            _hpPropertyBlock.SetFloat(Progress, HpProgressValue);
+            _moralePropertyBlock.SetFloat(Progress, MoraleProgressValue);
+            _fatiguePropertyBlock.SetFloat(Progress, FatigueProgressValue);
+            _actionPropertyBlock.SetFloat(Progress, ActionProgressValue);
+            
+            hpProgress.SetPropertyBlock(_hpPropertyBlock);
+            moraleProgress.SetPropertyBlock(_moralePropertyBlock);
+            fatigueProgress.SetPropertyBlock(_fatiguePropertyBlock);
+            actionProgress.SetPropertyBlock(_actionPropertyBlock);
+        }
+
+        public void OnInit(int unitId)
+        {
+            OnInit(this.GetModel<IFightCreateModel>().AllLegions[Constants.PlayLegionId].allUnit[unitId]);
+        }
+
+        public void OnInit(UnitData unitData)
+        {
+            _currentUnitData = unitData;
+            peopleCurrentNum.text = _currentUnitData.NowTroops.ToString();
+            peopleTotalNum.text = _currentUnitData.armDataType.totalTroops.ToString();
+            ProgressInit();
+        }
+
+        public void UpdateProgress()
+        {
+            if (_currentUnitData.NowTroops != int.Parse(peopleCurrentNum.text))
+            {
+                peopleCurrentNum.text = _currentUnitData.NowTroops.ToString();
+            }
+            
+            DoValue(HpProgressValue, hpProgress, _hpPropertyBlock);
+            DoValue(MoraleProgressValue, moraleProgress, _moralePropertyBlock);
+            DoValue(FatigueProgressValue, fatigueProgress, _fatiguePropertyBlock);
+            DoValue(ActionProgressValue, actionProgress, _actionPropertyBlock);
+        }
+
+        private void DoValue(float endValue, SpriteRenderer sprite, MaterialPropertyBlock block, float duration = 0.3f)
+        {
+            float beginValue = block.GetFloat(Progress);
+            DOTween.To(() => beginValue, value =>
+            {
+                beginValue = value;
+                block.SetFloat(Progress, value);
+                sprite.SetPropertyBlock(block);
+            }, endValue, duration);
+        }
+
+        private void OnValidate()
+        {
+            ProgressInit();
+        }
+
+        public IArchitecture GetArchitecture()
+        {
+            return GameApp.Interface;
+        }
+    }
+}
