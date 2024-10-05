@@ -101,6 +101,7 @@ namespace Fight.Game.Legion
                 {
                     Debug.LogError("实际操作的单位和当前选中的单位不一样，实际操作的单位：" + unitData.unitId + "  选中的单位：" +
                                    nowUnitController.unitData.unitId);
+                    return;
                 }
 
                 nowUnitController.Move(endIndex, UnitEndAction);

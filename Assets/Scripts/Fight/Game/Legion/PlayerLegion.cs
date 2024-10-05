@@ -25,6 +25,8 @@ namespace Fight.Game.Legion
                     EndRound();
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<SelectUnitFocusEvent>(e => { nowUnitController = e.controller; })
+                .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
         public override void StartRound(Action<int> action)

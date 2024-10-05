@@ -137,11 +137,6 @@ namespace Fight.System
                 //当前没有焦点兵种或者点击了其他属于自己的单位
                 this.SendCommand(new SelectUnitFocusCommand(controller));
             }
-            else
-            {
-                //点击的是当前选中的单位
-                this.SendCommand(new CancelUnitFocusCommand());
-            }
         }
 
         /// <summary>
@@ -153,11 +148,6 @@ namespace Fight.System
             {
                 //当前没有焦点兵种或者点击了其他属于自己的单位
                 this.SendCommand(new SelectUnitFocusCommand(index));
-            }
-            else
-            {
-                //点击的是当前选中的单位
-                this.SendCommand(new CancelUnitFocusCommand());
             }
         }
 

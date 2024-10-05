@@ -81,7 +81,7 @@ namespace Fight.Command
                 }
 
                 fightVisualModel.FocusController = _controller;
-                this.SendEvent(new SelectUnitFocusEvent(_index));
+                this.SendEvent(new SelectUnitFocusEvent(_index, _controller));
             }
             else
             {
