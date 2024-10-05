@@ -1,6 +1,7 @@
 ﻿using Fight.Command;
 using Fight.Game.Unit;
 using Fight.Model;
+using Fight.Utils;
 using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -185,7 +186,8 @@ namespace Fight.System
                     return;
                 }
 
-                fightVisualModel.FocusController.UnitMoveAction(index);
+                this.GetModel<IFightCoreModel>().AllLegion[Constants.PlayLegionId]
+                    .UnitMove(fightVisualModel.FocusController.unitData.unitId, index);
             }
         }
     }

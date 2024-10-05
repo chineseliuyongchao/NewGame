@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Fight.Model;
 using Fight.System;
 using Fight.Utils;
@@ -11,7 +12,7 @@ using Sequence = DG.Tweening.Sequence;
 namespace Fight.Game.Unit
 {
     /// <summary>
-    /// 单个兵种
+    /// 每个单位，只负责单位的实际行动表现，不参与玩家或者电脑的命令决策
     /// </summary>
     public class UnitController : BaseGameController
     {
@@ -22,6 +23,11 @@ namespace Fight.Game.Unit
 
         public ObjectUnitView view;
         private Tween _focusAction;
+
+        /// <summary>
+        /// 单位每次行动结束的回调
+        /// </summary>
+        private Action _actionEnd;
 
         public void Init()
         {
@@ -64,71 +70,77 @@ namespace Fight.Game.Unit
         }
 
         /// <summary>
-        /// 兵种移动的动作，需要根据当前战斗的状态变更方式
+        /// 改变位置
         /// </summary>
         /// <param name="endIndex"></param>
-        public virtual void UnitMoveAction(int endIndex)
+        public void ChangePos(int endIndex)
         {
-            switch (this.GetModel<IFightVisualModel>().FightType)
-            {
-                case FightType.WAR_PREPARATIONS:
-                {
-                    this.GetSystem<IFightSystem>().UnitChangePos(this, endIndex);
-                    Vector3 endPosition =
-                        (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
-                    transform.position = endPosition;
-                    ChangeOrderLayer();
-                }
-                    break;
-                case FightType.IN_FIGHT:
-                {
-                    this.GetModel<IAStarModel>().FindNodePath(unitData.currentPosIndex, endIndex, path =>
-                    {
-                        if (path.error)
-                        {
-                            Debug.LogError("Pathfinding error: " + path.errorLog);
-                            return;
-                        }
-
-                        Sequence sequence = DOTween.Sequence();
-                        EndFocusAction();
-                        sequence.AppendInterval(0.3f);
-                        this.GetModel<IFightVisualModel>().PlayerMoving = true;
-                        for (int i = 1; i < path.vectorPath.Count; i++)
-                        {
-                            sequence.AppendCallback(() =>
-                            {
-                                if (!this.GetSystem<IFightComputeSystem>().MoveOnce(unitData.unitId))
-                                {
-                                    sequence.Kill();
-                                    this.GetModel<IFightVisualModel>().PlayerMoving = false;
-                                }
-                            });
-                            sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
-                            var i1 = i;
-                            sequence.AppendCallback(() =>
-                            {
-                                int index = this.GetModel<IAStarModel>().GetGridNodeIndexMyRule(path.vectorPath[i1]);
-                                this.GetSystem<IFightSystem>().UnitChangePos(this, index);
-                                ChangeOrderLayer();
-                            });
-                        }
-
-                        sequence.AppendCallback(() =>
-                        {
-                            StartFocusAction();
-                            this.GetModel<IFightVisualModel>().PlayerMoving = false;
-                        });
-                    });
-                }
-                    break;
-                case FightType.SETTLEMENT:
-                    break;
-            }
-
+            this.GetSystem<IFightSystem>().UnitChangePos(this, endIndex);
+            Vector3 endPosition =
+                (Vector3)this.GetModel<IAStarModel>().FightGridNodeInfoList[endIndex].position;
+            transform.position = endPosition;
+            ChangeOrderLayer();
             if (_focusAction != null)
             {
                 StartFocusAction();
+            }
+        }
+
+        /// <summary>
+        /// 移动
+        /// </summary>
+        /// <param name="endIndex"></param>
+        /// <param name="actionEnd"></param>
+        public void Move(int endIndex, Action actionEnd)
+        {
+            _actionEnd = actionEnd;
+            this.GetModel<IAStarModel>().FindNodePath(unitData.currentPosIndex, endIndex, path =>
+            {
+                if (path.error)
+                {
+                    Debug.LogError("Pathfinding error: " + path.errorLog);
+                    return;
+                }
+
+                Sequence sequence = DOTween.Sequence();
+                EndFocusAction();
+                sequence.AppendInterval(0.3f);
+                this.GetModel<IFightVisualModel>().PlayerMoving = true;
+                for (int i = 1; i < path.vectorPath.Count; i++)
+                {
+                    sequence.AppendCallback(() =>
+                    {
+                        if (!this.GetSystem<IFightComputeSystem>().MoveOnce(unitData.unitId))
+                        {
+                            sequence.Kill();
+                            MoveEnd();
+                        }
+                    });
+                    sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
+                    var i1 = i;
+                    sequence.AppendCallback(() =>
+                    {
+                        int index = this.GetModel<IAStarModel>().GetGridNodeIndexMyRule(path.vectorPath[i1]);
+                        this.GetSystem<IFightSystem>().UnitChangePos(this, index);
+                        ChangeOrderLayer();
+                    });
+                }
+
+                sequence.AppendCallback(MoveEnd);
+            });
+        }
+
+        /// <summary>
+        /// 移动结束
+        /// </summary>
+        private void MoveEnd()
+        {
+            StartFocusAction();
+            this.GetModel<IFightVisualModel>().PlayerMoving = false;
+            if (_actionEnd != null)
+            {
+                _actionEnd();
+                _actionEnd = null;
             }
         }
 

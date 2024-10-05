@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Fight;
 using Fight.Model;
 using QFramework;
 

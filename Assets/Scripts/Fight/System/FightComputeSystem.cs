@@ -79,6 +79,12 @@ namespace Fight.System
             return false;
         }
 
+        public bool EnoughMovePoint(int unitId)
+        {
+            //暂定检测就不够
+            return false;
+        }
+
         public List<int> LegionOrder()
         {
             List<int> legionKeys = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);

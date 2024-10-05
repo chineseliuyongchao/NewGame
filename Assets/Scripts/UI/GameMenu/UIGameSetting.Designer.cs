@@ -5,15 +5,23 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:21b8323b-32f6-4969-b92e-18605204ae6f
+	// Generate Id:52e9cceb-96d5-486d-a511-d560dc1c72e4
 	public partial class UIGameSetting
 	{
 		public const string Name = "UIGameSetting";
 		
 		[SerializeField]
+		private UnityEngine.UI.Button leaveButton;
+		[SerializeField]
+		private UnityEngine.UI.Button basicSettingButton;
+		[SerializeField]
+		private UnityEngine.UI.Button fightSettingButton;
+		[SerializeField]
+		private RectTransform basicSettingGroup;
+		[SerializeField]
 		private TMPro.TMP_Dropdown Dropdown;
 		[SerializeField]
-		private UnityEngine.UI.Button leaveButton;
+		private RectTransform fightSettingGroup;
 		[SerializeField]
 		private UnityEngine.UI.Toggle showUnitHp;
 		[SerializeField]
@@ -24,18 +32,25 @@ namespace UI
 		private UnityEngine.UI.Toggle showUnitFatigue;
 		[SerializeField]
 		private UnityEngine.UI.Toggle showMovementPoints;
+		[SerializeField]
+		private UnityEngine.UI.Toggle automaticSwitchingUnit;
 		
 		private UIGameSettingData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
-			Dropdown = null;
 			leaveButton = null;
+			basicSettingButton = null;
+			fightSettingButton = null;
+			basicSettingGroup = null;
+			Dropdown = null;
+			fightSettingGroup = null;
 			showUnitHp = null;
 			showUnitTroops = null;
 			showUnitMorale = null;
 			showUnitFatigue = null;
 			showMovementPoints = null;
+			automaticSwitchingUnit = null;
 			
 			mData = null;
 		}

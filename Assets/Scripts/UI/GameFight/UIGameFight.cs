@@ -64,12 +64,6 @@ namespace UI
                 if (e.isPlayer)
                 {
                     endRoundButton.gameObject.SetActive(true);
-                }
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<StartActionEvent>(e =>
-            {
-                if (e.isPlayer)
-                {
                     fightBehaviorGroup.gameObject.SetActive(true);
                     fightBehaviorButton.ForEach(button => button.interactable = false);
                 }

@@ -144,7 +144,7 @@ namespace Fight.System
                     return;
                 }
 
-                fightVisualModel.FocusController.UnitMoveAction(index);
+                fightVisualModel.FocusController.ChangePos(index);
             }
         }
     }

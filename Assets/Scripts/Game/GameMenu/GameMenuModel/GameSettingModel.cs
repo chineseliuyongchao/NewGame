@@ -16,6 +16,8 @@ namespace Game.GameMenu
 
         private bool _showMovementPoints;
 
+        private bool _automaticSwitchingUnit = true;
+
         protected override void OnInit()
         {
         }
@@ -54,6 +56,12 @@ namespace Game.GameMenu
         {
             get => _showMovementPoints;
             set => _showMovementPoints = value;
+        }
+
+        public bool AutomaticSwitchingUnit
+        {
+            get => _automaticSwitchingUnit;
+            set => _automaticSwitchingUnit = value;
         }
     }
 }

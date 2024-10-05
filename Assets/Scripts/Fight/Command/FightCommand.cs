@@ -75,7 +75,11 @@ namespace Fight.Command
             if (_controller)
             {
                 _controller.StartFocusAction();
-                if (fightVisualModel.FocusController) fightVisualModel.FocusController.EndFocusAction();
+                if (fightVisualModel.FocusController)
+                {
+                    fightVisualModel.FocusController.EndFocusAction();
+                }
+
                 fightVisualModel.FocusController = _controller;
                 this.SendEvent(new SelectUnitFocusEvent(_index));
             }

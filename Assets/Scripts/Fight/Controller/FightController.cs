@@ -110,7 +110,7 @@ namespace Fight.Controller
         /// </summary>
         private void LegionStartAction(int legionId)
         {
-            this.GetModel<IFightCoreModel>().AllLegion[legionId].StartAction(LegionEndAction);
+            this.GetModel<IFightCoreModel>().AllLegion[legionId].StartRound(LegionEndAction);
         }
 
         /// <summary>
