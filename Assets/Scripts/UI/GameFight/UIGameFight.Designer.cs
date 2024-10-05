@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:4732da4f-3309-4908-9a7d-fc37e50d4adf
+	// Generate Id:de36eff8-87e3-440a-84af-adba679fa029
 	public partial class UIGameFight
 	{
 		public const string Name = "UIGameFight";
@@ -16,6 +16,24 @@ namespace UI
 		private UnityEngine.UI.Button startButton;
 		[SerializeField]
 		private UnityEngine.UI.Button endRoundButton;
+		[SerializeField]
+		private RectTransform fightBehaviorGroup;
+		[SerializeField]
+		private UnityEngine.UI.Button advanceButton;
+		[SerializeField]
+		private UnityEngine.UI.Button shootButton;
+		[SerializeField]
+		private UnityEngine.UI.Button sustainedAdvanceButton;
+		[SerializeField]
+		private UnityEngine.UI.Button sustainedShootButton;
+		[SerializeField]
+		private UnityEngine.UI.Button chargeButton;
+		[SerializeField]
+		private UnityEngine.UI.Button holdButton;
+		[SerializeField]
+		private UnityEngine.UI.Button turnButton;
+		[SerializeField]
+		private UnityEngine.UI.Button retreatButton;
 		
 		private UIGameFightData mPrivateData = null;
 		
@@ -24,6 +42,15 @@ namespace UI
 			exitButton = null;
 			startButton = null;
 			endRoundButton = null;
+			fightBehaviorGroup = null;
+			advanceButton = null;
+			shootButton = null;
+			sustainedAdvanceButton = null;
+			sustainedShootButton = null;
+			chargeButton = null;
+			holdButton = null;
+			turnButton = null;
+			retreatButton = null;
 			
 			mData = null;
 		}

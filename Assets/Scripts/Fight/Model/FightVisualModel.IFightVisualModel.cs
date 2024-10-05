@@ -40,5 +40,10 @@ namespace Fight.Model
         /// 是否在玩家的回合内
         /// </summary>
         public bool InPlayerAction { get; set; }
+
+        /// <summary>
+        /// 玩家是否有单位在行动
+        /// </summary>
+        public bool PlayerMoving { get; set; }
     }
 }

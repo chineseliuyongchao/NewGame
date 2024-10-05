@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using Fight.Command;
 using Fight.Event;
 using Fight.Model;
 using Game.GameBase;
 using QFramework;
+using UnityEngine.UI;
 
 // ReSharper disable once CheckNamespace
 namespace UI
@@ -13,12 +15,15 @@ namespace UI
 
     public partial class UIGameFight : UIBase
     {
+        public List<Button> fightBehaviorButton;
+
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIGameFightData ?? new UIGameFightData();
             // please add init code here
             base.OnInit(uiData);
             endRoundButton.gameObject.SetActive(false);
+            fightBehaviorGroup.gameObject.SetActive(false);
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -59,6 +64,22 @@ namespace UI
                 if (e.isPlayer)
                 {
                     endRoundButton.gameObject.SetActive(true);
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<StartActionEvent>(e =>
+            {
+                if (e.isPlayer)
+                {
+                    fightBehaviorGroup.gameObject.SetActive(true);
+                    fightBehaviorButton.ForEach(button => button.interactable = false);
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<EndActionEvent>(e =>
+            {
+                if (e.isPlayer)
+                {
+                    fightBehaviorGroup.gameObject.SetActive(false);
+                    fightBehaviorButton.ForEach(button => button.interactable = true);
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }

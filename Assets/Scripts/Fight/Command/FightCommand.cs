@@ -24,6 +24,7 @@ namespace Fight.Command
         {
             this.GetModel<IFightVisualModel>().FightType = _type;
             GameApp.Interface.UnRegisterSystem<IFightInputSystem>();
+
             switch (_type)
             {
                 case FightType.WAR_PREPARATIONS:

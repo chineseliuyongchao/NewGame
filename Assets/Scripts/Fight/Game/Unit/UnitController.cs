@@ -23,11 +23,6 @@ namespace Fight.Game.Unit
         public ObjectUnitView view;
         private Tween _focusAction;
 
-        /// <summary>
-        /// 正在移动
-        /// </summary>
-        private bool _isMoving;
-
         public void Init()
         {
             view = this.AddComponent<ObjectUnitView>();
@@ -56,8 +51,7 @@ namespace Fight.Game.Unit
         {
             _focusAction?.Kill();
             _focusAction = transform.DOMoveY(this.GetModel<IAStarModel>().GetUnitRelayPosition(unitData).y + 0.5f, 0.5f)
-                .SetLoops(-1, LoopType.Yoyo)
-                .SetEase(Ease.InOutSine);
+                .SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
         }
 
         /// <summary>
@@ -88,11 +82,6 @@ namespace Fight.Game.Unit
                     break;
                 case FightType.IN_FIGHT:
                 {
-                    if (_isMoving)
-                    {
-                        return;
-                    }
-
                     this.GetModel<IAStarModel>().FindNodePath(unitData.currentPosIndex, endIndex, path =>
                     {
                         if (path.error)
@@ -104,7 +93,7 @@ namespace Fight.Game.Unit
                         Sequence sequence = DOTween.Sequence();
                         EndFocusAction();
                         sequence.AppendInterval(0.3f);
-                        _isMoving = true;
+                        this.GetModel<IFightVisualModel>().PlayerMoving = true;
                         for (int i = 1; i < path.vectorPath.Count; i++)
                         {
                             sequence.AppendCallback(() =>
@@ -112,7 +101,7 @@ namespace Fight.Game.Unit
                                 if (!this.GetSystem<IFightComputeSystem>().MoveOnce(unitData.unitId))
                                 {
                                     sequence.Kill();
-                                    _isMoving = false;
+                                    this.GetModel<IFightVisualModel>().PlayerMoving = false;
                                 }
                             });
                             sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
@@ -128,7 +117,7 @@ namespace Fight.Game.Unit
                         sequence.AppendCallback(() =>
                         {
                             StartFocusAction();
-                            _isMoving = false;
+                            this.GetModel<IFightVisualModel>().PlayerMoving = false;
                         });
                     });
                 }
@@ -149,10 +138,8 @@ namespace Fight.Game.Unit
         /// </summary>
         private void ChangeOrderLayer()
         {
-            int beginIndex =
-                Mathf.Max(
-                    Constants.FightNodeVisibleHeightNum - unitData.currentPosIndex / Constants.FightNodeVisibleWidthNum,
-                    1) * 1000;
+            int beginIndex = Mathf.Max(Constants.FightNodeVisibleHeightNum -
+                                       unitData.currentPosIndex / Constants.FightNodeVisibleWidthNum, 1) * 1000;
             view.ChangeOrderLayer(beginIndex);
         }
     }

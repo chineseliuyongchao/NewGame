@@ -24,7 +24,7 @@ namespace Fight.System
                 return;
             }
 
-            if (!this.GetModel<IFightVisualModel>().InPlayerAction)
+            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerMoving)
             {
                 return;
             }
@@ -85,6 +85,11 @@ namespace Fight.System
             {
                 return;
             }
+
+            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerMoving)
+            {
+                return;
+            }
         }
 
         public void MouseButtonRight()
@@ -95,7 +100,7 @@ namespace Fight.System
                 return;
             }
 
-            if (!this.GetModel<IFightVisualModel>().InPlayerAction)
+            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerMoving)
             {
                 return;
             }
