@@ -22,6 +22,7 @@ namespace UI
             mData = uiData as UIGameSettingData ?? new UIGameSettingData();
             // please add init code here
             base.OnInit(uiData);
+            Dropdown.value = this.GetModel<IGameSettingModel>().Language;
             showUnitHp.isOn = this.GetModel<IGameSettingModel>().ShowUnitHp;
             showUnitTroops.isOn = this.GetModel<IGameSettingModel>().ShowUnitTroops;
             showUnitMorale.isOn = this.GetModel<IGameSettingModel>().ShowUnitMorale;
