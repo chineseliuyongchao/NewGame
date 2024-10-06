@@ -46,9 +46,9 @@ namespace Fight.Game.Unit
             else
             {
                 var transform1 = transform;
-                var transformRotation = transform1.rotation;
-                transformRotation.eulerAngles = new Vector3(0, 180, 0);
-                transform1.rotation = transformRotation;
+                transform1.rotation = Quaternion.Euler(0, 180, 0);
+                
+                unitProgressBar.transform.rotation = Quaternion.Euler(0, -360, 0);
             }
 
             ChangeOrderLayer(); //初始化的时候也应该排序

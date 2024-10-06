@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSpeed: 1
-  dragSpeed: 7.5
+  dragSpeed: 6
 --- !u!114 &519420035
 MonoBehaviour:
   m_ObjectHideFlags: 0
