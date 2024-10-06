@@ -1,4 +1,5 @@
-﻿using Fight.Game.Unit;
+﻿using System.Collections.Generic;
+using Fight.Game.Unit;
 using Fight.Model;
 using QFramework;
 
@@ -38,5 +39,12 @@ namespace Fight.System
         /// <param name="controller"></param>
         /// <param name="endIndex"></param>
         void UnitChangePos(UnitController controller, int endIndex);
+
+        /// <summary>
+        /// 判断可以展示哪些战斗行为按钮（进攻，射击，持续进攻，持续射击，冲击，坚守，转向，撤离战场）
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        List<bool> FightBehaviorButtonShow(int unitId);
     }
 }

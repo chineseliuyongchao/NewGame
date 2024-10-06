@@ -81,8 +81,16 @@ namespace Fight.System
 
         public bool EnoughMovePoint(int unitId)
         {
-            //暂定检测就不够
-            return false;
+            //先判断是否够一次移动
+            bool result = false;
+            UnitData unitData = this.GetModel<IFightVisualModel>().AllUnit[unitId].unitData;
+            int onceMovePoint = Constants.MovementParameter - unitData.armDataType.mobility;
+            if (onceMovePoint <= unitData.NowMovementPoints)
+            {
+                result = true;
+            }
+
+            return result;
         }
 
         public List<int> LegionOrder()

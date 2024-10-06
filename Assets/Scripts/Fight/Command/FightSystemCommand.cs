@@ -1,4 +1,5 @@
-﻿using Fight.Tools;
+﻿using Fight.Event;
+using Fight.Tools;
 using QFramework;
 using UnityEngine;
 
@@ -47,6 +48,17 @@ namespace Fight.Command
                     mouseManager.HandleMouseScroll(_offset);
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// 结束回合按钮
+    /// </summary>
+    public class EndRoundButtonCommand : AbstractCommand
+    {
+        protected override void OnExecute()
+        {
+            this.SendEvent(new EndRoundButtonEvent());
         }
     }
 }

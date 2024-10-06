@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
-using Fight.Model;
-using Game.FightCreate;
-using QFramework;
+﻿using DG.Tweening;
 
 namespace Fight.Game.Legion
 {
@@ -16,19 +12,6 @@ namespace Fight.Game.Legion
             Sequence sequence = DOTween.Sequence();
             sequence.AppendInterval(2);
             sequence.AppendCallback(UnitEndRound);
-        }
-
-        protected override void UnitEndRound()
-        {
-            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
-            if (nowUnitIndex >= allUnit.Count - 1)
-            {
-                EndRound();
-            }
-            else
-            {
-                AutomaticSwitchingUnit();
-            }
         }
     }
 }

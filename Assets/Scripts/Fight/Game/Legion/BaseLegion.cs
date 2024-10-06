@@ -79,6 +79,15 @@ namespace Fight.Game.Legion
         /// </summary>
         protected virtual void UnitEndRound()
         {
+            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
+            if (nowUnitIndex >= allUnit.Count - 1)
+            {
+                EndRound();
+            }
+            else
+            {
+                AutomaticSwitchingUnit();
+            }
         }
 
         /// <summary>

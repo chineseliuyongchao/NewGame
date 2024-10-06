@@ -68,32 +68,61 @@ namespace Fight.Event
     /// <summary>
     /// 开始回合
     /// </summary>
-    public class StartActionEvent
+    public class StartRoundEvent
     {
         /// <summary>
         /// 是不是玩家
         /// </summary>
         public readonly bool isPlayer;
 
-        public StartActionEvent(bool isPlayer)
+        public readonly int unitId;
+
+        public StartRoundEvent(bool isPlayer,int unitId)
         {
             this.isPlayer = isPlayer;
+            this.unitId = unitId;
         }
     }
 
     /// <summary>
     /// 结束回合
     /// </summary>
-    public class EndActionEvent
+    public class EndRoundEvent
     {
         /// <summary>
         /// 是不是玩家
         /// </summary>
         public readonly bool isPlayer;
 
-        public EndActionEvent(bool isPlayer)
+        public EndRoundEvent(bool isPlayer)
         {
             this.isPlayer = isPlayer;
+        }
+    }
+
+    /// <summary>
+    /// 玩家的单位开始行动
+    /// </summary>
+    public class PlayerUnitActionEvent
+    {
+        public int unitId;
+
+        public PlayerUnitActionEvent(int unitId)
+        {
+            this.unitId = unitId;
+        }
+    }
+
+    /// <summary>
+    /// 玩家的单位等待行动
+    /// </summary>
+    public class PlayerUnitWaitActionEvent
+    {
+        public int unitId;
+
+        public PlayerUnitWaitActionEvent(int unitId)
+        {
+            this.unitId = unitId;
         }
     }
 }

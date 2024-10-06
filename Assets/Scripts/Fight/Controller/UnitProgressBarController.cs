@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
@@ -56,8 +55,9 @@ namespace Fight.Controller
             ? 1
             : (float)_currentUnitData.NowFatigue / _currentUnitData.armDataType.maximumFatigue;
 
-        //todo
-        private float ActionProgressValue => 1;
+        private float ActionProgressValue => _currentUnitData == null
+            ? 1
+            : (float)_currentUnitData.NowMovementPoints / Constants.InitMovementPoints;
 
         private void ProgressInit()
         {

@@ -21,7 +21,7 @@ namespace Fight.Model
         Dictionary<int, int> IndexToUnitIdDictionary { get; }
 
         /// <summary>
-        /// 当前被选取为焦点的兵种
+        /// 当前被选取为焦点的单位
         /// </summary>
         [CanBeNull]
         UnitController FocusController { get; set; }

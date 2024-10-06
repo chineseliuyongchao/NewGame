@@ -112,42 +112,81 @@ namespace Fight.Command
     /// <summary>
     /// 开始回合
     /// </summary>
-    public class StartActionCommand : AbstractCommand
+    public class StartRoundCommand : AbstractCommand
     {
         /// <summary>
         /// 是不是玩家
         /// </summary>
         private readonly bool _isPlayer;
 
-        public StartActionCommand(bool isPlayer)
+        private readonly int _unitId;
+
+        public StartRoundCommand(bool isPlayer, int unitId)
         {
             _isPlayer = isPlayer;
+            _unitId = unitId;
         }
 
         protected override void OnExecute()
         {
-            this.SendEvent(new StartActionEvent(_isPlayer));
+            this.SendEvent(new StartRoundEvent(_isPlayer, _unitId));
         }
     }
 
     /// <summary>
     /// 结束回合
     /// </summary>
-    public class EndActionCommand : AbstractCommand
+    public class EndRoundCommand : AbstractCommand
     {
         /// <summary>
         /// 是不是玩家
         /// </summary>
         private readonly bool _isPlayer;
 
-        public EndActionCommand(bool isPlayer)
+        public EndRoundCommand(bool isPlayer)
         {
             _isPlayer = isPlayer;
         }
 
         protected override void OnExecute()
         {
-            this.SendEvent(new EndActionEvent(_isPlayer));
+            this.SendEvent(new EndRoundEvent(_isPlayer));
+        }
+    }
+    
+    /// <summary>
+    /// 玩家的单位开始行动
+    /// </summary>
+    public class PlayerUnitActionCommand : AbstractCommand
+    {
+        private readonly int _unitId;
+
+        public PlayerUnitActionCommand(int unitId)
+        {
+            _unitId = unitId;
+        }
+
+        protected override void OnExecute()
+        {
+            this.SendEvent(new PlayerUnitActionEvent(_unitId));
+        }
+    }
+
+    /// <summary>
+    /// 玩家的单位等待行动
+    /// </summary>
+    public class PlayerUnitWaitActionCommand : AbstractCommand
+    {
+        private readonly int _unitId;
+
+        public PlayerUnitWaitActionCommand(int unitId)
+        {
+            _unitId = unitId;
+        }
+
+        protected override void OnExecute()
+        {
+            this.SendEvent(new PlayerUnitWaitActionEvent(_unitId));
         }
     }
 }

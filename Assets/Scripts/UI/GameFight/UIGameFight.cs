@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Fight.Command;
 using Fight.Event;
 using Fight.Model;
+using Fight.System;
 using Game.GameBase;
 using QFramework;
 using UnityEngine.UI;
@@ -43,7 +44,7 @@ namespace UI
             });
             endRoundButton.onClick.AddListener(() =>
             {
-                this.SendCommand(new EndActionCommand(true));
+                this.SendCommand(new EndRoundButtonCommand());
                 endRoundButton.gameObject.SetActive(false);
             });
         }
@@ -59,22 +60,35 @@ namespace UI
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<SettlementEvent>(_ => { UIKit.OpenPanel<UIFightEnd>(); })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<StartActionEvent>(e =>
+            this.RegisterEvent<StartRoundEvent>(e =>
             {
                 if (e.isPlayer)
                 {
                     endRoundButton.gameObject.SetActive(true);
                     fightBehaviorGroup.gameObject.SetActive(true);
-                    fightBehaviorButton.ForEach(button => button.interactable = false);
+                    List<bool> buttonShow = this.GetSystem<IFightSystem>().FightBehaviorButtonShow(e.unitId);
+                    int index = 0;
+                    fightBehaviorButton.ForEach(button =>
+                    {
+                        button.gameObject.SetActive(buttonShow[index]);
+                        index++;
+                    });
                 }
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
-            this.RegisterEvent<EndActionEvent>(e =>
+            this.RegisterEvent<EndRoundEvent>(e =>
             {
                 if (e.isPlayer)
                 {
                     fightBehaviorGroup.gameObject.SetActive(false);
-                    fightBehaviorButton.ForEach(button => button.interactable = true);
                 }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<PlayerUnitActionEvent>(_ =>
+            {
+                fightBehaviorButton.ForEach(button => button.interactable = false);
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<PlayerUnitWaitActionEvent>(_ =>
+            {
+                fightBehaviorButton.ForEach(button => button.interactable = true);
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 

@@ -119,6 +119,10 @@ namespace Fight.Game.Unit
                             sequence.Kill();
                             MoveEnd();
                         }
+                        else
+                        {
+                            unitProgressBar.UpdateProgress();
+                        }
                     });
                     sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
                     var i1 = i;

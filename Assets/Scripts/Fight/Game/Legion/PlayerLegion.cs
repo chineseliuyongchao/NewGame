@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Fight.Command;
 using Fight.Event;
 using Fight.Model;
-using Game.FightCreate;
 using Game.GameMenu;
 using QFramework;
 
@@ -16,14 +14,11 @@ namespace Fight.Game.Legion
     {
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<EndActionEvent>(e =>
+            this.RegisterEvent<EndRoundButtonEvent>(_ =>
             {
-                if (e.isPlayer)
-                {
-                    this.GetModel<IFightVisualModel>().InPlayerAction = false;
-                    this.SendCommand(new CancelUnitFocusCommand());
-                    EndRound();
-                }
+                this.GetModel<IFightVisualModel>().InPlayerAction = false;
+                this.SendCommand(new CancelUnitFocusCommand());
+                EndRound();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<SelectUnitFocusEvent>(e => { nowUnitController = e.controller; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
@@ -33,32 +28,33 @@ namespace Fight.Game.Legion
         {
             base.StartRound(action);
             this.GetModel<IFightVisualModel>().InPlayerAction = true;
-            this.SendCommand(new StartActionCommand(true));
+            this.SendCommand(new StartRoundCommand(true, nowUnitController.unitData.unitId));
         }
 
         protected override void UnitStartRound()
         {
-        }
-
-        protected override void UnitEndRound()
-        {
-            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
-            if (nowUnitIndex >= allUnit.Count - 1)
-            {
-                EndRound();
-            }
-            else
-            {
-                AutomaticSwitchingUnit();
-            }
+            this.SendCommand(new PlayerUnitWaitActionCommand(nowUnitController.unitData.unitId));
         }
 
         protected override void UnitEndAction()
         {
+            this.SendCommand(new PlayerUnitWaitActionCommand(nowUnitController.unitData.unitId));
             if (this.GetModel<IGameSettingModel>().AutomaticSwitchingUnit)
             {
                 base.UnitEndAction();
             }
+        }
+
+        public override void UnitMove(int unitIndex, int endIndex)
+        {
+            base.UnitMove(unitIndex, endIndex);
+            this.SendCommand(new PlayerUnitActionCommand(nowUnitController.unitData.unitId));
+        }
+
+        protected override void EndRound()
+        {
+            base.EndRound();
+            this.SendCommand(new EndRoundCommand(true));
         }
     }
 }

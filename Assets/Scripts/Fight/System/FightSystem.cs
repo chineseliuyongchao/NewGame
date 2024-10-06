@@ -1,4 +1,5 @@
-﻿using Fight.Game.Unit;
+﻿using System.Collections.Generic;
+using Fight.Game.Unit;
 using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
@@ -69,6 +70,11 @@ namespace Fight.System
 
             fightVisualModel.IndexToUnitIdDictionary[endIndex] = controller.unitData.unitId;
             controller.unitData.currentPosIndex = endIndex;
+        }
+
+        public List<bool> FightBehaviorButtonShow(int unitId)
+        {
+            return new List<bool> { true, true, true, true, true, true, true, true };
         }
     }
 }
