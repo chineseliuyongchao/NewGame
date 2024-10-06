@@ -25,7 +25,7 @@ namespace Fight.Game.Unit
         public ObjectUnitView view;
 
         public UnitProgressBarController unitProgressBar;
-        
+
         private Tween _focusAction;
 
         /// <summary>
@@ -157,6 +157,7 @@ namespace Fight.Game.Unit
             int beginIndex = Mathf.Max(Constants.FightNodeVisibleHeightNum -
                                        unitData.currentPosIndex / Constants.FightNodeVisibleWidthNum, 1) * 1000;
             view.ChangeOrderLayer(beginIndex);
+            unitProgressBar.ChangeOrderLayer(beginIndex);
         }
     }
 }

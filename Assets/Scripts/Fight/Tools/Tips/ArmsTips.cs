@@ -135,6 +135,14 @@ namespace Fight.Tools.Tips
             base.Layout(localPosition);
         }
 
+        public override void Show()
+        {
+            base.Show();
+            Color color = bg.color;
+            color.a = canvasGroup.alpha;
+            bg.material.SetColor(ImageColor, color);
+        }
+
         private void Update()
         {
             Color color = bg.color;

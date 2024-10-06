@@ -12,6 +12,7 @@ namespace Fight.Controller
 {
     public class UnitProgressBarController : MonoBehaviour, IController
     {
+        [SerializeField] private SpriteRenderer unitProgressBg;
         [SerializeField] private TextMeshPro peopleCurrentNum;
         [SerializeField] private TextMeshPro peopleTotalNum;
         [SerializeField] private SpriteRenderer hpProgress;
@@ -24,10 +25,10 @@ namespace Fight.Controller
 
         private static readonly Color MoraleBaseColor = new Color32(105, 105, 105, 255);
         private static readonly Color MoraleCoreColor = new Color32(0, 255, 0, 255);
-        
+
         private static readonly Color FatigueBaseColor = new Color32(0, 0, 139, 255);
         private static readonly Color FatigueCoreColor = new Color32(255, 255, 0, 255);
-        
+
         private static readonly Color ActionBaseColor = new Color32(64, 64, 64, 255);
         private static readonly Color ActionCoreColor = new Color32(30, 144, 255, 255);
 
@@ -35,16 +36,26 @@ namespace Fight.Controller
         private MaterialPropertyBlock _moralePropertyBlock;
         private MaterialPropertyBlock _fatiguePropertyBlock;
         private MaterialPropertyBlock _actionPropertyBlock;
-        
+
         private UnitData _currentUnitData;
         private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
         private static readonly int CoreColor = Shader.PropertyToID("_CoreColor");
         private static readonly int Progress = Shader.PropertyToID("_Progress");
+        private static readonly int Threshold = Shader.PropertyToID("_Threshold");
+        private static readonly int ThresholdColor = Shader.PropertyToID("_ThresholdColor");
 
-        private float HpProgressValue => _currentUnitData == null ? 1 : (float)_currentUnitData.NowHp / _currentUnitData.armDataType.totalHp;
-        private float MoraleProgressValue => _currentUnitData == null ? 1 : (float)_currentUnitData.NowMorale / _currentUnitData.armDataType.maximumMorale;
-        private float FatigueProgressValue => _currentUnitData == null ? 1 : (float)_currentUnitData.NowFatigue / _currentUnitData.armDataType.maximumFatigue;
-        
+        private float HpProgressValue => _currentUnitData == null
+            ? 1
+            : (float)_currentUnitData.NowHp / _currentUnitData.armDataType.totalHp;
+
+        private float MoraleProgressValue => _currentUnitData == null
+            ? 1
+            : (float)_currentUnitData.NowMorale / _currentUnitData.armDataType.maximumMorale;
+
+        private float FatigueProgressValue => _currentUnitData == null
+            ? 1
+            : (float)_currentUnitData.NowFatigue / _currentUnitData.armDataType.maximumFatigue;
+
         //todo
         private float ActionProgressValue => 1;
 
@@ -53,24 +64,33 @@ namespace Fight.Controller
             _hpPropertyBlock = new MaterialPropertyBlock();
             _hpPropertyBlock.SetColor(BaseColor, HpBaseColor);
             _hpPropertyBlock.SetColor(CoreColor, HpCoreColor);
-            
+
             _moralePropertyBlock = new MaterialPropertyBlock();
             _moralePropertyBlock.SetColor(BaseColor, MoraleBaseColor);
             _moralePropertyBlock.SetColor(CoreColor, MoraleCoreColor);
-            
+
             _fatiguePropertyBlock = new MaterialPropertyBlock();
             _fatiguePropertyBlock.SetColor(BaseColor, FatigueBaseColor);
             _fatiguePropertyBlock.SetColor(CoreColor, FatigueCoreColor);
-            
+
             _actionPropertyBlock = new MaterialPropertyBlock();
             _actionPropertyBlock.SetColor(BaseColor, ActionBaseColor);
             _actionPropertyBlock.SetColor(CoreColor, ActionCoreColor);
-            
+
             _hpPropertyBlock.SetFloat(Progress, HpProgressValue);
             _moralePropertyBlock.SetFloat(Progress, MoraleProgressValue);
             _fatiguePropertyBlock.SetFloat(Progress, FatigueProgressValue);
             _actionPropertyBlock.SetFloat(Progress, ActionProgressValue);
-            
+
+            // _hpPropertyBlock.SetFloat(Threshold, 0.01f);
+            // _hpPropertyBlock.SetColor(ThresholdColor, HpCoreColor * 10);
+            // _moralePropertyBlock.SetFloat(Threshold, 0.01f);
+            // _moralePropertyBlock.SetColor(ThresholdColor, MoraleCoreColor * 10);
+            // _fatiguePropertyBlock.SetFloat(Threshold, 0.01f);
+            // _fatiguePropertyBlock.SetColor(ThresholdColor, FatigueCoreColor * 10);
+            // _actionPropertyBlock.SetFloat(Threshold, 0.01f);
+            // _actionPropertyBlock.SetColor(ThresholdColor, ActionCoreColor * 10);
+
             hpProgress.SetPropertyBlock(_hpPropertyBlock);
             moraleProgress.SetPropertyBlock(_moralePropertyBlock);
             fatigueProgress.SetPropertyBlock(_fatiguePropertyBlock);
@@ -96,7 +116,7 @@ namespace Fight.Controller
             {
                 peopleCurrentNum.text = _currentUnitData.NowTroops.ToString();
             }
-            
+
             DoValue(HpProgressValue, hpProgress, _hpPropertyBlock);
             DoValue(MoraleProgressValue, moraleProgress, _moralePropertyBlock);
             DoValue(FatigueProgressValue, fatigueProgress, _fatiguePropertyBlock);
@@ -116,12 +136,20 @@ namespace Fight.Controller
 
         private void OnValidate()
         {
+            _currentUnitData = null;
             ProgressInit();
         }
 
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;
+        }
+
+        public void ChangeOrderLayer(int beginIndex)
+        {
+            unitProgressBg.sortingOrder = beginIndex++;
+            peopleCurrentNum.sortingOrder = peopleTotalNum.sortingOrder = hpProgress.sortingOrder =
+                moraleProgress.sortingOrder = fatigueProgress.sortingOrder = actionProgress.sortingOrder = beginIndex;
         }
     }
 }

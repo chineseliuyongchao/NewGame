@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipsType: 0
-  id: 81609750
+  id: 1497124930
   showTips: 0
   objectTips: {fileID: 0}
   parent: {fileID: 0}
@@ -729,10 +729,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8064133460558531133, guid: ae79b1095bf36384eb471b6a7fa93569, type: 3}
+      propertyPath: unitProgressBg
+      value: 
+      objectReference: {fileID: 5104832191961238332}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae79b1095bf36384eb471b6a7fa93569, type: 3}
 --- !u!4 &2183076985366751583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4792379428992033115, guid: ae79b1095bf36384eb471b6a7fa93569, type: 3}
+  m_PrefabInstance: {fileID: 6686204153681152004}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &5104832191961238332 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1878610810989445944, guid: ae79b1095bf36384eb471b6a7fa93569, type: 3}
   m_PrefabInstance: {fileID: 6686204153681152004}
   m_PrefabAsset: {fileID: 0}
