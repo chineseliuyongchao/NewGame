@@ -76,5 +76,12 @@ namespace Fight.System
         {
             return new List<bool> { true, true, true, true, true, true, true, true };
         }
+
+        public int GetBelligerentsIdOfUnit(int unitId)
+        {
+            UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
+            int legionId = unitController.unitData.legionId;
+            return this.GetModel<IFightCreateModel>().AllLegions[legionId].belligerentsId;
+        }
     }
 }

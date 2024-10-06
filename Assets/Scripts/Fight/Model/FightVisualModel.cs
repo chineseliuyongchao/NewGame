@@ -13,7 +13,8 @@ namespace Fight.Model
         private Dictionary<int, UnitController> _allUnit;
         private FightType _fightType;
         private bool _inPlayerAction;
-        private bool _playerMoving;
+        private bool _playerInAction;
+        private FightAttackType _fightAttackType = FightAttackType.NONE;
 
         protected override void OnInit()
         {
@@ -49,10 +50,16 @@ namespace Fight.Model
             set => _inPlayerAction = value;
         }
 
-        public bool PlayerMoving
+        public bool PlayerInAction
         {
-            get => _playerMoving;
-            set => _playerMoving = value;
+            get => _playerInAction;
+            set => _playerInAction = value;
+        }
+
+        public FightAttackType FightAttackType
+        {
+            get => _fightAttackType;
+            set => _fightAttackType = value;
         }
     }
 }

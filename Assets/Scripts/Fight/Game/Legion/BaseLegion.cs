@@ -101,6 +101,11 @@ namespace Fight.Game.Legion
             }
         }
 
+        /// <summary>
+        /// 单位移动
+        /// </summary>
+        /// <param name="unitIndex">单位id</param>
+        /// <param name="endIndex">结束的位置id</param>
         public virtual void UnitMove(int unitIndex, int endIndex)
         {
             Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
@@ -114,6 +119,46 @@ namespace Fight.Game.Legion
                 }
 
                 nowUnitController.Move(endIndex, UnitEndAction);
+            }
+        }
+
+        /// <summary>
+        /// 单位攻击（此处的攻击是泛指所有的攻击行为）
+        /// </summary>
+        /// <param name="unitIndex"></param>
+        /// <param name="targetUnitIndex"></param>
+        public virtual void UnitAttack(int unitIndex, int targetUnitIndex)
+        {
+            Dictionary<int, UnitController> allUnitController = this.GetModel<IFightVisualModel>().AllUnit;
+            if (allUnitController.TryGetValue(unitIndex, out var unitController) &&
+                allUnitController.TryGetValue(targetUnitIndex, out var targetUnitController))
+            {
+                if (!nowUnitController.Equals(
+                        this.GetModel<IFightVisualModel>().AllUnit[unitController.unitData.unitId]))
+                {
+                    Debug.LogError("实际操作的单位和当前选中的单位不一样，实际操作的单位：" + unitController.unitData.unitId + "  选中的单位：" +
+                                   nowUnitController.unitData.unitId);
+                    return;
+                }
+
+                switch (this.GetModel<IFightVisualModel>().FightAttackType)
+                {
+                    case FightAttackType.ADVANCE:
+                        this.GetSystem<IFightComputeSystem>().AssaultWithRetaliation(unitIndex, targetUnitIndex);
+                        break;
+                    case FightAttackType.SHOOT:
+                        this.GetSystem<IFightComputeSystem>().Shoot(unitIndex, targetUnitIndex);
+                        break;
+                    case FightAttackType.SUSTAIN_ADVANCE:
+                        break;
+                    case FightAttackType.SUSTAIN_SHOOT:
+                        break;
+                    case FightAttackType.CHARGE:
+                        break;
+                }
+
+                unitController.Attack();
+                targetUnitController.Attacked();
             }
         }
 

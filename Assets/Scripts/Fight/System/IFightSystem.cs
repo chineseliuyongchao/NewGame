@@ -46,5 +46,12 @@ namespace Fight.System
         /// <param name="unitId"></param>
         /// <returns></returns>
         List<bool> FightBehaviorButtonShow(int unitId);
+
+        /// <summary>
+        /// 获取单位的阵营id
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <returns></returns>
+        int GetBelligerentsIdOfUnit(int unitId);
     }
 }

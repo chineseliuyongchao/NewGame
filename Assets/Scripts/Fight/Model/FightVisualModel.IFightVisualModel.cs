@@ -44,6 +44,11 @@ namespace Fight.Model
         /// <summary>
         /// 玩家是否有单位在行动
         /// </summary>
-        public bool PlayerMoving { get; set; }
+        public bool PlayerInAction { get; set; }
+
+        /// <summary>
+        /// 当前选择的攻击行为
+        /// </summary>
+        public FightAttackType FightAttackType { get; set; }
     }
 }

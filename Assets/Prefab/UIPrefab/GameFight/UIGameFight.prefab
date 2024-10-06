@@ -905,7 +905,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: retreatButton
   CustomComment: 
-  mComponentName: 
+  mComponentName: UnityEngine.UI.Button
 --- !u!1 &4608077223175484443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1282,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: retreatButton
   CustomComment: 
-  mComponentName: 
+  mComponentName: UnityEngine.UI.Button
 --- !u!1 &5054196969724915826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,7 +2402,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: retreatButton
   CustomComment: 
-  mComponentName: 
+  mComponentName: UnityEngine.UI.Button
 --- !u!1 &7269007041627728103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,7 +2760,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: retreatButton
   CustomComment: 
-  mComponentName: 
+  mComponentName: UnityEngine.UI.Button
 --- !u!1 &8278822776733018163
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,7 +2899,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: retreatButton
   CustomComment: 
-  mComponentName: 
+  mComponentName: UnityEngine.UI.Button
 --- !u!1 &8803249660952949384
 GameObject:
   m_ObjectHideFlags: 0

@@ -109,7 +109,7 @@ namespace Fight.Game.Unit
                 Sequence sequence = DOTween.Sequence();
                 EndFocusAction();
                 sequence.AppendInterval(0.3f);
-                this.GetModel<IFightVisualModel>().PlayerMoving = true;
+                this.GetModel<IFightVisualModel>().PlayerInAction = true;
                 for (int i = 1; i < path.vectorPath.Count; i++)
                 {
                     sequence.AppendCallback(() =>
@@ -139,12 +139,28 @@ namespace Fight.Game.Unit
         }
 
         /// <summary>
+        /// 单位攻击（此处的攻击是泛指所有的攻击行为）
+        /// </summary>
+        public void Attack()
+        {
+            unitProgressBar.UpdateProgress();
+        }
+
+        /// <summary>
+        /// 单位被攻击（此处的攻击是泛指所有的攻击行为）
+        /// </summary>
+        public void Attacked()
+        {
+            unitProgressBar.UpdateProgress();
+        }
+
+        /// <summary>
         /// 移动结束
         /// </summary>
         private void MoveEnd()
         {
             StartFocusAction();
-            this.GetModel<IFightVisualModel>().PlayerMoving = false;
+            this.GetModel<IFightVisualModel>().PlayerInAction = false;
             if (_actionEnd != null)
             {
                 _actionEnd();

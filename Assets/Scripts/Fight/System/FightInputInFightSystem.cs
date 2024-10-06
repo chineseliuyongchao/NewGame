@@ -25,7 +25,7 @@ namespace Fight.System
                 return;
             }
 
-            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerMoving)
+            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerInAction)
             {
                 return;
             }
@@ -42,11 +42,12 @@ namespace Fight.System
                     if (this.GetSystem<IFightSystem>().IsPlayerUnit(controller.unitData.unitId))
                     {
                         //玩家单位
-                        SelectPlayerUnit(fightVisualModel, controller);
+                        SelectPlayerUnit(controller);
                     }
                     else
                     {
                         //非玩家单位
+                        SelectOtherUnit(controller);
                     }
                 }
             }
@@ -62,14 +63,16 @@ namespace Fight.System
 
                 if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(index, out var unitId))
                 {
+                    UnitController controller = this.GetModel<IFightVisualModel>().AllUnit[unitId];
                     if (this.GetSystem<IFightSystem>().IsPlayerUnit(unitId))
                     {
                         //玩家单位
-                        SelectPlayerUnit(fightVisualModel, index);
+                        SelectPlayerUnit(controller);
                     }
                     else
                     {
                         //非玩家单位
+                        SelectOtherUnit(controller);
                     }
                 }
                 else
@@ -87,7 +90,7 @@ namespace Fight.System
                 return;
             }
 
-            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerMoving)
+            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerInAction)
             {
                 return;
             }
@@ -101,7 +104,7 @@ namespace Fight.System
                 return;
             }
 
-            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerMoving)
+            if (!this.GetModel<IFightVisualModel>().InPlayerAction || this.GetModel<IFightVisualModel>().PlayerInAction)
             {
                 return;
             }
@@ -130,8 +133,9 @@ namespace Fight.System
         /// <summary>
         /// 选取了玩家的单位
         /// </summary>
-        private void SelectPlayerUnit(IFightVisualModel fightVisualModel, UnitController controller)
+        private void SelectPlayerUnit(UnitController controller)
         {
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
             if (!fightVisualModel.FocusController || controller != fightVisualModel.FocusController)
             {
                 //当前没有焦点兵种或者点击了其他属于自己的单位
@@ -140,14 +144,25 @@ namespace Fight.System
         }
 
         /// <summary>
-        /// 选取了玩家的单位
+        /// 选择到了电脑的单位
         /// </summary>
-        private void SelectPlayerUnit(IFightVisualModel fightVisualModel, int index)
+        private void SelectOtherUnit(UnitController controller)
         {
-            if (!fightVisualModel.FocusController || index != fightVisualModel.FocusController.unitData.currentPosIndex)
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
+            if (!fightVisualModel.FocusController)
             {
-                //当前没有焦点兵种或者点击了其他属于自己的单位
-                this.SendCommand(new SelectUnitFocusCommand(index));
+                return;
+            }
+
+            if (this.GetSystem<IFightSystem>().GetBelligerentsIdOfUnit(controller.unitData.unitId) !=
+                Constants.BELLIGERENT1) //非玩家阵营，可以攻击
+            {
+                this.GetModel<IFightCoreModel>().AllLegion[Constants.PlayLegionId]
+                    .UnitAttack(fightVisualModel.FocusController.unitData.unitId, controller.unitData.unitId);
+            }
+            else
+            {
+                //玩家阵营，不可以攻击
             }
         }
 

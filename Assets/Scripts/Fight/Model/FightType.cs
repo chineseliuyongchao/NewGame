@@ -25,4 +25,40 @@
         /// </summary>
         FIGHT_OVER
     }
+
+    /// <summary>
+    /// 战斗的攻击行为
+    /// </summary>
+    public enum FightAttackType
+    {
+        /// <summary>
+        /// 没有攻击行为
+        /// </summary>
+        NONE,
+
+        /// <summary>
+        /// 进攻
+        /// </summary>
+        ADVANCE,
+
+        /// <summary>
+        /// 射击
+        /// </summary>
+        SHOOT,
+
+        /// <summary>
+        /// 持续进攻
+        /// </summary>
+        SUSTAIN_ADVANCE,
+
+        /// <summary>
+        /// 持续射击
+        /// </summary>
+        SUSTAIN_SHOOT,
+
+        /// <summary>
+        /// 冲击
+        /// </summary>
+        CHARGE
+    }
 }

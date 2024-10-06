@@ -5,6 +5,7 @@ using Fight.Model;
 using Fight.System;
 using Game.GameBase;
 using QFramework;
+using UnityEngine;
 using UnityEngine.UI;
 
 // ReSharper disable once CheckNamespace
@@ -17,6 +18,11 @@ namespace UI
     public partial class UIGameFight : UIBase
     {
         public List<Button> fightBehaviorButton;
+
+        /// <summary>
+        /// 选中的攻击方式对应的按钮
+        /// </summary>
+        private Button _chooseAttackButton;
 
         protected override void OnInit(IUIData uiData = null)
         {
@@ -47,6 +53,17 @@ namespace UI
                 this.SendCommand(new EndRoundButtonCommand());
                 endRoundButton.gameObject.SetActive(false);
             });
+            advanceButton.onClick.AddListener(() => { ChooseAttackType(FightAttackType.ADVANCE, advanceButton); });
+            shootButton.onClick.AddListener(() => { ChooseAttackType(FightAttackType.SHOOT, shootButton); });
+            sustainedAdvanceButton.onClick.AddListener(() =>
+            {
+                ChooseAttackType(FightAttackType.SUSTAIN_ADVANCE, sustainedAdvanceButton);
+            });
+            sustainedShootButton.onClick.AddListener(() =>
+            {
+                ChooseAttackType(FightAttackType.SUSTAIN_SHOOT, sustainedShootButton);
+            });
+            chargeButton.onClick.AddListener(() => { ChooseAttackType(FightAttackType.CHARGE, chargeButton); });
         }
 
         protected override void OnListenEvent()
@@ -89,6 +106,7 @@ namespace UI
             this.RegisterEvent<PlayerUnitWaitActionEvent>(_ =>
             {
                 fightBehaviorButton.ForEach(button => button.interactable = true);
+                ChooseAttackType(FightAttackType.NONE, null);
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
@@ -98,6 +116,26 @@ namespace UI
         private void StartFight()
         {
             startButton.gameObject.SetActive(false);
+        }
+
+        /// <summary>
+        /// 选择攻击行为
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="button"></param>
+        private void ChooseAttackType(FightAttackType type, Button button)
+        {
+            if (_chooseAttackButton != null)
+            {
+                _chooseAttackButton.GetComponent<Image>().color = Color.white;
+            }
+
+            this.GetModel<IFightVisualModel>().FightAttackType = type;
+            _chooseAttackButton = button;
+            if (_chooseAttackButton != null)
+            {
+                _chooseAttackButton.GetComponent<Image>().color = Color.red;
+            }
         }
     }
 }
