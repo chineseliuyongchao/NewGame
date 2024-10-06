@@ -1,6 +1,7 @@
 ﻿using Fight.Command;
 using Fight.Game.Unit;
 using Fight.Model;
+using Fight.Utils;
 using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -136,11 +137,6 @@ namespace Fight.System
                 //当前没有焦点兵种或者点击了其他属于自己的单位
                 this.SendCommand(new SelectUnitFocusCommand(controller));
             }
-            else
-            {
-                //点击的是当前选中的单位
-                this.SendCommand(new CancelUnitFocusCommand());
-            }
         }
 
         /// <summary>
@@ -152,11 +148,6 @@ namespace Fight.System
             {
                 //当前没有焦点兵种或者点击了其他属于自己的单位
                 this.SendCommand(new SelectUnitFocusCommand(index));
-            }
-            else
-            {
-                //点击的是当前选中的单位
-                this.SendCommand(new CancelUnitFocusCommand());
             }
         }
 
@@ -185,7 +176,8 @@ namespace Fight.System
                     return;
                 }
 
-                fightVisualModel.FocusController.UnitMoveAction(index);
+                this.GetModel<IFightCoreModel>().AllLegion[Constants.PlayLegionId]
+                    .UnitMove(fightVisualModel.FocusController.unitData.unitId, index);
             }
         }
     }

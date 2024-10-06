@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using Fight.Command;
 using Fight.Event;
 using Fight.FsmS;
@@ -110,7 +111,7 @@ namespace Fight.Controller
         /// </summary>
         private void LegionStartAction(int legionId)
         {
-            this.GetModel<IFightCoreModel>().AllLegion[legionId].StartAction(LegionEndAction);
+            this.GetModel<IFightCoreModel>().AllLegion[legionId].StartRound(LegionEndAction);
         }
 
         /// <summary>
@@ -127,7 +128,9 @@ namespace Fight.Controller
             else
             {
                 ActionLegionIndex = index + 1;
-                LegionStartAction(_legionOrder[ActionLegionIndex]);
+                Sequence sequence = DOTween.Sequence();
+                sequence.AppendInterval(1);
+                sequence.AppendCallback(() => { LegionStartAction(_legionOrder[ActionLegionIndex]); });
             }
         }
 

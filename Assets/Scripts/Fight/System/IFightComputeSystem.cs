@@ -38,6 +38,12 @@ namespace Fight.System
         bool MoveOnce(int unitId);
 
         /// <summary>
+        /// 判断是否还有足够的移动点数
+        /// </summary>
+        /// <returns></returns>
+        bool EnoughMovePoint(int unitId);
+
+        /// <summary>
         /// 获取各个军队在同一回合的行动顺序
         /// </summary>
         /// <returns></returns>

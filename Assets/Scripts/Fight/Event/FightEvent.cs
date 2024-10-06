@@ -1,4 +1,6 @@
-﻿namespace Fight.Event
+﻿using Fight.Game.Unit;
+
+namespace Fight.Event
 {
     /// <summary>
     /// 单位移动
@@ -19,10 +21,12 @@
     public struct SelectUnitFocusEvent
     {
         public int selectIndex;
+        public UnitController controller;
 
-        public SelectUnitFocusEvent(int selectIndex)
+        public SelectUnitFocusEvent(int selectIndex, UnitController controller)
         {
             this.selectIndex = selectIndex;
+            this.controller = controller;
         }
     }
 
@@ -60,7 +64,7 @@
     public struct FightOverEvent
     {
     }
-    
+
     /// <summary>
     /// 开始回合
     /// </summary>

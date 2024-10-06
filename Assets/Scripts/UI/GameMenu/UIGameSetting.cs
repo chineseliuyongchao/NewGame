@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Game.GameMenu;
 using QFramework;
+using UnityEngine;
 using UnityEngine.Localization.Settings;
 
 namespace UI
@@ -13,16 +15,22 @@ namespace UI
     /// </summary>
     public partial class UIGameSetting : UIBase
     {
+        public List<GameObject> allSettingGroup;
+
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIGameSettingData ?? new UIGameSettingData();
             // please add init code here
             base.OnInit(uiData);
+            Dropdown.value = this.GetModel<IGameSettingModel>().Language;
             showUnitHp.isOn = this.GetModel<IGameSettingModel>().ShowUnitHp;
             showUnitTroops.isOn = this.GetModel<IGameSettingModel>().ShowUnitTroops;
             showUnitMorale.isOn = this.GetModel<IGameSettingModel>().ShowUnitMorale;
             showUnitFatigue.isOn = this.GetModel<IGameSettingModel>().ShowUnitFatigue;
             showMovementPoints.isOn = this.GetModel<IGameSettingModel>().ShowMovementPoints;
+            automaticSwitchingUnit.isOn = this.GetModel<IGameSettingModel>().AutomaticSwitchingUnit;
+            allSettingGroup.ForEach(group => group.SetActive(false));
+            basicSettingGroup.gameObject.SetActive(true);
         }
 
         protected override void OnOpen(IUIData uiData = null)
@@ -56,7 +64,21 @@ namespace UI
             {
                 this.GetModel<IGameSettingModel>().ShowMovementPoints = value;
             });
+            automaticSwitchingUnit.onValueChanged.AddListener(value =>
+            {
+                this.GetModel<IGameSettingModel>().AutomaticSwitchingUnit = value;
+            });
             leaveButton.onClick.AddListener(CloseSelf);
+            basicSettingButton.onClick.AddListener(() =>
+            {
+                allSettingGroup.ForEach(group => group.SetActive(false));
+                basicSettingGroup.gameObject.SetActive(true);
+            });
+            fightSettingButton.onClick.AddListener(() =>
+            {
+                allSettingGroup.ForEach(group => group.SetActive(false));
+                fightSettingGroup.gameObject.SetActive(true);
+            });
         }
 
         protected override void OnListenEvent()

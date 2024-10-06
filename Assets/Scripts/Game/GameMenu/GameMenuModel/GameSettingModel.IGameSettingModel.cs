@@ -33,5 +33,10 @@ namespace Game.GameMenu
         /// 是否展示剩余移动力
         /// </summary>
         public bool ShowMovementPoints { get; set; }
+
+        /// <summary>
+        /// 在回合中是否自动切换选中兵种
+        /// </summary>
+        public bool AutomaticSwitchingUnit { get; set; }
     }
 }

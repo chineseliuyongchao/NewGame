@@ -1,59 +1,54 @@
 ﻿using QFramework;
+using UnityEngine;
 
 namespace Game.GameMenu
 {
     public class GameSettingModel : AbstractModel, IGameSettingModel
     {
-        private int _language;
-
-        private bool _showUnitHp = true;
-
-        private bool _showUnitTroops = true;
-
-        private bool _showUnitMorale = true;
-
-        private bool _showUnitFatigue;
-
-        private bool _showMovementPoints;
-
         protected override void OnInit()
         {
         }
 
         public int Language
         {
-            get => _language;
-            set => _language = value;
+            get => PlayerPrefs.GetInt("HOP_Setting_Language", 0);
+            set => PlayerPrefs.SetInt("HOP_Setting_Language", value);
         }
 
         public bool ShowUnitHp
         {
-            get => _showUnitHp;
-            set => _showUnitHp = value;
+            get => PlayerPrefs.GetInt("HOP_Setting_ShowUnitHp", 1) == 1;
+            set => PlayerPrefs.SetInt("HOP_Setting_ShowUnitHp", value ? 1 : 0);
         }
 
         public bool ShowUnitTroops
         {
-            get => _showUnitTroops;
-            set => _showUnitTroops = value;
+            get => PlayerPrefs.GetInt("HOP_Setting_ShowUnitTroops", 1) == 1;
+            set => PlayerPrefs.SetInt("HOP_Setting_ShowUnitTroops", value ? 1 : 0);
         }
 
         public bool ShowUnitMorale
         {
-            get => _showUnitMorale;
-            set => _showUnitMorale = value;
+            get => PlayerPrefs.GetInt("HOP_Setting_ShowUnitMorale", 1) == 1;
+            set => PlayerPrefs.SetInt("HOP_Setting_ShowUnitMorale", value ? 1 : 0);
         }
 
         public bool ShowUnitFatigue
         {
-            get => _showUnitFatigue;
-            set => _showUnitFatigue = value;
+            get => PlayerPrefs.GetInt("HOP_Setting_ShowUnitFatigue", 0) == 1;
+            set => PlayerPrefs.SetInt("HOP_Setting_ShowUnitFatigue", value ? 1 : 0);
         }
 
         public bool ShowMovementPoints
         {
-            get => _showMovementPoints;
-            set => _showMovementPoints = value;
+            get => PlayerPrefs.GetInt("HOP_Setting_ShowMovementPoints", 0) == 1;
+            set => PlayerPrefs.SetInt("HOP_Setting_ShowMovementPoints", value ? 1 : 0);
+        }
+
+        public bool AutomaticSwitchingUnit
+        {
+            get => PlayerPrefs.GetInt("HOP_Setting_AutomaticSwitchingUnit", 0) == 1;
+            set => PlayerPrefs.SetInt("HOP_Setting_AutomaticSwitchingUnit", value ? 1 : 0);
         }
     }
 }

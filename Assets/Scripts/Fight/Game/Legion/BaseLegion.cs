@@ -1,5 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Fight.Command;
+using Fight.Game.Unit;
+using Fight.Model;
+using Fight.System;
+using Game.FightCreate;
 using Game.GameBase;
+using QFramework;
+using UnityEngine;
 
 namespace Fight.Game.Legion
 {
@@ -9,33 +18,106 @@ namespace Fight.Game.Legion
     public abstract class BaseLegion : BaseGameController
     {
         public int legionId;
-        protected Action<int> actionEnd;
+        protected Action<int> roundEnd;
+
+        /// <summary>
+        /// 军队是否在回合中
+        /// </summary>
+        protected bool inRound;
+
+        /// <summary>
+        /// 当前正在执行回合的单位顺序
+        /// </summary>
+        protected int nowUnitIndex;
+
+        /// <summary>
+        /// 当前正在行动的单位
+        /// </summary>
+        protected UnitController nowUnitController;
 
         public virtual void Init(int id)
         {
             legionId = id;
             OnListenEvent();
+            inRound = false;
+            nowUnitIndex = -1;
         }
 
         /// <summary>
-        /// 开始行动
+        /// 开始回合
         /// </summary>
-        public virtual void StartAction(Action<int> action)
+        public virtual void StartRound(Action<int> action)
         {
-            actionEnd = action;
-            //暂时没有行动相关逻辑，直接调用结束
-            EndAction();
+            inRound = true;
+            roundEnd = action;
+            nowUnitIndex = -1;
+            AutomaticSwitchingUnit();
         }
 
         /// <summary>
-        /// 结束行动
+        /// 自动跳转下一个单位
         /// </summary>
-        protected virtual void EndAction()
+        protected void AutomaticSwitchingUnit()
         {
-            if (actionEnd != null)
+            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
+            nowUnitIndex++;
+            int unitId = allUnit.ElementAt(nowUnitIndex).Value.unitId;
+            nowUnitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
+            this.SendCommand(new SelectUnitFocusCommand(nowUnitController));
+            UnitStartRound();
+        }
+
+        /// <summary>
+        /// 单位开始执行回合
+        /// </summary>
+        protected virtual void UnitStartRound()
+        {
+        }
+
+        /// <summary>
+        /// 单位回合结束
+        /// </summary>
+        protected virtual void UnitEndRound()
+        {
+        }
+
+        /// <summary>
+        /// 单位回合中的单次行动结束
+        /// </summary>
+        protected virtual void UnitEndAction()
+        {
+            if (!this.GetSystem<IFightComputeSystem>().EnoughMovePoint(nowUnitController.unitData.unitId))
             {
-                actionEnd(legionId);
-                actionEnd = null;
+                UnitEndRound();
+            }
+        }
+
+        public virtual void UnitMove(int unitIndex, int endIndex)
+        {
+            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
+            if (allUnit.TryGetValue(unitIndex, out var unitData))
+            {
+                if (!nowUnitController.Equals(this.GetModel<IFightVisualModel>().AllUnit[unitData.unitId]))
+                {
+                    Debug.LogError("实际操作的单位和当前选中的单位不一样，实际操作的单位：" + unitData.unitId + "  选中的单位：" +
+                                   nowUnitController.unitData.unitId);
+                    return;
+                }
+
+                nowUnitController.Move(endIndex, UnitEndAction);
+            }
+        }
+
+        /// <summary>
+        /// 结束回合
+        /// </summary>
+        protected virtual void EndRound()
+        {
+            inRound = false;
+            if (roundEnd != null)
+            {
+                roundEnd(legionId);
+                roundEnd = null;
             }
         }
     }
