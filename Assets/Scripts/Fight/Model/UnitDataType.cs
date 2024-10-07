@@ -51,7 +51,9 @@ namespace Fight.Model
 
         private int _nowTroops;
 
-        private int _nowMovementPoints;
+        private int _nowActionPoints;
+
+        private UnitType _unitType;
 
         public UnitData(UnitData unitData)
         {
@@ -64,9 +66,10 @@ namespace Fight.Model
             NowAmmo = unitData.NowAmmo;
             NowMorale = unitData.NowMorale;
             NowFatigue = unitData.NowFatigue;
-            NowMovementPoints = unitData.NowMovementPoints;
+            NowActionPoints = unitData.NowActionPoints;
             IsCharge = unitData.IsCharge;
             IsStick = unitData.IsStick;
+            UnitType = unitData.UnitType;
         }
 
         public UnitData(ArmDataType armDataType, int id, int legionId)
@@ -80,13 +83,14 @@ namespace Fight.Model
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
             NowFatigue = armDataType.maximumFatigue;
-            NowMovementPoints = Constants.InitMovementPoints;
+            NowActionPoints = Constants.InitActionPoints;
             IsCharge = false;
             IsStick = false;
+            UnitType = UnitType.NORMAL;
         }
 
         /// <summary>
-        ///     当前血量
+        /// 当前血量
         /// </summary>
         public int NowHp
         {
@@ -95,7 +99,7 @@ namespace Fight.Model
         }
 
         /// <summary>
-        ///     当前人数
+        /// 当前人数
         /// </summary>
         public int NowTroops
         {
@@ -104,7 +108,7 @@ namespace Fight.Model
         }
 
         /// <summary>
-        ///     当前弹药量
+        /// 当前弹药量
         /// </summary>
         public int NowAmmo
         {
@@ -113,7 +117,7 @@ namespace Fight.Model
         }
 
         /// <summary>
-        ///     当前作战意志
+        /// 当前作战意志
         /// </summary>
         public int NowMorale
         {
@@ -122,7 +126,7 @@ namespace Fight.Model
         }
 
         /// <summary>
-        ///     当前疲劳值
+        /// 当前疲劳值
         /// </summary>
         public int NowFatigue
         {
@@ -131,16 +135,16 @@ namespace Fight.Model
         }
 
         /// <summary>
-        /// 当前的移动点数
+        /// 当前的行动点数
         /// </summary>
-        public int NowMovementPoints
+        public int NowActionPoints
         {
-            get => _nowMovementPoints;
-            set => _nowMovementPoints = Mathf.Clamp(value, 0, Constants.InitMovementPoints);
+            get => _nowActionPoints;
+            set => _nowActionPoints = Mathf.Clamp(value, 0, Constants.InitActionPoints);
         }
 
         /// <summary>
-        ///     单位是否在冲锋
+        /// 单位是否在冲锋
         /// </summary>
         public bool IsCharge
         {
@@ -149,12 +153,21 @@ namespace Fight.Model
         }
 
         /// <summary>
-        ///     单位是否在坚守
+        /// 单位是否在坚守
         /// </summary>
         public bool IsStick
         {
             get => _isStick;
             set => _isStick = value;
+        }
+
+        /// <summary>
+        /// 单位状态
+        /// </summary>
+        public UnitType UnitType
+        {
+            get => _unitType;
+            set => _unitType = value;
         }
 
         public void Reset(UnitData data)
@@ -168,9 +181,10 @@ namespace Fight.Model
             NowAmmo = data.NowAmmo;
             NowMorale = data.NowMorale;
             NowFatigue = data.NowFatigue;
-            NowMovementPoints = data.NowMovementPoints;
+            NowActionPoints = data.NowActionPoints;
             IsCharge = data._isCharge;
             IsStick = data.IsStick;
+            UnitType = data.UnitType;
         }
     }
 }

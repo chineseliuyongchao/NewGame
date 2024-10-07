@@ -61,4 +61,25 @@
         /// </summary>
         CHARGE
     }
+
+    /// <summary>
+    /// 单位状态
+    /// </summary>
+    public enum UnitType
+    {
+        /// <summary>
+        /// 正常，后续可能会拆成多种状态
+        /// </summary>
+        NORMAL,
+
+        /// <summary>
+        /// 崩溃
+        /// </summary>
+        COLLAPSE,
+
+        /// <summary>
+        /// 全军覆没
+        /// </summary>
+        DIE
+    }
 }

@@ -57,7 +57,7 @@ namespace Fight.Controller
 
         private float ActionProgressValue => _currentUnitData == null
             ? 1
-            : (float)_currentUnitData.NowMovementPoints / Constants.InitMovementPoints;
+            : (float)_currentUnitData.NowActionPoints / Constants.InitActionPoints;
 
         private void ProgressInit()
         {

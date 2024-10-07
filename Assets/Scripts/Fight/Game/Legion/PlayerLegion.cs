@@ -45,9 +45,9 @@ namespace Fight.Game.Legion
             }
         }
 
-        public override void UnitMove(int unitIndex, int endIndex)
+        public override void UnitMove(int unitId, int endIndex)
         {
-            base.UnitMove(unitIndex, endIndex);
+            base.UnitMove(unitId, endIndex);
             this.SendCommand(new PlayerUnitActionCommand(nowUnitController.unitData.unitId));
         }
 

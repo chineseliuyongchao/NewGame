@@ -158,13 +158,18 @@
         public const float HoverThreshold = 1f;
 
         /// <summary>
-        /// 初始移动点数
+        /// 初始行动点数
         /// </summary>
-        public const int InitMovementPoints = 50;
+        public const int InitActionPoints = 50;
 
         /// <summary>
-        /// 用于计算移动点数消耗的参数
+        /// 用于计算行动点数消耗的参数
         /// </summary>
-        public const int MovementParameter = 20;
+        public const int ActionParameter = 20;
+
+        /// <summary>
+        /// 攻击（泛指所有攻击）消耗的行动点数
+        /// </summary>
+        public const int AttackActionPoints = 20;
     }
 }

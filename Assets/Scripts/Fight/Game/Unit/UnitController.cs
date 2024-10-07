@@ -47,7 +47,7 @@ namespace Fight.Game.Unit
             {
                 var transform1 = transform;
                 transform1.rotation = Quaternion.Euler(0, 180, 0);
-                
+
                 unitProgressBar.transform.rotation = Quaternion.Euler(0, -360, 0);
             }
 
@@ -152,6 +152,14 @@ namespace Fight.Game.Unit
         public void Attacked()
         {
             unitProgressBar.UpdateProgress();
+        }
+
+        /// <summary>
+        /// 更新状态
+        /// </summary>
+        /// <param name="unitType"></param>
+        public void UpdateType(UnitType unitType)
+        {
         }
 
         /// <summary>

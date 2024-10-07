@@ -120,14 +120,32 @@ namespace Fight.Controller
         private void LegionEndAction(int legionId)
         {
             int index = _legionOrder.IndexOf(legionId);
-            //暂时行动完一轮后结束战斗
+            bool isEnd = false;
             if (index + 1 >= _legionOrder.Count)
             {
-                this.SendCommand(new FightCommand(FightType.SETTLEMENT));
+                ActionLegionIndex = 0;
+                if (this.GetSystem<IFightComputeSystem>().CheckFightFinish())
+                {
+                    this.SendCommand(new FightCommand(FightType.SETTLEMENT));
+                    isEnd = true;
+                }
+                else
+                {
+                    List<int> allUnitKey = new List<int>(this.GetModel<IFightVisualModel>().AllUnit.Keys);
+                    for (int i = 0; i < allUnitKey.Count; i++)
+                    {
+                        UnitData unitData = this.GetModel<IFightVisualModel>().AllUnit[allUnitKey[i]].unitData;
+                        unitData.NowActionPoints = Constants.InitActionPoints;
+                    }
+                }
             }
             else
             {
                 ActionLegionIndex = index + 1;
+            }
+
+            if (!isEnd)
+            {
                 Sequence sequence = DOTween.Sequence();
                 sequence.AppendInterval(1);
                 sequence.AppendCallback(() => { LegionStartAction(_legionOrder[ActionLegionIndex]); });

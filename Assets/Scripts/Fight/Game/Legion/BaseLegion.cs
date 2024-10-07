@@ -104,12 +104,12 @@ namespace Fight.Game.Legion
         /// <summary>
         /// 单位移动
         /// </summary>
-        /// <param name="unitIndex">单位id</param>
+        /// <param name="unitId">单位id</param>
         /// <param name="endIndex">结束的位置id</param>
-        public virtual void UnitMove(int unitIndex, int endIndex)
+        public virtual void UnitMove(int unitId, int endIndex)
         {
             Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
-            if (allUnit.TryGetValue(unitIndex, out var unitData))
+            if (allUnit.TryGetValue(unitId, out var unitData))
             {
                 if (!nowUnitController.Equals(this.GetModel<IFightVisualModel>().AllUnit[unitData.unitId]))
                 {
@@ -119,19 +119,20 @@ namespace Fight.Game.Legion
                 }
 
                 nowUnitController.Move(endIndex, UnitEndAction);
+                UpdateUnitType(unitId, nowUnitController);
             }
         }
 
         /// <summary>
         /// 单位攻击（此处的攻击是泛指所有的攻击行为）
         /// </summary>
-        /// <param name="unitIndex"></param>
-        /// <param name="targetUnitIndex"></param>
-        public virtual void UnitAttack(int unitIndex, int targetUnitIndex)
+        /// <param name="unitId"></param>
+        /// <param name="targetUnitId"></param>
+        public virtual void UnitAttack(int unitId, int targetUnitId)
         {
             Dictionary<int, UnitController> allUnitController = this.GetModel<IFightVisualModel>().AllUnit;
-            if (allUnitController.TryGetValue(unitIndex, out var unitController) &&
-                allUnitController.TryGetValue(targetUnitIndex, out var targetUnitController))
+            if (allUnitController.TryGetValue(unitId, out var unitController) &&
+                allUnitController.TryGetValue(targetUnitId, out var targetUnitController))
             {
                 if (!nowUnitController.Equals(
                         this.GetModel<IFightVisualModel>().AllUnit[unitController.unitData.unitId]))
@@ -141,13 +142,18 @@ namespace Fight.Game.Legion
                     return;
                 }
 
+                if (!this.GetSystem<IFightComputeSystem>().CheckCanAttack(unitId))
+                {
+                    return;
+                }
+
                 switch (this.GetModel<IFightVisualModel>().FightAttackType)
                 {
                     case FightAttackType.ADVANCE:
-                        this.GetSystem<IFightComputeSystem>().AssaultWithRetaliation(unitIndex, targetUnitIndex);
+                        this.GetSystem<IFightComputeSystem>().AssaultWithRetaliation(unitId, targetUnitId);
                         break;
                     case FightAttackType.SHOOT:
-                        this.GetSystem<IFightComputeSystem>().Shoot(unitIndex, targetUnitIndex);
+                        this.GetSystem<IFightComputeSystem>().Shoot(unitId, targetUnitId);
                         break;
                     case FightAttackType.SUSTAIN_ADVANCE:
                         break;
@@ -159,7 +165,19 @@ namespace Fight.Game.Legion
 
                 unitController.Attack();
                 targetUnitController.Attacked();
+                UpdateUnitType(unitId, unitController);
+                UpdateUnitType(targetUnitId, targetUnitController);
             }
+        }
+
+        /// <summary>
+        /// 刷新单位状态
+        /// </summary>
+        /// <param name="unitId"></param>
+        /// <param name="unitController"></param>
+        protected virtual void UpdateUnitType(int unitId, UnitController unitController)
+        {
+            unitController.UpdateType(this.GetSystem<IFightComputeSystem>().UpdateUnitType(unitId));
         }
 
         /// <summary>

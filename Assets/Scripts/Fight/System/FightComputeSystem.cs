@@ -69,10 +69,22 @@ namespace Fight.System
         public bool MoveOnce(int unitId)
         {
             UnitData unit = this.GetSystem<IFightSystem>().FindUnit(unitId);
-            int decreaseMovePoint = Constants.MovementParameter - unit.armDataType.mobility;
-            if (unit.NowMovementPoints >= decreaseMovePoint)
+            int decreaseMovePoint = Constants.ActionParameter - unit.armDataType.mobility;
+            if (unit.NowActionPoints >= decreaseMovePoint)
             {
-                unit.NowMovementPoints -= decreaseMovePoint;
+                unit.NowActionPoints -= decreaseMovePoint;
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CheckCanAttack(int unitId)
+        {
+            UnitData unit = this.GetSystem<IFightSystem>().FindUnit(unitId);
+            if (unit.NowActionPoints >= Constants.AttackActionPoints)
+            {
+                unit.NowActionPoints -= Constants.AttackActionPoints;
                 return true;
             }
 
@@ -84,8 +96,14 @@ namespace Fight.System
             //先判断是否够一次移动
             bool result = false;
             UnitData unitData = this.GetModel<IFightVisualModel>().AllUnit[unitId].unitData;
-            int onceMovePoint = Constants.MovementParameter - unitData.armDataType.mobility;
-            if (onceMovePoint <= unitData.NowMovementPoints)
+            int onceMovePoint = Constants.ActionParameter - unitData.armDataType.mobility;
+            if (onceMovePoint <= unitData.NowActionPoints)
+            {
+                result = true;
+            }
+
+            //判断是否够执行一次攻击
+            if (Constants.AttackActionPoints <= unitData.NowActionPoints)
             {
                 result = true;
             }
@@ -99,6 +117,82 @@ namespace Fight.System
             //目前没有顺序逻辑，先根据id顺序处理
             var order = legionKeys;
             return order;
+        }
+
+        public UnitType UpdateUnitType(int unitId)
+        {
+            UnitData unit = this.GetSystem<IFightSystem>().FindUnit(unitId);
+            switch (unit.UnitType)
+            {
+                case UnitType.NORMAL:
+                    if (unit.NowHp <= 0 || unit.NowTroops <= 0)
+                    {
+                        unit.UnitType = UnitType.DIE;
+                    }
+
+                    break;
+            }
+
+            return unit.UnitType;
+        }
+
+        public bool CheckFightFinish()
+        {
+            bool canFinish = false;
+            bool belligerentFail = true;
+            List<int> allLegionKey = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);
+            //玩家阵营的单位是不是都崩溃或者全军覆没了
+            for (int i = 0; i < allLegionKey.Count; i++)
+            {
+                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
+                if (legionInfo.belligerentsId != Constants.BELLIGERENT1)
+                {
+                    continue;
+                }
+
+                List<int> allUnitKey = new List<int>(legionInfo.allUnit.Keys);
+                for (int j = 0; j < allUnitKey.Count; j++)
+                {
+                    UnitData unitData = legionInfo.allUnit[allUnitKey[i]];
+                    if (unitData.UnitType == UnitType.NORMAL)
+                    {
+                        belligerentFail = false;
+                    }
+                }
+            }
+
+            if (belligerentFail)
+            {
+                canFinish = true;
+            }
+
+            belligerentFail = true;
+            //玩家敌对阵营的单位是不是都崩溃或者全军覆没了
+            for (int i = 0; i < allLegionKey.Count; i++)
+            {
+                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
+                if (legionInfo.belligerentsId != Constants.BELLIGERENT2)
+                {
+                    continue;
+                }
+
+                List<int> allUnitKey = new List<int>(legionInfo.allUnit.Keys);
+                for (int j = 0; j < allUnitKey.Count; j++)
+                {
+                    UnitData unitData = legionInfo.allUnit[allUnitKey[i]];
+                    if (unitData.UnitType == UnitType.NORMAL)
+                    {
+                        belligerentFail = false;
+                    }
+                }
+            }
+
+            if (belligerentFail)
+            {
+                canFinish = true;
+            }
+
+            return canFinish;
         }
 
         /// <summary>
