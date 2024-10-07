@@ -63,8 +63,15 @@ namespace Fight.Game.Legion
             nowUnitIndex++;
             int unitId = allUnit.ElementAt(nowUnitIndex).Value.unitId;
             nowUnitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
-            this.SendCommand(new SelectUnitFocusCommand(nowUnitController));
-            UnitStartRound();
+            if (nowUnitController.unitData.UnitType == UnitType.NORMAL)
+            {
+                this.SendCommand(new SelectUnitFocusCommand(nowUnitController));
+                UnitStartRound();
+            }
+            else
+            {
+                UnitEndRound();
+            }
         }
 
         /// <summary>

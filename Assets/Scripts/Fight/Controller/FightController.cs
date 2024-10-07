@@ -4,6 +4,7 @@ using Fight.Command;
 using Fight.Event;
 using Fight.FsmS;
 using Fight.Game.Legion;
+using Fight.Game.Unit;
 using Fight.Model;
 using Fight.System;
 using Fight.Utils;
@@ -134,8 +135,9 @@ namespace Fight.Controller
                     List<int> allUnitKey = new List<int>(this.GetModel<IFightVisualModel>().AllUnit.Keys);
                     for (int i = 0; i < allUnitKey.Count; i++)
                     {
-                        UnitData unitData = this.GetModel<IFightVisualModel>().AllUnit[allUnitKey[i]].unitData;
-                        unitData.NowActionPoints = Constants.InitActionPoints;
+                        UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[allUnitKey[i]];
+                        unitController.unitData.NowActionPoints = Constants.InitActionPoints;
+                        unitController.unitProgressBar.UpdateProgress();
                     }
                 }
             }
