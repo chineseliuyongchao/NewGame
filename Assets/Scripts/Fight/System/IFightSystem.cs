@@ -53,5 +53,12 @@ namespace Fight.System
         /// <param name="unitId"></param>
         /// <returns></returns>
         int GetBelligerentsIdOfUnit(int unitId);
+
+        /// <summary>
+        /// 获取一个单位的周围6格的其他单位数据，返回一个列表，表示从该单位的正上方逆时针旋转的其他单位信息
+        /// </summary>
+        /// <param name="unitController">要计算的单位</param>
+        /// <returns></returns>
+        List<UnitController> GetUnitsNearUnit(UnitController unitController);
     }
 }

@@ -83,5 +83,43 @@ namespace Fight.System
             int legionId = unitController.unitData.legionId;
             return this.GetModel<IFightCreateModel>().AllLegions[legionId].belligerentsId;
         }
+        
+        public List<UnitController> GetUnitsNearUnit(UnitController unitController)
+        {
+            int index = unitController.unitData.currentPosIndex;
+            List<UnitController> result = new List<UnitController>(6);
+            int width = AStarModel.WorldNodeWidth;
+            FightVisualModel fightVisualModel = this.GetModel<FightVisualModel>();
+            //从最上方开始逆时针旋转
+            int index1 = index + width;
+            ObtainUnitController(fightVisualModel, index1, result);
+            if (index % width != 0)
+            {
+                ObtainUnitController(fightVisualModel, index1 - 1, result);
+                ObtainUnitController(fightVisualModel, index - 1, result);
+            }
+
+            if (index >= width)
+            {
+                ObtainUnitController(fightVisualModel, index - width, result);
+            }
+
+            if ((index + 1 ) % width != 0)
+            {
+                ObtainUnitController(fightVisualModel, index + 1, result);
+                ObtainUnitController(fightVisualModel, index1 + 1, result);
+            }
+            
+            return result;
+        }
+        
+        private void ObtainUnitController(FightVisualModel fightVisualModel, int index, List<UnitController> list)
+        {
+            if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(index, out int value) && 
+                fightVisualModel.AllUnit.TryGetValue(value, out UnitController controller))
+            {
+                list.Add(controller);
+            }
+        }
     }
 }

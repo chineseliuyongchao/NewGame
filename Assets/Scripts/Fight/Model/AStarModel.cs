@@ -20,6 +20,10 @@ namespace Fight.Model
 
         public SortedList<int, GridNodeBase> FightGridNodeInfoList => _fightGridNodeInfoList;
 
+        public static int WorldNodeWidth => AstarPath.active.data.gridGraph.depth;
+
+        public static int WorldNodeHeight => AstarPath.active.data.gridGraph.width;
+
         protected override void OnInit()
         {
         }
