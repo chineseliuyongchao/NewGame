@@ -179,7 +179,7 @@ namespace Fight.System
                 List<int> allUnitKey = new List<int>(legionInfo.allUnit.Keys);
                 for (int j = 0; j < allUnitKey.Count; j++)
                 {
-                    UnitData unitData = legionInfo.allUnit[allUnitKey[i]];
+                    UnitData unitData = legionInfo.allUnit[allUnitKey[j]];
                     if (unitData.UnitType == UnitType.NORMAL)
                     {
                         belligerentFail = false;

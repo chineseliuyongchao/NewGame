@@ -12,7 +12,7 @@ namespace Fight.Model
     public class AStarModel : AbstractModel, IAStarModel
     {
         /// <summary>
-        ///     A*中节点的index对应世界的节点的index
+        /// A*中节点的index对应世界的节点的index
         /// </summary>
         private readonly SortedList<uint, int> _aStarNodeToWorldNode = new();
 
