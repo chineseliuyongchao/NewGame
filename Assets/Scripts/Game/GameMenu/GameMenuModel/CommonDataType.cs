@@ -56,6 +56,11 @@ namespace Game.GameMenu
         [Label("近战杀伤（破甲）")] public int meleeArmor;
 
         /// <summary>
+        /// 攻击范围
+        /// </summary>
+        [Label("攻击范围")] public int attackRange;
+
+        /// <summary>
         /// 护甲强度
         /// </summary>
         [Label("护甲强度")] public int armor;
@@ -122,7 +127,7 @@ namespace Game.GameMenu
     }
 
     /// <summary>
-    /// 兵种数据类型
+    /// 派系数据类型
     /// </summary>
     [Serializable]
     public class FactionDataType : BaseJsonData
@@ -130,6 +135,7 @@ namespace Game.GameMenu
         /// <summary>
         /// 派系名称
         /// </summary>
+        // ReSharper disable once InconsistentNaming
         public string FactionName;
     }
 }

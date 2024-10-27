@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Fight.Game.Unit;
 using Fight.Model;
 using QFramework;
@@ -60,5 +61,10 @@ namespace Fight.System
         /// <param name="unitController">要计算的单位</param>
         /// <returns></returns>
         List<UnitController> GetUnitsNearUnit(UnitController unitController);
+
+        /// <summary>
+        /// 判断攻击范围是否足够，因为a*底层判断的方法是异步的，所以要用回调
+        /// </summary>
+        void IsInAttackRange(int unitId, int targetUnitId, Action<bool> res);
     }
 }

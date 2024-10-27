@@ -1,5 +1,4 @@
-﻿using System;
-using Fight.Model;
+﻿using Fight.Model;
 using UnityAttribute;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +24,7 @@ namespace Fight.Tools.Tips
         [Label("攻击能力")] public Text attack;
         [Label("冲锋加成")] public Text charge;
         [Label("近战杀伤")] public Text melee;
+        [Label("攻击范围")] public Text attackRange;
         [Label("防御能力")] public Text defense;
         [Label("护甲强度")] public Text armor;
         [Label("移动能力")] public Text mobility;
@@ -66,6 +66,7 @@ namespace Fight.Tools.Tips
             attack.text = "攻击能力：" + data.armDataType.attack;
             charge.text = "冲锋加成：" + data.armDataType.charge;
             melee.text = "近战杀伤：" + (data.armDataType.meleeNormal + data.armDataType.meleeArmor);
+            attackRange.text = "攻击范围：" + data.armDataType.attackRange;
             defense.text = "防御能力：" + (data.armDataType.defenseMelee + data.armDataType.defenseRange);
             armor.text = "护甲强度：" + data.armDataType.armor;
             mobility.text = "移动能力：" + data.armDataType.mobility;
@@ -110,7 +111,7 @@ namespace Fight.Tools.Tips
             maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(hp));
             maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(troops, cost));
             maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(morale, fatigue));
-            maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(attack, charge, melee));
+            maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(attack, charge, melee, attackRange));
             maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(defense, armor));
             maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(mobility));
             maxWidth = Mathf.Max(maxWidth, TextHorizontalLayout(sight, stealth));

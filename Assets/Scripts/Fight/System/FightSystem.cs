@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Fight.Game.Unit;
 using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
 using QFramework;
+using UnityEngine;
 
 namespace Fight.System
 {
@@ -83,7 +85,7 @@ namespace Fight.System
             int legionId = unitController.unitData.legionId;
             return this.GetModel<IFightCreateModel>().AllLegions[legionId].belligerentsId;
         }
-        
+
         public List<UnitController> GetUnitsNearUnit(UnitController unitController)
         {
             int index = unitController.unitData.currentPosIndex;
@@ -104,18 +106,38 @@ namespace Fight.System
                 ObtainUnitController(fightVisualModel, index - width, result);
             }
 
-            if ((index + 1 ) % width != 0)
+            if ((index + 1) % width != 0)
             {
                 ObtainUnitController(fightVisualModel, index + 1, result);
                 ObtainUnitController(fightVisualModel, index1 + 1, result);
             }
-            
+
             return result;
         }
-        
+
+        public void IsInAttackRange(int unitId, int targetUnitId, Action<bool> res)
+        {
+            Dictionary<int, UnitController> allUnitController = this.GetModel<IFightVisualModel>().AllUnit;
+            if (allUnitController.TryGetValue(unitId, out var unitController) &&
+                allUnitController.TryGetValue(targetUnitId, out var targetUnitController))
+            {
+                this.GetModel<IAStarModel>().FindNodePath(unitController.unitData.currentPosIndex,
+                    targetUnitController.unitData.currentPosIndex, path =>
+                    {
+                        if (path.error)
+                        {
+                            Debug.LogError("Pathfinding error: " + path.errorLog);
+                            return;
+                        }
+
+                        res(path.vectorPath.Count - 1 <= unitController.unitData.armDataType.attackRange);
+                    });
+            }
+        }
+
         private void ObtainUnitController(FightVisualModel fightVisualModel, int index, List<UnitController> list)
         {
-            if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(index, out int value) && 
+            if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(index, out int value) &&
                 fightVisualModel.AllUnit.TryGetValue(value, out UnitController controller))
             {
                 list.Add(controller);

@@ -2,8 +2,10 @@
 using Fight.Command;
 using Fight.Event;
 using Fight.Model;
+using Fight.System;
 using Game.GameMenu;
 using QFramework;
+using UnityEngine;
 
 namespace Fight.Game.Legion
 {
@@ -49,6 +51,21 @@ namespace Fight.Game.Legion
         {
             base.UnitMove(unitId, endIndex);
             this.SendCommand(new PlayerUnitActionCommand(nowUnitController.unitData.unitId));
+        }
+
+        public override void UnitAttack(int unitId, int targetUnitId)
+        {
+            this.GetSystem<IFightSystem>().IsInAttackRange(unitId, targetUnitId, res =>
+            {
+                if (res)
+                {
+                    base.UnitAttack(unitId, targetUnitId);
+                }
+                else
+                {
+                    Debug.LogWarning("攻击距离不够");
+                }
+            });
         }
 
         protected override void EndRound()
