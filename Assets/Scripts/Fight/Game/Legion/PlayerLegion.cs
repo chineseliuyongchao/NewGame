@@ -38,7 +38,7 @@ namespace Fight.Game.Legion
             this.SendCommand(new PlayerUnitWaitActionCommand(nowUnitController.unitData.unitId));
         }
 
-        protected override void UnitEndAction()
+        public override void UnitEndAction()
         {
             this.SendCommand(new PlayerUnitWaitActionCommand(nowUnitController.unitData.unitId));
             if (this.GetModel<IGameSettingModel>().AutomaticSwitchingUnit)
@@ -47,9 +47,9 @@ namespace Fight.Game.Legion
             }
         }
 
-        public override void UnitMove(int unitId, int endIndex)
+        public override void UnitMove(int unitId, int endIndex, Func<int, bool> moveOnceEnd)
         {
-            base.UnitMove(unitId, endIndex);
+            base.UnitMove(unitId, endIndex, moveOnceEnd);
             this.SendCommand(new PlayerUnitActionCommand(nowUnitController.unitData.unitId));
         }
 

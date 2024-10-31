@@ -63,6 +63,13 @@ namespace Fight.System
         List<UnitController> GetUnitsNearUnit(UnitController unitController);
 
         /// <summary>
+        /// 获取一个位置周围的位置，给一个位置的index，会返回这个位置周围位置的index列表
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        List<int> GetPosNearPos(int index);
+
+        /// <summary>
         /// 判断攻击范围是否足够，因为a*底层判断的方法是异步的，所以要用回调
         /// </summary>
         void IsInAttackRange(int unitId, int targetUnitId, Action<bool> res);

@@ -115,6 +115,32 @@ namespace Fight.System
             return result;
         }
 
+        public List<int> GetPosNearPos(int index)
+        {
+            List<int> res = new List<int>();
+            int width = AStarModel.WorldNodeWidth;
+            int index1 = index + width;
+            res.Add(index1);
+            if (index % width != 0)
+            {
+                res.Add(index1 - 1);
+                res.Add(index - 1);
+            }
+
+            if (index >= width)
+            {
+                res.Add(index - width);
+            }
+
+            if ((index + 1) % width != 0)
+            {
+                res.Add(index + 1);
+                res.Add(index1 + 1);
+            }
+
+            return res;
+        }
+
         public void IsInAttackRange(int unitId, int targetUnitId, Action<bool> res)
         {
             Dictionary<int, UnitController> allUnitController = this.GetModel<IFightVisualModel>().AllUnit;

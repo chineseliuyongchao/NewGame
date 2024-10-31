@@ -192,7 +192,7 @@ namespace Fight.System
                 }
 
                 this.GetModel<IFightCoreModel>().AllLegion[Constants.PlayLegionId]
-                    .UnitMove(fightVisualModel.FocusController.unitData.unitId, index);
+                    .UnitMove(fightVisualModel.FocusController.unitData.unitId, index, null);
             }
         }
     }

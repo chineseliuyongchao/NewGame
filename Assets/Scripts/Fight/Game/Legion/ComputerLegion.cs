@@ -1,4 +1,7 @@
-﻿using DG.Tweening;
+﻿using System;
+using Fight.Game.AI;
+using Fight.System;
+using QFramework;
 
 namespace Fight.Game.Legion
 {
@@ -7,11 +10,35 @@ namespace Fight.Game.Legion
     /// </summary>
     public class ComputerLegion : BaseLegion
     {
+        private BaseLegionAi _baseLegionAi;
+
+        public override void Init(int id)
+        {
+            base.Init(id);
+            _baseLegionAi = new LegionEasyAi(this);
+        }
+
+        public override void StartRound(Action<int> action)
+        {
+            _baseLegionAi.StartRound();
+            base.StartRound(action);
+        }
+
         protected override void UnitStartRound()
         {
-            Sequence sequence = DOTween.Sequence();
-            sequence.AppendInterval(2);
-            sequence.AppendCallback(UnitEndRound);
+            _baseLegionAi.CheckNextBehavior(nowUnitId);
+        }
+
+        public override void UnitEndAction()
+        {
+            if (!this.GetSystem<IFightComputeSystem>().EnoughMovePoint(nowUnitController.unitData.unitId))
+            {
+                UnitEndRound();
+            }
+            else
+            {
+                _baseLegionAi.CheckNextBehavior(nowUnitId);
+            }
         }
     }
 }

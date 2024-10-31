@@ -93,9 +93,10 @@ namespace Fight.Game.Unit
         /// <summary>
         /// 移动
         /// </summary>
-        /// <param name="endIndex"></param>
+        /// <param name="endIndex">终点的位置id</param>
         /// <param name="actionEnd"></param>
-        public void Move(int endIndex, Action actionEnd)
+        /// <param name="moveOnceEnd">每移动完一步以后调用，传入移动后的位置，返回是否可以继续移动（true->可以继续移动）</param>
+        public void Move(int endIndex, Action actionEnd, Func<int, bool> moveOnceEnd)
         {
             _actionEnd = actionEnd;
             this.GetModel<IAStarModel>().FindNodePath(unitData.currentPosIndex, endIndex, path =>
@@ -131,6 +132,14 @@ namespace Fight.Game.Unit
                         int index = this.GetModel<IAStarModel>().GetGridNodeIndexMyRule(path.vectorPath[i1]);
                         this.GetSystem<IFightSystem>().UnitChangePos(this, index);
                         ChangeOrderLayer();
+                        if (moveOnceEnd != null)
+                        {
+                            if (!moveOnceEnd(index))
+                            {
+                                sequence.Kill();
+                                MoveEnd();
+                            }
+                        }
                     });
                 }
 

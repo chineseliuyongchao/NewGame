@@ -31,6 +31,11 @@ namespace Fight.Game.Legion
         protected int nowUnitIndex;
 
         /// <summary>
+        /// 当前正在执行回合的单位id
+        /// </summary>
+        protected int nowUnitId;
+
+        /// <summary>
         /// 当前正在行动的单位
         /// </summary>
         protected UnitController nowUnitController;
@@ -41,6 +46,7 @@ namespace Fight.Game.Legion
             OnListenEvent();
             inRound = false;
             nowUnitIndex = -1;
+            nowUnitId = -1;
         }
 
         /// <summary>
@@ -51,6 +57,7 @@ namespace Fight.Game.Legion
             inRound = true;
             roundEnd = action;
             nowUnitIndex = -1;
+            nowUnitId = -1;
             AutomaticSwitchingUnit();
         }
 
@@ -61,8 +68,8 @@ namespace Fight.Game.Legion
         {
             Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
             nowUnitIndex++;
-            int unitId = allUnit.ElementAt(nowUnitIndex).Value.unitId;
-            nowUnitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
+            nowUnitId = allUnit.ElementAt(nowUnitIndex).Value.unitId;
+            nowUnitController = this.GetModel<IFightVisualModel>().AllUnit[nowUnitId];
             if (nowUnitController.unitData.UnitType == UnitType.NORMAL)
             {
                 this.SendCommand(new SelectUnitFocusCommand(nowUnitController));
@@ -84,7 +91,7 @@ namespace Fight.Game.Legion
         /// <summary>
         /// 单位回合结束
         /// </summary>
-        protected virtual void UnitEndRound()
+        public virtual void UnitEndRound()
         {
             Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
             if (nowUnitIndex >= allUnit.Count - 1)
@@ -100,7 +107,7 @@ namespace Fight.Game.Legion
         /// <summary>
         /// 单位回合中的单次行动结束
         /// </summary>
-        protected virtual void UnitEndAction()
+        public virtual void UnitEndAction()
         {
             if (!this.GetSystem<IFightComputeSystem>().EnoughMovePoint(nowUnitController.unitData.unitId))
             {
@@ -113,7 +120,8 @@ namespace Fight.Game.Legion
         /// </summary>
         /// <param name="unitId">单位id</param>
         /// <param name="endIndex">结束的位置id</param>
-        public virtual void UnitMove(int unitId, int endIndex)
+        /// <param name="moveOnceEnd"></param>
+        public virtual void UnitMove(int unitId, int endIndex, Func<int, bool> moveOnceEnd)
         {
             Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
             if (allUnit.TryGetValue(unitId, out var unitData))
@@ -125,7 +133,7 @@ namespace Fight.Game.Legion
                     return;
                 }
 
-                nowUnitController.Move(endIndex, UnitEndAction);
+                nowUnitController.Move(endIndex, UnitEndAction, moveOnceEnd);
                 UpdateUnitType(unitId, nowUnitController);
             }
         }
@@ -174,6 +182,7 @@ namespace Fight.Game.Legion
                 targetUnitController.Attacked();
                 UpdateUnitType(unitId, unitController);
                 UpdateUnitType(targetUnitId, targetUnitController);
+                UnitEndAction();
             }
         }
 

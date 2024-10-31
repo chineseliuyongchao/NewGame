@@ -32,7 +32,7 @@
     public enum FightAttackType
     {
         /// <summary>
-        /// 没有攻击行为
+        /// 没有行为
         /// </summary>
         NONE,
 
@@ -81,5 +81,13 @@
         /// 全军覆没
         /// </summary>
         DIE
+    }
+
+    public enum AiBehaviorType
+    {
+        /// <summary>
+        /// 移动直至目标进入攻击范围
+        /// </summary>
+        MOVE_IN_ATTACK_RANGE,
     }
 }
