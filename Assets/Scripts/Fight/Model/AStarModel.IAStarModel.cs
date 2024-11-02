@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Pathfinding;
 using QFramework;
 using UnityEngine;
@@ -40,12 +41,18 @@ namespace Fight.Model
         /// <summary>
         /// 给定当前所在index和给定任意一个坐标，查找当前位置到达该坐标的所有关键节点，找到后调用相应回调
         /// </summary>
-        /// <param name="startIndex">当前index</param>
-        /// <param name="position">任意坐标</param>
+        /// <param name="startIndex">当前位置的index</param>
+        /// <param name="position">目标位置坐标</param>
         /// <param name="callBack">找到路径后的回调</param>
         /// <returns></returns>
-        void FindNodePath(int startIndex, Vector3 position, OnPathDelegate callBack);
+        Task FindNodePath(int startIndex, Vector3 position, OnPathDelegate callBack);
 
-        void FindNodePath(int startIndex, int endIndex, OnPathDelegate callBack);
+        /// <summary>
+        /// 给定当前所在index和给定任意一个坐标，查找当前位置到达该坐标的所有关键节点，找到后调用相应回调
+        /// </summary>
+        /// <param name="startIndex">当前位置的index</param>
+        /// <param name="endIndex">目标位置的index</param>
+        /// <param name="callBack">找到路径后的回调</param>
+        Task FindNodePath(int startIndex, int endIndex, OnPathDelegate callBack);
     }
 }

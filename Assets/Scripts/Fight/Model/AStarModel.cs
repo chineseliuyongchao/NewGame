@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fight.Utils;
 using Pathfinding;
 using QFramework;
@@ -83,21 +84,35 @@ namespace Fight.Model
             // return _aStarNodeToWorldNode[info.node.NodeIndex];
         }
 
-        public void FindNodePath(int startIndex, Vector3 position, OnPathDelegate callBack)
+        public async Task FindNodePath(int startIndex, Vector3 position, OnPathDelegate callBack)
         {
+            var tcs = new TaskCompletionSource<bool>();
             if (FightGridNodeInfoList.TryGetValue(startIndex, out var nodeBase))
             {
-                AstarPath.StartPath(ABPath.Construct((Vector3)nodeBase.position, position, callBack));
+                AstarPath.StartPath(ABPath.Construct((Vector3)nodeBase.position, position, path =>
+                {
+                    callBack(path);
+                    tcs.SetResult(true);
+                }));
             }
+
+            await tcs.Task;
         }
 
-        public void FindNodePath(int startIndex, int endIndex, OnPathDelegate callBack)
+        public async Task FindNodePath(int startIndex, int endIndex, OnPathDelegate callBack)
         {
+            var tcs = new TaskCompletionSource<bool>();
             if (FightGridNodeInfoList.TryGetValue(startIndex, out var startNode) &&
                 FightGridNodeInfoList.TryGetValue(endIndex, out var endNode))
             {
-                AstarPath.StartPath(ABPath.Construct((Vector3)startNode.position, (Vector3)endNode.position, callBack));
+                AstarPath.StartPath(ABPath.Construct((Vector3)startNode.position, (Vector3)endNode.position, path =>
+                {
+                    callBack(path);
+                    tcs.SetResult(true);
+                }));
             }
+
+            await tcs.Task;
         }
     }
 }

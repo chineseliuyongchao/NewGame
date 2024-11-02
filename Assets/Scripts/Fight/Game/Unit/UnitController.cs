@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Fight.Controller;
 using Fight.Model;
@@ -96,7 +97,7 @@ namespace Fight.Game.Unit
         /// <param name="endIndex">终点的位置id</param>
         /// <param name="actionEnd"></param>
         /// <param name="moveOnceEnd">每移动完一步以后调用，传入移动后的位置，返回是否可以继续移动（true->可以继续移动）</param>
-        public void Move(int endIndex, Action actionEnd, Func<int, bool> moveOnceEnd)
+        public Task Move(int endIndex, Action actionEnd, Func<int, Task<bool>> moveOnceEnd)
         {
             _actionEnd = actionEnd;
             this.GetModel<IAStarModel>().FindNodePath(unitData.currentPosIndex, endIndex, path =>
@@ -127,24 +128,28 @@ namespace Fight.Game.Unit
                     });
                     sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
                     var i1 = i;
-                    sequence.AppendCallback(() =>
+
+                    async void callback()
                     {
                         int index = this.GetModel<IAStarModel>().GetGridNodeIndexMyRule(path.vectorPath[i1]);
                         this.GetSystem<IFightSystem>().UnitChangePos(this, index);
                         ChangeOrderLayer();
                         if (moveOnceEnd != null)
                         {
-                            if (!moveOnceEnd(index))
+                            if (!await moveOnceEnd(index))
                             {
                                 sequence.Kill();
                                 MoveEnd();
                             }
                         }
-                    });
+                    }
+
+                    sequence.AppendCallback(callback);
                 }
 
                 sequence.AppendCallback(MoveEnd);
             });
+            return Task.CompletedTask;
         }
 
         /// <summary>

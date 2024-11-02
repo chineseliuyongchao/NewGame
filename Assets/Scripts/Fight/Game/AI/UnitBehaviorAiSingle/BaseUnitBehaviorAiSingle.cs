@@ -26,6 +26,11 @@ namespace Fight.Game.AI
         public bool mustFinish;
 
         /// <summary>
+        /// 记录行为是否结束
+        /// </summary>
+        protected bool isEnd = false;
+
+        /// <summary>
         /// 开始行为
         /// </summary>
         /// <param name="behaviorEnd"></param>

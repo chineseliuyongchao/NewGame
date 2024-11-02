@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Fight.Game.Unit;
 using Fight.Model;
+using Fight.System;
+using Pathfinding;
 using QFramework;
+using UnityEngine;
 
 namespace Fight.Game.AI
 {
@@ -14,23 +18,62 @@ namespace Fight.Game.AI
         private int _endIndex;
         private Action<bool> _behaviorEnd;
 
-        public override void StartBehavior(Action<bool> behaviorEnd)
+        public override async void StartBehavior(Action<bool> behaviorEnd)
         {
             _behaviorEnd = behaviorEnd;
             UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
             UnitController targetUnitController = this.GetModel<IFightVisualModel>().AllUnit[targetUnitId];
+            int nowIndex = unitController.unitData.currentPosIndex;
             _endIndex = targetUnitController.unitData.currentPosIndex;
-            unitController.Move(_endIndex, BehaviorEnd, MoveOnceEnd);
+            Path nowPath = null;
+            await this.GetModel<IAStarModel>().FindNodePath(nowIndex, _endIndex, path => { nowPath = path; });
+            if (nowPath.error)
+            {
+                Debug.LogError("Pathfinding error: " + nowPath.errorLog);
+                isEnd = true;
+            }
+
+            UnitData unitData = this.GetSystem<IFightSystem>().FindUnit(unitId);
+            if (nowPath.vectorPath.Count - 2 < unitData.armDataType.attackRange)
+            {
+                isEnd = true;
+                BehaviorEnd(); //如果开始行为时已经完成就直接结束
+            }
+            else
+            {
+                await unitController.Move(_endIndex, BehaviorEnd, MoveOnceEnd);
+            }
         }
 
-        private bool MoveOnceEnd(int index)
+        /// <summary>
+        /// 每一步移动结束时调用，判断是否需要继续移动
+        /// </summary>
+        /// <param name="index">移动到的位置</param>
+        /// <returns></returns>
+        private async Task<bool> MoveOnceEnd(int index)
         {
+            Path nowPath = null;
+            await this.GetModel<IAStarModel>().FindNodePath(index, _endIndex, path => { nowPath = path; });
+            if (nowPath.error)
+            {
+                Debug.LogError("Pathfinding error: " + nowPath.errorLog);
+                isEnd = true;
+                return false;
+            }
+
+            UnitData unitData = this.GetSystem<IFightSystem>().FindUnit(unitId);
+            if (nowPath.vectorPath.Count - 2 < unitData.armDataType.attackRange)
+            {
+                isEnd = true;
+                return false;
+            }
+
             return true;
         }
 
         public override void BehaviorEnd()
         {
-            _behaviorEnd(true);
+            _behaviorEnd(isEnd);
         }
     }
 }

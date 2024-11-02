@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Fight.Command;
 using Fight.Event;
 using Fight.Model;
@@ -47,7 +48,7 @@ namespace Fight.Game.Legion
             }
         }
 
-        public override void UnitMove(int unitId, int endIndex, Func<int, bool> moveOnceEnd)
+        public override void UnitMove(int unitId, int endIndex, Func<int, Task<bool>> moveOnceEnd)
         {
             base.UnitMove(unitId, endIndex, moveOnceEnd);
             this.SendCommand(new PlayerUnitActionCommand(nowUnitController.unitData.unitId));

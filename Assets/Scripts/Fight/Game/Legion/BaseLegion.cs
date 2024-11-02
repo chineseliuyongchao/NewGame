@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fight.Command;
 using Fight.Game.Unit;
 using Fight.Model;
@@ -121,7 +122,7 @@ namespace Fight.Game.Legion
         /// <param name="unitId">单位id</param>
         /// <param name="endIndex">结束的位置id</param>
         /// <param name="moveOnceEnd"></param>
-        public virtual void UnitMove(int unitId, int endIndex, Func<int, bool> moveOnceEnd)
+        public virtual async void UnitMove(int unitId, int endIndex, Func<int, Task<bool>> moveOnceEnd)
         {
             Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
             if (allUnit.TryGetValue(unitId, out var unitData))
@@ -133,7 +134,7 @@ namespace Fight.Game.Legion
                     return;
                 }
 
-                nowUnitController.Move(endIndex, UnitEndAction, moveOnceEnd);
+                await nowUnitController.Move(endIndex, UnitEndAction, moveOnceEnd);
                 UpdateUnitType(unitId, nowUnitController);
             }
         }
