@@ -240,6 +240,11 @@ namespace UI
         /// <param name="legionId"></param>
         public void ChangeShowLegion(int legionId)
         {
+            if (_nowLegionId == legionId)
+            {
+                return;
+            }
+
             LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[legionId];
             if (legionInfo == null)
             {
@@ -279,11 +284,7 @@ namespace UI
                 before.ChangeShow(false);
             }
 
-            if (_nowLegionId != legionId)
-            {
-                ClearUnit(false, true);
-            }
-
+            ClearUnit(false, true);
             _nowLegionId = legionId;
             ShowUnit();
             UIFightCreateLegion now = belligerents[_nowLegionId];
