@@ -48,7 +48,7 @@ namespace Fight.System
         /// 判断是否还有足够的行动点数
         /// </summary>
         /// <returns></returns>
-        bool EnoughMovePoint(int unitId);
+        bool EnoughMovePoint(int unitId, ActionType actionType);
 
         /// <summary>
         /// 获取各个军队在同一回合的行动顺序

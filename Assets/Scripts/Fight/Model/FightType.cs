@@ -83,11 +83,40 @@
         DIE
     }
 
+    /// <summary>
+    /// 单位行动的类型
+    /// </summary>
+    public enum ActionType
+    {
+        /// <summary>
+        /// 没有类型
+        /// </summary>
+        NONE,
+
+        /// <summary>
+        /// 移动
+        /// </summary>
+        MOVE,
+
+        /// <summary>
+        /// 攻击
+        /// </summary>
+        ATTACK,
+    }
+
+    /// <summary>
+    /// ai行为类型
+    /// </summary>
     public enum AiBehaviorType
     {
         /// <summary>
         /// 移动直至目标进入攻击范围
         /// </summary>
         MOVE_IN_ATTACK_RANGE,
+
+        /// <summary>
+        /// 攻击
+        /// </summary>
+        ATTACK,
     }
 }

@@ -39,7 +39,7 @@ namespace Fight.Game.Legion
         /// <summary>
         /// 当前正在行动的单位
         /// </summary>
-        protected UnitController nowUnitController;
+        public UnitController nowUnitController;
 
         public virtual void Init(int id)
         {
@@ -110,7 +110,8 @@ namespace Fight.Game.Legion
         /// </summary>
         public virtual void UnitEndAction()
         {
-            if (!this.GetSystem<IFightComputeSystem>().EnoughMovePoint(nowUnitController.unitData.unitId))
+            if (!this.GetSystem<IFightComputeSystem>()
+                    .EnoughMovePoint(nowUnitController.unitData.unitId, ActionType.NONE))
             {
                 UnitEndRound();
             }

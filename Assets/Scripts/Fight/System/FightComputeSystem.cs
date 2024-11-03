@@ -91,24 +91,22 @@ namespace Fight.System
             return false;
         }
 
-        public bool EnoughMovePoint(int unitId)
+        public bool EnoughMovePoint(int unitId, ActionType actionType)
         {
-            //先判断是否够一次移动
-            bool result = false;
             UnitData unitData = this.GetModel<IFightVisualModel>().AllUnit[unitId].unitData;
             int onceMovePoint = Constants.ActionParameter - unitData.armDataType.mobility;
-            if (onceMovePoint <= unitData.NowActionPoints)
+            // 判断是否有足够的行动点进行移动
+            bool canMove = onceMovePoint <= unitData.NowActionPoints;
+            // 判断是否有足够的行动点进行攻击
+            bool canAttack = Constants.AttackActionPoints <= unitData.NowActionPoints;
+            // 根据传入的类型判断是否满足行动要求
+            return actionType switch
             {
-                result = true;
-            }
-
-            //判断是否够执行一次攻击
-            if (Constants.AttackActionPoints <= unitData.NowActionPoints)
-            {
-                result = true;
-            }
-
-            return result;
+                ActionType.MOVE => canMove,
+                ActionType.ATTACK => canAttack,
+                ActionType.NONE => canMove && canAttack,
+                _ => false
+            };
         }
 
         public List<int> LegionOrder()

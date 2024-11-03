@@ -1,7 +1,5 @@
 ﻿using System;
 using Fight.Game.AI;
-using Fight.System;
-using QFramework;
 
 namespace Fight.Game.Legion
 {
@@ -26,18 +24,17 @@ namespace Fight.Game.Legion
 
         protected override void UnitStartRound()
         {
-            _baseLegionAi.CheckNextBehavior(nowUnitId);
+            if (!_baseLegionAi.CheckNextBehavior(nowUnitId))
+            {
+                UnitEndRound();
+            }
         }
 
         public override void UnitEndAction()
         {
-            if (!this.GetSystem<IFightComputeSystem>().EnoughMovePoint(nowUnitController.unitData.unitId))
+            if (!_baseLegionAi.CheckNextBehavior(nowUnitId))
             {
                 UnitEndRound();
-            }
-            else
-            {
-                _baseLegionAi.CheckNextBehavior(nowUnitId);
             }
         }
     }

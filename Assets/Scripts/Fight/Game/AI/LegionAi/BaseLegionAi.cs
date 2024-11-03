@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fight.Game.Legion;
+using Fight.System;
 using Game.FightCreate;
 using Game.GameBase;
 using QFramework;
@@ -44,16 +45,21 @@ namespace Fight.Game.AI
         /// <summary>
         /// 检查ai的下一个行为
         /// </summary>
-        public void CheckNextBehavior(int unitId)
+        public bool CheckNextBehavior(int unitId)
         {
             UnitBehaviorAi unitBehaviorAi = unitBehaviorAis[unitId];
             if (unitBehaviorAi.unitBehaviorAiSingles.Count <= 0)
             {
-                computerLegion.UnitEndRound();
-                return;
+                return false;
             }
 
             BaseUnitBehaviorAiSingle aiSingle = unitBehaviorAi.unitBehaviorAiSingles[0];
+            if (!this.GetSystem<IFightComputeSystem>().EnoughMovePoint(computerLegion.nowUnitController.unitData.unitId,
+                    aiSingle.ActionType()))
+            {
+                return false;
+            }
+
             aiSingle.StartBehavior(isEnd =>
             {
                 if (isEnd)
@@ -63,6 +69,8 @@ namespace Fight.Game.AI
 
                 computerLegion.UnitEndAction();
             });
+
+            return true;
         }
     }
 

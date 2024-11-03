@@ -31,13 +31,15 @@ namespace Fight.Game.AI
             {
                 Debug.LogError("Pathfinding error: " + nowPath.errorLog);
                 isEnd = true;
+                BehaviorEnd();
+                return;
             }
 
             UnitData unitData = this.GetSystem<IFightSystem>().FindUnit(unitId);
             if (nowPath.vectorPath.Count - 2 < unitData.armDataType.attackRange)
             {
                 isEnd = true;
-                BehaviorEnd(); //如果开始行为时已经完成就直接结束
+                BehaviorEnd(); //如果开始行为时已经到达目的地就直接结束
             }
             else
             {
@@ -74,6 +76,11 @@ namespace Fight.Game.AI
         public override void BehaviorEnd()
         {
             _behaviorEnd(isEnd);
+        }
+
+        public override ActionType ActionType()
+        {
+            return Model.ActionType.MOVE;
         }
     }
 }

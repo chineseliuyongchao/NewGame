@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Game.GameUtils
 {
-    public abstract class DelayManager : Singleton<DelayManager>
+    public class DelayManager : Singleton<DelayManager>
     {
         private GameObject _goDelayUtil;
         private TaskBehaviour _mTask;

@@ -121,17 +121,15 @@ namespace Fight.Controller
         private void LegionEndAction(int legionId)
         {
             int index = _legionOrder.IndexOf(legionId);
-            bool isEnd = false;
-            if (index + 1 >= _legionOrder.Count)
+            if (this.GetSystem<IFightComputeSystem>().CheckFightFinish())
             {
-                ActionLegionIndex = 0;
-                if (this.GetSystem<IFightComputeSystem>().CheckFightFinish())
+                this.SendCommand(new FightCommand(FightType.SETTLEMENT));
+            }
+            else
+            {
+                if (index + 1 >= _legionOrder.Count)
                 {
-                    this.SendCommand(new FightCommand(FightType.SETTLEMENT));
-                    isEnd = true;
-                }
-                else
-                {
+                    ActionLegionIndex = 0;
                     List<int> allUnitKey = new List<int>(this.GetModel<IFightVisualModel>().AllUnit.Keys);
                     for (int i = 0; i < allUnitKey.Count; i++)
                     {
@@ -140,14 +138,11 @@ namespace Fight.Controller
                         unitController.unitProgressBar.UpdateProgress();
                     }
                 }
-            }
-            else
-            {
-                ActionLegionIndex = index + 1;
-            }
+                else
+                {
+                    ActionLegionIndex = index + 1;
+                }
 
-            if (!isEnd)
-            {
                 Sequence sequence = DOTween.Sequence();
                 sequence.AppendInterval(1);
                 sequence.AppendCallback(() => { LegionStartAction(_legionOrder[ActionLegionIndex]); });

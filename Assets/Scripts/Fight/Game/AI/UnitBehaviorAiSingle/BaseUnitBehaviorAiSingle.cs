@@ -41,6 +41,12 @@ namespace Fight.Game.AI
         /// </summary>
         public abstract void BehaviorEnd();
 
+        /// <summary>
+        /// 获取行为的行动类型
+        /// </summary>
+        /// <returns></returns>
+        public abstract ActionType ActionType();
+
         public IArchitecture GetArchitecture()
         {
             return GameApp.Interface;
