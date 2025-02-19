@@ -49,8 +49,11 @@ namespace Fight.Game.AI
                 UnitController enemyUnit = FindEnemyAtPosition(currentIndex, unitId);
                 if (enemyUnit != null)
                 {
-                    // 找到最近的敌方单位，返回
-                    return enemyUnit;
+                    if (enemyUnit.unitData.UnitType == UnitType.NORMAL)
+                    {
+                        // 找到最近的敌方单位，返回
+                        return enemyUnit;
+                    }
                 }
 
                 // 获取当前位置周围的位置索引列表

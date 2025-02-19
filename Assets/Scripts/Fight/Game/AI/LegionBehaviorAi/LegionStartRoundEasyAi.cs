@@ -29,7 +29,7 @@ namespace Fight.Game.AI
                     targetUnitId = unitController.unitData.unitId,
                     mustFinish = false
                 });
-                behaviorAi.unitBehaviorAiSingles.Add(new UnitAiAttack()
+                behaviorAi.unitBehaviorAiSingles.Add(new UnitAiAttack
                 {
                     unitId = unitId[i],
                     behaviorType = AiBehaviorType.MOVE_IN_ATTACK_RANGE,
