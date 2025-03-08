@@ -44,7 +44,6 @@ namespace Fight.Game.Legion
         public virtual void Init(int id)
         {
             legionId = id;
-            OnListenEvent();
             inRound = false;
             nowUnitIndex = -1;
             nowUnitId = -1;
@@ -204,6 +203,12 @@ namespace Fight.Game.Legion
         protected virtual void EndRound()
         {
             inRound = false;
+            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
+            foreach (var unit in allUnit.Values)
+            {
+                this.GetSystem<IFightComputeSystem>().ChangeFatigue(unit);
+            }
+
             if (roundEnd != null)
             {
                 roundEnd(legionId);

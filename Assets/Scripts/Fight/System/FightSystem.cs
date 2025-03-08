@@ -41,7 +41,7 @@ namespace Fight.System
         public bool IsPlayerUnit(int unitId)
         {
             UnitData data = FindUnit(unitId);
-            return data.legionId == Constants.PlayLegionId;
+            return data.legionId == Constants.PLAY_LEGION_ID;
         }
 
         public UnitData FindUnit(int unitId)

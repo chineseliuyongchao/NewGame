@@ -39,7 +39,7 @@ namespace Fight.System
         bool MoveOnce(int unitId);
 
         /// <summary>
-        /// 检查是否可以攻击（泛指所有攻击种类）
+        /// 检查是否可以进攻（泛指所有攻击种类）
         /// </summary>
         /// <returns></returns>
         bool CheckCanAttack(int unitId);
@@ -68,5 +68,10 @@ namespace Fight.System
         /// </summary>
         /// <returns></returns>
         bool CheckFightFinish();
+
+        /// <summary>
+        /// 疲劳值改变（一个军队的所有单位结束回合以后计算）
+        /// </summary>
+        void ChangeFatigue(UnitData unitData);
     }
 }

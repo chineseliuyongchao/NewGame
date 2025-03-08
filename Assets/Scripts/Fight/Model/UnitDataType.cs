@@ -82,8 +82,8 @@ namespace Fight.Model
             NowTroops = armDataType.totalTroops;
             NowAmmo = armDataType.ammo;
             NowMorale = armDataType.maximumMorale;
-            NowFatigue = armDataType.maximumFatigue;
-            NowActionPoints = Constants.InitActionPoints;
+            NowFatigue = 0; //单位初始疲劳值应该是0
+            NowActionPoints = Constants.INIT_ACTION_POINTS;
             IsCharge = false;
             IsStick = false;
             UnitType = UnitType.NORMAL;
@@ -140,7 +140,7 @@ namespace Fight.Model
         public int NowActionPoints
         {
             get => _nowActionPoints;
-            set => _nowActionPoints = Mathf.Clamp(value, 0, Constants.InitActionPoints);
+            set => _nowActionPoints = Mathf.Clamp(value, 0, Constants.INIT_ACTION_POINTS);
         }
 
         /// <summary>

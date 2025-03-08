@@ -130,7 +130,7 @@ namespace UI
             List<int> armKeys = new List<int>(this.GetModel<IGameMenuModel>().ARMDataTypes.Keys);
             _chooseArmId = armKeys[0];
             AddLegion(Constants.BELLIGERENT1);
-            ChangeShowLegion(Constants.PlayLegionId); //系统默认为玩家添加的军队就会是这个id
+            ChangeShowLegion(Constants.PLAY_LEGION_ID); //系统默认为玩家添加的军队就会是这个id
             AddLegion(Constants.BELLIGERENT2);
 
             List<Dropdown.OptionData> options = new List<Dropdown.OptionData>();

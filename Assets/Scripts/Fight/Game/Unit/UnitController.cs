@@ -41,7 +41,7 @@ namespace Fight.Game.Unit
 
             unitProgressBar = transform.Find("unitProgressBar").GetComponent<UnitProgressBarController>();
             unitProgressBar.OnInit(unitData);
-            if (unitData.legionId == Constants.PlayLegionId)
+            if (unitData.legionId == Constants.PLAY_LEGION_ID)
             {
             }
             else

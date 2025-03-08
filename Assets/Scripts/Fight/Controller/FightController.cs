@@ -72,7 +72,7 @@ namespace Fight.Controller
                 GameObject legionObject = new GameObject("legion" + legionInfo.legionId);
                 legionObject.Parent(legionNode);
                 BaseLegion legion;
-                if (legionInfo.legionId == Constants.PlayLegionId)
+                if (legionInfo.legionId == Constants.PLAY_LEGION_ID)
                 {
                     legion = legionObject.AddComponent<PlayerLegion>();
                 }
@@ -134,7 +134,7 @@ namespace Fight.Controller
                     for (int i = 0; i < allUnitKey.Count; i++)
                     {
                         UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[allUnitKey[i]];
-                        unitController.unitData.NowActionPoints = Constants.InitActionPoints;
+                        unitController.unitData.NowActionPoints = Constants.INIT_ACTION_POINTS;
                         unitController.unitProgressBar.UpdateProgress();
                     }
                 }

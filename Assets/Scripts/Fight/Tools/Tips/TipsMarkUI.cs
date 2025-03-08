@@ -20,7 +20,7 @@ namespace Fight.Tools.Tips
                 if (!showTips)
                 {
                     _hoverTime += Time.deltaTime;
-                    if (_hoverTime >= Constants.HoverThreshold)
+                    if (_hoverTime >= Constants.HOVER_THRESHOLD)
                     {
                         Camera cam = GameObject.Find("UICamera").GetComponent<Camera>();
                         if (cam)

@@ -157,7 +157,7 @@ namespace Fight.System
             if (this.GetSystem<IFightSystem>().GetBelligerentsIdOfUnit(controller.unitData.unitId) !=
                 Constants.BELLIGERENT1) //非玩家阵营，可以攻击
             {
-                this.GetModel<IFightCoreModel>().AllLegion[Constants.PlayLegionId]
+                this.GetModel<IFightCoreModel>().AllLegion[Constants.PLAY_LEGION_ID]
                     .UnitAttack(fightVisualModel.FocusController.unitData.unitId, controller.unitData.unitId);
             }
             else
@@ -191,7 +191,7 @@ namespace Fight.System
                     return;
                 }
 
-                this.GetModel<IFightCoreModel>().AllLegion[Constants.PlayLegionId]
+                this.GetModel<IFightCoreModel>().AllLegion[Constants.PLAY_LEGION_ID]
                     .UnitMove(fightVisualModel.FocusController.unitData.unitId, index, null);
             }
         }

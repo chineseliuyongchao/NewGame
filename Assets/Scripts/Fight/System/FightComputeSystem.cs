@@ -46,30 +46,37 @@ namespace Fight.System
         {
             UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(unitAId);
             UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(unitBId);
+            UnitData unitAOld = new UnitData(unitA);
+            UnitData unitBOld = new UnitData(unitB);
             //单位1进攻单位2，单位2反击
-            UnitData arm2Before = new UnitData(unitB);
             AssaultNoRetaliation(unitA, unitB);
-            AssaultNoRetaliation(arm2Before, unitA);
+            AssaultNoRetaliation(unitBOld, unitA);
+            AttackChangeMorale(unitAOld.NowTroops - unitA.NowTroops, unitA);
+            AttackChangeMorale(unitBOld.NowTroops - unitB.NowTroops, unitB);
         }
 
         public void AssaultNoRetaliation(int unitAId, int unitBId)
         {
             UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(unitAId);
             UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(unitBId);
+            UnitData unitBOld = new UnitData(unitB);
             AssaultNoRetaliation(unitA, unitB);
+            AttackChangeMorale(unitBOld.NowTroops - unitB.NowTroops, unitB);
         }
 
         public void Shoot(int unitAId, int unitBId)
         {
             UnitData unitA = this.GetSystem<IFightSystem>().FindUnit(unitAId);
             UnitData unitB = this.GetSystem<IFightSystem>().FindUnit(unitBId);
+            UnitData unitBOld = new UnitData(unitB);
             OneShoot(unitA, unitB);
+            AttackChangeMorale(unitBOld.NowTroops - unitB.NowTroops, unitB);
         }
 
         public bool MoveOnce(int unitId)
         {
             UnitData unit = this.GetSystem<IFightSystem>().FindUnit(unitId);
-            int decreaseMovePoint = Constants.ActionParameter - unit.armDataType.mobility;
+            int decreaseMovePoint = Constants.ACTION_PARAMETER - unit.armDataType.mobility;
             if (unit.NowActionPoints >= decreaseMovePoint)
             {
                 unit.NowActionPoints -= decreaseMovePoint;
@@ -82,9 +89,9 @@ namespace Fight.System
         public bool CheckCanAttack(int unitId)
         {
             UnitData unit = this.GetSystem<IFightSystem>().FindUnit(unitId);
-            if (unit.NowActionPoints >= Constants.AttackActionPoints)
+            if (unit.NowActionPoints >= Constants.ATTACK_ACTION_POINTS)
             {
-                unit.NowActionPoints -= Constants.AttackActionPoints;
+                unit.NowActionPoints -= Constants.ATTACK_ACTION_POINTS;
                 return true;
             }
 
@@ -94,11 +101,11 @@ namespace Fight.System
         public bool EnoughMovePoint(int unitId, ActionType actionType)
         {
             UnitData unitData = this.GetModel<IFightVisualModel>().AllUnit[unitId].unitData;
-            int onceMovePoint = Constants.ActionParameter - unitData.armDataType.mobility;
+            int onceMovePoint = Constants.ACTION_PARAMETER - unitData.armDataType.mobility;
             // 判断是否有足够的行动点进行移动
             bool canMove = onceMovePoint <= unitData.NowActionPoints;
             // 判断是否有足够的行动点进行攻击
-            bool canAttack = Constants.AttackActionPoints <= unitData.NowActionPoints;
+            bool canAttack = Constants.ATTACK_ACTION_POINTS <= unitData.NowActionPoints;
             // 根据传入的类型判断是否满足行动要求
             return actionType switch
             {
@@ -205,7 +212,7 @@ namespace Fight.System
             int realDefenseMelee = RealDefenseMelee(unitB);
             float hitProbability = Math.Max(0.05f, Math.Min(1, realAttack / (realDefenseMelee * 3f))); //命中概率
             int successAttackNum = CompleteSuccessAttackNum(hitProbability, unitA.NowTroops); //成功命中次数
-            // Debug.Log("命中概率：" + hitProbability + "  成功命中次数：" + successAttackNum);
+            // Debug.Log("实际攻击能力：" + realAttack + "  实际防御能力：" + realDefenseMelee + "  命中概率：" + hitProbability + "  成功命中次数：" + successAttackNum);
 
             //计算单次实际杀伤（普通杀伤和破甲杀伤）
             float realMeleeNormal =
@@ -406,6 +413,84 @@ namespace Fight.System
             }
 
             return successAttackNum;
+        }
+
+        /// <summary>
+        /// 计算受到攻击损失的作战意志
+        /// </summary>
+        /// <param name="lossTroops"></param>
+        /// <param name="unitData"></param>
+        private void AttackChangeMorale(int lossTroops, UnitData unitData)
+        {
+            int afterAttackLossTroops = lossTroops + unitData.NowTroops; //计算损失之前单位的人数
+            float moraleRatio = lossTroops / (float)afterAttackLossTroops * 2; //计算损失比例参数
+            float moraleLossRatio = moraleRatio * moraleRatio; //计算作战意志损失比例
+            unitData.NowMorale -= (int)(moraleLossRatio * Constants.INIT_MORALE);
+        }
+
+        /// <summary>
+        /// 计算疲劳值对作战意志的影响
+        /// </summary>
+        /// <param name="unitData"></param>
+        private void FatigueChangeMorale(UnitData unitData)
+        {
+            float fatigueRatio =
+                unitData.NowFatigue / (float)_armDataTypes[unitData.armId].maximumFatigue - 0.5f; //计算疲劳值影响参数
+            float moraleLossRatio = Math.Min(0, fatigueRatio * fatigueRatio);
+            unitData.NowMorale -= (int)(moraleLossRatio * Constants.INIT_MORALE);
+        }
+
+        /// <summary>
+        /// 周围单位崩溃影响作战意志
+        /// </summary>
+        /// <param name="unitData"></param>
+        /// <param name="isOur">是否是友方的单位</param>
+        private void AroundUnitCollapseChangeMorale(UnitData unitData, bool isOur)
+        {
+            unitData.NowMorale -= (int)(0.2f * Constants.INIT_MORALE);
+        }
+
+        /// <summary>
+        /// 己方将领阵亡影响作战意志
+        /// </summary>
+        /// <param name="unitData"></param>
+        private void OurGeneralDieChangeMorale(UnitData unitData)
+        {
+            unitData.NowMorale -= (int)(0.3f * Constants.INIT_MORALE);
+        }
+
+        /// <summary>
+        /// 敌方将领阵亡影响作战意志
+        /// </summary>
+        /// <param name="unitData"></param>
+        private void EnemyGeneralDieChangeMorale(UnitData unitData)
+        {
+            unitData.NowMorale += (int)(0.2f * Constants.INIT_MORALE);
+        }
+
+        /// <summary>
+        /// 被包围影响作战意志
+        /// </summary>
+        /// <param name="surroundRatio">被包围比例（0.33-1，即从两面被围到六面全被围）</param>
+        /// <param name="unitData"></param>
+        private void SurroundChangeMorale(float surroundRatio, UnitData unitData)
+        {
+            unitData.NowMorale -= (int)(0.25f * surroundRatio * Constants.INIT_MORALE);
+        }
+
+        public void ChangeFatigue(UnitData unitData)
+        {
+            float fatigueChange = (Constants.INIT_ACTION_POINTS - unitData.NowActionPoints) /
+                (float)Constants.INIT_ACTION_POINTS - 0.6f;
+            float fatigueChangeRatio = fatigueChange * fatigueChange;
+            if (fatigueChange > 0)
+            {
+                unitData.NowFatigue += (int)(Constants.INIT_FATIGUE * fatigueChangeRatio);
+            }
+            else
+            {
+                unitData.NowFatigue -= (int)(Constants.INIT_FATIGUE * fatigueChangeRatio);
+            }
         }
     }
 }

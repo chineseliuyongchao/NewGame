@@ -57,7 +57,7 @@ namespace Fight.Controller
 
         private float ActionProgressValue => _currentUnitData == null
             ? 1
-            : (float)_currentUnitData.NowActionPoints / Constants.InitActionPoints;
+            : (float)_currentUnitData.NowActionPoints / Constants.INIT_ACTION_POINTS;
 
         private void ProgressInit()
         {
@@ -99,7 +99,7 @@ namespace Fight.Controller
 
         public void OnInit(int unitId)
         {
-            OnInit(this.GetModel<IFightCreateModel>().AllLegions[Constants.PlayLegionId].allUnit[unitId]);
+            OnInit(this.GetModel<IFightCreateModel>().AllLegions[Constants.PLAY_LEGION_ID].allUnit[unitId]);
         }
 
         public void OnInit(UnitData unitData)
