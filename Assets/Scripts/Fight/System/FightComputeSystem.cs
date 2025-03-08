@@ -4,6 +4,7 @@ using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
 using Game.GameMenu;
+using Game.GameTest;
 using QFramework;
 using Random = UnityEngine.Random;
 
@@ -291,8 +292,15 @@ namespace Fight.System
             }
 
             int realAttack = correctAttack; //修正后攻击能力
-            realAttack = ComputeCorrectMorale(realAttack, unitData);
-            realAttack = ComputeCorrectFatigue(realAttack, unitData);
+            if (!this.GetModel<IGameTestModel>().IgnoreMorale)
+            {
+                realAttack = ComputeCorrectMorale(realAttack, unitData);
+            }
+
+            if (!this.GetModel<IGameTestModel>().IgnoreFatigue)
+            {
+                realAttack = ComputeCorrectFatigue(realAttack, unitData);
+            }
 
             return realAttack;
         }
@@ -311,8 +319,16 @@ namespace Fight.System
             }
 
             int realDefenseMelee = correctDefenseMelee; //修正后防御能力
-            realDefenseMelee = ComputeCorrectMorale(realDefenseMelee, unitData);
-            realDefenseMelee = ComputeCorrectFatigue(realDefenseMelee, unitData);
+            if (!this.GetModel<IGameTestModel>().IgnoreMorale)
+            {
+                realDefenseMelee = ComputeCorrectMorale(realDefenseMelee, unitData);
+            }
+
+            if (!this.GetModel<IGameTestModel>().IgnoreFatigue)
+            {
+                realDefenseMelee = ComputeCorrectFatigue(realDefenseMelee, unitData);
+            }
+
             return realDefenseMelee;
         }
 
@@ -400,15 +416,22 @@ namespace Fight.System
         private int CompleteSuccessAttackNum(float hitProbability, int nowTroops)
         {
             int successAttackNum = 0;
-            for (int i = 0; i < nowTroops; i++)
+            if (this.GetModel<IGameTestModel>().FixedHitRateEnabled)
             {
-                // 生成0到1之间的随机数
-                float randomValue = Random.Range(0f, 1f);
-
-                // 如果随机数小于命中概率，则计为命中
-                if (randomValue < hitProbability)
+                successAttackNum = (int)(nowTroops * hitProbability);
+            }
+            else
+            {
+                for (int i = 0; i < nowTroops; i++)
                 {
-                    successAttackNum++;
+                    // 生成0到1之间的随机数
+                    float randomValue = Random.Range(0f, 1f);
+
+                    // 如果随机数小于命中概率，则计为命中
+                    if (randomValue < hitProbability)
+                    {
+                        successAttackNum++;
+                    }
                 }
             }
 

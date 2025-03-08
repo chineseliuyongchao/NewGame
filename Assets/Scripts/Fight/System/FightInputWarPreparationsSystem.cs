@@ -1,6 +1,7 @@
 ﻿using Fight.Command;
 using Fight.Game.Unit;
 using Fight.Model;
+using Game.GameTest;
 using QFramework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -55,10 +56,14 @@ namespace Fight.System
                     if (this.GetSystem<IFightSystem>().IsPlayerUnit(controller.unitData.unitId))
                     {
                         //玩家单位
-                        SelectPlayerUnit(fightVisualModel, controller);
+                        SelectUnit(fightVisualModel, controller);
                     }
                     else
                     {
+                        if (this.GetModel<IGameTestModel>().CanPlaceAI)
+                        {
+                            SelectUnit(fightVisualModel, controller);
+                        }
                         //非玩家单位
                     }
                 }
@@ -78,10 +83,14 @@ namespace Fight.System
                     if (this.GetSystem<IFightSystem>().IsPlayerUnit(unitId))
                     {
                         //玩家单位
-                        SelectPlayerUnit(fightVisualModel, index);
+                        SelectUnit(fightVisualModel, index);
                     }
                     else
                     {
+                        if (this.GetModel<IGameTestModel>().CanPlaceAI)
+                        {
+                            SelectUnit(fightVisualModel, index);
+                        }
                         //非玩家单位
                     }
                 }
@@ -93,9 +102,9 @@ namespace Fight.System
         }
 
         /// <summary>
-        /// 选取了玩家的单位
+        /// 选取单位
         /// </summary>
-        private void SelectPlayerUnit(IFightVisualModel fightVisualModel, UnitController controller)
+        private void SelectUnit(IFightVisualModel fightVisualModel, UnitController controller)
         {
             if (!fightVisualModel.FocusController || controller != fightVisualModel.FocusController)
             {
@@ -110,9 +119,9 @@ namespace Fight.System
         }
 
         /// <summary>
-        /// 选取了玩家的单位
+        /// 选取单位
         /// </summary>
-        private void SelectPlayerUnit(IFightVisualModel fightVisualModel, int index)
+        private void SelectUnit(IFightVisualModel fightVisualModel, int index)
         {
             if (!fightVisualModel.FocusController || index != fightVisualModel.FocusController.unitData.currentPosIndex)
             {

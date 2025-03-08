@@ -2,6 +2,7 @@
 using Fight.Game.Unit;
 using Fight.Model;
 using Fight.System;
+using Game.GameTest;
 using Game.GameUtils;
 using Pathfinding;
 using QFramework;
@@ -21,6 +22,13 @@ namespace Fight.Game.AI
         public override async void StartBehavior(Action<bool> behaviorEnd)
         {
             _behaviorEnd = behaviorEnd;
+            if (this.GetModel<IGameTestModel>().AINoAttack)
+            {
+                isEnd = true;
+                BehaviorEnd();
+                return;
+            }
+
             UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
             UnitController targetUnitController = this.GetModel<IFightVisualModel>().AllUnit[targetUnitId];
             int nowIndex = unitController.unitData.currentPosIndex;

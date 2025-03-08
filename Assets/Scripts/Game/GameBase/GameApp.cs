@@ -8,6 +8,7 @@ using Battle.Town;
 using Game.FightCreate;
 using Game.GameMenu;
 using Game.GameSave;
+using Game.GameTest;
 using Game.GameUtils;
 using QFramework;
 
@@ -40,6 +41,7 @@ namespace Game.GameBase
             RegisterModel<IGameSettingModel>(new GameSettingModel());
             RegisterModel<IBattleBaseModel>(new BattleBaseModel());
             RegisterModel<IFightCreateModel>(new FightCreateModel());
+            RegisterModel<IGameTestModel>(new GameTestModel());
 
             RegisterUtility<IGameUtility>(new GameUtility());
             RegisterUtility<IMathUtility>(new MathUtility());
