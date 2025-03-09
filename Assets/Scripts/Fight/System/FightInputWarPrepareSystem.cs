@@ -11,7 +11,7 @@ namespace Fight.System
     /// <summary>
     /// 战斗准备阶段处理输入事件
     /// </summary>
-    public class FightInputWarPreparationsSystem : AbstractSystem, IFightInputSystem, ICanSendCommand
+    public class FightInputWarPrepareSystem : AbstractSystem, IFightInputSystem, ICanSendCommand
     {
         protected override void OnInit()
         {

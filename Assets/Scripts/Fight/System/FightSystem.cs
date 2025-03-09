@@ -156,7 +156,7 @@ namespace Fight.System
                             return;
                         }
 
-                        res(path.vectorPath.Count - 1 <= unitController.unitData.armDataType.attackRange);
+                        res(this.GetSystem<IFightComputeSystem>().CheckAttackRange(path, unitController.unitData));
                     });
             }
         }

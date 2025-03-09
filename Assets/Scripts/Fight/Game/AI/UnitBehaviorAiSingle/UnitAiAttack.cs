@@ -44,10 +44,11 @@ namespace Fight.Game.AI
             }
 
             UnitData unitData = this.GetSystem<IFightSystem>().FindUnit(unitId);
-            if (nowPath.vectorPath.Count - 2 >= unitData.armDataType.attackRange)
+            if (!this.GetSystem<IFightComputeSystem>().CheckAttackRange(nowPath, unitData))
             {
                 isEnd = true;
                 BehaviorEnd(); //如果开始行为时攻击范围不够就直接结束
+                return;
             }
 
             while (this.GetSystem<IFightComputeSystem>().CheckCanAttack(unitId))

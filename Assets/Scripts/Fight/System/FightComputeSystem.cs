@@ -5,6 +5,7 @@ using Fight.Utils;
 using Game.FightCreate;
 using Game.GameMenu;
 using Game.GameTest;
+using Pathfinding;
 using QFramework;
 using Random = UnityEngine.Random;
 
@@ -514,6 +515,16 @@ namespace Fight.System
             {
                 unitData.NowFatigue -= (int)(Constants.INIT_FATIGUE * fatigueChangeRatio);
             }
+        }
+
+        public bool CheckAttackRange(Path path, UnitData unitData)
+        {
+            if (path.vectorPath.Count - 1 <= unitData.armDataType.attackRange)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

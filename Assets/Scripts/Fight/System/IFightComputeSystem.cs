@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fight.Model;
+using Pathfinding;
 using QFramework;
 
 namespace Fight.System
@@ -73,5 +74,11 @@ namespace Fight.System
         /// 疲劳值改变（一个军队的所有单位结束回合以后计算）
         /// </summary>
         void ChangeFatigue(UnitData unitData);
+
+        /// <summary>
+        /// 判断攻击范围够不够
+        /// </summary>
+        /// <returns></returns>
+        bool CheckAttackRange(Path path, UnitData unitData);
     }
 }
