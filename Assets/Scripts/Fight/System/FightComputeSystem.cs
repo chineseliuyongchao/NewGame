@@ -136,70 +136,15 @@ namespace Fight.System
                     {
                         unit.UnitType = UnitType.DIE;
                     }
+                    else if (unit.NowMorale <= 0)
+                    {
+                        unit.UnitType = UnitType.COLLAPSE;
+                    }
 
                     break;
             }
 
             return unit.UnitType;
-        }
-
-        public bool CheckFightFinish()
-        {
-            bool canFinish = false;
-            bool belligerentFail = true;
-            List<int> allLegionKey = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);
-            //玩家阵营的单位是不是都崩溃或者全军覆没了
-            for (int i = 0; i < allLegionKey.Count; i++)
-            {
-                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
-                if (legionInfo.belligerentsId != Constants.BELLIGERENT1)
-                {
-                    continue;
-                }
-
-                List<int> allUnitKey = new List<int>(legionInfo.allUnit.Keys);
-                for (int j = 0; j < allUnitKey.Count; j++)
-                {
-                    UnitData unitData = legionInfo.allUnit[allUnitKey[j]];
-                    if (unitData.UnitType == UnitType.NORMAL)
-                    {
-                        belligerentFail = false;
-                    }
-                }
-            }
-
-            if (belligerentFail)
-            {
-                canFinish = true;
-            }
-
-            belligerentFail = true;
-            //玩家敌对阵营的单位是不是都崩溃或者全军覆没了
-            for (int i = 0; i < allLegionKey.Count; i++)
-            {
-                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
-                if (legionInfo.belligerentsId != Constants.BELLIGERENT2)
-                {
-                    continue;
-                }
-
-                List<int> allUnitKey = new List<int>(legionInfo.allUnit.Keys);
-                for (int j = 0; j < allUnitKey.Count; j++)
-                {
-                    UnitData unitData = legionInfo.allUnit[allUnitKey[j]];
-                    if (unitData.UnitType == UnitType.NORMAL)
-                    {
-                        belligerentFail = false;
-                    }
-                }
-            }
-
-            if (belligerentFail)
-            {
-                canFinish = true;
-            }
-
-            return canFinish;
         }
 
         /// <summary>
@@ -460,18 +405,23 @@ namespace Fight.System
         {
             float fatigueRatio =
                 unitData.NowFatigue / (float)_armDataTypes[unitData.armId].maximumFatigue - 0.5f; //计算疲劳值影响参数
-            float moraleLossRatio = Math.Min(0, fatigueRatio * fatigueRatio);
-            unitData.NowMorale -= (int)(moraleLossRatio * Constants.INIT_MORALE);
+            if (fatigueRatio > 0)
+            {
+                float moraleLossRatio = Math.Max(0, fatigueRatio * fatigueRatio);
+                unitData.NowMorale -= (int)(moraleLossRatio * Constants.INIT_MORALE);
+            }
         }
 
-        /// <summary>
-        /// 周围单位崩溃影响作战意志
-        /// </summary>
-        /// <param name="unitData"></param>
-        /// <param name="isOur">是否是友方的单位</param>
-        private void AroundUnitCollapseChangeMorale(UnitData unitData, bool isOur)
+        public void AroundUnitCollapseChangeMorale(UnitData unitData, bool isOur)
         {
-            unitData.NowMorale -= (int)(0.2f * Constants.INIT_MORALE);
+            if (isOur)
+            {
+                unitData.NowMorale -= (int)(0.2f * Constants.INIT_MORALE);
+            }
+            else
+            {
+                unitData.NowMorale += (int)(0.2f * Constants.INIT_MORALE);
+            }
         }
 
         /// <summary>
@@ -515,6 +465,8 @@ namespace Fight.System
             {
                 unitData.NowFatigue -= (int)(Constants.INIT_FATIGUE * fatigueChangeRatio);
             }
+
+            FatigueChangeMorale(unitData);
         }
 
         public bool CheckAttackRange(Path path, UnitData unitData)

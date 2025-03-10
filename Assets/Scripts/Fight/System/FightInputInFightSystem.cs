@@ -209,10 +209,8 @@ namespace Fight.System
                         targetUnitController.Attacked();
                         BaseLegion legion = this.GetModel<IFightCoreModel>()
                             .AllLegion[unitController.unitData.legionId];
-                        BaseLegion targetLegion = this.GetModel<IFightCoreModel>()
-                            .AllLegion[targetUnitController.unitData.legionId];
-                        legion.UpdateUnitType(unitId, unitController);
-                        targetLegion.UpdateUnitType(targetUnitId, targetUnitController);
+                        unitController.UpdateType();
+                        targetUnitController.UpdateType();
                         legion.UnitEndAction();
                     }
                 }
@@ -265,7 +263,7 @@ namespace Fight.System
             {
                 BaseLegion legion = this.GetModel<IFightCoreModel>().AllLegion[unitController.unitData.legionId];
                 await unitController.Move(endIndex, legion.UnitEndAction, moveOnceEnd);
-                legion.UpdateUnitType(unitId, unitController);
+                unitController.UpdateType();
                 this.SendCommand(new PlayerUnitActionCommand(unitController.unitData.unitId));
             }
         }

@@ -73,5 +73,11 @@ namespace Fight.System
         /// 判断攻击范围是否足够，因为a*底层判断的方法是异步的，所以要用回调
         /// </summary>
         void IsInAttackRange(int unitId, int targetUnitId, Action<bool> res);
+
+        /// <summary>
+        /// 检测战斗是否结束
+        /// </summary>
+        /// <returns></returns>
+        bool CheckFightFinish();
     }
 }

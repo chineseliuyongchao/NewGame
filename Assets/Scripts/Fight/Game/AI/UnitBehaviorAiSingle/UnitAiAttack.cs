@@ -77,8 +77,8 @@ namespace Fight.Game.AI
 
                 unitController.Attack();
                 targetUnitController.Attacked();
-                unitController.UpdateType(this.GetSystem<IFightComputeSystem>().UpdateUnitType(unitId));
-                targetUnitController.UpdateType(this.GetSystem<IFightComputeSystem>().UpdateUnitType(targetUnitId));
+                unitController.UpdateType();
+                targetUnitController.UpdateType();
                 await DelayManager.Instance.WaitTimeAsync(1);
                 if (needBreak)
                 {

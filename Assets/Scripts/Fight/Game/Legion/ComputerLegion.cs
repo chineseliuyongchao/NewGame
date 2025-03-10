@@ -1,5 +1,6 @@
 ﻿using System;
 using Fight.Game.AI;
+using Game.FightCreate;
 
 namespace Fight.Game.Legion
 {
@@ -10,9 +11,9 @@ namespace Fight.Game.Legion
     {
         private BaseLegionAi _baseLegionAi;
 
-        public override void Init(int id)
+        public override void Init(LegionInfo info)
         {
-            base.Init(id);
+            base.Init(info);
             _baseLegionAi = new LegionEasyAi(this);
         }
 

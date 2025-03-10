@@ -65,10 +65,11 @@ namespace Fight.System
         UnitType UpdateUnitType(int unitId);
 
         /// <summary>
-        /// 检测战斗是否结束
+        /// 周围单位崩溃影响作战意志
         /// </summary>
-        /// <returns></returns>
-        bool CheckFightFinish();
+        /// <param name="unitData"></param>
+        /// <param name="isOur">是否是友方的单位</param>
+        void AroundUnitCollapseChangeMorale(UnitData unitData, bool isOur);
 
         /// <summary>
         /// 疲劳值改变（一个军队的所有单位结束回合以后计算）

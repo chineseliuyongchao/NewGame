@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Fight.Command;
 using Fight.Game.Unit;
 using Fight.Model;
@@ -9,7 +8,6 @@ using Fight.System;
 using Game.FightCreate;
 using Game.GameBase;
 using QFramework;
-using UnityEngine;
 
 namespace Fight.Game.Legion
 {
@@ -18,7 +16,7 @@ namespace Fight.Game.Legion
     /// </summary>
     public abstract class BaseLegion : BaseGameController
     {
-        public int legionId;
+        public LegionInfo legionInfo;
         protected Action<int> roundEnd;
 
         /// <summary>
@@ -41,9 +39,9 @@ namespace Fight.Game.Legion
         /// </summary>
         public UnitController nowUnitController;
 
-        public virtual void Init(int id)
+        public virtual void Init(LegionInfo info)
         {
-            legionId = id;
+            this.legionInfo = info;
             inRound = false;
             nowUnitIndex = -1;
             nowUnitId = -1;
@@ -66,7 +64,8 @@ namespace Fight.Game.Legion
         /// </summary>
         protected void AutomaticSwitchingUnit()
         {
-            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
+            Dictionary<int, UnitData> allUnit =
+                this.GetModel<IFightCreateModel>().AllLegions[legionInfo.legionId].allUnit;
             nowUnitIndex++;
             nowUnitId = allUnit.ElementAt(nowUnitIndex).Value.unitId;
             nowUnitController = this.GetModel<IFightVisualModel>().AllUnit[nowUnitId];
@@ -93,7 +92,8 @@ namespace Fight.Game.Legion
         /// </summary>
         public virtual void UnitEndRound()
         {
-            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
+            Dictionary<int, UnitData> allUnit =
+                this.GetModel<IFightCreateModel>().AllLegions[legionInfo.legionId].allUnit;
             if (nowUnitIndex >= allUnit.Count - 1)
             {
                 EndRound();
@@ -117,22 +117,13 @@ namespace Fight.Game.Legion
         }
 
         /// <summary>
-        /// 刷新单位状态
-        /// </summary>
-        /// <param name="unitId"></param>
-        /// <param name="unitController"></param>
-        public virtual void UpdateUnitType(int unitId, UnitController unitController)
-        {
-            unitController.UpdateType(this.GetSystem<IFightComputeSystem>().UpdateUnitType(unitId));
-        }
-
-        /// <summary>
         /// 结束回合
         /// </summary>
         protected virtual void EndRound()
         {
             inRound = false;
-            Dictionary<int, UnitData> allUnit = this.GetModel<IFightCreateModel>().AllLegions[legionId].allUnit;
+            Dictionary<int, UnitData> allUnit =
+                this.GetModel<IFightCreateModel>().AllLegions[legionInfo.legionId].allUnit;
             foreach (var unit in allUnit.Values)
             {
                 this.GetSystem<IFightComputeSystem>().ChangeFatigue(unit);
@@ -140,7 +131,7 @@ namespace Fight.Game.Legion
 
             if (roundEnd != null)
             {
-                roundEnd(legionId);
+                roundEnd(legionInfo.legionId);
                 roundEnd = null;
             }
         }

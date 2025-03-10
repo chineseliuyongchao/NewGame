@@ -81,7 +81,7 @@ namespace Fight.Controller
                     legion = legionObject.AddComponent<ComputerLegion>();
                 }
 
-                legion.Init(legionInfo.legionId);
+                legion.Init(legionInfo);
                 this.GetModel<IFightCoreModel>().AllLegion.Add(legionInfo.legionId, legion);
             }
 
@@ -121,7 +121,7 @@ namespace Fight.Controller
         private void LegionEndAction(int legionId)
         {
             int index = _legionOrder.IndexOf(legionId);
-            if (this.GetSystem<IFightComputeSystem>().CheckFightFinish())
+            if (this.GetSystem<IFightSystem>().CheckFightFinish())
             {
                 this.SendCommand(new FightCommand(FightType.SETTLEMENT));
             }

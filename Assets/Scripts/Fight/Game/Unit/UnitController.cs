@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Fight.Controller;
+using Fight.Game.Legion;
 using Fight.Model;
 using Fight.System;
 using Fight.Utils;
@@ -171,9 +173,29 @@ namespace Fight.Game.Unit
         /// <summary>
         /// 更新状态
         /// </summary>
-        /// <param name="unitType"></param>
-        public void UpdateType(UnitType unitType)
+        public void UpdateType()
         {
+            UnitType oldType = unitData.UnitType;
+            this.GetSystem<IFightComputeSystem>().UpdateUnitType(unitData.unitId);
+            UnitType newType = unitData.UnitType;
+            switch (oldType)
+            {
+                case UnitType.NORMAL:
+                {
+                    switch (newType)
+                    {
+                        case UnitType.COLLAPSE:
+                            List<UnitController> nearUnit = this.GetSystem<IFightSystem>().GetUnitsNearUnit(this);
+                            for (int i = 0; i < nearUnit.Count; i++)
+                            {
+                                nearUnit[i].NearUnitCollapse(unitData);
+                            }
+
+                            break;
+                    }
+                }
+                    break;
+            }
         }
 
         /// <summary>
@@ -200,6 +222,19 @@ namespace Fight.Game.Unit
                                        unitData.currentPosIndex / Constants.FightNodeVisibleWidthNum, 1) * 1000;
             view.ChangeOrderLayer(beginIndex);
             unitProgressBar.ChangeOrderLayer(beginIndex);
+        }
+
+        /// <summary>
+        /// 周围单位崩溃
+        /// </summary>
+        /// <param name="data"></param>
+        private void NearUnitCollapse(UnitData data)
+        {
+            BaseLegion ourLegion = this.GetModel<IFightCoreModel>().AllLegion[unitData.legionId];
+            BaseLegion legion = this.GetModel<IFightCoreModel>().AllLegion[data.legionId];
+            this.GetSystem<IFightComputeSystem>().AroundUnitCollapseChangeMorale(unitData,
+                ourLegion.legionInfo.belligerentsId == legion.legionInfo.belligerentsId);
+            UpdateType();
         }
     }
 }
