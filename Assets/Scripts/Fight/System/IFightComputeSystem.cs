@@ -72,6 +72,12 @@ namespace Fight.System
         void AroundUnitCollapseChangeMorale(UnitData unitData, bool isOur);
 
         /// <summary>
+        /// 临近单位影响作战意志
+        /// </summary>
+        /// <param name="unitData"></param>
+        void NearUnitChangeMorale(UnitData unitData);
+
+        /// <summary>
         /// 疲劳值改变（一个军队的所有单位结束回合以后计算）
         /// </summary>
         void ChangeFatigue(UnitData unitData);

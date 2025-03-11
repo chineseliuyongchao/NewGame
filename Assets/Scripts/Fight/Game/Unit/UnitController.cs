@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Fight.Controller;
-using Fight.Game.Legion;
 using Fight.Model;
 using Fight.System;
 using Fight.Utils;
@@ -230,10 +229,9 @@ namespace Fight.Game.Unit
         /// <param name="data"></param>
         private void NearUnitCollapse(UnitData data)
         {
-            BaseLegion ourLegion = this.GetModel<IFightCoreModel>().AllLegion[unitData.legionId];
-            BaseLegion legion = this.GetModel<IFightCoreModel>().AllLegion[data.legionId];
             this.GetSystem<IFightComputeSystem>().AroundUnitCollapseChangeMorale(unitData,
-                ourLegion.legionInfo.belligerentsId == legion.legionInfo.belligerentsId);
+                this.GetSystem<IFightSystem>().GetCampIdOfUnit(unitData.unitId) ==
+                this.GetSystem<IFightSystem>().GetCampIdOfUnit(data.unitId));
             UpdateType();
         }
     }

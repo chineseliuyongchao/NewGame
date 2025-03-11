@@ -56,6 +56,13 @@ namespace Fight.Game.Legion
             roundEnd = action;
             nowUnitIndex = -1;
             nowUnitId = -1;
+            Dictionary<int, UnitData> allUnit =
+                this.GetModel<IFightCreateModel>().AllLegions[legionInfo.legionId].allUnit;
+            foreach (var unit in allUnit.Values)
+            {
+                this.GetSystem<IFightComputeSystem>().NearUnitChangeMorale(unit);
+            }
+
             AutomaticSwitchingUnit();
         }
 

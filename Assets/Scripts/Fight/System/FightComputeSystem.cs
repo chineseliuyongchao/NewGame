@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Fight.Game.Unit;
 using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
@@ -33,7 +34,7 @@ namespace Fight.System
             {
                 LegionInfo legionInfo = allLegions[legionId[i]];
                 List<int> armId = new List<int>(legionInfo.allUnit.Keys);
-                var pos = legionInfo.belligerentsId == Constants.BELLIGERENT1 ? pos1 : pos2;
+                var pos = legionInfo.campId == Constants.BELLIGERENT1 ? pos1 : pos2;
                 for (int j = 0; j < armId.Count; j++)
                 {
                     UnitData unitData = legionInfo.allUnit[armId[j]];
@@ -428,28 +429,52 @@ namespace Fight.System
         /// 己方将领阵亡影响作战意志
         /// </summary>
         /// <param name="unitData"></param>
-        private void OurGeneralDieChangeMorale(UnitData unitData)
+        /// <param name="isOur"></param>
+        private void GeneralDieChangeMorale(UnitData unitData, bool isOur)
         {
-            unitData.NowMorale -= (int)(0.3f * Constants.INIT_MORALE);
+            if (isOur)
+            {
+                unitData.NowMorale -= (int)(0.3f * Constants.INIT_MORALE);
+            }
+            else
+            {
+                unitData.NowMorale += (int)(0.2f * Constants.INIT_MORALE);
+            }
         }
 
-        /// <summary>
-        /// 敌方将领阵亡影响作战意志
-        /// </summary>
-        /// <param name="unitData"></param>
-        private void EnemyGeneralDieChangeMorale(UnitData unitData)
+        public void NearUnitChangeMorale(UnitData unitData)
         {
-            unitData.NowMorale += (int)(0.2f * Constants.INIT_MORALE);
-        }
+            List<UnitController> nearUnit = this.GetSystem<IFightSystem>()
+                .GetUnitsNearUnit(this.GetModel<IFightVisualModel>().AllUnit[unitData.unitId]);
+            int ourUnitNum = 0;
+            int enemyUnitNum = 0;
+            List<float> addRatio = new List<float> { 0, 0, 0, 0.01f, 0.03f, 0.06f, 0.11f };
+            List<float> reduceRatio = new List<float> { 0, 0.01f, 0.03f, 0.06f, 0.11f, 0.17f, 0.25f };
+            int campId = this.GetSystem<IFightSystem>().GetCampIdOfUnit(unitData.unitId);
+            for (int i = 0; i < nearUnit.Count; i++)
+            {
+                if (this.GetSystem<IFightSystem>().GetCampIdOfUnit(nearUnit[i].unitData.unitId) == campId)
+                {
+                    ourUnitNum++;
+                }
+                else
+                {
+                    enemyUnitNum++;
+                }
+            }
 
-        /// <summary>
-        /// 被包围影响作战意志
-        /// </summary>
-        /// <param name="surroundRatio">被包围比例（0.33-1，即从两面被围到六面全被围）</param>
-        /// <param name="unitData"></param>
-        private void SurroundChangeMorale(float surroundRatio, UnitData unitData)
-        {
-            unitData.NowMorale -= (int)(0.25f * surroundRatio * Constants.INIT_MORALE);
+            float changeRatio;
+            if (ourUnitNum > enemyUnitNum)
+            {
+                changeRatio = addRatio[ourUnitNum - enemyUnitNum];
+                unitData.NowMorale += (int)(changeRatio * Constants.INIT_MORALE);
+            }
+            else if (enemyUnitNum > ourUnitNum)
+            {
+                changeRatio = reduceRatio[enemyUnitNum - ourUnitNum];
+                unitData.NowMorale -= (int)(changeRatio * Constants.INIT_MORALE);
+            }
+
         }
 
         public void ChangeFatigue(UnitData unitData)

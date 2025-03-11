@@ -53,7 +53,7 @@ namespace Fight.System
         /// </summary>
         /// <param name="unitId"></param>
         /// <returns></returns>
-        int GetBelligerentsIdOfUnit(int unitId);
+        int GetCampIdOfUnit(int unitId);
 
         /// <summary>
         /// 获取一个单位的周围6格的其他单位数据，返回一个列表，表示从该单位的正上方逆时针旋转的其他单位信息

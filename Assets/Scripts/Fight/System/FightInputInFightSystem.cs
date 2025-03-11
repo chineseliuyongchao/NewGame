@@ -158,7 +158,7 @@ namespace Fight.System
                 return;
             }
 
-            if (this.GetSystem<IFightSystem>().GetBelligerentsIdOfUnit(controller.unitData.unitId) !=
+            if (this.GetSystem<IFightSystem>().GetCampIdOfUnit(controller.unitData.unitId) !=
                 Constants.BELLIGERENT1) //非玩家阵营，可以攻击
             {
                 UnitAttack(fightVisualModel.FocusController.unitData.unitId, controller.unitData.unitId);

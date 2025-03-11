@@ -79,11 +79,11 @@ namespace Fight.System
             return new List<bool> { true, true, true, true, true, true, true, true };
         }
 
-        public int GetBelligerentsIdOfUnit(int unitId)
+        public int GetCampIdOfUnit(int unitId)
         {
             UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
             int legionId = unitController.unitData.legionId;
-            return this.GetModel<IFightCreateModel>().AllLegions[legionId].belligerentsId;
+            return this.GetModel<IFightCreateModel>().AllLegions[legionId].campId;
         }
 
         public List<UnitController> GetUnitsNearUnit(UnitController unitController)
@@ -170,7 +170,7 @@ namespace Fight.System
             for (int i = 0; i < allLegionKey.Count; i++)
             {
                 LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
-                if (legionInfo.belligerentsId != Constants.BELLIGERENT1)
+                if (legionInfo.campId != Constants.BELLIGERENT1)
                 {
                     continue;
                 }
@@ -196,7 +196,7 @@ namespace Fight.System
             for (int i = 0; i < allLegionKey.Count; i++)
             {
                 LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
-                if (legionInfo.belligerentsId != Constants.BELLIGERENT2)
+                if (legionInfo.campId != Constants.BELLIGERENT2)
                 {
                     continue;
                 }

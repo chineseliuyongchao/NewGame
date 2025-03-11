@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Fight;
 using Fight.Model;
 using Fight.System;
 using Fight.Utils;
@@ -23,8 +22,8 @@ namespace UI
     public partial class UIFightCreate : UIBase
     {
         public GameObject belligerentPrefab;
-        public Dictionary<int, UIFightCreateLegion> belligerents1;
-        public Dictionary<int, UIFightCreateLegion> belligerents2;
+        public Dictionary<int, UIFightCreateLegion> campA;
+        public Dictionary<int, UIFightCreateLegion> campB;
         public GameObject unitPrefab;
         public Dictionary<int, UIFightCreateUnit> uiFightCreateUnits;
 
@@ -122,8 +121,8 @@ namespace UI
         private void InitUI()
         {
             this.GetModel<IFightCreateModel>().AllLegions.Clear();
-            belligerents1 = new Dictionary<int, UIFightCreateLegion>();
-            belligerents2 = new Dictionary<int, UIFightCreateLegion>();
+            campA = new Dictionary<int, UIFightCreateLegion>();
+            campB = new Dictionary<int, UIFightCreateLegion>();
             uiFightCreateUnits = new Dictionary<int, UIFightCreateUnit>();
             List<int> factionKeys = new List<int>(this.GetModel<IGameMenuModel>().FactionDataTypes.Keys);
             _chooseFactionId = factionKeys[0];
@@ -159,19 +158,19 @@ namespace UI
         /// <summary>
         /// 添加一个参战军队
         /// </summary>
-        /// <param name="belligerentsId">阵营id</param>
-        private void AddLegion(int belligerentsId)
+        /// <param name="campId">阵营id</param>
+        private void AddLegion(int campId)
         {
-            Dictionary<int, UIFightCreateLegion> belligerents;
+            Dictionary<int, UIFightCreateLegion> camps;
             Transform buttonTransform;
-            switch (belligerentsId)
+            switch (campId)
             {
                 case Constants.BELLIGERENT1:
-                    belligerents = belligerents1;
+                    camps = campA;
                     buttonTransform = belligerent1Add.transform;
                     break;
                 case Constants.BELLIGERENT2:
-                    belligerents = belligerents2;
+                    camps = campB;
                     buttonTransform = belligerent2Add.transform;
                     break;
                 default:
@@ -180,12 +179,12 @@ namespace UI
 
             int legionIdMul = 1000;
             //新的军队id的个位根据上一个军队的id个位加1得到，确保每个军队的id都不一样
-            int newLegionId = belligerentsId * legionIdMul + _lastLegionId % legionIdMul + 1;
+            int newLegionId = campId * legionIdMul + _lastLegionId % legionIdMul + 1;
             _lastLegionId = newLegionId;
             LegionInfo legionInfo = new LegionInfo
             {
                 legionId = newLegionId,
-                belligerentsId = belligerentsId,
+                campId = campId,
                 factionsId = 0,
                 allUnit = new Dictionary<int, UnitData>()
             };
@@ -194,7 +193,7 @@ namespace UI
             newLegion.transform.SetSiblingIndex(buttonTransform.GetSiblingIndex());
             UIFightCreateLegion uiFightCreateLegion = newLegion.GetComponent<UIFightCreateLegion>();
             uiFightCreateLegion.InitUI(newLegionId, this);
-            belligerents.Add(newLegionId, uiFightCreateLegion);
+            camps.Add(newLegionId, uiFightCreateLegion);
             CheckCanCreate();
         }
 
@@ -209,21 +208,21 @@ namespace UI
                 return;
             }
 
-            Dictionary<int, UIFightCreateLegion> belligerents;
-            switch (legionInfo.belligerentsId)
+            Dictionary<int, UIFightCreateLegion> camps;
+            switch (legionInfo.campId)
             {
                 case Constants.BELLIGERENT1:
-                    belligerents = belligerents1;
+                    camps = campA;
                     break;
                 case Constants.BELLIGERENT2:
-                    belligerents = belligerents2;
+                    camps = campB;
                     break;
                 default:
                     return;
             }
 
-            UIFightCreateLegion uiFightCreateLegion = belligerents[legionId];
-            belligerents.Remove(legionId);
+            UIFightCreateLegion uiFightCreateLegion = camps[legionId];
+            camps.Remove(legionId);
             uiFightCreateLegion.gameObject.DestroySelf();
             this.GetModel<IFightCreateModel>().AllLegions.Remove(legionId);
             if (_nowLegionId == legionId)
@@ -251,14 +250,14 @@ namespace UI
                 return;
             }
 
-            Dictionary<int, UIFightCreateLegion> belligerents;
-            switch (legionInfo.belligerentsId)
+            Dictionary<int, UIFightCreateLegion> camps;
+            switch (legionInfo.campId)
             {
                 case Constants.BELLIGERENT1:
-                    belligerents = belligerents1;
+                    camps = campA;
                     break;
                 case Constants.BELLIGERENT2:
-                    belligerents = belligerents2;
+                    camps = campB;
                     break;
                 default:
                     return;
@@ -267,27 +266,27 @@ namespace UI
             if (_nowLegionId != -1)
             {
                 LegionInfo beforeLegionInfo = this.GetModel<IFightCreateModel>().AllLegions[_nowLegionId];
-                Dictionary<int, UIFightCreateLegion> beforeBelligerents;
-                switch (beforeLegionInfo.belligerentsId)
+                Dictionary<int, UIFightCreateLegion> beforeCamps;
+                switch (beforeLegionInfo.campId)
                 {
                     case Constants.BELLIGERENT1:
-                        beforeBelligerents = belligerents1;
+                        beforeCamps = campA;
                         break;
                     case Constants.BELLIGERENT2:
-                        beforeBelligerents = belligerents2;
+                        beforeCamps = campB;
                         break;
                     default:
                         return;
                 }
 
-                UIFightCreateLegion before = beforeBelligerents[_nowLegionId];
+                UIFightCreateLegion before = beforeCamps[_nowLegionId];
                 before.ChangeShow(false);
             }
 
             ClearUnit(false, true);
             _nowLegionId = legionId;
             ShowUnit();
-            UIFightCreateLegion now = belligerents[_nowLegionId];
+            UIFightCreateLegion now = camps[_nowLegionId];
             now.ChangeShow(true);
         }
 

@@ -6,17 +6,17 @@ namespace Game.FightCreate
 {
     public class FightCreateModel : AbstractModel, IFightCreateModel
     {
-        private Dictionary<int, LegionInfo> _allBelligerents;
+        private Dictionary<int, LegionInfo> _allCamp;
 
         protected override void OnInit()
         {
-            _allBelligerents = new Dictionary<int, LegionInfo>();
+            _allCamp = new Dictionary<int, LegionInfo>();
         }
 
         public Dictionary<int, LegionInfo> AllLegions
         {
-            get => _allBelligerents;
-            set => _allBelligerents = value;
+            get => _allCamp;
+            set => _allCamp = value;
         }
     }
 
@@ -33,7 +33,7 @@ namespace Game.FightCreate
         /// <summary>
         /// 阵营的id，目前参考全战只有两个阵营
         /// </summary>
-        public int belligerentsId;
+        public int campId;
 
         /// <summary>
         /// 记录军队的派系id
