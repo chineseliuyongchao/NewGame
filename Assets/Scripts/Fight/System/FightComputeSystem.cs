@@ -338,8 +338,8 @@ namespace Fight.System
         /// </summary>
         private int ComputeCorrectFatigue(int value, UnitData unitData)
         {
-            return (int)(value * (1 - unitData.NowFatigue /
-                (float)_armDataTypes[unitData.armId].maximumFatigue * 0.5f));
+            return (int)(value * Math.Min(1,
+                1.2f - unitData.NowFatigue / (float)_armDataTypes[unitData.armId].maximumFatigue * 0.5f));
         }
 
         /// <summary>
@@ -393,7 +393,7 @@ namespace Fight.System
         private void AttackChangeMorale(int lossTroops, UnitData unitData)
         {
             int afterAttackLossTroops = lossTroops + unitData.NowTroops; //计算损失之前单位的人数
-            float moraleRatio = lossTroops / (float)afterAttackLossTroops * 2; //计算损失比例参数
+            float moraleRatio = lossTroops / (float)afterAttackLossTroops * 5; //计算损失比例参数
             float moraleLossRatio = moraleRatio * moraleRatio; //计算作战意志损失比例
             unitData.NowMorale -= (int)(moraleLossRatio * Constants.INIT_MORALE);
         }
@@ -474,7 +474,6 @@ namespace Fight.System
                 changeRatio = reduceRatio[enemyUnitNum - ourUnitNum];
                 unitData.NowMorale -= (int)(changeRatio * Constants.INIT_MORALE);
             }
-
         }
 
         public void ChangeFatigue(UnitData unitData)

@@ -14,12 +14,7 @@ namespace Fight.Game.Legion
     {
         protected override void OnListenEvent()
         {
-            this.RegisterEvent<EndRoundButtonEvent>(_ =>
-            {
-                this.GetModel<IFightVisualModel>().InPlayerAction = false;
-                this.SendCommand(new CancelUnitFocusCommand());
-                EndRound();
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            this.RegisterEvent<EndRoundButtonEvent>(_ => { EndRound(); }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<SelectUnitFocusEvent>(e => { nowUnitController = e.controller; })
                 .UnRegisterWhenGameObjectDestroyed(gameObject);
         }
@@ -47,6 +42,8 @@ namespace Fight.Game.Legion
 
         protected override void EndRound()
         {
+            this.GetModel<IFightVisualModel>().InPlayerAction = false;
+            this.SendCommand(new CancelUnitFocusCommand());
             base.EndRound();
             this.SendCommand(new EndRoundCommand(true));
         }
