@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fight.Model;
+using Pathfinding;
 using QFramework;
 
 namespace Fight.System
@@ -39,7 +40,7 @@ namespace Fight.System
         bool MoveOnce(int unitId);
 
         /// <summary>
-        /// 检查是否可以攻击（泛指所有攻击种类）
+        /// 检查是否可以进攻（泛指所有攻击种类）
         /// </summary>
         /// <returns></returns>
         bool CheckCanAttack(int unitId);
@@ -64,9 +65,27 @@ namespace Fight.System
         UnitType UpdateUnitType(int unitId);
 
         /// <summary>
-        /// 检测战斗是否结束
+        /// 周围单位崩溃影响作战意志
+        /// </summary>
+        /// <param name="unitData"></param>
+        /// <param name="isOur">是否是友方的单位</param>
+        void AroundUnitCollapseChangeMorale(UnitData unitData, bool isOur);
+
+        /// <summary>
+        /// 临近单位影响作战意志
+        /// </summary>
+        /// <param name="unitData"></param>
+        void NearUnitChangeMorale(UnitData unitData);
+
+        /// <summary>
+        /// 疲劳值改变（一个军队的所有单位结束回合以后计算）
+        /// </summary>
+        void ChangeFatigue(UnitData unitData);
+
+        /// <summary>
+        /// 判断攻击范围够不够
         /// </summary>
         /// <returns></returns>
-        bool CheckFightFinish();
+        bool CheckAttackRange(Path path, UnitData unitData);
     }
 }

@@ -28,6 +28,7 @@ namespace Game
         protected override void OnControllerStart()
         {
             UIKit.OpenPanel<UIGameMenu>();
+            UIKit.OpenPanel<UIGameTest>(UILevel.PopUI);
         }
     }
 }

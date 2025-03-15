@@ -111,7 +111,7 @@ namespace Fight.Controller
                         }
 
                         _hoverTime += Time.deltaTime;
-                        if (_hoverTime >= Constants.HoverThreshold)
+                        if (_hoverTime >= Constants.HOVER_THRESHOLD)
                         {
                             Camera uiCam = GameObject.Find("UICamera").GetComponent<Camera>();
                             this.SendCommand(new TipsCommand(uiCam.ScreenToWorldPoint(mousePosition),

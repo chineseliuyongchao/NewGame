@@ -28,7 +28,7 @@ namespace Fight.Command
             switch (_type)
             {
                 case FightType.WAR_PREPARATIONS:
-                    GameApp.Interface.RegisterSystem<IFightInputSystem>(new FightInputWarPreparationsSystem());
+                    GameApp.Interface.RegisterSystem<IFightInputSystem>(new FightInputWarPrepareSystem());
                     this.SendEvent<WarPreparationsEvent>();
                     break;
                 case FightType.IN_FIGHT:

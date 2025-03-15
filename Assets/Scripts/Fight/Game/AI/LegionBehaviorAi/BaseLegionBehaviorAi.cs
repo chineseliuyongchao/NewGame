@@ -86,8 +86,8 @@ namespace Fight.Game.AI
             foreach (var unit in fightModel.AllUnit.Values)
             {
                 if (unit.unitData.currentPosIndex == positionIndex &&
-                    this.GetSystem<IFightSystem>().GetBelligerentsIdOfUnit(unit.unitData.unitId) !=
-                    this.GetSystem<IFightSystem>().GetBelligerentsIdOfUnit(currentUnitId))
+                    this.GetSystem<IFightSystem>().GetCampIdOfUnit(unit.unitData.unitId) !=
+                    this.GetSystem<IFightSystem>().GetCampIdOfUnit(currentUnitId))
                 {
                     return unit; // 找到敌方单位
                 }

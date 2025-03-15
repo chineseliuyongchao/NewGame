@@ -15,7 +15,8 @@ namespace Fight.Game.AI
         public override void Operation()
         {
             //最简单的ai行为就是让每个单位寻找最近的敌方单位靠近并且攻击
-            LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[baseLegionAi.computerLegion.legionId];
+            LegionInfo legionInfo = this.GetModel<IFightCreateModel>()
+                .AllLegions[baseLegionAi.computerLegion.legionInfo.legionId];
             List<int> unitId = new List<int>(legionInfo.allUnit.Keys);
             for (int i = 0; i < unitId.Count; i++)
             {

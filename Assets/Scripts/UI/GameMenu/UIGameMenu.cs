@@ -27,21 +27,6 @@ namespace UI
             base.OnOpen(uiData);
         }
 
-        protected override void OnShow()
-        {
-            base.OnShow();
-        }
-
-        protected override void OnHide()
-        {
-            base.OnHide();
-        }
-
-        protected override void OnClose()
-        {
-            base.OnClose();
-        }
-
         protected override void OnListenButton()
         {
             startGameButton.onClick.AddListener(

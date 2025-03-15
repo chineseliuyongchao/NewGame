@@ -150,26 +150,36 @@
         /// <summary>
         /// 临时变量，系统为玩家生成的军队id就是这个值
         /// </summary>
-        public const int PlayLegionId = 1001;
+        public const int PLAY_LEGION_ID = 1001;
 
         /// <summary>
         /// 兵种悬停展示气泡的时间
         /// </summary>
-        public const float HoverThreshold = 1f;
+        public const float HOVER_THRESHOLD = 1f;
 
         /// <summary>
         /// 初始行动点数
         /// </summary>
-        public const int InitActionPoints = 50;
+        public const int INIT_ACTION_POINTS = 50;
 
         /// <summary>
         /// 用于计算行动点数消耗的参数
         /// </summary>
-        public const int ActionParameter = 20;
+        public const int ACTION_PARAMETER = 20;
 
         /// <summary>
         /// 攻击（泛指所有攻击）消耗的行动点数
         /// </summary>
-        public const int AttackActionPoints = 20;
+        public const int ATTACK_ACTION_POINTS = 20;
+
+        /// <summary>
+        /// 标准作战意志
+        /// </summary>
+        public const int INIT_MORALE = 50;
+
+        /// <summary>
+        /// 标准疲劳值
+        /// </summary>
+        public const int INIT_FATIGUE = 50;
     }
 }

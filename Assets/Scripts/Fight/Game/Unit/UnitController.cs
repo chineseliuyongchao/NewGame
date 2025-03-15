@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Fight.Controller;
@@ -41,7 +42,7 @@ namespace Fight.Game.Unit
 
             unitProgressBar = transform.Find("unitProgressBar").GetComponent<UnitProgressBarController>();
             unitProgressBar.OnInit(unitData);
-            if (unitData.legionId == Constants.PlayLegionId)
+            if (unitData.legionId == Constants.PLAY_LEGION_ID)
             {
             }
             else
@@ -171,9 +172,29 @@ namespace Fight.Game.Unit
         /// <summary>
         /// 更新状态
         /// </summary>
-        /// <param name="unitType"></param>
-        public void UpdateType(UnitType unitType)
+        public void UpdateType()
         {
+            UnitType oldType = unitData.UnitType;
+            this.GetSystem<IFightComputeSystem>().UpdateUnitType(unitData.unitId);
+            UnitType newType = unitData.UnitType;
+            switch (oldType)
+            {
+                case UnitType.NORMAL:
+                {
+                    switch (newType)
+                    {
+                        case UnitType.COLLAPSE:
+                            List<UnitController> nearUnit = this.GetSystem<IFightSystem>().GetUnitsNearUnit(this);
+                            for (int i = 0; i < nearUnit.Count; i++)
+                            {
+                                nearUnit[i].NearUnitCollapse(unitData);
+                            }
+
+                            break;
+                    }
+                }
+                    break;
+            }
         }
 
         /// <summary>
@@ -200,6 +221,18 @@ namespace Fight.Game.Unit
                                        unitData.currentPosIndex / Constants.FightNodeVisibleWidthNum, 1) * 1000;
             view.ChangeOrderLayer(beginIndex);
             unitProgressBar.ChangeOrderLayer(beginIndex);
+        }
+
+        /// <summary>
+        /// 周围单位崩溃
+        /// </summary>
+        /// <param name="data"></param>
+        private void NearUnitCollapse(UnitData data)
+        {
+            this.GetSystem<IFightComputeSystem>().AroundUnitCollapseChangeMorale(unitData,
+                this.GetSystem<IFightSystem>().GetCampIdOfUnit(unitData.unitId) ==
+                this.GetSystem<IFightSystem>().GetCampIdOfUnit(data.unitId));
+            UpdateType();
         }
     }
 }

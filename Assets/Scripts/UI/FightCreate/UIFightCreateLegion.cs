@@ -48,20 +48,20 @@ namespace UI
                     return;
                 }
 
-                Dictionary<int, UIFightCreateLegion> belligerents;
-                switch (legionInfo.belligerentsId)
+                Dictionary<int, UIFightCreateLegion> camps;
+                switch (legionInfo.campId)
                 {
                     case Constants.BELLIGERENT1:
-                        belligerents = _uiFightCreate.belligerents1;
+                        camps = _uiFightCreate.campA;
                         break;
                     case Constants.BELLIGERENT2:
-                        belligerents = _uiFightCreate.belligerents2;
+                        camps = _uiFightCreate.campB;
                         break;
                     default:
                         return;
                 }
 
-                if (belligerents.Count <= 1)
+                if (camps.Count <= 1)
                 {
                     return; //如果阵营只剩一个军队也不能删除
                 }

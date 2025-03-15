@@ -2,6 +2,7 @@
 using Fight.Game.Unit;
 using Fight.Model;
 using Fight.System;
+using Game.GameTest;
 using Game.GameUtils;
 using Pathfinding;
 using QFramework;
@@ -21,6 +22,13 @@ namespace Fight.Game.AI
         public override async void StartBehavior(Action<bool> behaviorEnd)
         {
             _behaviorEnd = behaviorEnd;
+            if (this.GetModel<IGameTestModel>().AINoAttack)
+            {
+                isEnd = true;
+                BehaviorEnd();
+                return;
+            }
+
             UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
             UnitController targetUnitController = this.GetModel<IFightVisualModel>().AllUnit[targetUnitId];
             int nowIndex = unitController.unitData.currentPosIndex;
@@ -36,10 +44,11 @@ namespace Fight.Game.AI
             }
 
             UnitData unitData = this.GetSystem<IFightSystem>().FindUnit(unitId);
-            if (nowPath.vectorPath.Count - 2 >= unitData.armDataType.attackRange)
+            if (!this.GetSystem<IFightComputeSystem>().CheckAttackRange(nowPath, unitData))
             {
                 isEnd = true;
                 BehaviorEnd(); //如果开始行为时攻击范围不够就直接结束
+                return;
             }
 
             while (this.GetSystem<IFightComputeSystem>().CheckCanAttack(unitId))
@@ -68,8 +77,8 @@ namespace Fight.Game.AI
 
                 unitController.Attack();
                 targetUnitController.Attacked();
-                unitController.UpdateType(this.GetSystem<IFightComputeSystem>().UpdateUnitType(unitId));
-                targetUnitController.UpdateType(this.GetSystem<IFightComputeSystem>().UpdateUnitType(targetUnitId));
+                unitController.UpdateType();
+                targetUnitController.UpdateType();
                 await DelayManager.Instance.WaitTimeAsync(1);
                 if (needBreak)
                 {

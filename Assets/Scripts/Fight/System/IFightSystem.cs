@@ -53,7 +53,7 @@ namespace Fight.System
         /// </summary>
         /// <param name="unitId"></param>
         /// <returns></returns>
-        int GetBelligerentsIdOfUnit(int unitId);
+        int GetCampIdOfUnit(int unitId);
 
         /// <summary>
         /// 获取一个单位的周围6格的其他单位数据，返回一个列表，表示从该单位的正上方逆时针旋转的其他单位信息
@@ -73,5 +73,11 @@ namespace Fight.System
         /// 判断攻击范围是否足够，因为a*底层判断的方法是异步的，所以要用回调
         /// </summary>
         void IsInAttackRange(int unitId, int targetUnitId, Action<bool> res);
+
+        /// <summary>
+        /// 检测战斗是否结束
+        /// </summary>
+        /// <returns></returns>
+        bool CheckFightFinish();
     }
 }

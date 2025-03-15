@@ -24,7 +24,7 @@ namespace Fight.Game.AI
         {
             this.computerLegion = computerLegion;
             unitBehaviorAis = new Dictionary<int, UnitBehaviorAi>();
-            LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[computerLegion.legionId];
+            LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[computerLegion.legionInfo.legionId];
             List<int> unitId = new List<int>(legionInfo.allUnit.Keys);
             for (int i = 0; i < unitId.Count; i++)
             {

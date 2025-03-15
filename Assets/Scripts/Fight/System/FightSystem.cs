@@ -42,7 +42,7 @@ namespace Fight.System
         public bool IsPlayerUnit(int unitId)
         {
             UnitData data = FindUnit(unitId);
-            return data.legionId == Constants.PlayLegionId;
+            return data.legionId == Constants.PLAY_LEGION_ID;
         }
 
         public UnitData FindUnit(int unitId)
@@ -87,19 +87,19 @@ namespace Fight.System
             return new List<bool> { true, true, true, true, true, true, true, true };
         }
 
-        public int GetBelligerentsIdOfUnit(int unitId)
+        public int GetCampIdOfUnit(int unitId)
         {
             UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[unitId];
             int legionId = unitController.unitData.legionId;
-            return this.GetModel<IFightCreateModel>().AllLegions[legionId].belligerentsId;
+            return this.GetModel<IFightCreateModel>().AllLegions[legionId].campId;
         }
 
         public List<UnitController> GetUnitsNearUnit(UnitController unitController)
         {
             int index = unitController.unitData.currentPosIndex;
-            List<UnitController> result = new List<UnitController>(6);
+            List<UnitController> result = new List<UnitController>();
             int width = AStarModel.WorldNodeWidth;
-            FightVisualModel fightVisualModel = this.GetModel<FightVisualModel>();
+            IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
             //从最上方开始逆时针旋转
             int index1 = index + width;
             ObtainUnitController(fightVisualModel, index1, result);
@@ -164,12 +164,71 @@ namespace Fight.System
                             return;
                         }
 
-                        res(path.vectorPath.Count - 1 <= unitController.unitData.armDataType.attackRange);
+                        res(this.GetSystem<IFightComputeSystem>().CheckAttackRange(path, unitController.unitData));
                     });
             }
         }
 
-        private void ObtainUnitController(FightVisualModel fightVisualModel, int index, List<UnitController> list)
+        public bool CheckFightFinish()
+        {
+            bool canFinish = false;
+            bool belligerentFail = true;
+            List<int> allLegionKey = new List<int>(this.GetModel<IFightCreateModel>().AllLegions.Keys);
+            //玩家阵营的单位是不是都崩溃或者全军覆没了
+            for (int i = 0; i < allLegionKey.Count; i++)
+            {
+                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
+                if (legionInfo.campId != Constants.BELLIGERENT1)
+                {
+                    continue;
+                }
+
+                List<int> allUnitKey = new List<int>(legionInfo.allUnit.Keys);
+                for (int j = 0; j < allUnitKey.Count; j++)
+                {
+                    UnitData unitData = legionInfo.allUnit[allUnitKey[j]];
+                    if (unitData.UnitType == UnitType.NORMAL)
+                    {
+                        belligerentFail = false;
+                    }
+                }
+            }
+
+            if (belligerentFail)
+            {
+                canFinish = true;
+            }
+
+            belligerentFail = true;
+            //玩家敌对阵营的单位是不是都崩溃或者全军覆没了
+            for (int i = 0; i < allLegionKey.Count; i++)
+            {
+                LegionInfo legionInfo = this.GetModel<IFightCreateModel>().AllLegions[allLegionKey[i]];
+                if (legionInfo.campId != Constants.BELLIGERENT2)
+                {
+                    continue;
+                }
+
+                List<int> allUnitKey = new List<int>(legionInfo.allUnit.Keys);
+                for (int j = 0; j < allUnitKey.Count; j++)
+                {
+                    UnitData unitData = legionInfo.allUnit[allUnitKey[j]];
+                    if (unitData.UnitType == UnitType.NORMAL)
+                    {
+                        belligerentFail = false;
+                    }
+                }
+            }
+
+            if (belligerentFail)
+            {
+                canFinish = true;
+            }
+
+            return canFinish;
+        }
+
+        private void ObtainUnitController(IFightVisualModel fightVisualModel, int index, List<UnitController> list)
         {
             if (fightVisualModel.IndexToUnitIdDictionary.TryGetValue(index, out int value) &&
                 fightVisualModel.AllUnit.TryGetValue(value, out UnitController controller))
