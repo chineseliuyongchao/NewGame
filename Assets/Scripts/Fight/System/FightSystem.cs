@@ -4,6 +4,7 @@ using Fight.Game.Unit;
 using Fight.Model;
 using Fight.Utils;
 using Game.FightCreate;
+using Pathfinding;
 using QFramework;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ namespace Fight.System
 
         public bool CanWalkableIndex(int index)
         {
-            return this.GetModel<IAStarModel>().FightGridNodeInfoList[index].WalkableErosion;
+            return this.GetModel<IAStarModel>().FightGridNodeInfoList[index].Walkable;
         }
 
         public bool IsPlayerUnit(int unitId)
@@ -63,15 +64,22 @@ namespace Fight.System
         public void UnitChangePos(UnitController controller, int endIndex)
         {
             IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
-            int index = controller.unitData.currentPosIndex;
+            int startIndex = controller.unitData.currentPosIndex;
             fightVisualModel.UnitIdToIndexDictionary[controller.unitData.unitId] = endIndex;
-            if (!fightVisualModel.IndexToUnitIdDictionary.Remove(index))
-            {
-                fightVisualModel.IndexToUnitIdDictionary.Remove(controller.unitData.currentPosIndex);
-            }
-
+            fightVisualModel.IndexToUnitIdDictionary.Remove(startIndex);
             fightVisualModel.IndexToUnitIdDictionary[endIndex] = controller.unitData.unitId;
             controller.unitData.currentPosIndex = endIndex;
+            IAStarModel aStarModel = this.GetModel<IAStarModel>();
+            if (aStarModel.FightGridNodeInfoList.TryGetValue(startIndex, out GridNodeBase startNode))
+            {
+                startNode.Walkable = true;
+            }
+
+            if (aStarModel.FightGridNodeInfoList.TryGetValue(endIndex, out GridNodeBase endNode))
+            {
+                endNode.Walkable = false;
+                //todo 可以在这里设置网格标签为兵种占用，后续再加，但是网格标签应该被地形使用，如果后续需要更加细化可以拓展GridNodeBase类
+            }
         }
 
         public List<bool> FightBehaviorButtonShow(int unitId)
