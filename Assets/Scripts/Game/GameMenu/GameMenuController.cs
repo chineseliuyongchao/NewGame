@@ -21,8 +21,11 @@ namespace Game
                 this.GetSystem<IGameSystem>().LoadCurrentData();
             }
 
-            LocalizationSettings.SelectedLocale =
-                LocalizationSettings.AvailableLocales.Locales[this.GetModel<IGameSettingModel>().Language];
+            LocalizationSettings.InitializationOperation.Completed += (op) =>
+            {
+                int languageIndex = this.GetModel<IGameSettingModel>().Language;
+                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[languageIndex];
+            };
         }
 
         protected override void OnControllerStart()

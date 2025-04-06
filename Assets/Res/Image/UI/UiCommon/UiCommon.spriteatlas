@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UiCommon
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 9be8740474e93c749be8c3d91cfcc1a3, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 266c3450291b98e4c8c650006c16ce48, type: 3}
+  - {fileID: 21300000, guid: b8a2ac50c34d1704cb541563bee4df48, type: 3}
+  - {fileID: 21300000, guid: 25cc7f80a34402941aa312b257b935d1, type: 3}
+  - {fileID: 21300000, guid: 1b15d7d087dd1454ea80f52b3c67e78f, type: 3}
+  - {fileID: 21300000, guid: 4baee9d0eba714542903146a21d8ba43, type: 3}
+  - {fileID: 21300000, guid: 13d08f738983bda44a8c6f40becc531b, type: 3}
+  - {fileID: 21300000, guid: 33e97f851a4b9214ebb83ee7b55f88b5, type: 3}
+  - {fileID: 21300000, guid: 9d8741d6cc812654885a06e4fec9a63c, type: 3}
+  - {fileID: 21300000, guid: 89d8f827a32d8ee46852b485afe8cf36, type: 3}
+  - {fileID: 21300000, guid: 1c03b6b72e1433a45bf6f16d36e87cdf, type: 3}
+  - {fileID: 21300000, guid: 9d99f9c8bd7ff4c4a88649e76117fa4b, type: 3}
+  - {fileID: 21300000, guid: 0c327d7a9998c1b4c9f34d72def496ec, type: 3}
+  - {fileID: 21300000, guid: b487daba3eada9346a11d3b8feb50f25, type: 3}
+  - {fileID: 21300000, guid: 9125d1da213f2e34da07c9e045c80809, type: 3}
+  - {fileID: 21300000, guid: 3091e1acff327d247b6a242d772fcf9a, type: 3}
+  - {fileID: 21300000, guid: 95bedbcc6a838984993584283f7dd12a, type: 3}
+  - {fileID: 21300000, guid: bcdc4cec232627a4faa42192f73d0b5d, type: 3}
+  - {fileID: 21300000, guid: 24b965ddcae5fdb45be2b6fa40b08aef, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - button
+  - button2-6
+  - title2
+  - button2-1
+  - decoration
+  - thumb
+  - informationPanel1
+  - title
+  - button2-3
+  - button2-4
+  - button1
+  - button3
+  - informationPanel
+  - titleBg1
+  - button2-2
+  - slider
+  - titleBg
+  - button2-5
+  m_RenderDataMap: {}
+  m_Tag: UiCommon
+  m_IsVariant: 0
