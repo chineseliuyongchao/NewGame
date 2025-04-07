@@ -241,7 +241,7 @@ namespace QFramework
                     EditorSceneManager.SaveScene(scene);
 
                     // 标记 AssetBundle
-                    ResKitAssetsMenu.MarkAB(panelPrefabPath);
+                    ResKitAssetsMenu.MarkAb(panelPrefabPath);
 
 #if !UNITY_2022_1_OR_NEWER
                     var tester = new GameObject("Test{0}".FillFormat(panelName));

@@ -57,7 +57,7 @@ namespace QFramework
             SubProjectData.SplitAssetBundles2DefaultAndSubProjectDatas(defaultSubProjectData, subProjectDatas);
 
             // Choose the output path according to the build target.
-            var outputPath = Path.Combine(ResKitAssetsMenu.AssetBundlesOutputPath, GetPlatformName());
+            var outputPath = Path.Combine(ResKitAssetsMenu.ASSET_BUNDLES_OUTPUT_PATH, GetPlatformName());
             outputPath.CreateDirIfNotExists();
 
             BuildPipeline.BuildAssetBundles(outputPath, defaultSubProjectData.Builds.ToArray(),
@@ -76,7 +76,7 @@ namespace QFramework
 
             foreach (var subProjectData in subProjectDatas)
             {
-                outputPath = Path.Combine(ResKitAssetsMenu.AssetBundlesOutputPath + "/" + subProjectData.Name,
+                outputPath = Path.Combine(ResKitAssetsMenu.ASSET_BUNDLES_OUTPUT_PATH + "/" + subProjectData.Name,
                     GetPlatformName());
                 outputPath.CreateDirIfNotExists();
 

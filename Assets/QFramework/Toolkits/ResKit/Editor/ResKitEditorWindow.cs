@@ -314,7 +314,7 @@ namespace QFramework
 
                             if (GUILayout.Button(LocaleText.CancelMark, GUILayout.Width(75)))
                             {
-                                ResKitAssetsMenu.MarkAB(n);
+                                ResKitAssetsMenu.MarkAb(n);
 
                                 // EditorLifecycle.PushCommand(() => { ReloadMarkedList(); });
                             }

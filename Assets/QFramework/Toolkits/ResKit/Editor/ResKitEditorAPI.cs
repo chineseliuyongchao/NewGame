@@ -45,7 +45,7 @@ namespace QFramework
 
         public static void ForceClearAssetBundles()
         {
-            ResKitAssetsMenu.AssetBundlesOutputPath.DeleteDirIfExists();
+            ResKitAssetsMenu.ASSET_BUNDLES_OUTPUT_PATH.DeleteDirIfExists();
             (Application.streamingAssetsPath + "/AssetBundles").DeleteDirIfExists();
 
             AssetDatabase.Refresh();
