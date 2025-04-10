@@ -775,4 +775,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1620717e6f8481fa37e22b28523bc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objArmsGameObject: {fileID: 6588485371955350312, guid: 9d608dd6a7150d543bee306787702d0d, type: 3}
+  objArmsGameObject: {fileID: 6588485371955350312, guid: 23f72dab99d21d04da33902b3f33fb1b, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 141599232601418452}
   - component: {fileID: 1032635140093164947}
   m_Layer: 7
-  m_Name: "\u6C49\u519B\u6B65\u5175\u96C6\u56E2"
+  m_Name: "\u6C49\u519B\u6B65\u5175"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipsType: 0
-  id: 846185218
+  id: 2098893133
   showTips: 0
   objectTips: {fileID: 0}
   parent: {fileID: 0}
