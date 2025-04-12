@@ -83,7 +83,7 @@ namespace Editor.Compress
         /// <returns>是否符合条件</returns>
         static bool IsStartGameEx(string assetPath)
         {
-            return false;
+            return true;
         }
     }
 }

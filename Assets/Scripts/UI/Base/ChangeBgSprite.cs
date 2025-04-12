@@ -12,7 +12,7 @@ namespace UI
         protected override void OnInit()
         {
             base.OnInit();
-            int bgIndex = Random.Range(1, UiBg.BG_NUM + 1);
+            int bgIndex = Random.Range(0, UiBg.BG_NUM);
             Sprite bgSprite = resLoader.LoadSync<Sprite>("bg" + bgIndex);
             bg.sprite = bgSprite;
         }
