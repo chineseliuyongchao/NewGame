@@ -64,10 +64,14 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 84255b25e59de6c46a7f1bb46e4428fd, type: 3}
   - {fileID: 21300000, guid: 9125d1da213f2e34da07c9e045c80809, type: 3}
+  - {fileID: 21300000, guid: b08dbb4bc3babef47b7cc49a16667b92, type: 3}
+  - {fileID: 21300000, guid: 4c4236ac36b547642befc59a853146e7, type: 3}
   - {fileID: 21300000, guid: bcdc4cec232627a4faa42192f73d0b5d, type: 3}
   m_PackedSpriteNamesToIndex:
   - titleBg2
   - titleBg1
+  - titleBg4
+  - titleBg3
   - titleBg0
   m_RenderDataMap: {}
   m_Tag: titleBg

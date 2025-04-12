@@ -64,10 +64,24 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 6cea127044dd0624d81e2baeb47a623b, type: 3}
   - {fileID: 21300000, guid: 4a590d53e14d5a646afab8548bfcbf5e, type: 3}
+  - {fileID: 21300000, guid: 9de60f06ae427d648ae76c6427c65c84, type: 3}
+  - {fileID: 21300000, guid: 57dd8de6e1c9b064e9b2a214e605c71b, type: 3}
+  - {fileID: 21300000, guid: 1b3a566825698364a9be081046d2ca06, type: 3}
+  - {fileID: 21300000, guid: 314ff3880d525be49962c5679639c2b7, type: 3}
+  - {fileID: 21300000, guid: 2ab3a0296aebcf14bb532c8a0d4458d2, type: 3}
+  - {fileID: 21300000, guid: 071f3df9edbaa894781b94c4d2d1b7c6, type: 3}
+  - {fileID: 21300000, guid: 9495260e29d7f254f8be673e47fab41d, type: 3}
   - {fileID: 21300000, guid: 06f0c9febe4c78a4c987d1b0880c7a67, type: 3}
   m_PackedSpriteNamesToIndex:
   - InfoBar2
   - InfoBar0
+  - InfoBar3
+  - InfoBar7
+  - InfoBar4
+  - InfoBar9
+  - InfoBar6
+  - InfoBar8
+  - InfoBar5
   - InfoBar1
   m_RenderDataMap: {}
   m_Tag: InfoBar

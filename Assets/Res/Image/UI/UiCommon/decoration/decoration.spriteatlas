@@ -63,10 +63,20 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 4baee9d0eba714542903146a21d8ba43, type: 3}
+  - {fileID: 21300000, guid: fa1b7271eb5091d42b9a7a782f997cd7, type: 3}
+  - {fileID: 21300000, guid: 450ebc86ecc78f24ba9aef7bf4cadb99, type: 3}
+  - {fileID: 21300000, guid: 3c4b6dc67b40de8498f91e38f8db1ff3, type: 3}
   - {fileID: 21300000, guid: e0bbd32b25f1dbd46bb01ee78bfe0719, type: 3}
+  - {fileID: 21300000, guid: 90e7b73baffa5654697bfa348bd97aa0, type: 3}
+  - {fileID: 21300000, guid: c3aa330fbdb2a8d49a90517a88a877f2, type: 3}
   m_PackedSpriteNamesToIndex:
   - decoration0
+  - decoration5
+  - decoration6
+  - decoration4
   - decoration2
+  - decoration7
+  - decoration3
   m_RenderDataMap: {}
   m_Tag: decoration
   m_IsVariant: 0
