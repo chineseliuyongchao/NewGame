@@ -20,14 +20,38 @@ SpriteAtlas:
       readable: 0
       crunchedCompression: 0
       sRGB: 1
-    platformSettings: []
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: ANDROID
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: PHONE
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
     packingSettings:
       serializedVersion: 2
       padding: 4
       blockOffset: 1
       allowAlphaSplitting: 0
       enableRotation: 1
-      enableTightPacking: 1
+      enableTightPacking: 0
       enableAlphaDilation: 0
     secondaryTextureSettings: {}
     variantMultiplier: 1
@@ -42,15 +66,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: f11a7c2757ae1394dad88b096e9681ab, type: 3}
   - {fileID: 21300000, guid: 24006b679e404c748a178546875706f4, type: 3}
   - {fileID: 21300000, guid: 1ac369b8571d16c428252e74f4f34563, type: 3}
-  - {fileID: 21300000, guid: 4f54a43a90355254cabf1870f2a9d679, type: 3}
-  - {fileID: 21300000, guid: 357ac3df5883ee94f858071871c1914f, type: 3}
   m_PackedSpriteNamesToIndex:
   - progressBg
   - white
   - mask
   - none
-  - delete
-  - add
   m_RenderDataMap: {}
   m_Tag: common
   m_IsVariant: 0

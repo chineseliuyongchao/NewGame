@@ -70,8 +70,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 72845cb275aecc34a8cff1d6cd9cbd5f, type: 3}
   - {fileID: 21300000, guid: 4950d7e3d18fbf5499479d233e37c9ba, type: 3}
   - {fileID: 21300000, guid: 7c1407268d73f4d45a9167f3e93b93c9, type: 3}
+  - {fileID: 21300000, guid: 00c023a685dfa0d4d97f7075efd2c283, type: 3}
   - {fileID: 21300000, guid: 989010f6e9e16c440b05fd614f88108c, type: 3}
   - {fileID: 21300000, guid: 89d8f827a32d8ee46852b485afe8cf36, type: 3}
+  - {fileID: 21300000, guid: 7b724c77c6bdd8e47b7d68572cc09f01, type: 3}
   - {fileID: 21300000, guid: 1c03b6b72e1433a45bf6f16d36e87cdf, type: 3}
   - {fileID: 21300000, guid: 9d99f9c8bd7ff4c4a88649e76117fa4b, type: 3}
   - {fileID: 21300000, guid: ced7ade93c6ae554aa1c4332458b19a3, type: 3}
@@ -91,8 +93,10 @@ SpriteAtlas:
   - button4
   - button10
   - button9
+  - button13
   - button6
   - button2-3
+  - button14
   - button2-4
   - button1
   - button7
