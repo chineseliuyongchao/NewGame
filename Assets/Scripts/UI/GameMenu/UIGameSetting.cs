@@ -3,6 +3,7 @@ using Game.GameMenu;
 using QFramework;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -16,13 +17,13 @@ namespace UI
     public partial class UIGameSetting : UIBase
     {
         public List<GameObject> allSettingGroup;
+        public List<Button> allLanguageButton;
 
         protected override void OnInit(IUIData uiData = null)
         {
             mData = uiData as UIGameSettingData ?? new UIGameSettingData();
             // please add init code here
             base.OnInit(uiData);
-            Dropdown.value = this.GetModel<IGameSettingModel>().Language;
             showUnitHp.isOn = this.GetModel<IGameSettingModel>().ShowUnitHp;
             showUnitTroops.isOn = this.GetModel<IGameSettingModel>().ShowUnitTroops;
             showUnitMorale.isOn = this.GetModel<IGameSettingModel>().ShowUnitMorale;
@@ -42,11 +43,15 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            Dropdown.onValueChanged.AddListener(value =>
+            for (int i = 0; i < allLanguageButton.Count; i++)
             {
-                this.GetModel<IGameSettingModel>().Language = value;
-                LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[value];
-            });
+                var i1 = i;
+                allLanguageButton[i].onClick.AddListener(() =>
+                {
+                    this.GetModel<IGameSettingModel>().Language = i1;
+                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[i1];
+                });
+            }
             showUnitHp.onValueChanged.AddListener(value => { this.GetModel<IGameSettingModel>().ShowUnitHp = value; });
             showUnitTroops.onValueChanged.AddListener(value =>
             {

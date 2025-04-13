@@ -66,6 +66,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 266c3450291b98e4c8c650006c16ce48, type: 3}
   - {fileID: 21300000, guid: b8a2ac50c34d1704cb541563bee4df48, type: 3}
   - {fileID: 21300000, guid: 1b15d7d087dd1454ea80f52b3c67e78f, type: 3}
+  - {fileID: 21300000, guid: e0b196822fe6fb64980683e34ca3f5f2, type: 3}
   - {fileID: 21300000, guid: 72845cb275aecc34a8cff1d6cd9cbd5f, type: 3}
   - {fileID: 21300000, guid: 4950d7e3d18fbf5499479d233e37c9ba, type: 3}
   - {fileID: 21300000, guid: 7c1407268d73f4d45a9167f3e93b93c9, type: 3}
@@ -86,6 +87,7 @@ SpriteAtlas:
   - button0
   - button2-6
   - button2-1
+  - button12
   - button4
   - button10
   - button9

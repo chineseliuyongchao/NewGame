@@ -64,17 +64,23 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 6a53f270ff99cb748821f76d143b29a6, type: 3}
   - {fileID: 21300000, guid: e2496fb013458754d8f0c60f65c908fd, type: 3}
+  - {fileID: 21300000, guid: 130aad01855352349814702dd0e35d22, type: 3}
+  - {fileID: 21300000, guid: 51535d5295e13b54abb3571df40fbddb, type: 3}
   - {fileID: 21300000, guid: 33ab74732806ccb4cbf29428cfed497c, type: 3}
   - {fileID: 21300000, guid: 13d08f738983bda44a8c6f40becc531b, type: 3}
   - {fileID: 21300000, guid: e1022a833b1cf0b44a5a7d75f36b25d0, type: 3}
   - {fileID: 21300000, guid: 060a5014d0aa52947a5ad2baa683ad38, type: 3}
   - {fileID: 21300000, guid: 153dbe363a6ebc446b4588f1b9340af9, type: 3}
+  - {fileID: 21300000, guid: 3d93d9274af9b044eb2cc7c9c71605d9, type: 3}
   - {fileID: 21300000, guid: 67f5c8089bf0bf146a4cfdef4f6b1a91, type: 3}
+  - {fileID: 21300000, guid: 5781ce78dacf3e3439cfed5a27086585, type: 3}
   - {fileID: 21300000, guid: e467e4e99ad7e2542b3d1267699d3292, type: 3}
+  - {fileID: 21300000, guid: e9dcc31aea925f44b8526b0953445ae1, type: 3}
   - {fileID: 21300000, guid: 1f6a946b166de754ba77c0910507f20e, type: 3}
   - {fileID: 21300000, guid: 639226eb1e25d7b4bb68fa05c8d137dc, type: 3}
   - {fileID: 21300000, guid: a7a5eeac89d82ba458ca00fb621199f9, type: 3}
   - {fileID: 21300000, guid: 95bedbcc6a838984993584283f7dd12a, type: 3}
+  - {fileID: 21300000, guid: b622374dab5d91748829071f0ebff1d9, type: 3}
   - {fileID: 21300000, guid: 8469b94d5aa9fd141860bd0ea823e755, type: 3}
   - {fileID: 21300000, guid: 71154c7e9fbc7b444a9d04c541654316, type: 3}
   - {fileID: 21300000, guid: 2a13748e1c17c7b4fb8fb9285875a72a, type: 3}
@@ -83,17 +89,23 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - composeDecoration0
   - slider4
+  - checkmark1
+  - checkmark2
   - thumb3
   - thumb0
   - composeDecoration3
   - slider
   - thumb
+  - toggle2
   - thumb4
+  - checkmark0
   - slider3
+  - toggle1
   - composeDecoration2
   - slider2
   - composeButton0
   - slider0
+  - toggle0
   - thumb1
   - composeDecoration1
   - thumb2

@@ -148,5 +148,27 @@ namespace QFramework
         public void OnSingletonInit()
         {
         }
+
+        public Rect GetVisibleSize()
+        {
+            var rect = GetComponent<RectTransform>().rect;
+            // Debug.LogWarning("CanvasScaler.matchWidthOrHeight:" + CanvasScaler.matchWidthOrHeight);
+            // Debug.LogWarning("CanvasScaler.matchWidthOrHeight:x=" + rect.x + ",y=" + rect.y+ ",width=" + rect.width+ ",height=" + rect.height);
+            // Debug.LogWarning("CanvasScaler.referenceResolution:x=" + CanvasScaler.referenceResolution.x + ",y=" + CanvasScaler.referenceResolution.y);
+
+            // if (CanvasScaler.matchWidthOrHeight == 0)
+            // {
+            //     if (rect.width > rect.height)
+            //     {
+            //         return new Rect(rect.y, rect.x, rect.height, rect.width);
+            //     }
+            //
+            //     return rect;
+            // }
+            // else
+            // {
+            return rect;
+            // }
+        }
     }
 }

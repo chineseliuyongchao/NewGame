@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:52e9cceb-96d5-486d-a511-d560dc1c72e4
+	// Generate Id:ecaa06e1-cb34-4faf-92b7-d6aec84db361
 	public partial class UIGameSetting
 	{
 		public const string Name = "UIGameSetting";
@@ -19,7 +19,7 @@ namespace UI
 		[SerializeField]
 		private RectTransform basicSettingGroup;
 		[SerializeField]
-		private TMPro.TMP_Dropdown Dropdown;
+		private RectTransform fileDataContent;
 		[SerializeField]
 		private RectTransform fightSettingGroup;
 		[SerializeField]
@@ -43,7 +43,7 @@ namespace UI
 			basicSettingButton = null;
 			fightSettingButton = null;
 			basicSettingGroup = null;
-			Dropdown = null;
+			fileDataContent = null;
 			fightSettingGroup = null;
 			showUnitHp = null;
 			showUnitTroops = null;

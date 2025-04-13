@@ -1158,6 +1158,8 @@ GameObject:
   - component: {fileID: 1872216320385033771}
   - component: {fileID: 2341350301394480597}
   - component: {fileID: 8354376107607902437}
+  - component: {fileID: 348330448470958395}
+  - component: {fileID: 7115843628788986994}
   m_Layer: 5
   m_Name: backGround
   m_TagString: Untagged
@@ -1223,6 +1225,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &348330448470958395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773852039907513415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e386b924fe4d468cc860046f9c8934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bg: {fileID: 8354376107607902437}
+  isPure: 0
+--- !u!114 &7115843628788986994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3773852039907513415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc8127a527d46048b1c33a7205439b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bg: {fileID: 1872216320385033771}
+  changeX: 1
+  changeY: 1
 --- !u!1 &5925325272015520390
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,7 +1313,6 @@ GameObject:
   - component: {fileID: 7312524352712995274}
   - component: {fileID: 1147777700521408372}
   - component: {fileID: 6034335984917251205}
-  - component: {fileID: 693908593180386760}
   m_Layer: 5
   m_Name: UIGameMenu
   m_TagString: Untagged
@@ -1352,16 +1382,3 @@ MonoBehaviour:
   startGameButton: {fileID: 5652858214593395434}
   fightButton: {fileID: 8029103367470031610}
   settingButton: {fileID: 28937494115421322}
---- !u!114 &693908593180386760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7312524352712995272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e386b924fe4d468cc860046f9c8934, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bg: {fileID: 8354376107607902437}
