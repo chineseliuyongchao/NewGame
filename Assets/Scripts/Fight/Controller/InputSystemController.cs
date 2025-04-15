@@ -5,6 +5,7 @@ using Fight.Tools.Tips;
 using Fight.Utils;
 using Game.GameBase;
 using QFramework;
+using UI.Base;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -54,7 +55,8 @@ namespace Fight.Controller
 
         private void OnClickPerformed(InputAction.CallbackContext context)
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            _hoverTime = 0f;
+            if (UIClickInterceptor.IsUIBlockingClick(Mouse.current.position.ReadValue()))
             {
                 // 正在操作UI，阻断操作
                 return;
@@ -75,18 +77,16 @@ namespace Fight.Controller
                     this.GetSystem<IFightInputSystem>().MouseButtonRight();
                 }
             }
-
-            _hoverTime = 0f;
         }
 
         private void OnRightClickDragPerformed(InputAction.CallbackContext context)
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            _hoverTime = 0f;
+            if (UIClickInterceptor.IsUIBlockingClick(Mouse.current.position.ReadValue()))
             {
                 // 正在操作UI，阻断操作
                 return;
             }
-            _hoverTime = 0f;
             this.SendCommand(new MouseDragCommand(context.ReadValue<Vector2>()));
         }
 

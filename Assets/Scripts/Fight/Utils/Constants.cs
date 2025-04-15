@@ -69,6 +69,16 @@
 
         #endregion
 
+        #region 兵种集团对应的具体子单位id
+
+        public const int Child1 = 1;
+        public const int Child2 = 2;
+        public const int Child3 = 3;
+        public const int Child4 = 4;
+        public const int Child5 = 5;
+
+        #endregion
+
         #region 兵种可视化界面的对应部位id
 
         /// <summary>
@@ -181,5 +191,10 @@
         /// 标准疲劳值
         /// </summary>
         public const int INIT_FATIGUE = 50;
+
+        /// <summary>
+        /// 兵种ab包名
+        /// </summary>
+        public const string AssetsPrefabUnitAb = "assets_prefab_unit_ab";
     }
 }

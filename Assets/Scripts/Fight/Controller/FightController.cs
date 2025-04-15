@@ -135,7 +135,8 @@ namespace Fight.Controller
                     {
                         UnitController unitController = this.GetModel<IFightVisualModel>().AllUnit[allUnitKey[i]];
                         unitController.unitData.NowActionPoints = Constants.INIT_ACTION_POINTS;
-                        unitController.unitProgressBar.UpdateProgress();
+                        //progressBar todo
+                        // unitController.unitProgressBar.UpdateProgress();
                     }
                 }
                 else

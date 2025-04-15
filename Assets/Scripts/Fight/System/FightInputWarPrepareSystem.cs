@@ -47,6 +47,7 @@ namespace Fight.System
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Vector2 worldPosition = cam.ScreenToWorldPoint(mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPosition, Vector2.zero);
+            
             IFightVisualModel fightVisualModel = this.GetModel<IFightVisualModel>();
             if (hit.collider)
             {
