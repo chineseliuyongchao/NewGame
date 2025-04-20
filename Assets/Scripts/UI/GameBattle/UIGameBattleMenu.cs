@@ -50,11 +50,11 @@ namespace UI
             });
             saveButton.onClick.AddListener(() =>
             {
-                UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData(false, false));
+                UIKit.OpenPanel<UIStartBattle>(new UIStartGamePanelData(false, false));
             });
             loadButton.onClick.AddListener(() =>
             {
-                UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData(true, false));
+                UIKit.OpenPanel<UIStartBattle>(new UIStartGamePanelData(true, false));
             });
             settingButton.onClick.AddListener(() => { UIKit.OpenPanel<UIGameSetting>(new UIGameSettingData()); });
             closeButton.onClick.AddListener(CloseSelf);

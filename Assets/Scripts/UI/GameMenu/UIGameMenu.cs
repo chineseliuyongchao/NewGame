@@ -30,7 +30,7 @@ namespace UI
         protected override void OnListenButton()
         {
             startGameButton.onClick.AddListener(
-                () => { UIKit.OpenPanel<UIStartGamePanel>(new UIStartGamePanelData()); });
+                () => { UIKit.OpenPanel<UIStartBattle>(new UIStartGamePanelData()); });
             fightButton.onClick.AddListener(() =>
             {
                 this.GetSystem<IGameSystem>().ChangeScene(SceneType.CREATE_FIGHT_SCENE);

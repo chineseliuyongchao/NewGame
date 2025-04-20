@@ -7,7 +7,6 @@ SpriteAtlas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: button
-  serializedVersion: 2
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -66,6 +65,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 501abd209e8bb2241b092888aa7aa3ed, type: 3}
   - {fileID: 21300000, guid: 266c3450291b98e4c8c650006c16ce48, type: 3}
   - {fileID: 21300000, guid: b8a2ac50c34d1704cb541563bee4df48, type: 3}
+  - {fileID: 21300000, guid: 670630d0ecd8b7e41a5a870b3703a18d, type: 3}
   - {fileID: 21300000, guid: 1b15d7d087dd1454ea80f52b3c67e78f, type: 3}
   - {fileID: 21300000, guid: e0b196822fe6fb64980683e34ca3f5f2, type: 3}
   - {fileID: 21300000, guid: 72845cb275aecc34a8cff1d6cd9cbd5f, type: 3}
@@ -85,10 +85,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 24b965ddcae5fdb45be2b6fa40b08aef, type: 3}
   - {fileID: 21300000, guid: c425cd7eb432cd5448f4de80332f43f5, type: 3}
   - {fileID: 21300000, guid: 237805ce64f3b2f48a16206b5405d957, type: 3}
+  - {fileID: 21300000, guid: 22f9fd9f3532b164980c2e42dbf8708f, type: 3}
   m_PackedSpriteNamesToIndex:
   - button8-1
   - button0
   - button2-6
+  - button16
   - button2-1
   - button12
   - button4
@@ -108,7 +110,7 @@ SpriteAtlas:
   - button2-5
   - button8-3
   - button11
+  - button15
   m_RenderDataMap: {}
   m_Tag: button
   m_IsVariant: 0
-  m_IsPlaceholder: 0

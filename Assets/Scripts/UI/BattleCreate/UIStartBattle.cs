@@ -15,24 +15,24 @@ namespace UI
         /// 本次打开存档界面是读取存档还是覆盖存档
         /// 
         /// </summary>
-        public readonly bool IsLoad;
+        public readonly bool isLoad;
 
         /// <summary>
         /// 本次打开存档界面是在主菜单还是游戏界面
         /// </summary>
-        public readonly bool IsInMenu;
+        public readonly bool isInMenu;
 
         public UIStartGamePanelData(bool isLoad = true, bool isInMenu = true)
         {
-            this.IsLoad = isLoad;
-            this.IsInMenu = isInMenu;
+            this.isLoad = isLoad;
+            this.isInMenu = isInMenu;
         }
     }
 
     /// <summary>
     /// 开始游戏界面
     /// </summary>
-    public partial class UIStartGamePanel : UIBase
+    public partial class UIStartBattle : UIBase
     {
         public UIFileData uiFileData;
 
@@ -49,21 +49,6 @@ namespace UI
             mData = uiData as UIStartGamePanelData ?? new UIStartGamePanelData();
             // please add open code here
             base.OnOpen(uiData);
-        }
-
-        protected override void OnShow()
-        {
-            base.OnShow();
-        }
-
-        protected override void OnHide()
-        {
-            base.OnHide();
-        }
-
-        protected override void OnClose()
-        {
-            base.OnClose();
         }
 
         protected override void OnListenButton()
@@ -99,10 +84,10 @@ namespace UI
             for (int i = 0; i < list.Count; i++)
             {
                 UIFileData fileData = Instantiate(uiFileData, fileDataContent);
-                fileData.InitUI(list[i], mData.IsLoad);
+                fileData.InitUI(list[i], mData.isLoad);
             }
 
-            if (mData.IsLoad)
+            if (mData.isLoad)
             {
                 newFileButton.gameObject.SetActive(false);
             }
@@ -111,7 +96,7 @@ namespace UI
                 newGameButton.gameObject.SetActive(false);
             }
 
-            if (mData.IsInMenu)
+            if (mData.isInMenu)
             {
                 backToGameButton.gameObject.SetActive(false);
             }

@@ -6,7 +6,7 @@ using QFramework;
 namespace UI
 {
 	// Generate Id:014a1702-be13-4aa9-90b4-be8a2bda8f09
-	public partial class UIStartGamePanel
+	public partial class UIStartBattle
 	{
 		public const string Name = "UIStartGamePanel";
 		
