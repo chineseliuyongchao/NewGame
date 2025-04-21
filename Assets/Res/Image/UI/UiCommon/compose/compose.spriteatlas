@@ -71,6 +71,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 33ab74732806ccb4cbf29428cfed497c, type: 3}
   - {fileID: 21300000, guid: 13d08f738983bda44a8c6f40becc531b, type: 3}
   - {fileID: 21300000, guid: e1022a833b1cf0b44a5a7d75f36b25d0, type: 3}
+  - {fileID: 21300000, guid: 5d1caae3bc91db94e86beeb756c504c1, type: 3}
   - {fileID: 21300000, guid: 1e459e5627cc99b489cf817a25b22eb3, type: 3}
   - {fileID: 21300000, guid: df7f3f66855cfc94aa419acc380b925d, type: 3}
   - {fileID: 21300000, guid: 3d93d9274af9b044eb2cc7c9c71605d9, type: 3}
@@ -88,6 +89,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 71154c7e9fbc7b444a9d04c541654316, type: 3}
   - {fileID: 21300000, guid: 2a13748e1c17c7b4fb8fb9285875a72a, type: 3}
   - {fileID: 21300000, guid: 56e5fb8e2fa6e9b44807bcd3e3619a9c, type: 3}
+  - {fileID: 21300000, guid: 9b3ede4f341368648881d16c66ed6111, type: 3}
   - {fileID: 21300000, guid: befe216f21927bf40b43a9131cd114e8, type: 3}
   m_PackedSpriteNamesToIndex:
   - composeDecoration0
@@ -99,6 +101,7 @@ SpriteAtlas:
   - thumb3
   - thumb0
   - composeDecoration3
+  - thumb5
   - composeBG1
   - composebutton1
   - toggle2
@@ -116,6 +119,7 @@ SpriteAtlas:
   - composeDecoration1
   - thumb2
   - effect
+  - slider5
   - slider1
   m_RenderDataMap: {}
   m_Tag: compose
