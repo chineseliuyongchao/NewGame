@@ -23,8 +23,10 @@ namespace Fight.Command
         protected override void OnExecute()
         {
             this.GetModel<IFightVisualModel>().FightType = _type;
-            GameApp.Interface.UnRegisterSystem<IFightInputSystem>();
-
+            if (GameApp.Interface.GetSystem<IFightInputSystem>() != null)
+            {
+                GameApp.Interface.UnRegisterSystem<IFightInputSystem>();
+            }
             switch (_type)
             {
                 case FightType.WAR_PREPARATIONS:
