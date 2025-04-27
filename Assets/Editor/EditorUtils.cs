@@ -1,8 +1,10 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Editor
 {
@@ -16,15 +18,15 @@ namespace Editor
             SceneManager.LoadScene(0);
         }
 #endif
+        
+        private static readonly string targetTMPFontPath = "Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset";
+        private static readonly string targetFontPath = "Assets/Res/Font/simhei.ttf";
 
         [MenuItem("Tools/TMPUGUI → Text (指定字体)")]
         public static void ReplaceTMPUGUI()
         {
-            string targetTMPFontPath = "Assets/Res/Font/fontFine.asset";
-            string targetUIFontPath = "Assets/Res/Font/simhei.ttf";
-
             TMP_FontAsset targetTMPFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(targetTMPFontPath);
-            Font targetUIFont = AssetDatabase.LoadAssetAtPath<Font>(targetUIFontPath);
+            Font targetUIFont = AssetDatabase.LoadAssetAtPath<Font>(targetFontPath);
 
             if (targetTMPFont == null || targetUIFont == null)
             {
@@ -81,9 +83,6 @@ namespace Editor
         [MenuItem("Tools/TMP → Text (指定字体)")]
         public static void ReplaceTMP()
         {
-            string targetTMPFontPath = "Assets/Res/Font/fontFine.asset";
-            string targetFontPath = "Assets/Res/Font/simhei.ttf";
-
             TMP_FontAsset targetTMPFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(targetTMPFontPath);
             Font targetFont = AssetDatabase.LoadAssetAtPath<Font>(targetFontPath);
 
@@ -122,6 +121,12 @@ namespace Editor
                         textMesh.fontSize = Mathf.RoundToInt(fontSize);
                         textMesh.color = color;
                         textMesh.anchor = ConvertAlignment(alignment);
+
+                        MeshRenderer renderer = go.GetComponent<MeshRenderer>();
+                        if (renderer)
+                        {
+                            renderer.materials = Array.Empty<Material>();
+                        }
 
                         changed = true;
                     }
