@@ -1,24 +1,27 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using QFramework;
 
 namespace UI
 {
-	// Generate Id:3fd33e05-64e0-426c-95e6-51b91622e79c
+	// Generate Id:6c7d8b03-3400-4f88-b563-67bd6f7437e4
 	public partial class UIBattleCreate
 	{
-		public const string Name = "UIGameCreate";
+		public const string Name = "UIBattleCreate";
 		
 		[SerializeField]
 		private UnityEngine.UI.Button createButton;
 		[SerializeField]
 		private UnityEngine.UI.Button leaveButton;
 		[SerializeField]
-		private TMPro.TMP_InputField inputName;
+		private UnityEngine.UI.InputField inputName;
 		[SerializeField]
-		private TMPro.TMP_InputField inputAge;
+		private UnityEngine.UI.InputField inputAge;
 		[SerializeField]
-		private TMPro.TMP_InputField inputFamilyName;
+		private UnityEngine.UI.InputField inputFamilyName;
 		
-		private UIGameCreateData mPrivateData = null;
+		private UIBattleCreateData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
@@ -31,7 +34,7 @@ namespace UI
 			mData = null;
 		}
 		
-		public UIGameCreateData Data
+		public UIBattleCreateData Data
 		{
 			get
 			{
@@ -39,11 +42,11 @@ namespace UI
 			}
 		}
 		
-		UIGameCreateData mData
+		UIBattleCreateData mData
 		{
 			get
 			{
-				return mPrivateData ?? (mPrivateData = new UIGameCreateData());
+				return mPrivateData ?? (mPrivateData = new UIBattleCreateData());
 			}
 			set
 			{

@@ -183,7 +183,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: fileName
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &682966620502248668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,7 +448,7 @@ MonoBehaviour:
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 0
   stopTime: 0
-  fileName: {fileID: 0}
+  fileName: {fileID: 682966620502248668}
   openButton: {fileID: 7065953011423059739}
   coverButton: {fileID: 4133117990567699388}
   deleteButton: {fileID: 5496192631565232199}

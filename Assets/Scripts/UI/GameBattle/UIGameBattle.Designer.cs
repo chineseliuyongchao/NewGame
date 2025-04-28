@@ -5,13 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:83fd43f0-52ba-47b9-88ee-a5b140e7f4b2
+	// Generate Id:ac4682d2-8b65-4470-b880-ae2117e3c445
 	public partial class UIGameBattle
 	{
-		public const string Name = "UIGameLobby";
+		public const string Name = "UIGameBattle";
 		
 		[SerializeField]
-		private TMPro.TextMeshProUGUI timeView;
+		private UnityEngine.UI.Text timeView;
 		[SerializeField]
 		private UnityEngine.UI.Button menuButton;
 		[SerializeField]
@@ -21,7 +21,7 @@ namespace UI
 		[SerializeField]
 		private UnityEngine.UI.Image timePass;
 		
-		private UIGameLobbyData mPrivateData = null;
+		private UIGameBattleData mPrivateData = null;
 		
 		protected override void ClearUIComponents()
 		{
@@ -34,7 +34,7 @@ namespace UI
 			mData = null;
 		}
 		
-		public UIGameLobbyData Data
+		public UIGameBattleData Data
 		{
 			get
 			{
@@ -42,11 +42,11 @@ namespace UI
 			}
 		}
 		
-		UIGameLobbyData mData
+		UIGameBattleData mData
 		{
 			get
 			{
-				return mPrivateData ?? (mPrivateData = new UIGameLobbyData());
+				return mPrivateData ?? (mPrivateData = new UIGameBattleData());
 			}
 			set
 			{

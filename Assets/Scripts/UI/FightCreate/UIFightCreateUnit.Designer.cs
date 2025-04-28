@@ -5,13 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:4e04b076-4e57-41e1-ba18-b14614e8794e
+	// Generate Id:10ee8277-c9c1-4cdd-a17a-5fd22cc92b9a
 	public partial class UIFightCreateUnit
 	{
 		public const string Name = "UIFightCreateUnit";
 		
 		[SerializeField]
-		private TMPro.TextMeshProUGUI armName;
+		private UnityEngine.UI.Text armName;
 		[SerializeField]
 		private UnityEngine.UI.Button delete;
 		

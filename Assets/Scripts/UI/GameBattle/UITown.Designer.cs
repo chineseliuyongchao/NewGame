@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:da9ce7a7-ce35-435e-86e7-9e2a9077e1aa
+	// Generate Id:055cb71c-6f78-4d6f-b5ba-2a48a45ed9a2
 	public partial class UITown
 	{
 		public const string Name = "UITown";
@@ -17,17 +17,17 @@ namespace UI
 		[SerializeField]
 		private UnityEngine.UI.Button leaveButton;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI townName;
+		private UnityEngine.UI.Text townName;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI prosperityValue;
+		private UnityEngine.UI.Text prosperityValue;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI populationValue;
+		private UnityEngine.UI.Text populationValue;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI levelValue;
+		private UnityEngine.UI.Text levelValue;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI militiaValue;
+		private UnityEngine.UI.Text militiaValue;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI introduce;
+		private UnityEngine.UI.Text introduce;
 		
 		private UITownData mPrivateData = null;
 		

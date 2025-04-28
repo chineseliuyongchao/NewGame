@@ -62,7 +62,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: roleName
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &2141934393379282827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: roleName
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &5671519293226542470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,9 +536,9 @@ MonoBehaviour:
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 0
   stopTime: 0
-  roleName: {fileID: 0}
-  countryName: {fileID: 0}
-  familyName: {fileID: 0}
+  roleName: {fileID: 2141934393379282827}
+  countryName: {fileID: 9209757724514991810}
+  familyName: {fileID: 5671519293226542470}
   dialogue: {fileID: 81172015171423156}
 --- !u!1 &8740184127572445613
 GameObject:
@@ -602,7 +602,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: roleName
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &9209757724514991810
 MonoBehaviour:
   m_ObjectHideFlags: 0

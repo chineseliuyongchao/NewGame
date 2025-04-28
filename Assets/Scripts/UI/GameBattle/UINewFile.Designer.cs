@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:b2ea3feb-de5e-40e4-a75e-eafa94365f29
+	// Generate Id:a6f07df6-b1e8-46e6-aa65-8585e76fb946
 	public partial class UINewFile
 	{
 		public const string Name = "UINewFile";
@@ -13,7 +13,7 @@ namespace UI
 		[SerializeField]
 		private RectTransform root;
 		[SerializeField]
-		private TMPro.TMP_InputField inputFileData;
+		private UnityEngine.UI.InputField inputFileData;
 		[SerializeField]
 		private UnityEngine.UI.Button determineButton;
 		[SerializeField]

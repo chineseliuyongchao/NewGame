@@ -183,7 +183,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: wealthValue
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &3678289815354914940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: wealthValue
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &-2854159348462900319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: introduce
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &8699254534977505954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,7 +1422,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: wealthValue
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &7394487620418472492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1727,7 +1727,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: wealthValue
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &7075714543597427263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1918,7 +1918,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: townName
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &-5408840678906760073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,12 +2155,12 @@ MonoBehaviour:
   showRoleButton: {fileID: 7000168386154000757}
   conscriptionButton: {fileID: 2783304679086570223}
   leaveButton: {fileID: 5652858214593395434}
-  townName: {fileID: 0}
-  prosperityValue: {fileID: 0}
-  populationValue: {fileID: 0}
-  levelValue: {fileID: 0}
-  militiaValue: {fileID: 0}
-  introduce: {fileID: 0}
+  townName: {fileID: -5408840678906760073}
+  prosperityValue: {fileID: -2854159348462900319}
+  populationValue: {fileID: 7394487620418472492}
+  levelValue: {fileID: 3678289815354914940}
+  militiaValue: {fileID: 7075714543597427263}
+  introduce: {fileID: 8699254534977505954}
 --- !u!1 &7528187550004262756
 GameObject:
   m_ObjectHideFlags: 0

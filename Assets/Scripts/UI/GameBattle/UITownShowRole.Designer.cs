@@ -5,17 +5,17 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:ab4c8ee0-4e3b-47c4-b1ba-4b8a93670493
+	// Generate Id:535de898-7047-4560-8949-53798622439b
 	public partial class UITownShowRole
 	{
 		public const string Name = "UITownShowRole";
 		
 		[SerializeField]
-		private TMPro.TextMeshProUGUI roleName;
+		private UnityEngine.UI.Text roleName;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI countryName;
+		private UnityEngine.UI.Text countryName;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI familyName;
+		private UnityEngine.UI.Text familyName;
 		[SerializeField]
 		private UnityEngine.UI.Button dialogue;
 		

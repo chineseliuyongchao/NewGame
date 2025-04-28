@@ -201,7 +201,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: title
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &6799173545131104841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,8 +800,8 @@ MonoBehaviour:
   bShowMask: 1
   stopTime: 1
   root: {fileID: 6249112612470826865}
-  title: {fileID: 0}
-  chooseNum: {fileID: 0}
+  title: {fileID: 6799173545131104841}
+  chooseNum: {fileID: 4071397850871213348}
   Slider: {fileID: 7895849808879514114}
   leaveButton: {fileID: 3386110957222670620}
 --- !u!1 &8040732166080705136
@@ -866,7 +866,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: title
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &4071397850871213348
 MonoBehaviour:
   m_ObjectHideFlags: 0

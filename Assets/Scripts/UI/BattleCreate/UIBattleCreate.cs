@@ -4,7 +4,7 @@ using QFramework;
 
 namespace UI
 {
-    public class UIGameCreateData : UIPanelData
+    public class UIBattleCreateData : UIPanelData
     {
     }
 
@@ -15,31 +15,16 @@ namespace UI
     {
         protected override void OnInit(IUIData uiData = null)
         {
-            mData = uiData as UIGameCreateData ?? new UIGameCreateData();
+            mData = uiData as UIBattleCreateData ?? new UIBattleCreateData();
             // please add init code here
             base.OnInit(uiData);
         }
 
         protected override void OnOpen(IUIData uiData = null)
         {
-            mData = uiData as UIGameCreateData ?? new UIGameCreateData();
+            mData = uiData as UIBattleCreateData ?? new UIBattleCreateData();
             // please add open code here
             base.OnOpen(uiData);
-        }
-
-        protected override void OnShow()
-        {
-            base.OnShow();
-        }
-
-        protected override void OnHide()
-        {
-            base.OnHide();
-        }
-
-        protected override void OnClose()
-        {
-            base.OnClose();
         }
 
         protected override void OnListenButton()

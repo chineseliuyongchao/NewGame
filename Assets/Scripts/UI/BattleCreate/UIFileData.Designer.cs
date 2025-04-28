@@ -5,13 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:8852031e-273a-4231-95bf-ebedc82b9bb6
+	// Generate Id:b4ae40e7-daff-4ebd-8392-95f815c7c837
 	public partial class UIFileData
 	{
 		public const string Name = "UIFileData";
 		
 		[SerializeField]
-		private TMPro.TextMeshProUGUI fileName;
+		private UnityEngine.UI.Text fileName;
 		[SerializeField]
 		private UnityEngine.UI.Button openButton;
 		[SerializeField]

@@ -5,13 +5,13 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:1718a8ab-2ac1-455f-8526-fbb8caaa210f
+	// Generate Id:ab972b77-b0cb-4ca9-a06e-321642b41022
 	public partial class UIFightCreateLegion
 	{
 		public const string Name = "UIFightCreateLegion";
 		
 		[SerializeField]
-		private TMPro.TextMeshProUGUI legionName;
+		private UnityEngine.UI.Text legionName;
 		[SerializeField]
 		private UnityEngine.UI.Button chooseButton;
 		[SerializeField]

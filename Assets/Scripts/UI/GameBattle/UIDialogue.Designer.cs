@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:cadddf82-c205-40de-b9e1-60655440a09d
+	// Generate Id:307330b3-b33e-438f-b893-cfcca1659e32
 	public partial class UIDialogue
 	{
 		public const string Name = "UIDialogue";
@@ -15,9 +15,9 @@ namespace UI
 		[SerializeField]
 		private UnityEngine.UI.Image playerDialogBox;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI npcText;
+		private UnityEngine.UI.Text npcText;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI playText;
+		private UnityEngine.UI.Text playText;
 		
 		private UIDialogueData mPrivateData = null;
 		

@@ -200,7 +200,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: belligerentName
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &-8328594670355762776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 0
   stopTime: 0
-  legionName: {fileID: 0}
+  legionName: {fileID: -8328594670355762776}
   chooseButton: {fileID: 5496192631565232199}
   delete: {fileID: 5179549358124008366}
 --- !u!1 &5868422604436861348

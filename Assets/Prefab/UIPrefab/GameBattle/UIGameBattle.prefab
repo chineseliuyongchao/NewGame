@@ -62,7 +62,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: timeView
   CustomComment: 
-  mComponentName: TMPro.TextMeshProUGUI
+  mComponentName: UnityEngine.UI.Text
 --- !u!114 &-4518305325242909151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ MonoBehaviour:
   animScale: {x: 1.04, y: 1.04, z: 1.04}
   bShowMask: 0
   stopTime: 0
-  timeView: {fileID: 0}
+  timeView: {fileID: -4518305325242909151}
   menuButton: {fileID: 7334002638809022560}
   timeControlButton: {fileID: 4651708947868070346}
   timePause: {fileID: 7938587571485418567}

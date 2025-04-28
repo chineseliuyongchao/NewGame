@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:ec88c58f-8f98-4b58-90c3-b8758fe110e4
+	// Generate Id:cd01fdd5-66ae-496b-b886-5e91083f93c8
 	public partial class UITownConscription
 	{
 		public const string Name = "UITownConscription";
@@ -13,9 +13,9 @@ namespace UI
 		[SerializeField]
 		private RectTransform root;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI title;
+		private UnityEngine.UI.Text title;
 		[SerializeField]
-		private TMPro.TextMeshProUGUI chooseNum;
+		private UnityEngine.UI.Text chooseNum;
 		[SerializeField]
 		private UnityEngine.UI.Slider Slider;
 		[SerializeField]
