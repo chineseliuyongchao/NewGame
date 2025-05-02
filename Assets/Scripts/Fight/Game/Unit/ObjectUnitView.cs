@@ -23,7 +23,8 @@ namespace Fight.Game.Unit
                 { Constants.Child2, InitSortedList(transform.Find(Constants.Child2.ToString())) },
                 { Constants.Child3, InitSortedList(transform.Find(Constants.Child3.ToString())) },
                 { Constants.Child4, InitSortedList(transform.Find(Constants.Child4.ToString())) },
-                { Constants.Child5, InitSortedList(transform.Find(Constants.Child5.ToString())) }
+                { Constants.Child5, InitSortedList(transform.Find(Constants.Child5.ToString())) },
+                { Constants.Child6, InitSortedList(transform.Find(Constants.Child6.ToString())) }
             };
         }
 

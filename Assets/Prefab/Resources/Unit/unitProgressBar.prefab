@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a52912e3394c22b4fa6694d603301e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitProgressBg: {fileID: 1878610810989445944}
   peopleCurrentNum: {fileID: 2124958876372645231}
   peopleTotalNum: {fileID: 3616539100018106274}
   hpProgress: {fileID: 703973663451193179}

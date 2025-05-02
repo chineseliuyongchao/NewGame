@@ -26,8 +26,7 @@ namespace Fight.Game.Unit
 
         public ObjectUnitView view;
 
-        //progressBar todo
-        // public UnitProgressBarController unitProgressBar;
+        public UnitProgressBarController unitProgressBar;
 
         private Tween _focusAction;
 
@@ -41,9 +40,8 @@ namespace Fight.Game.Unit
             view = this.AddComponent<ObjectUnitView>();
             view.OnInit();
 
-            //progressBar todo
-            // unitProgressBar = transform.Find("unitProgressBar").GetComponent<UnitProgressBarController>();
-            // unitProgressBar.OnInit(unitData);
+            unitProgressBar = transform.Find("unitProgressBar").GetComponent<UnitProgressBarController>();
+            unitProgressBar.OnInit(unitData);
             if (unitData.legionId == Constants.PLAY_LEGION_ID)
             {
             }
@@ -51,9 +49,7 @@ namespace Fight.Game.Unit
             {
                 var transform1 = transform;
                 transform1.rotation = Quaternion.Euler(0, 180, 0);
-
-                //progressBar todo
-                // unitProgressBar.transform.rotation = Quaternion.Euler(0, -360, 0);
+                unitProgressBar.transform.rotation = Quaternion.Euler(0, -360, 0);
             }
 
             ChangeOrderLayer(); //初始化的时候也应该排序
@@ -127,8 +123,7 @@ namespace Fight.Game.Unit
                         }
                         else
                         {
-                            //progressBar todo
-                            // unitProgressBar.UpdateProgress();
+                            unitProgressBar.UpdateProgress();
                         }
                     });
                     sequence.Append(transform.DOMove(path.vectorPath[i], 0.5f));
@@ -162,8 +157,7 @@ namespace Fight.Game.Unit
         /// </summary>
         public void Attack()
         {
-            //progressBar todo
-            // unitProgressBar.UpdateProgress();
+            unitProgressBar.UpdateProgress();
         }
 
         /// <summary>
@@ -171,8 +165,7 @@ namespace Fight.Game.Unit
         /// </summary>
         public void Attacked()
         {
-            //progressBar todo
-            // unitProgressBar.UpdateProgress();
+            unitProgressBar.UpdateProgress();
         }
 
         /// <summary>
@@ -226,8 +219,7 @@ namespace Fight.Game.Unit
             int beginIndex = Mathf.Max(Constants.FightNodeVisibleHeightNum -
                                        unitData.currentPosIndex / Constants.FightNodeVisibleWidthNum, 1) * 1000;
             view.ChangeOrderLayer(beginIndex);
-            //progressBar todo
-            // unitProgressBar.ChangeOrderLayer(beginIndex);
+            unitProgressBar.ChangeOrderLayer(beginIndex);
         }
 
         /// <summary>

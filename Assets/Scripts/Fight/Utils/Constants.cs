@@ -76,6 +76,7 @@
         public const int Child3 = 3;
         public const int Child4 = 4;
         public const int Child5 = 5;
+        public const int Child6 = 6;
 
         #endregion
 
