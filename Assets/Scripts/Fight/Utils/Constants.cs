@@ -83,9 +83,9 @@
         #region 兵种可视化界面的对应部位id
 
         /// <summary>
-        ///     头
+        ///     腿
         /// </summary>
-        public const int Head = 2;
+        public const int Foot = 0;
 
         /// <summary>
         ///     身体
@@ -93,19 +93,19 @@
         public const int Body = 1;
 
         /// <summary>
+        ///     盔甲
+        /// </summary>
+        public const int Armor = 2;
+
+        /// <summary>
+        ///     头
+        /// </summary>
+        public const int Head = 3;
+
+        /// <summary>
         ///     头盔
         /// </summary>
         public const int Helmet = 4;
-
-        /// <summary>
-        ///     盔甲
-        /// </summary>
-        public const int Armor = 3;
-
-        /// <summary>
-        ///     武器
-        /// </summary>
-        public const int Weapon = 6;
 
         /// <summary>
         ///     盾牌
@@ -113,9 +113,9 @@
         public const int Shield = 5;
 
         /// <summary>
-        ///     腿
+        ///     武器
         /// </summary>
-        public const int Foot = 0;
+        public const int Weapon = 6;
 
         /// <summary>
         /// 用于调试的文本展示

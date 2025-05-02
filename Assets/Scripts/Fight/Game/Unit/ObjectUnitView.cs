@@ -31,13 +31,13 @@ namespace Fight.Game.Unit
         private SortedList<int, Object> InitSortedList(Transform target)
         {
             SortedList<int, Object> result = new SortedList<int, Object>();
-            if (target.Find("head")) result.Add(Constants.Head, target.Find("head").GetComponent<SpriteRenderer>());
-            if (target.Find("body")) result.Add(Constants.Body, target.Find("body").GetComponent<SpriteRenderer>());
-            if (target.Find("helmet")) result.Add(Constants.Helmet, target.Find("helmet").GetComponent<SpriteRenderer>());
-            if (target.Find("armor")) result.Add(Constants.Armor, target.Find("armor").GetComponent<SpriteRenderer>());
-            if (target.Find("weapon")) result.Add(Constants.Weapon, target.Find("weapon").GetComponent<SpriteRenderer>());
-            if (target.Find("shield")) result.Add(Constants.Shield, target.Find("shield").GetComponent<SpriteRenderer>());
             if (target.Find("foot")) result.Add(Constants.Foot, target.Find("foot").GetComponent<SpriteRenderer>());
+            if (target.Find("body")) result.Add(Constants.Body, target.Find("body").GetComponent<SpriteRenderer>());
+            if (target.Find("armor")) result.Add(Constants.Armor, target.Find("armor").GetComponent<SpriteRenderer>());
+            if (target.Find("head")) result.Add(Constants.Head, target.Find("head").GetComponent<SpriteRenderer>());
+            if (target.Find("helmet")) result.Add(Constants.Helmet, target.Find("helmet").GetComponent<SpriteRenderer>());
+            if (target.Find("shield")) result.Add(Constants.Shield, target.Find("shield").GetComponent<SpriteRenderer>());
+            if (target.Find("weapon")) result.Add(Constants.Weapon, target.Find("weapon").GetComponent<SpriteRenderer>());
             return result;
         }
 
