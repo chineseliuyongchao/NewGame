@@ -15,8 +15,8 @@ TagManager:
   - Map
   - Arms
   - Map2
-  - 
-  - 
+  - Town
+  - Team
   - 
   - 
   - 
@@ -50,6 +50,12 @@ TagManager:
     locked: 0
   - name: Arms
     uniqueID: 3447917323
+    locked: 0
+  - name: Town
+    uniqueID: 1012957495
+    locked: 0
+  - name: Team
+    uniqueID: 2235666247
     locked: 0
   - name: UI
     uniqueID: 1940308667
