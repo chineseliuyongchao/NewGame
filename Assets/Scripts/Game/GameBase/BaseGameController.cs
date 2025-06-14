@@ -9,7 +9,7 @@ namespace Game.GameBase
 
     public class BaseGameController : MonoBehaviour, IBaseGameController
     {
-        protected ResLoader resLoader;
+        static readonly protected ResLoader resLoader = ResLoader.Allocate();
 
         public IArchitecture GetArchitecture()
         {
@@ -18,7 +18,6 @@ namespace Game.GameBase
 
         void Awake()
         {
-            resLoader = ResLoader.Allocate();
             // please add init code here
             OnInit();
         }

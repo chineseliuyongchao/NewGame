@@ -61,11 +61,13 @@ namespace Battle.Town
         /// <summary>
         /// 男性人口
         /// </summary>
+        [Obsolete]
         public int malePopulation;
 
         /// <summary>
         /// 女性人口
         /// </summary>
+        [Obsolete]
         public int femalePopulation;
 
         /// <summary>

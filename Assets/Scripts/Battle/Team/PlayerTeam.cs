@@ -3,6 +3,7 @@ using Battle.Map;
 using Battle.Player;
 using QFramework;
 using UI;
+using UnityEngine;
 
 namespace Battle.Team
 {
@@ -20,34 +21,36 @@ namespace Battle.Team
         protected override void OnListenEvent()
         {
             base.OnListenEvent();
-            this.RegisterEvent<SelectMapLocationEvent>(e =>
+            this.RegisterEvent<SelectMapLocationEvent>(OnLocationSelected).UnRegisterWhenGameObjectDestroyed(gameObject);
+        }
+
+        protected virtual void OnLocationSelected(SelectMapLocationEvent e)
+        {
+            this.GetModel<ITeamModel>().TeamData[TeamId].targetTownId = e.townId;
+            if (e.townId != 0)
             {
-                this.GetModel<ITeamModel>().TeamData[TeamId].targetTownId = e.townId;
+                SetTeamType(TeamType.MOVE_TO_TOWN);
+            }
+            else
+            {
+                SetTeamType(TeamType.MOVE_TO_FIELD);
+            }
+
+            SetMoveTarget(GetStartMapPos(), e.selectPos, () =>
+            {
+                Debug.Log("Move to Town:" + e.townId);
                 if (e.townId != 0)
                 {
-                    SetTeamType(TeamType.MOVE_TO_TOWN);
+                    ArriveInTown(e.townId);
+                    this.GetModel<IMyPlayerModel>().AccessTown++;
+                    SetTeamType(TeamType.HUT_TOWN);
                 }
                 else
                 {
-                    SetTeamType(TeamType.MOVE_TO_FIELD);
+                    SetTeamType(TeamType.HUT_FIELD);
                 }
-
-                SetMoveTarget(GetStartMapPos(), e.selectPos, () =>
-                {
-                    if (e.townId != 0)
-                    {
-                        ArriveInTown(e.townId);
-                        this.GetModel<IMyPlayerModel>().AccessTown++;
-                        SetTeamType(TeamType.HUT_TOWN);
-                    }
-                    else
-                    {
-                        SetTeamType(TeamType.HUT_FIELD);
-                    }
-                });
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            });
         }
-
         protected override void ArriveInTown(int townId)
         {
             UIKit.OpenPanel<UITown>(new UITownData(townId));
