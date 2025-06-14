@@ -5,7 +5,7 @@ using QFramework;
 
 namespace UI
 {
-	// Generate Id:055cb71c-6f78-4d6f-b5ba-2a48a45ed9a2
+	// Generate Id:e31ca876-1734-4ce6-8f5a-d7a6b23de0e4
 	public partial class UITown
 	{
 		public const string Name = "UITown";
@@ -14,6 +14,10 @@ namespace UI
 		private UnityEngine.UI.Button showRoleButton;
 		[SerializeField]
 		private UnityEngine.UI.Button conscriptionButton;
+		[SerializeField]
+		private UnityEngine.UI.Button buildingButton;
+		[SerializeField]
+		private UnityEngine.UI.Button shopButton;
 		[SerializeField]
 		private UnityEngine.UI.Button leaveButton;
 		[SerializeField]
@@ -35,6 +39,8 @@ namespace UI
 		{
 			showRoleButton = null;
 			conscriptionButton = null;
+			buildingButton = null;
+			shopButton = null;
 			leaveButton = null;
 			townName = null;
 			prosperityValue = null;

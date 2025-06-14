@@ -55,18 +55,13 @@ namespace UI
 
         protected override void OnListenButton()
         {
-            showRoleButton.onClick.AddListener(() =>
-            {
-                UIKit.OpenPanel<UITownRole>(new UITownRoleData(mData.townId));
-            });
-            conscriptionButton.onClick.AddListener(() =>
-            {
-                ConscriptionData data = this.GetSystem<ITownSystem>().Conscription(mData.townId);
-                UIKit.OpenPanel<UITownConscription>(new UITownConscriptionData(data));
-            });
+            showRoleButton.onClick.AddListener(OnButtonRoleClick);
+            conscriptionButton.onClick.AddListener(OnButtonScriptionClick);
+            shopButton.onClick.AddListener(OnButtonShopClick);
+            buildingButton.onClick.AddListener(OnButtonBuildingClick);
             leaveButton.onClick.AddListener(CloseSelf);
         }
-
+        
         protected override void OnListenEvent()
         {
         }
@@ -87,5 +82,27 @@ namespace UI
                     .GetDataName(this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].storage.name)
             });
         }
+
+        #region 按钮点击
+
+        private void OnButtonShopClick()
+        {
+            UIKit.OpenPanel<UITownShop>();
+        }
+        private void OnButtonBuildingClick()
+        {
+            UIKit.OpenPanel<UITownBuilding>();
+        }
+        private void OnButtonRoleClick()
+        {
+            UIKit.OpenPanel<UITownRole>(new UITownRoleData(mData.townId));
+        }
+
+        private void OnButtonScriptionClick()
+        {
+            ConscriptionData data = this.GetSystem<ITownSystem>().Conscription(mData.townId);
+            UIKit.OpenPanel<UITownConscription>(new UITownConscriptionData(data));
+        }
+        #endregion
     }
 }
