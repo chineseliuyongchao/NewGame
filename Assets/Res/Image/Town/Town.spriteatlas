@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Town
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: ANDROID
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: PHONE
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 84179d89c1b8965469da8b8711b5b951, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 123b9d11e8f74434d89140356fcc77e1, type: 3}
+  - {fileID: 21300000, guid: 3775ba538c0d7364c82dac01b9240b3d, type: 3}
+  - {fileID: 21300000, guid: bf103d67ff6430849ba65a9a1d103961, type: 3}
+  - {fileID: 21300000, guid: d98261a72c5fe5b46bc4ac2c9734dfbc, type: 3}
+  - {fileID: 21300000, guid: 623b28581836aab4dbec08408c19603f, type: 3}
+  - {fileID: 21300000, guid: 6e5cad7835f753d4ab5854270e59c116, type: 3}
+  - {fileID: 21300000, guid: 5cbe916abf2b94a4bbb44844d02b4f48, type: 3}
+  - {fileID: 21300000, guid: dae87facd15ffa848a3cf434929c6be3, type: 3}
+  - {fileID: 21300000, guid: c84355bca4f6c1d409cd1cdff6afa3b5, type: 3}
+  - {fileID: 21300000, guid: a022b13d3fdfd844f9ccc0bd92df415f, type: 3}
+  - {fileID: 21300000, guid: f658026d114dd77458fcb39c36841f5b, type: 3}
+  - {fileID: 21300000, guid: a39d743ec9fface499c118173bcbe4bc, type: 3}
+  - {fileID: 21300000, guid: a1ec154e27dd38e4fb9c18117e7e96bb, type: 3}
+  - {fileID: 21300000, guid: 9242a03f5c78f0d4f903be691a350655, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - world_entity_0-316
+  - world_entity_0-282
+  - world_entity_0-68
+  - world_entity_0-304
+  - world_settlement-133
+  - world_settlement-103
+  - town1
+  - world_settlement-70
+  - world_settlement-46
+  - world_settlement-52
+  - world_entity_0-17
+  - world_settlement-33
+  - world_entity_0-310
+  - world_entity_0-157
+  m_RenderDataMap: {}
+  m_Tag: Town
+  m_IsVariant: 0

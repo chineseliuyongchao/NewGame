@@ -38,30 +38,16 @@ namespace UI
             base.OnOpen(uiData);
         }
 
-        protected override void OnShow()
-        {
-            base.OnShow();
-        }
-
-        protected override void OnHide()
-        {
-            base.OnHide();
-        }
-
-        protected override void OnClose()
-        {
-            base.OnClose();
-        }
-
         protected override void OnListenButton()
         {
-            showRoleButton.onClick.AddListener(OnButtonRoleClick);
-            conscriptionButton.onClick.AddListener(OnButtonScriptionClick);
-            shopButton.onClick.AddListener(OnButtonShopClick);
-            buildingButton.onClick.AddListener(OnButtonBuildingClick);
+            importantPeople.onClick.AddListener(OnButtonRoleClick);
+            government.onClick.AddListener(OnButtonGovernmentClick);
+            governmentWorkshop.onClick.AddListener(OnButtonBuildingClick);
+            barracks.onClick.AddListener(OnButtonScriptionClick);
+            shop.onClick.AddListener(OnButtonShopClick);
             leaveButton.onClick.AddListener(CloseSelf);
         }
-        
+
         protected override void OnListenEvent()
         {
         }
@@ -69,33 +55,39 @@ namespace UI
         private void InitUI()
         {
             TownData townData = this.GetModel<ITownModel>().TownData[mData.townId];
-            townName.text = this.GetSystem<IGameSystem>().GetDataName(townData.storage.name);
-            prosperityValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.noStorage.prosperity, 5);
-            populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.GetPopulation(), 5);
-            levelValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.level, 5);
-            militiaValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.storage.militiaNum, 5);
-            introduce.text = this.GetSystem<IGameSystem>().GetLocalizationText(1, new List<string>()
+            countyName.text = this.GetSystem<IGameSystem>().GetDataName(townData.storage.name); //县名字，后面改这个
+            countyName.text = "高柳县";
+            countyIntroduce.text = this.GetSystem<IGameSystem>().GetLocalizationText(1, new List<string>
             {
                 this.GetSystem<IGameSystem>()
                     .GetDataName(this.GetModel<ICountryModel>().CountryData[townData.storage.countryId].name),
                 this.GetSystem<IGameSystem>()
                     .GetDataName(this.GetModel<IFamilyModel>().FamilyData[townData.storage.familyId].storage.name)
-            });
+            }); //可以在这个基础上改
+            countyIntroduce.text = "高柳县属于幽州的代郡，（并且是代郡的郡治）。这里属于汉朝廷统治。（加一些简介，不超过两行）。"; //县城简介
+            populationValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.GetPopulation(), 5); //人口
+            foodSituationValue.text = "非常充足"; //食物情况
+            garrisonValue.text = "1.2万"; //驻军
+            prosperityValue.text = this.GetUtility<IGameUtility>().NumToKmbt(townData.noStorage.prosperity, 5); //繁荣度
+            publicOrderValue.text = 80.ToString(); //治安度
+            loyaltyValue.text = 70.ToString(); //忠诚度
         }
 
         #region 按钮点击
 
-        private void OnButtonShopClick()
-        {
-            UIKit.OpenPanel<UITownShop>();
-        }
-        private void OnButtonBuildingClick()
-        {
-            UIKit.OpenPanel<UITownBuilding>();
-        }
         private void OnButtonRoleClick()
         {
             UIKit.OpenPanel<UITownRole>(new UITownRoleData(mData.townId));
+        }
+        
+        private void OnButtonGovernmentClick()
+        {
+            // UIKit.OpenPanel<UITownRole>(new UITownRoleData(mData.townId));
+        }
+
+        private void OnButtonBuildingClick()
+        {
+            UIKit.OpenPanel<UITownBuilding>();
         }
 
         private void OnButtonScriptionClick()
@@ -103,6 +95,12 @@ namespace UI
             ConscriptionData data = this.GetSystem<ITownSystem>().Conscription(mData.townId);
             UIKit.OpenPanel<UITownConscription>(new UITownConscriptionData(data));
         }
+
+        private void OnButtonShopClick()
+        {
+            UIKit.OpenPanel<UITownShop>();
+        }
+
         #endregion
     }
 }
