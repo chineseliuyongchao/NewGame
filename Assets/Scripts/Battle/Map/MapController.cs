@@ -12,12 +12,14 @@ namespace Battle.Map
     /// <summary>
     /// 地图控制器，用于管理所有与地图有关的内容
     /// </summary>
-    public class MapController : BaseGameController
+    public partial class MapController : BaseGameController
     {
         private GameObject _mapNodePrefab;
         private GameObject _townNodePrefab;
         
         private Camera _camera;
+        
+        private float _curCameraSize = 0;
         
         /// <summary>
         /// 描述当前摄像机的视角缩放
@@ -31,7 +33,7 @@ namespace Battle.Map
             set
             {
                 // 在这里处理视角缩放的变化逻辑
-                float result = Mathf.Clamp(value, _minCameraSize, 100);
+                float result = Mathf.Clamp(value, _minCameraSize, _maxCameraSize);
                 // 根据旧的数据和新的数据响应是否进入了对应等级的缩放
                 OnCameraResize(_curCameraSize, result);
                 _curCameraSize = result;
@@ -39,14 +41,17 @@ namespace Battle.Map
             }
         }
 
+        #region
+        // 摄像机最大的视角缩放
+        private readonly float _maxCameraSize = 30;
+        // 摄像机最小的视角缩放
         private readonly float _minCameraSize = 3;
-        private float _curCameraSize = 0;
         // 州级视角界限值，超出为州级视角
-        private float _inProvinceView = 0;
-        // 郡级视角界限值，超出为郡级视角
-        private float _inPrefectureView = 0;
-        // 县级视角界限值，超出为县级视角
-        private float _inCountyView = 0;
+        private readonly float _inProvinceView = 25;
+        // 郡级视角界限值，超出为郡级视角，小于为县级视角
+        private readonly float _inPrefectureView = 13;
+        
+        #endregion
         protected override void OnInit()
         {
             _mapNodePrefab = resLoader.LoadSync<GameObject>(GamePrefabConstant.MAP_NODE);
